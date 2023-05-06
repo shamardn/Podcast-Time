@@ -6,4 +6,9 @@
     </style>
 
     <style name="Theme.PodcastTime" parent="Base.Theme.PodcastTime" />
+
+    <style name="ShapeAppearanceOverlay.MyApp.ImageView.Round" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
 </resources>
