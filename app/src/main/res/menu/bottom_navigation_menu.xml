@@ -5,13 +5,9 @@
         android:icon="@drawable/ic_home"
         android:title="@string/home" />
     <item
-        android:id="@+id/subscriptionsFragment"
-        android:icon="@drawable/ic_subscriptions"
-        android:title="@string/subscriptions" />
-    <item
-        android:id="@+id/downloadsFragment"
-        android:icon="@drawable/ic_downloads"
-        android:title="@string/downloads" />
+        android:id="@+id/libraryFragment"
+        android:icon="@drawable/ic_library"
+        android:title="@string/Library" />
     <item
         android:id="@+id/settingsFragment"
         android:icon="@drawable/ic_settings"
