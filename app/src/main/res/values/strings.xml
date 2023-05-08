@@ -1,10 +1,19 @@
 <resources>
     <string name="app_name">Podcast Time</string>
     <string name="home">Home</string>
-    <string name="subscriptions">Sub</string>
+    <string name="subscriptions">Subscriptions</string>
     <string name="downloads">Downloads</string>
     <string name="settings">Settings</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="search">Search</string>
+    <string name="download">Download</string>
+    <string name="subscription">Subscription</string>
+    <string name="episode_title">Episode</string>
+    <string name="episode_author">Author</string>
+    <string name="episode_topic">Topic</string>
+    <string name="back_arrow_icon_desc">back arrow icon</string>
+    <string name="_1_0x">1.0x</string>
+    <string name="multi_line_text">Description of episode Learn English 1 Description of episode Learn English 1 Description of episode Learn English 1 Description of episode Learn English 1 Description of episode Learn English 1 Description of episode Learn English 1 Description of episode Learn English 1 Description of episode Learn English 1 Description of episode Learn English 1 Description of episode Learn English 1 Description of episode Learn English 1 Description of episode Learn English 1 Description of episode Learn English 1 Description of episode Learn English 1 Description of episode Learn English 1 Description of episode Learn English 1 Description of episode Learn English 1 Description of episode Learn English 1 Description of episode Learn English 1 Description of episode Learn English 1 Description of episode Learn English 1 Description of episode Learn English 1</string>
+    <string name="Library">Library</string>
 </resources>
