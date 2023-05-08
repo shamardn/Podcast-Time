@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <ImageView
+        android:id="@+id/img_episode_details_back_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space8x"
+        android:layout_marginTop="@dimen/space8x"
+        android:background="@drawable/circular_shape"
+        android:contentDescription="@string/back_arrow_icon_desc"
+        android:padding="@dimen/space4x"
+        android:src="@drawable/ic_back_arrow"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/primary" />
+
+    <TextView
+        android:id="@+id/text_episode_details_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/space8x"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/img_episode_details"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_episode_details_back_arrow"
+        tools:text="Episode Learn English 1  " />
+
+    <TextView
+        android:id="@+id/text_episode_details_podcast_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space2x"
+        android:layout_marginEnd="@dimen/space8x"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@+id/img_episode_details"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/text_episode_details_title"
+        app:layout_constraintTop_toBottomOf="@id/text_episode_details_title"
+        tools:text="Learn English podcast" />
+
+    <TextView
+        android:id="@+id/text_episode_details_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space2x"
+        android:textSize="8sp"
+        app:layout_constraintStart_toStartOf="@+id/text_episode_details_podcast_name"
+        app:layout_constraintTop_toBottomOf="@+id/text_episode_details_podcast_name"
+        tools:text="May 06, 2023" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/img_episode_details"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_marginEnd="@dimen/space8x"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/text_episode_details_title"
+        app:shapeAppearanceOverlay="@style/RoundedImageView"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/text_episode_details_desc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space8x"
+        android:layout_marginStart="@dimen/space8x"
+        android:layout_marginEnd="@dimen/space8x"
+        android:textColor="@color/on_surface_variant"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_episode_details_subscription"
+        tools:text="@string/multi_line_text" />
+
+    <TextView
+        android:id="@+id/text_episode_details_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space8x"
+        android:background="@drawable/outline_rounded_shape"
+        android:drawablePadding="@dimen/space4x"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/space4x"
+        android:paddingEnd="@dimen/space4x"
+        android:textSize="12sp"
+        app:drawableStartCompat="@drawable/ic_play"
+        app:drawableTint="@color/primary"
+        app:layout_constraintStart_toStartOf="@+id/text_episode_details_date"
+        app:layout_constraintTop_toBottomOf="@+id/text_episode_details_date"
+        tools:text="30 min " />
+
+    <TextView
+        android:id="@+id/text_episode_details_subscription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space4x"
+        android:layout_marginEnd="@dimen/space4x"
+        android:background="@drawable/outline_rounded_shape"
+        android:drawablePadding="@dimen/space4x"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/space4x"
+        android:paddingEnd="@dimen/space4x"
+        android:textSize="12sp"
+        app:drawableStartCompat="@drawable/ic_add"
+        app:drawableTint="@color/primary"
+        app:layout_constraintStart_toEndOf="@+id/text_episode_details_time"
+        app:layout_constraintEnd_toStartOf="@+id/img_episode_details_download"
+        app:layout_constraintTop_toTopOf="@+id/text_episode_details_time"
+        tools:text="Subscribe " />
+
+    <ImageView
+        android:id="@+id/img_episode_details_download"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="25dp"
+        android:contentDescription="@string/back_arrow_icon_desc"
+        android:padding="@dimen/space4x"
+        android:src="@drawable/ic_downloads"
+        app:layout_constraintBottom_toBottomOf="@+id/text_episode_details_subscription"
+        app:layout_constraintEnd_toStartOf="@+id/img_episode_details"
+        app:layout_constraintTop_toTopOf="@+id/text_episode_details_subscription"
+        app:tint="@color/primary" />
+</androidx.constraintlayout.widget.ConstraintLayout>
