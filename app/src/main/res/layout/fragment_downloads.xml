@@ -41,7 +41,7 @@
         android:layout_height="40dp"
         android:layout_marginEnd="@dimen/space8x"
         android:layout_marginTop="@dimen/space8x"
-        android:background="@tools:sample/avatars"
+        tools:srcCompat="@tools:sample/avatars"
         app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.ImageView.Round"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -55,6 +55,6 @@
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintTop_toBottomOf="@+id/text_downloads_title"
         app:spanCount="1"
-        tools:listitem="@layout/item_download" />
+        tools:srcCompat="@tools:sample/avatars" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

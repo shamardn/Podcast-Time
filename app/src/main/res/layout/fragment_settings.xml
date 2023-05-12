@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
+    tools:srcCompat="@tools:sample/avatars"
     tools:context=".SettingsFragment">
 
     <ImageView
@@ -41,11 +41,10 @@
         android:layout_height="40dp"
         android:layout_marginTop="@dimen/space8x"
         android:layout_marginEnd="@dimen/space8x"
-        android:background="@tools:sample/avatars"
+        tools:srcCompat="@tools:sample/avatars"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.ImageView.Round"
-        app:tint="@color/primary" />
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.ImageView.Round" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_settings_language"
