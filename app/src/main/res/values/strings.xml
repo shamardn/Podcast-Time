@@ -20,4 +20,11 @@
     <string name="sign_out">Sign out</string>
     <string name="welcome">Welcome</string>
     <string name="icon_for_change_user_image">icon for change user image</string>
+    <string name="personalization">Personalization</string>
+    <string name="language">Language</string>
+    <string name="theme">Theme</string>
+    <string name="light">Light</string>
+    <string name="about">About</string>
+    <string name="profile">Profile</string>
+    <string name="english">English</string>
 </resources>

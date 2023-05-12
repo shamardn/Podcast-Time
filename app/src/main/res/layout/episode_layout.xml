@@ -85,7 +85,7 @@
             android:id="@+id/img_sleep"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_sleep"
+            android:src="@drawable/ic_night"
             app:layout_constraintEnd_toStartOf="@id/img_share"
             app:layout_constraintStart_toEndOf="@+id/text_speed"
             app:layout_constraintTop_toTopOf="@+id/text_speed" />
