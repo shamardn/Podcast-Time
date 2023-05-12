@@ -28,4 +28,9 @@
     <string name="english">English</string>
     <string name="arabic">Arabic</string>
     <string name="dark">Dark</string>
+    <string name="email">Email</string>
+    <string name="password">password</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="username">Username</string>
 </resources>
