@@ -1,11 +1,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.PodcastTime" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="PodcastTimeTheme" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
-    <style name="Theme.PodcastTime" parent="Base.Theme.PodcastTime" />
 
     <style name="ShapeAppearanceOverlay.MyApp.ImageView.Round" parent="">
         <item name="cornerFamily">rounded</item>
@@ -15,6 +14,12 @@
     <style name="RoundedImageView">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">16dp</item>
+    </style>
+
+    <style name="PodcastTimeTheme.SplashScreen" parent="Theme.SplashScreen">
+        <item name="postSplashScreenTheme">@style/PodcastTimeTheme</item>
+        <item name="windowSplashScreenBackground">@color/primary</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/podcast_icon</item>
     </style>
 
 </resources>
