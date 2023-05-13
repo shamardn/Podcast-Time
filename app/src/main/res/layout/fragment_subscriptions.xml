@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.SubscriptionsFragment">
+
+    <ImageView
+        android:id="@+id/img_sub_back_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space8x"
+        android:layout_marginTop="@dimen/space8x"
+        android:background="@drawable/circular_shape"
+        android:padding="@dimen/space4x"
+        android:src="@drawable/ic_back_arrow"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/primary"
+        android:contentDescription="@string/back_arrow_icon_desc" />
+
+    <TextView
+        android:id="@+id/text_sub_title"
+        android:layout_width="0dp"
+        android:layout_height="?actionBarSize"
+        android:layout_marginStart="@dimen/space8x"
+        android:layout_marginEnd="@dimen/space8x"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="@string/subscriptions"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/img_sub_back_arrow"
+        app:layout_constraintEnd_toStartOf="@+id/img_sub_profile"
+        app:layout_constraintStart_toEndOf="@id/img_sub_back_arrow"
+        app:layout_constraintTop_toTopOf="@+id/img_sub_back_arrow" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/img_sub_profile"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="@dimen/space8x"
+        android:layout_marginTop="@dimen/space8x"
+        android:src="@drawable/ic_person"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.ImageView.Round"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_sub"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintTop_toBottomOf="@+id/text_sub_title"
+        app:spanCount="3"
+        tools:listitem="@layout/item_subscription" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
