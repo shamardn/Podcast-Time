@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/background"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".LibraryFragment">
+    tools:context=".ui.LibraryFragment">
 
     <ImageView
         android:id="@+id/img_library_back_arrow"
@@ -41,11 +41,10 @@
         android:layout_height="40dp"
         android:layout_marginEnd="@dimen/space8x"
         android:layout_marginTop="@dimen/space8x"
-        tools:srcCompat="@tools:sample/avatars"
+        android:src="@drawable/ic_person"
         app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.ImageView.Round"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/primary" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_library_subscriptions"

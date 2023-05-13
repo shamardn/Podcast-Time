@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background">
+    android:background="@color/background"
+    tools:context=".ui.EpisodeDetailsFragment">
 
     <ImageView
         android:id="@+id/img_episode_details_back_arrow"
@@ -32,7 +33,7 @@
         app:layout_constraintEnd_toStartOf="@id/img_episode_details"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/img_episode_details_back_arrow"
-        tools:text="Episode Learn English 1  " />
+        android:text="@string/_episode_title" />
 
     <TextView
         android:id="@+id/text_episode_details_podcast_name"
@@ -47,7 +48,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@id/text_episode_details_title"
         app:layout_constraintTop_toBottomOf="@id/text_episode_details_title"
-        tools:text="Learn English podcast" />
+        android:text="@string/_podcast_title" />
 
     <TextView
         android:id="@+id/text_episode_details_date"
@@ -57,7 +58,7 @@
         android:textSize="8sp"
         app:layout_constraintStart_toStartOf="@+id/text_episode_details_podcast_name"
         app:layout_constraintTop_toBottomOf="@+id/text_episode_details_podcast_name"
-        tools:text="May 06, 2023" />
+        android:text="@string/_episode_date" />
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/img_episode_details"
@@ -68,7 +69,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/text_episode_details_title"
         app:shapeAppearanceOverlay="@style/RoundedImageView"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:src="@drawable/ic_person" />
 
     <TextView
         android:id="@+id/text_episode_details_desc"
@@ -82,7 +83,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_episode_details_subscription"
-        tools:text="@string/multi_line_text" />
+        android:text="@string/multi_line_text" />
 
     <TextView
         android:id="@+id/text_episode_details_time"
@@ -99,7 +100,7 @@
         app:drawableTint="@color/primary"
         app:layout_constraintStart_toStartOf="@+id/text_episode_details_date"
         app:layout_constraintTop_toBottomOf="@+id/text_episode_details_date"
-        tools:text="30 min " />
+        android:text="@string/_episoed_time" />
 
     <TextView
         android:id="@+id/text_episode_details_subscription"
@@ -118,7 +119,7 @@
         app:layout_constraintStart_toEndOf="@+id/text_episode_details_time"
         app:layout_constraintEnd_toStartOf="@+id/img_episode_details_download"
         app:layout_constraintTop_toTopOf="@+id/text_episode_details_time"
-        tools:text="Subscribe " />
+        android:text="@string/subscribe" />
 
     <ImageView
         android:id="@+id/img_episode_details_download"

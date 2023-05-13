@@ -2,7 +2,6 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
     app:cardCornerRadius="@dimen/space8x"
     android:layout_margin="@dimen/space8x"
     app:cardElevation="0dp"
@@ -17,7 +16,7 @@
             android:id="@+id/img_item_sub"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            tools:srcCompat="@tools:sample/avatars"
+            android:src="@drawable/ic_person"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -34,7 +33,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/img_item_sub"
-            tools:text="English podcast" />
+            android:text="@string/_episode_title" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

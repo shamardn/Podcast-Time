@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:cardCornerRadius="@dimen/space12x"
-    android:backgroundTint="@color/background"
-    tools:context=".EpisodeDetailsFragment">
+    android:backgroundTint="@color/background">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -22,7 +20,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearanceOverlay="@style/RoundedImageView"
-            tools:srcCompat="@tools:sample/avatars" />
+            android:src="@drawable/ic_person" />
 
         <TextView
             android:id="@+id/text_podcast"
@@ -38,7 +36,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/img_episode"
-            tools:text="Learn English Podcast Learn English Podcast Learn English Podcast " />
+            android:text="@string/_podcast_title" />
 
         <TextView
             android:id="@+id/text_episode"
@@ -55,12 +53,12 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_podcast"
-            tools:text="ep1: Learn English Podcast " />
+            android:text="@string/episode_title" />
 
         <com.google.android.exoplayer2.ui.StyledPlayerView
             android:id="@+id/exo_player"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_margin="@dimen/space12x"
             android:keepScreenOn="true"
             app:layout_constraintEnd_toEndOf="parent"

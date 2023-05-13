@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/space8x"
@@ -23,7 +22,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearanceOverlay="@style/RoundedImageView"
-            tools:srcCompat="@tools:sample/avatars" />
+            android:src="@drawable/ic_person" />
 
         <TextView
             android:id="@+id/text_item_download_episode_title"
@@ -38,7 +37,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/text_item_download_episode_date"
             app:layout_constraintTop_toBottomOf="@+id/text_item_download_episode_date"
-            tools:text="eps 1: Learn English Podcast" />
+            android:text="@string/_episode_title" />
 
         <TextView
             android:id="@+id/text_item_download_episode_date"
@@ -51,7 +50,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/img_item_download"
             app:layout_constraintTop_toTopOf="@+id/img_item_download"
-            tools:text="May 06, 2023" />
+            android:text="@string/_episode_date" />
 
         <TextView
             android:id="@+id/text_item_episode_play_time"
@@ -70,7 +69,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/img_item_download"
             app:layout_constraintTop_toBottomOf="@+id/img_item_download"
-            tools:text="30 min" />
+            android:text="@string/_episoed_time" />
 
         <TextView
             android:id="@+id/text_item_episode_download"

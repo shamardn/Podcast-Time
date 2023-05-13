@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/background"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".DownloadsFragment">
+    tools:context=".ui.DownloadsFragment">
 
     <ImageView
         android:id="@+id/img_downloads_back_arrow"
@@ -41,12 +41,10 @@
         android:layout_height="40dp"
         android:layout_marginEnd="@dimen/space8x"
         android:layout_marginTop="@dimen/space8x"
-        tools:srcCompat="@tools:sample/avatars"
+        android:src="@drawable/ic_person"
         app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.ImageView.Round"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/primary" />
-
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_downloads"
@@ -55,6 +53,6 @@
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintTop_toBottomOf="@+id/text_downloads_title"
         app:spanCount="1"
-        tools:srcCompat="@tools:sample/avatars" />
+        tools:listitem="@layout/item_download"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

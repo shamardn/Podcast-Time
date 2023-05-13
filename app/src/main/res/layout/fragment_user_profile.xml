@@ -56,7 +56,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_library_title"
         app:shapeAppearanceOverlay="@style/RoundedImageView"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:src="@drawable/ic_person" />
 
 
     <ImageView
@@ -101,7 +101,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/space4x"
-        tools:text="User Name"
+        android:text="@string/_user_name"
         android:textColor="@color/black"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"

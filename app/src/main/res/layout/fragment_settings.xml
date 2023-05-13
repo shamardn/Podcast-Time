@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:srcCompat="@tools:sample/avatars"
-    tools:context=".SettingsFragment">
+    tools:context=".ui.SettingsFragment">
 
     <ImageView
         android:id="@+id/img_settings_back_arrow"
@@ -41,7 +41,7 @@
         android:layout_height="40dp"
         android:layout_marginTop="@dimen/space8x"
         android:layout_marginEnd="@dimen/space8x"
-        tools:srcCompat="@tools:sample/avatars"
+        android:src="@drawable/ic_person"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.ImageView.Round" />
