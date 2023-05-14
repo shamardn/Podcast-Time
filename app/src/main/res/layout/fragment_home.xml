@@ -29,6 +29,7 @@
             android:textColor="@color/primary" />
 
         <TextView
+            android:id="@+id/text_home_search"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -41,6 +42,14 @@
             app:tint="@color/secondary"
             app:drawableTint="@color/primary"
             app:drawableEndCompat="@drawable/ic_search" />
+
+        <ImageView
+            android:id="@+id/img_home_filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/space4x"
+            android:src="@drawable/ic_filter"
+            app:tint="@color/primary" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -52,7 +61,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:listitem="@layout/item_episode"
+        tools:listitem="@layout/item_podcast"
         app:layout_constraintTop_toBottomOf="@+id/top_app_bar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

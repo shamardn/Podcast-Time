@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginStart="@dimen/space8x"
+    android:layout_marginTop="@dimen/space8x"
+    android:layout_marginEnd="@dimen/space8x"
+    android:backgroundTint="@color/white"
+    app:cardCornerRadius="@dimen/space6x"
+    app:cardElevation="0dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/img_item_podcast"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_margin="@dimen/space4x"
+            android:src="@drawable/ic_person"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/RoundedImageView" />
+
+        <TextView
+            android:id="@+id/text_item_podcast_track_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space4x"
+            android:layout_marginEnd="@dimen/space4x"
+            android:layout_marginTop="@dimen/space2x"
+            tools:text="Droos Podcast - دروس بودكاست"
+            android:textColor="@color/primary"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/img_item_podcast"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_item_podcast_artist_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space4x"
+            android:layout_marginEnd="@dimen/space4x"
+            android:layout_marginTop="@dimen/space2x"
+            tools:text="Ahmed Abouzaid"
+            android:textColor="@color/on_surface_variant"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/img_item_podcast"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_item_podcast_genre_name" />
+
+        <TextView
+            android:id="@+id/text_item_podcast_genre_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space4x"
+            android:layout_marginEnd="@dimen/space4x"
+            tools:text="Self Help "
+            android:textColor="@color/on_surface_variant"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toStartOf="@+id/img_item_podcast"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_item_podcast_track_name" />
+
+        <TextView
+            android:id="@+id/text_item_podcast_release_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space4x"
+            tools:text="2023-04-17"
+            android:textColor="@color/on_surface_variant"
+            android:textSize="8sp"
+            app:layout_constraintBottom_toBottomOf="@+id/text_item_podcast_track_count"
+            app:layout_constraintStart_toEndOf="@+id/text_item_podcast_track_count"
+            app:layout_constraintTop_toTopOf="@+id/text_item_podcast_track_count" />
+
+        <TextView
+            android:id="@+id/text_item_podcast_track_count"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/space4x"
+            tools:text="651 episodes"
+            android:textColor="@color/on_surface_variant"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_item_podcast_artist_name" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
