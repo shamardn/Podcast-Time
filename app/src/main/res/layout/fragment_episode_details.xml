@@ -33,7 +33,7 @@
         app:layout_constraintEnd_toStartOf="@id/img_episode_details"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/img_episode_details_back_arrow"
-        android:text="@string/_episode_title" />
+        android:text="@string/_track_name" />
 
     <TextView
         android:id="@+id/text_episode_details_podcast_name"
@@ -48,7 +48,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@id/text_episode_details_title"
         app:layout_constraintTop_toBottomOf="@id/text_episode_details_title"
-        android:text="@string/_podcast_title" />
+        android:text="@string/_collection_name" />
 
     <TextView
         android:id="@+id/text_episode_details_date"

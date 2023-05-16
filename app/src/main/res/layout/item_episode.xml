@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="280dp"
     android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/space4x"
     android:layout_marginTop="@dimen/space8x"
-    android:layout_marginStart="@dimen/space8x"
-    android:layout_marginEnd="@dimen/space8x"
+    android:layout_marginEnd="@dimen/space4x"
     android:backgroundTint="@color/white"
     app:cardCornerRadius="@dimen/space6x"
     app:cardElevation="0dp">
@@ -19,21 +20,22 @@
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:layout_margin="@dimen/space4x"
+            android:src="@drawable/ic_person"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.ImageView.Round"
-            android:src="@drawable/ic_person" />
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.ImageView.Round" />
 
         <TextView
-            android:id="@+id/text_item_episode_podcast_title"
+            android:id="@+id/text_item_episode_podcast_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/space4x"
             android:layout_marginEnd="@dimen/space4x"
             android:ellipsize="end"
             android:maxLines="1"
+            android:textAlignment="viewStart"
+            android:text="@string/_collection_name"
             android:textColor="@color/on_surface_variant"
-            android:text="@string/_podcast_title"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -45,28 +47,42 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/_episode_date"
-            android:textSize="12sp"
             android:textColor="@color/on_surface_variant"
+            android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@id/text_item_episode_podcast_title"
-            app:layout_constraintTop_toBottomOf="@id/text_item_episode_podcast_title" />
+            app:layout_constraintStart_toStartOf="@id/text_item_episode_podcast_name"
+            app:layout_constraintTop_toBottomOf="@id/text_item_episode_podcast_name" />
 
         <TextView
-            android:id="@+id/text_item_episode_title"
+            android:id="@+id/text_item_episode_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/space4x"
             android:layout_marginEnd="@dimen/space4x"
             android:ellipsize="end"
             android:maxLines="1"
+            android:text="@string/_track_name"
             android:textColor="@color/primary"
-            android:text="@string/_episode_title"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@id/img_item_episode"
-            app:layout_constraintTop_toBottomOf="@id/img_item_episode" />
+            app:layout_constraintStart_toStartOf="@+id/text_item_episode_artist_name"
+            app:layout_constraintTop_toBottomOf="@+id/text_item_episode_artist_name" />
+
+        <TextView
+            android:id="@+id/text_item_episode_artist_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/space4x"
+            android:layout_marginTop="@dimen/space4x"
+            android:textColor="@color/on_surface_variant"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/img_item_episode"
+            app:layout_constraintTop_toBottomOf="@+id/img_item_episode"
+            tools:text="Ahmed Abouzaid" />
+
 
         <TextView
             android:id="@+id/text_item_episode_desc"
@@ -74,15 +90,15 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/space2x"
             android:layout_marginEnd="@dimen/space4x"
-            android:textColor="@color/on_surface_variant"
             android:ellipsize="end"
-            android:maxLines="2"
+            android:maxLines="1"
             android:text="@string/multi_line_text"
+            android:textColor="@color/on_surface_variant"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@id/text_item_episode_title"
-            app:layout_constraintTop_toBottomOf="@id/text_item_episode_title" />
+            app:layout_constraintStart_toStartOf="@id/text_item_episode_name"
+            app:layout_constraintTop_toBottomOf="@id/text_item_episode_name" />
 
         <TextView
             android:id="@+id/text_item_episode_play_time"
@@ -91,47 +107,38 @@
             android:layout_margin="@dimen/space8x"
             android:background="@drawable/search_shape"
             android:drawablePadding="@dimen/space4x"
+            android:gravity="center_vertical"
             android:paddingStart="@dimen/space4x"
             android:paddingEnd="@dimen/space4x"
+            android:text="@string/_episode_time"
             android:textSize="12sp"
-            android:gravity="center_vertical"
             app:drawableStartCompat="@drawable/ic_play"
             app:drawableTint="@color/primary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_item_episode_desc"
-            android:text="@string/_episode_time" />
+            app:layout_constraintTop_toBottomOf="@+id/text_item_episode_desc" />
 
-        <TextView
+        <ImageView
             android:id="@+id/text_item_episode_download"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/space8x"
-            android:drawablePadding="@dimen/space4x"
-            android:paddingStart="@dimen/space4x"
-            android:paddingEnd="@dimen/space4x"
-            android:textSize="12sp"
-            android:gravity="center_vertical"
-            app:layout_constraintEnd_toStartOf="@+id/text_subscription"
+            android:layout_marginStart="@dimen/space16x"
+            android:src="@drawable/ic_downloads"
+            app:drawableStartCompat="@drawable/ic_downloads"
             app:layout_constraintStart_toEndOf="@+id/text_item_episode_play_time"
             app:layout_constraintTop_toTopOf="@+id/text_item_episode_play_time"
-            app:drawableStartCompat="@drawable/ic_downloads"
-            app:drawableTint="@color/primary" />
+            app:tint="@color/primary" />
 
-        <TextView
+        <ImageView
             android:id="@+id/text_subscription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/space8x"
-            android:drawablePadding="@dimen/space4x"
-            android:paddingStart="@dimen/space4x"
-            android:paddingEnd="@dimen/space4x"
-            android:textSize="12sp"
-            android:gravity="center_vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/text_item_episode_download"
-            app:drawableStartCompat="@drawable/ic_subscriptions"
-            app:drawableTint="@color/primary" />
+            android:layout_marginStart="@dimen/space16x"
+            android:src="@drawable/ic_subscriptions"
+            app:tint="@color/primary"
+            app:drawableTint="@color/primary"
+            app:layout_constraintStart_toEndOf="@+id/text_item_episode_download"
+            app:layout_constraintTop_toTopOf="@id/text_item_episode_download" />
 
-          </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

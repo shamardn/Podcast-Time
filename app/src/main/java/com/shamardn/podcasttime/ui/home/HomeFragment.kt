@@ -11,7 +11,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import com.shamardn.podcasttime.data.remote.ApiService
 import com.shamardn.podcasttime.databinding.FragmentHomeBinding
-import com.shamardn.podcasttime.domain.entity.Episode
 import com.shamardn.podcasttime.domain.entity.Podcast
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -21,8 +20,6 @@ class HomeFragment() : Fragment(), HomeInteractionListener {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var homeAdapter: HomeAdapter
     private var items = mutableListOf<Podcast>()
-    private var itemsPodcastEpisodes = mutableListOf<Episode>()
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,8 +31,7 @@ class HomeFragment() : Fragment(), HomeInteractionListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        fetchPodcasts("learn")
-//        fetchPodcastEpisodesById(1605382691)
+        fetchPodcasts("podcast")
 
         binding.textHomeSearch.setOnClickListener {
 
@@ -62,17 +58,4 @@ class HomeFragment() : Fragment(), HomeInteractionListener {
         val action = HomeFragmentDirections.actionHomeFragmentToPodcastDetailsFragment(trackId)
         Navigation.findNavController(binding.root).navigate(action)
     }
-
-//    private fun fetchPodcastEpisodesById(id: Int) {
-//        lifecycleScope.launch {
-//            lifecycleScope.async {
-//                val service = ApiService.instance
-//                itemsPodcastEpisodes.clear()
-//                service.getPodcastById(id).results.forEach {
-//                    itemsPodcastEpisodes.add(it)
-//                }
-//                Log.i("HomeFragment", "${itemsPodcastEpisodes}")
-//            }.await()
-//        }
-//    }
 }

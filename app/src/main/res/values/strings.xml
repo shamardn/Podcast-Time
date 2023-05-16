@@ -14,7 +14,7 @@
     <string name="episode_topic">Topic</string>
     <string name="back_arrow_icon_desc">back arrow icon</string>
     <string name="_1_0x">1.0x</string>
-    <string name="multi_line_text">Description of episode Learn English 1 Description of episode Learn English 1 Description of episode Learn English 1 Description of episode Learn English 1 Description of episode Learn English 1 Description of episode Learn English 1 Description of episode Learn English 1 Description of episode Learn English 1 Description of episode Learn English 1 Description of episode Learn English 1 Description of episode Learn English 1 Description of episode Learn English 1 Description of episode Learn English 1 Description of episode Learn English 1 Description of episode Learn English 1 Description of episode Learn English 1 Description of episode Learn English 1 Description of episode Learn English 1 Description of episode Learn English 1 Description of episode Learn English 1 Description of episode Learn English 1 Description of episode Learn English 1</string>
+    <string name="multi_line_text">Description of episode Learn English 1 Description of episode Learn English 1 Description of episode Learn English 1 Description of episode Learn English 1 Description of episode Learn English 1 Description of episode Learn English 1 Description of episode Learn English 1 Description of episode Learn English 1</string>
     <string name="Library">Library</string>
     <string name="history">History</string>
     <string name="sign_out">Sign out</string>
@@ -33,10 +33,12 @@
     <string name="login">Login</string>
     <string name="register">Register</string>
     <string name="username">Username</string>
-    <string name="_episode_title">eps 1: Learn English Podcast</string>
+    <string name="_track_name">How to LEARN VOCABULARY | English</string>
     <string name="_episode_date">May 06, 2023</string>
     <string name="_episode_time">30 min</string>
-    <string name="_podcast_title">Learn English Podcast Learn English Podcast Learn English Podcast</string>
+    <string name="_collection_name">Effortless English Podcast | Learn English with AJ Hoge</string>
     <string name="subscribe">Subscribe</string>
     <string name="_user_name">User Name</string>
+    <string name="_genre_name">Language Learning</string>
+    <string name="_episodes_count">59 Episodes</string>
 </resources>

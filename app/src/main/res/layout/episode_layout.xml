@@ -36,7 +36,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/img_episode"
-            android:text="@string/_podcast_title" />
+            android:text="@string/_collection_name" />
 
         <TextView
             android:id="@+id/text_episode"
