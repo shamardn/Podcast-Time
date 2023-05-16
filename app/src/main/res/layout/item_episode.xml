@@ -100,18 +100,16 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_item_episode_desc"
-            android:text="@string/_episoed_time" />
+            android:text="@string/_episode_time" />
 
         <TextView
             android:id="@+id/text_item_episode_download"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/space8x"
-            android:background="@drawable/search_shape"
             android:drawablePadding="@dimen/space4x"
             android:paddingStart="@dimen/space4x"
             android:paddingEnd="@dimen/space4x"
-            android:text="@string/download"
             android:textSize="12sp"
             android:gravity="center_vertical"
             app:layout_constraintEnd_toStartOf="@+id/text_subscription"
@@ -125,11 +123,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/space8x"
-            android:background="@drawable/search_shape"
             android:drawablePadding="@dimen/space4x"
             android:paddingStart="@dimen/space4x"
             android:paddingEnd="@dimen/space4x"
-            android:text="@string/subscription"
             android:textSize="12sp"
             android:gravity="center_vertical"
             app:layout_constraintEnd_toEndOf="parent"

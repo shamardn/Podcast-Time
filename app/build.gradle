@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
@@ -49,8 +50,8 @@ dependencies {
     implementation 'com.google.android.material:material:1.9.0'
 
     // Navigation component
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.6.0-beta01'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.6.0-beta01'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.6.0-rc01'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.6.0-rc01'
 
     // Lottie Animations
     implementation 'com.airbnb.android:lottie:5.2.0'
@@ -62,4 +63,15 @@ dependencies {
 
     //splash
     implementation 'androidx.core:core-splashscreen:1.0.1'
+
+    // coroutines
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.0-RC'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.0-RC'
+
+    // retrofit2
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+
+    // Glide
+    implementation 'com.github.bumptech.glide:glide:4.15.1'
 }

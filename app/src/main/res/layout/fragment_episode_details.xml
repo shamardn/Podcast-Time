@@ -100,7 +100,7 @@
         app:drawableTint="@color/primary"
         app:layout_constraintStart_toStartOf="@+id/text_episode_details_date"
         app:layout_constraintTop_toBottomOf="@+id/text_episode_details_date"
-        android:text="@string/_episoed_time" />
+        android:text="@string/_episode_time" />
 
     <TextView
         android:id="@+id/text_episode_details_subscription"

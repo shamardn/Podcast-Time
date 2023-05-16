@@ -69,7 +69,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/img_item_download"
             app:layout_constraintTop_toBottomOf="@+id/img_item_download"
-            android:text="@string/_episoed_time" />
+            android:text="@string/_episode_time" />
 
         <TextView
             android:id="@+id/text_item_episode_download"

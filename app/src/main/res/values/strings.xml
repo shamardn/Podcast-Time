@@ -33,4 +33,10 @@
     <string name="login">Login</string>
     <string name="register">Register</string>
     <string name="username">Username</string>
+    <string name="_episode_title">eps 1: Learn English Podcast</string>
+    <string name="_episode_date">May 06, 2023</string>
+    <string name="_episode_time">30 min</string>
+    <string name="_podcast_title">Learn English Podcast Learn English Podcast Learn English Podcast</string>
+    <string name="subscribe">Subscribe</string>
+    <string name="_user_name">User Name</string>
 </resources>
