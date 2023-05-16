@@ -56,15 +56,22 @@
         android:id="@+id/episodeDetailsFragment"
         android:name="com.shamardn.podcasttime.ui.EpisodeDetailsFragment"
         android:label="fragment_episode_details"
-        tools:layout="@layout/fragment_episode_details" />
+        tools:layout="@layout/fragment_episode_details" >
+        <argument
+            android:name="guid"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/podcastDetailsFragment"
-        android:name="com.shamardn.podcasttime.ui.PodcastDetailsFragment"
+        android:name="com.shamardn.podcasttime.ui.podcastdetails.PodcastDetailsFragment"
         android:label="fragment_podcast_details"
         tools:layout="@layout/fragment_podcast_details" >
         <argument
             android:name="trackId"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_podcastDetailsFragment_to_episodeDetailsFragment"
+            app:destination="@id/episodeDetailsFragment" />
     </fragment>
 
 </navigation>

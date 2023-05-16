@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".ui.podcastdetails.PodcastDetailsFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/top_app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@color/surface"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="@dimen/space8x"
+            android:paddingVertical="@dimen/space4x"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/img_podcast_details_back_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/circular_shape"
+                android:contentDescription="@string/back_arrow_icon_desc"
+                android:padding="@dimen/space4x"
+                android:src="@drawable/ic_back_arrow"
+                app:tint="@color/primary" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space8x"
+                android:layout_marginEnd="@dimen/space8x"
+                android:text="@string/app_name"
+                android:textColor="@color/primary"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/text_podcast_details_genre_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/space8x"
+            android:text="@string/_genre_name"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/top_app_bar" />
+
+        <TextView
+            android:id="@+id/text_podcast_details_collection_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space4x"
+            android:layout_marginEnd="@dimen/space8x"
+            android:ellipsize="end"
+            android:textAlignment="viewStart"
+            android:text="@string/_collection_name"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/img_podcast_details"
+            app:layout_constraintStart_toStartOf="@+id/text_podcast_details_genre_name"
+            app:layout_constraintTop_toBottomOf="@+id/text_podcast_details_genre_name" />
+
+        <TextView
+            android:id="@+id/text_podcast_details_artist_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space4x"
+            android:layout_marginEnd="@dimen/space8x"
+            android:textAlignment="viewStart"
+            android:textColor="@color/on_surface_variant"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/img_podcast_details"
+            app:layout_constraintStart_toStartOf="@+id/text_podcast_details_collection_name"
+            app:layout_constraintTop_toBottomOf="@+id/text_podcast_details_collection_name"
+            tools:text="Ahmed Abouzaid" />
+
+        <TextView
+            android:id="@+id/text_podcast_details_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space4x"
+            android:text="@string/_episode_date"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@+id/text_podcast_details_collection_name"
+            app:layout_constraintTop_toBottomOf="@+id/text_podcast_details_artist_name" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/img_podcast_details"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:layout_marginEnd="@dimen/space8x"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_person"
+            app:layout_constraintBottom_toBottomOf="@+id/text_podcast_details_collection_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/text_podcast_details_collection_name"
+            app:shapeAppearanceOverlay="@style/RoundedImageView" />
+
+        <TextView
+            android:id="@+id/text_podcast_details_desc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space8x"
+            android:layout_marginEnd="@dimen/space8x"
+            android:text="@string/multi_line_text"
+            android:textColor="@color/on_surface_variant"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/img_podcast_details_subscription"
+            app:layout_constraintTop_toBottomOf="@+id/img_podcast_details_subscription" />
+
+        <ImageView
+            android:id="@+id/img_podcast_details_subscription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space8x"
+            android:padding="@dimen/space4x"
+            android:src="@drawable/ic_add"
+            app:layout_constraintStart_toStartOf="@+id/text_podcast_details_date"
+            app:layout_constraintTop_toBottomOf="@+id/text_podcast_details_date"
+            app:tint="@color/primary" />
+
+        <ImageView
+            android:id="@+id/img_podcast_details_download"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space16x"
+            android:contentDescription="@string/back_arrow_icon_desc"
+            android:padding="@dimen/space4x"
+            android:src="@drawable/ic_downloads"
+            app:layout_constraintBottom_toBottomOf="@+id/img_podcast_details_subscription"
+            app:layout_constraintStart_toEndOf="@+id/img_podcast_details_subscription"
+            app:layout_constraintTop_toTopOf="@+id/img_podcast_details_subscription"
+            app:tint="@color/primary" />
+
+        <TextView
+            android:id="@+id/text_podcast_details_episodes_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space4x"
+            android:text="@string/_episodes_count"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/text_podcast_details_desc"
+            app:layout_constraintTop_toBottomOf="@+id/text_podcast_details_desc" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_podcast_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space4x"
+            android:layout_marginBottom="@dimen/space4x"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_podcast_details_episodes_count"
+            app:layout_constraintVertical_bias="0.0"
+            tools:listitem="@layout/item_episode" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
