@@ -11,6 +11,7 @@ import com.shamardn.podcasttime.domain.entity.Podcast
 
 class HomeAdapter(
     private val items: List<Podcast>,
+    private val listener: HomeInteractionListener,
 ) : RecyclerView.Adapter<HomeAdapter.PodcastViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PodcastViewHolder {
         return PodcastViewHolder(
@@ -28,7 +29,12 @@ class HomeAdapter(
             textItemPodcastGenreName.text = currentPodcast.primaryGenreName.trim()
             textItemPodcastReleaseDate.text = currentPodcast.releaseDate
             textItemPodcastTrackCount.text = "${currentPodcast.trackCount.toString()} Episodes"
-            Glide.with(root.context).load(currentPodcast.artworkUrl100).into(imgItemPodcast)        }
+            Glide.with(root.context).load(currentPodcast.artworkUrl100).into(imgItemPodcast)
+
+            root.setOnClickListener {
+                listener.onClickPodcast(currentPodcast.trackId)
+            }
+        }
     }
 
     class PodcastViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
