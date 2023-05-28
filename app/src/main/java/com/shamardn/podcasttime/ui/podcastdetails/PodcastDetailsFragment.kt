@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.shamardn.podcasttime.data.remote.ApiService
@@ -58,8 +57,11 @@ class PodcastDetailsFragment : Fragment(), PodcastDetailsInteractionListener {
         }
     }
 
-    override fun onClickEpisode(guid: String) {
-        val action = PodcastDetailsFragmentDirections.actionPodcastDetailsFragmentToEpisodeDetailsFragment(guid)
-        Navigation.findNavController(binding.root).navigate(action)
+    override fun onClickEpisode() {
+        showEpisodeDetailsBottomSheet()
+    }
+
+    private fun showEpisodeDetailsBottomSheet() {
+        EpisodeDetailsBottomSheet().show(requireActivity().supportFragmentManager, "show bottom sheet")
     }
 }
