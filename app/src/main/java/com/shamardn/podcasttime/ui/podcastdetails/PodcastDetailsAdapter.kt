@@ -8,6 +8,8 @@ import com.bumptech.glide.Glide
 import com.shamardn.podcasttime.R
 import com.shamardn.podcasttime.databinding.ItemEpisodeBinding
 import com.shamardn.podcasttime.domain.entity.Episode
+import com.shamardn.podcasttime.util.changeDateFormat
+import com.shamardn.podcasttime.util.milliSecondsToMinutes
 
 class PodcastDetailsAdapter(
     private val items: List<Episode>,
@@ -27,9 +29,9 @@ class PodcastDetailsAdapter(
             textItemEpisodePodcastName.text = currentEpisode.collectionName
             textItemEpisodeArtistName.text = items[0].artistName
             textItemEpisodeName.text = currentEpisode.trackName
-            textItemEpisodeDate.text = currentEpisode.releaseDate
+            textItemEpisodeDate.text = currentEpisode.releaseDate.changeDateFormat()
             textItemEpisodeDesc.text = currentEpisode.description
-            textItemEpisodePlayTime.text = currentEpisode.trackTimeMillis.toString()
+            textItemEpisodePlayTime.text = currentEpisode.trackTimeMillis.milliSecondsToMinutes()
             Glide.with(root.context).load(currentEpisode.artworkUrl60).into(imgItemEpisode)
 
             root.setOnClickListener {

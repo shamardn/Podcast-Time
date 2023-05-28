@@ -8,6 +8,7 @@ import com.bumptech.glide.Glide
 import com.shamardn.podcasttime.R
 import com.shamardn.podcasttime.databinding.ItemPodcastBinding
 import com.shamardn.podcasttime.domain.entity.Podcast
+import com.shamardn.podcasttime.util.changeDateFormat
 
 class HomeAdapter(
     private val items: List<Podcast>,
@@ -27,8 +28,8 @@ class HomeAdapter(
             textItemPodcastArtistName.text = currentPodcast.artistName.trim()
             textItemPodcastTrackName.text = currentPodcast.trackName.trim()
             textItemPodcastGenreName.text = currentPodcast.primaryGenreName.trim()
-            textItemPodcastReleaseDate.text = currentPodcast.releaseDate
-            textItemPodcastTrackCount.text = "${currentPodcast.trackCount.toString()} Episodes"
+            textItemPodcastReleaseDate.text = currentPodcast.releaseDate.changeDateFormat()
+            textItemPodcastTrackCount.text = "${currentPodcast.trackCount} Episodes"
             Glide.with(root.context).load(currentPodcast.artworkUrl100).into(imgItemPodcast)
 
             root.setOnClickListener {

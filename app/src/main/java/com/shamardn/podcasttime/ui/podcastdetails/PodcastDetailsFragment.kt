@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide
 import com.shamardn.podcasttime.data.remote.ApiService
 import com.shamardn.podcasttime.databinding.FragmentPodcastDetailsBinding
 import com.shamardn.podcasttime.domain.entity.Episode
+import com.shamardn.podcasttime.util.changeDateFormat
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -49,7 +50,7 @@ class PodcastDetailsFragment : Fragment(), PodcastDetailsInteractionListener {
             binding.textPodcastDetailsArtistName.text = items[0].artistName
             binding.textPodcastDetailsCollectionName.text = items[0].collectionName
             binding.textPodcastDetailsGenreName.text = items[0].primaryGenreName
-            binding.textPodcastDetailsDate.text = items[0].releaseDate
+            binding.textPodcastDetailsDate.text = items[0].releaseDate.changeDateFormat()
             binding.textPodcastDetailsDesc.text = items[1].description
             binding.textPodcastDetailsEpisodesCount.text = "${items[0].trackCount} Episodes"
             Glide.with(binding.imgPodcastDetails).load(items[0].artworkUrl100).into(binding.imgPodcastDetails)
