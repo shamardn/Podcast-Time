@@ -72,6 +72,18 @@
         <action
             android:id="@+id/action_podcastDetailsFragment_to_episodeDetailsFragment"
             app:destination="@id/episodeDetailsFragment" />
+        <action
+            android:id="@+id/action_podcastDetailsFragment_to_episodeDetailsBottomSheet"
+            app:destination="@id/episodeDetailsBottomSheet" />
     </fragment>
+    <dialog
+        android:id="@+id/episodeDetailsBottomSheet"
+        android:name="com.shamardn.podcasttime.ui.podcastdetails.EpisodeDetailsBottomSheet"
+        android:label="EpisodeDetailsBottomSheet"
+        tools:layout="@layout/episode_bottom_sheet_layout">
+        <argument
+            android:name="trackViewUrl"
+            app:argType="string" />
+    </dialog>
 
 </navigation>

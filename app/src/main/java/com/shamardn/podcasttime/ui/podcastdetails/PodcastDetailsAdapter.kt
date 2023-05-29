@@ -35,7 +35,7 @@ class PodcastDetailsAdapter(
             Glide.with(root.context).load(currentEpisode.artworkUrl60).into(imgItemEpisode)
 
             root.setOnClickListener {
-                listener.onClickEpisode()
+                listener.onClickEpisode(currentEpisode.trackViewUrl)
             }
         }
     }

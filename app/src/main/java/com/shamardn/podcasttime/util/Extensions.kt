@@ -26,7 +26,7 @@ fun formatTimeStamp(timestamp: Long) {
 }
 
 fun Int.milliSecondsToMinutes(): String {
-    val minutes: Int = (this / 60000) % 60
+    val minutes: Int = (this / 60000) % 60 + 1
     val hours: Int = this / 3600000
     return when {
         minutes == 0 -> "$hours hr"

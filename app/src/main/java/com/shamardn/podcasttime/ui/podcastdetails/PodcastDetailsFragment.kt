@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.shamardn.podcasttime.data.remote.ApiService
@@ -48,6 +49,7 @@ class PodcastDetailsFragment : Fragment(), PodcastDetailsInteractionListener {
             binding.recyclerViewPodcastDetails.adapter = podcastDetailsAdapter
             binding.textPodcastDetailsArtistName.text = items[0].artistName
             binding.textPodcastDetailsCollectionName.text = items[0].collectionName
+            binding.textAppbarTitle.text = items[0].collectionName
             binding.textPodcastDetailsGenreName.text = items[0].primaryGenreName
             binding.textPodcastDetailsDate.text = items[0].releaseDate.changeDateFormat()
             binding.textPodcastDetailsDesc.text = items[1].description
@@ -57,11 +59,13 @@ class PodcastDetailsFragment : Fragment(), PodcastDetailsInteractionListener {
         }
     }
 
-    override fun onClickEpisode() {
-        showEpisodeDetailsBottomSheet()
+
+    private fun showEpisodeDetailsBottomSheet(trackViewUrl: String) {
+        val action = PodcastDetailsFragmentDirections.actionPodcastDetailsFragmentToEpisodeDetailsBottomSheet(trackViewUrl)
+        Navigation.findNavController(binding.root).navigate(action)
     }
 
-    private fun showEpisodeDetailsBottomSheet() {
-        EpisodeDetailsBottomSheet().show(requireActivity().supportFragmentManager, "show bottom sheet")
+    override fun onClickEpisode(trackViewUrl: String) {
+        showEpisodeDetailsBottomSheet(trackViewUrl)
     }
 }

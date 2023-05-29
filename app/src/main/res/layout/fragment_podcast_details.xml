@@ -36,11 +36,15 @@
                 app:tint="@color/primary" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/text_appbar_title"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:layout_marginStart="@dimen/space8x"
                 android:layout_marginEnd="@dimen/space8x"
-                android:text="@string/app_name"
+                tools:text="@string/app_name"
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:textColor="@color/primary"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -52,7 +56,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/space8x"
-            android:text="@string/_genre_name"
+            tools:text="@string/_genre_name"
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/top_app_bar" />
@@ -65,7 +69,7 @@
             android:layout_marginEnd="@dimen/space8x"
             android:ellipsize="end"
             android:textAlignment="viewStart"
-            android:text="@string/_collection_name"
+            tools:text="@string/_collection_name"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/img_podcast_details"
@@ -91,7 +95,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/space4x"
-            android:text="@string/_episode_date"
+            tools:text="@string/_episode_date"
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="@+id/text_podcast_details_collection_name"
             app:layout_constraintTop_toBottomOf="@+id/text_podcast_details_artist_name" />
@@ -102,7 +106,7 @@
             android:layout_height="72dp"
             android:layout_marginEnd="@dimen/space8x"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_person"
+            tools:src="@drawable/ic_person"
             app:layout_constraintBottom_toBottomOf="@+id/text_podcast_details_collection_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/text_podcast_details_collection_name"
@@ -114,7 +118,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/space8x"
             android:layout_marginEnd="@dimen/space8x"
-            android:text="@string/multi_line_text"
+            tools:text="@string/multi_line_text"
             android:textColor="@color/on_surface_variant"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -127,7 +131,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/space8x"
             android:padding="@dimen/space4x"
-            android:src="@drawable/ic_add"
+            android:src="@drawable/ic_subscriptions"
             app:layout_constraintStart_toStartOf="@+id/text_podcast_details_date"
             app:layout_constraintTop_toBottomOf="@+id/text_podcast_details_date"
             app:tint="@color/primary" />
@@ -150,7 +154,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/space4x"
-            android:text="@string/_episodes_count"
+            tools:text="@string/_episodes_count"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="@+id/text_podcast_details_desc"
             app:layout_constraintTop_toBottomOf="@+id/text_podcast_details_desc" />

@@ -130,16 +130,5 @@
             app:layout_constraintTop_toTopOf="@+id/text_item_episode_play_time"
             app:tint="@color/primary" />
 
-        <ImageView
-            android:id="@+id/text_subscription"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/space16x"
-            android:src="@drawable/ic_subscriptions"
-            app:tint="@color/primary"
-            app:drawableTint="@color/primary"
-            app:layout_constraintStart_toEndOf="@+id/text_item_episode_download"
-            app:layout_constraintTop_toTopOf="@id/text_item_episode_download" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
