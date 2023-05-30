@@ -60,12 +60,12 @@ class PodcastDetailsFragment : Fragment(), PodcastDetailsInteractionListener {
     }
 
 
-    private fun showEpisodeDetailsBottomSheet(trackViewUrl: String) {
-        val action = PodcastDetailsFragmentDirections.actionPodcastDetailsFragmentToEpisodeDetailsBottomSheet(trackViewUrl)
+    private fun showEpisodeDetailsBottomSheet(episodeUrl: String) {
+        val action = PodcastDetailsFragmentDirections.actionPodcastDetailsFragmentToEpisodeDetailsBottomSheet(episodeUrl)
         Navigation.findNavController(binding.root).navigate(action)
     }
 
-    override fun onClickEpisode(trackViewUrl: String) {
-        showEpisodeDetailsBottomSheet(trackViewUrl)
+    override fun onClickEpisode(episodeUrl: String) {
+        showEpisodeDetailsBottomSheet(episodeUrl)
     }
 }

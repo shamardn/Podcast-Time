@@ -82,7 +82,7 @@
         android:label="EpisodeDetailsBottomSheet"
         tools:layout="@layout/episode_bottom_sheet_layout">
         <argument
-            android:name="trackViewUrl"
+            android:name="episodeUrl"
             app:argType="string" />
     </dialog>
 

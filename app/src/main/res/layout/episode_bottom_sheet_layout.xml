@@ -50,17 +50,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_podcast" />
 
-    <com.google.android.exoplayer2.ui.StyledPlayerView
-        android:id="@+id/exo_player"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_margin="@dimen/space12x"
-        android:keepScreenOn="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_episode"
-        app:resize_mode="fixed_width"
-        app:use_controller="true" />
+        <com.google.android.exoplayer2.ui.StyledPlayerView
+            android:id="@+id/player_view"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_margin="@dimen/space8x"
+            app:use_controller="true"
+            app:show_timeout="0"
+            app:hide_on_touch="false"
+            android:background="@android:color/transparent"
+            app:surface_type="surface_view"
+            app:shutter_background_color="@android:color/white"
+            app:controller_layout_id="@layout/exo_player_control_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_episode"
+            android:gravity="center" />
 
     <TextView
         android:id="@+id/text_speed"
@@ -72,12 +77,12 @@
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/exo_player" />
+        app:layout_constraintTop_toBottomOf="@+id/player_view" />
 
     <ImageView
         android:id="@+id/img_sleep"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="16dp"
+        android:layout_height="24dp"
         android:src="@drawable/ic_night"
         app:layout_constraintEnd_toStartOf="@id/img_share"
         app:layout_constraintStart_toEndOf="@+id/text_speed"

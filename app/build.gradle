@@ -50,16 +50,18 @@ dependencies {
     implementation 'com.google.android.material:material:1.9.0'
 
     // Navigation component
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.6.0-rc01'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.6.0-rc01'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.7.0-alpha01'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.7.0-alpha01'
 
     // Lottie Animations
     implementation 'com.airbnb.android:lottie:5.2.0'
 
     // exo player
-    implementation 'com.google.android.exoplayer:exoplayer-core:2.18.6'
-    implementation 'com.google.android.exoplayer:exoplayer-ui:2.18.6'
-    implementation 'com.google.android.exoplayer:exoplayer-smoothstreaming:2.18.6'
+    implementation 'com.google.android.exoplayer:exoplayer-core:2.18.7'
+    implementation 'com.google.android.exoplayer:exoplayer-ui:2.18.7'
+    implementation 'com.google.android.exoplayer:exoplayer-smoothstreaming:2.18.7'
+
+    implementation 'com.google.android.exoplayer:exoplayer:2.18.7'
 
     //splash
     implementation 'androidx.core:core-splashscreen:1.0.1'
