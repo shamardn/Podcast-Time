@@ -4,47 +4,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:srcCompat="@tools:sample/avatars"
     tools:context=".ui.SettingsFragment">
 
-    <ImageView
-        android:id="@+id/img_settings_back_arrow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/space8x"
-        android:layout_marginTop="@dimen/space8x"
-        android:background="@drawable/circular_shape"
-        android:contentDescription="@string/back_arrow_icon_desc"
-        android:padding="@dimen/space4x"
-        android:src="@drawable/ic_back_arrow"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/primary" />
-
-    <TextView
-        android:id="@+id/text_settings_title"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:id="@+id/top_app_bar"
+        android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:layout_marginStart="@dimen/space8x"
-        android:layout_marginEnd="@dimen/space8x"
-        android:gravity="center_vertical|center_horizontal"
-        android:text="@string/settings"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/img_settings_back_arrow"
-        app:layout_constraintEnd_toStartOf="@+id/img_settings_profile"
-        app:layout_constraintStart_toEndOf="@id/img_settings_back_arrow"
-        app:layout_constraintTop_toTopOf="@+id/img_settings_back_arrow" />
-
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/img_settings_profile"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="@dimen/space8x"
-        android:layout_marginEnd="@dimen/space8x"
-        android:src="@drawable/ic_person"
+        android:background="@color/surface"
+        android:gravity="center"
+        android:elevation="@dimen/space2x"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/space8x"
+        android:paddingVertical="@dimen/space4x"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.ImageView.Round" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/text_Settings_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/space8x"
+            android:layout_marginStart="@dimen/space8x"
+            android:text="@string/settings"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_weight="1"
+            android:textColor="@color/primary" />
+
+        <ImageView
+            android:id="@+id/img_settings_profile"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="@dimen/space4x"
+            android:src="@drawable/ic_person"
+            app:tint="@color/primary" />
+    </LinearLayout>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_settings_language"
@@ -55,7 +50,7 @@
         app:cardCornerRadius="@dimen/space8x"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_settings_title">
+        app:layout_constraintTop_toBottomOf="@id/top_app_bar">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

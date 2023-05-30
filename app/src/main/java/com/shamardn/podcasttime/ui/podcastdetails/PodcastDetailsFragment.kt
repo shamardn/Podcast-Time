@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.shamardn.podcasttime.data.remote.ApiService
@@ -31,6 +32,13 @@ class PodcastDetailsFragment : Fragment(), PodcastDetailsInteractionListener {
 
         fetchPodcastEpisodesById(navArgs.trackId)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.imgPodcastDetailsBackArrow.setOnClickListener {
+            it.findNavController().popBackStack()
+        }
     }
 
     private fun fetchPodcastEpisodesById(id: Int) {
