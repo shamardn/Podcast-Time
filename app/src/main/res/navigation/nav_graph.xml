@@ -84,6 +84,15 @@
         <argument
             android:name="episodeUrl"
             app:argType="string" />
+        <argument
+            android:name="artworkUrl"
+            app:argType="string" />
+        <argument
+            android:name="podcastTitle"
+            app:argType="string" />
+        <argument
+            android:name="episode"
+            app:argType="string" />
     </dialog>
 
 </navigation>

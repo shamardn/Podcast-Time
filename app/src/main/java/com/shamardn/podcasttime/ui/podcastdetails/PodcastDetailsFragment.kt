@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
@@ -44,7 +43,6 @@ class PodcastDetailsFragment : Fragment(), PodcastDetailsInteractionListener {
                     Log.i("PodcastDetailsFragment", "${items.size}   ${items.last()}")
                 }
             }
-            Toast.makeText(context, "${items.size}", Toast.LENGTH_SHORT).show()
             podcastDetailsAdapter = PodcastDetailsAdapter(items, this@PodcastDetailsFragment)
             binding.recyclerViewPodcastDetails.adapter = podcastDetailsAdapter
             binding.textPodcastDetailsArtistName.text = items[0].artistName
@@ -59,13 +57,12 @@ class PodcastDetailsFragment : Fragment(), PodcastDetailsInteractionListener {
         }
     }
 
-
-    private fun showEpisodeDetailsBottomSheet(episodeUrl: String) {
-        val action = PodcastDetailsFragmentDirections.actionPodcastDetailsFragmentToEpisodeDetailsBottomSheet(episodeUrl)
+    private fun showEpisodeDetailsBottomSheet(episodeUrl: String, artworkUrl: String, podcastTitle: String, episode: String) {
+        val action = PodcastDetailsFragmentDirections.actionPodcastDetailsFragmentToEpisodeDetailsBottomSheet(episodeUrl, artworkUrl, podcastTitle, episode)
         Navigation.findNavController(binding.root).navigate(action)
     }
 
-    override fun onClickEpisode(episodeUrl: String) {
-        showEpisodeDetailsBottomSheet(episodeUrl)
+    override fun onClickEpisode(episodeUrl: String, artworkUrl: String, podcastTitle: String, episode: String) {
+        showEpisodeDetailsBottomSheet(episodeUrl, artworkUrl, podcastTitle, episode)
     }
 }
