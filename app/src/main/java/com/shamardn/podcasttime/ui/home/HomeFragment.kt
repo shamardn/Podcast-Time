@@ -11,9 +11,12 @@ import androidx.navigation.Navigation
 import com.shamardn.podcasttime.data.remote.ApiService
 import com.shamardn.podcasttime.databinding.FragmentHomeBinding
 import com.shamardn.podcasttime.domain.entity.Podcast
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+
+@AndroidEntryPoint
 class HomeFragment() : Fragment(), HomeInteractionListener {
 
     private lateinit var binding: FragmentHomeBinding

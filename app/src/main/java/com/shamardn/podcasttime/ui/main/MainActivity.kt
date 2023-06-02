@@ -1,4 +1,4 @@
-package com.shamardn.podcasttime.ui
+package com.shamardn.podcasttime.ui.main
 
 import android.os.Bundle
 import android.view.WindowManager
@@ -8,7 +8,9 @@ import androidx.navigation.Navigation
 import androidx.navigation.ui.setupWithNavController
 import com.shamardn.podcasttime.R
 import com.shamardn.podcasttime.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
