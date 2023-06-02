@@ -1,6 +1,7 @@
 package com.shamardn.podcasttime.ui
 
 import android.os.Bundle
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.Navigation
@@ -16,6 +17,9 @@ class MainActivity : AppCompatActivity() {
         setTheme(R.style.PodcastTimeTheme)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
+
+        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+
         setContentView(binding.root)
 
         installSplashScreen()
