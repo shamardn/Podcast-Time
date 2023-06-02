@@ -1,39 +1,36 @@
 package com.shamardn.podcasttime.ui.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
-import com.shamardn.podcasttime.data.remote.ApiService
 import com.shamardn.podcasttime.databinding.FragmentHomeBinding
-import com.shamardn.podcasttime.domain.entity.Podcast
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 
 @AndroidEntryPoint
 class HomeFragment() : Fragment(), HomeInteractionListener {
-
     private lateinit var binding: FragmentHomeBinding
     private lateinit var homeAdapter: HomeAdapter
-    private var items = mutableListOf<Podcast>()
+    private val viewModel: HomeViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
+        viewModel.getPodcasts("podcast")
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        fetchPodcasts("podcast")
+        fetchPodcasts()
 
         binding.textHomeSearch.setOnClickListener {
             val action = HomeFragmentDirections.actionHomeFragmentToSearchFragment()
@@ -41,18 +38,14 @@ class HomeFragment() : Fragment(), HomeInteractionListener {
         }
     }
 
-    private fun fetchPodcasts(term: String) {
+    private fun fetchPodcasts() {
         lifecycleScope.launch {
-            withContext(lifecycleScope.coroutineContext) {
-                val service = ApiService.instance
-                items.clear()
-                service.getPodcasts(term).results.forEach {
-                    items.add(it)
+            viewModel.podcasts.collect{
+                if (it != null) {
+                    homeAdapter = HomeAdapter(it.results, this@HomeFragment)
+                    binding.homeRecyclerView.adapter = homeAdapter
                 }
-                Log.i("HomeFragment", "${items[0]}")
             }
-            homeAdapter = HomeAdapter(items, this@HomeFragment)
-            binding.homeRecyclerView.adapter = homeAdapter
         }
     }
 

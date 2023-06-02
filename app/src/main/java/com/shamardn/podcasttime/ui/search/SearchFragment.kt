@@ -6,52 +6,53 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
-import com.shamardn.podcasttime.data.remote.ApiService
 import com.shamardn.podcasttime.databinding.FragmentSearchBinding
-import com.shamardn.podcasttime.domain.entity.Podcast
-import kotlinx.coroutines.delay
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+@AndroidEntryPoint
 class SearchFragment : Fragment(), SearchInteractionListener {
     private lateinit var binding: FragmentSearchBinding
     private lateinit var searchAdapter: SearchAdapter
-    private var items = mutableListOf<Podcast>()
+    private val viewModel: SearchViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
         binding = FragmentSearchBinding.inflate(inflater, container, false)
+
+        binding.searchInput.doOnTextChanged { text, start, before, count ->
+            viewModel.getPodcasts(text.toString())
+            fetchPodcasts()
+        }
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         binding.imgSearchBackArrow.setOnClickListener {
             view.findNavController().popBackStack()
         }
-
-        binding.searchInput.doOnTextChanged { text, start, before, count ->
-
-            fetchPodcasts(text.toString())
-        }
     }
 
-    private fun fetchPodcasts(term: String) {
+    private fun fetchPodcasts() {
         lifecycleScope.launch {
-            withContext(lifecycleScope.coroutineContext) {
-                delay(1000)
-                val service = ApiService.instance
-                items.clear()
-                service.getPodcasts(term).results.forEach {
-                    items.add(it)
+            withContext(Dispatchers.Main) {
+                viewModel.podcasts.collect {
+                    if (it != null) {
+                        searchAdapter = SearchAdapter(it.results, this@SearchFragment)
+                        binding.searchRecyclerView.adapter = searchAdapter
+                    }
                 }
             }
-            searchAdapter = SearchAdapter(items, this@SearchFragment)
-            binding.searchRecyclerView.adapter = searchAdapter
         }
     }
 

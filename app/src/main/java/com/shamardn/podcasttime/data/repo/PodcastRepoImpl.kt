@@ -5,9 +5,8 @@ import com.shamardn.podcasttime.domain.entity.Episode
 import com.shamardn.podcasttime.domain.entity.Podcast
 import com.shamardn.podcasttime.domain.entity.PodcastResponse
 import com.shamardn.podcasttime.domain.repo.PodcastRepo
-import javax.inject.Inject
 
-class PodcastRepoImpl @Inject constructor(private val apiService: ApiService): PodcastRepo {
+class PodcastRepoImpl(private val apiService: ApiService): PodcastRepo {
     override suspend fun getPodcasts(term: String): PodcastResponse<Podcast> {
         return apiService.getPodcasts(term)
     }
