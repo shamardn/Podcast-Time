@@ -44,43 +44,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/img_search_back_arrow"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/img_search_back_arrow"
-        app:layout_constraintTop_toTopOf="@+id/img_search_back_arrow" />
-
-    <com.google.android.material.chip.ChipGroup
-        android:id="@+id/chipGroup"
-        style="@style/Widget.Material3.Chip.Suggestion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/space4x"
-        app:checkedChip="@id/episode_title_chip"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_input"
-        app:selectionRequired="true"
-        app:singleSelection="true">
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/episode_title_chip"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="@string/episode_title"
-            app:chipStrokeColor="@android:color/transparent" />
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/episode_author_chip"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/episode_author"
-            app:chipStrokeColor="@android:color/transparent" />
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/episode_topic_chip"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/episode_topic"
-            app:chipStrokeColor="@android:color/transparent" />
-    </com.google.android.material.chip.ChipGroup>
+        app:layout_constraintTop_toTopOf="@+id/img_search_back_arrow"
+        android:autofillHints="podcast" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/search_recycler_view"
@@ -91,6 +56,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chipGroup"
-        tools:listitem="@layout/item_episode" />
+        app:layout_constraintTop_toBottomOf="@+id/search_input"
+        tools:listitem="@layout/item_podcast" />
 </androidx.constraintlayout.widget.ConstraintLayout>

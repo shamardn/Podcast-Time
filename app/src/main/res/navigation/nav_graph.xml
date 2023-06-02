@@ -22,8 +22,12 @@
         android:label="LoginFragment" />
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.shamardn.podcasttime.ui.SearchFragment"
-        android:label="SearchFragment" />
+        android:name="com.shamardn.podcasttime.ui.search.SearchFragment"
+        android:label="SearchFragment" >
+        <action
+            android:id="@+id/action_searchFragment_to_podcastDetailsFragment"
+            app:destination="@id/podcastDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/signupFragment"
         android:name="com.shamardn.podcasttime.ui.SignupFragment"

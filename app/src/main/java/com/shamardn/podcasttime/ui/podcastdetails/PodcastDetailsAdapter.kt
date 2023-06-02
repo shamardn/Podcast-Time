@@ -1,5 +1,6 @@
 package com.shamardn.podcasttime.ui.podcastdetails
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,7 +34,7 @@ class PodcastDetailsAdapter(
             textItemEpisodeDesc.text = currentEpisode.description
             textItemEpisodePlayTime.text = currentEpisode.trackTimeMillis.milliSecondsToMinutes()
             Glide.with(root.context).load(currentEpisode.artworkUrl60).into(imgItemEpisode)
-
+            Log.i("PodcastDetailsAdapter", "description: -> ${currentEpisode.description}")
             root.setOnClickListener {
                 listener.onClickEpisode(currentEpisode.episodeUrl, currentEpisode.artworkUrl160, currentEpisode.collectionName, currentEpisode.trackName)
             }

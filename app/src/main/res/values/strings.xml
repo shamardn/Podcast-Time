@@ -41,4 +41,5 @@
     <string name="_user_name">User Name</string>
     <string name="_genre_name">Language Learning</string>
     <string name="_episodes_count">59 Episodes</string>
+    <string name="podcast_title">Podcast</string>
 </resources>

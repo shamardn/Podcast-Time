@@ -48,7 +48,6 @@ class PodcastDetailsFragment : Fragment(), PodcastDetailsInteractionListener {
                 items.clear()
                 service.getPodcastById(id).results.forEach {
                     items.add(it)
-                    Log.i("PodcastDetailsFragment", "${items.size}   ${items.last()}")
                 }
             }
             podcastDetailsAdapter = PodcastDetailsAdapter(items, this@PodcastDetailsFragment)
@@ -62,6 +61,7 @@ class PodcastDetailsFragment : Fragment(), PodcastDetailsInteractionListener {
             binding.textPodcastDetailsEpisodesCount.text = "${items[0].trackCount} Episodes"
             Glide.with(binding.imgPodcastDetails).load(items[0].artworkUrl100).into(binding.imgPodcastDetails)
 
+            Log.i("PodcastDetailsFragment", "${items[0]}")
         }
     }
 
