@@ -13,8 +13,10 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.shamardn.podcasttime.databinding.FragmentPodcastDetailsBinding
+import com.shamardn.podcasttime.domain.entity.EpisodeDTO
 import com.shamardn.podcasttime.util.changeDateFormat
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -43,30 +45,56 @@ class PodcastDetailsFragment : Fragment(), PodcastDetailsInteractionListener {
 
     private fun fetchPodcastEpisodesById() {
         lifecycleScope.launch {
-           viewModel.episodes.collect{
-               if (it != null){
-                   podcastDetailsAdapter = PodcastDetailsAdapter(it.results, this@PodcastDetailsFragment)
-                   binding.recyclerViewPodcastDetails.adapter = podcastDetailsAdapter
-                   binding.textPodcastDetailsArtistName.text = it.results[0].artistName
-                   binding.textPodcastDetailsCollectionName.text = it.results[0].collectionName
-                   binding.textAppbarTitle.text = it.results[0].collectionName
-                   binding.textPodcastDetailsGenreName.text = it.results[0].primaryGenreName
-                   binding.textPodcastDetailsDate.text = it.results[0].releaseDate.changeDateFormat()
-                   binding.textPodcastDetailsDesc.text = it.results[1].description
-                   binding.textPodcastDetailsEpisodesCount.text = "${it.results[0].trackCount} Episodes"
-                   Glide.with(binding.imgPodcastDetails).load(it.results[0].artworkUrl100).into(binding.imgPodcastDetails)
-                   Log.i("PodcastDetailsFragment", "${it.results[0]}")
-               }
-           }
+            viewModel.episodes.collect {
+                if (it != null) {
+                    podcastDetailsAdapter =
+                        PodcastDetailsAdapter(it.results, this@PodcastDetailsFragment)
+                    binding.recyclerViewPodcastDetails.adapter = podcastDetailsAdapter
+                    binding.textPodcastDetailsArtistName.text = it.results[0].artistName
+                    binding.textPodcastDetailsCollectionName.text = it.results[0].collectionName
+                    binding.textAppbarTitle.text = it.results[0].collectionName
+                    binding.textPodcastDetailsGenreName.text = it.results[0].primaryGenreName
+                    binding.textPodcastDetailsDate.text =
+                        it.results[0].releaseDate.changeDateFormat()
+                    binding.textPodcastDetailsDesc.text = it.results[1].description
+                    binding.textPodcastDetailsEpisodesCount.text =
+                        "${it.results[0].trackCount} Episodes"
+                    Glide.with(binding.imgPodcastDetails).load(it.results[0].artworkUrl100)
+                        .into(binding.imgPodcastDetails)
+                    Log.i("PodcastDetailsFragment", "${it.results[0]}")
+                }
+            }
         }
     }
 
-    private fun showEpisodeDetailsBottomSheet(episodeUrl: String, artworkUrl: String, podcastTitle: String, episode: String) {
-        val action = PodcastDetailsFragmentDirections.actionPodcastDetailsFragmentToEpisodeDetailsBottomSheet(episodeUrl, artworkUrl, podcastTitle, episode)
+    private fun showEpisodeDetailsBottomSheet(
+        episodeUrl: String,
+        artworkUrl: String,
+        podcastTitle: String,
+        episode: String,
+    ) {
+        val action =
+            PodcastDetailsFragmentDirections.actionPodcastDetailsFragmentToEpisodeDetailsBottomSheet(
+                episodeUrl,
+                artworkUrl,
+                podcastTitle,
+                episode
+            )
         Navigation.findNavController(binding.root).navigate(action)
     }
 
-    override fun onClickEpisode(episodeUrl: String, artworkUrl: String, podcastTitle: String, episode: String) {
+    override fun onClickEpisode(
+        episodeUrl: String,
+        artworkUrl: String,
+        podcastTitle: String,
+        episode: String,
+    ) {
         showEpisodeDetailsBottomSheet(episodeUrl, artworkUrl, podcastTitle, episode)
+    }
+
+    override fun onClickDownload(episodeDTO: EpisodeDTO) {
+        lifecycleScope.launch(Dispatchers.IO) {
+            viewModel.saveEpisodeToDownload(episodeDTO)
+        }
     }
 }
