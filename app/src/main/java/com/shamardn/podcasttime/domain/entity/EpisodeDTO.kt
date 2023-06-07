@@ -1,6 +1,6 @@
 package com.shamardn.podcasttime.domain.entity
 
-data class Episode(
+data class EpisodeDTO(
     val artistIds: List<Any>,
     val artistName: String,
     val artworkUrl100: String,

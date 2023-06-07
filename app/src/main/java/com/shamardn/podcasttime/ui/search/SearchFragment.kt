@@ -27,6 +27,8 @@ class SearchFragment : Fragment(), SearchInteractionListener {
     ): View {
         binding = FragmentSearchBinding.inflate(inflater, container, false)
 
+        binding.searchInput.requestFocus()
+
         binding.searchInput.doOnTextChanged { text, start, before, count ->
             viewModel.getPodcasts(text.toString())
             fetchPodcasts()

@@ -7,11 +7,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.shamardn.podcasttime.R
 import com.shamardn.podcasttime.databinding.ItemPodcastBinding
-import com.shamardn.podcasttime.domain.entity.Podcast
+import com.shamardn.podcasttime.domain.entity.PodcastDTO
 import com.shamardn.podcasttime.util.changeDateFormat
 
 class SearchAdapter(
-    private val items: List<Podcast>,
+    private val items: List<PodcastDTO>,
     private val listener: SearchInteractionListener,
 ) : RecyclerView.Adapter<SearchAdapter.PodcastViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PodcastViewHolder {

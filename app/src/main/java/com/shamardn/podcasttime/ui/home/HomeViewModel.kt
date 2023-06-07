@@ -3,7 +3,7 @@ package com.shamardn.podcasttime.ui.home
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.shamardn.podcasttime.domain.entity.Podcast
+import com.shamardn.podcasttime.domain.entity.PodcastDTO
 import com.shamardn.podcasttime.domain.entity.PodcastResponse
 import com.shamardn.podcasttime.domain.usecase.GetPodcastsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,8 +16,8 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val getPodcastsUseCase: GetPodcastsUseCase,
 ): ViewModel() {
-    private val _podcasts = MutableStateFlow<PodcastResponse<Podcast>?>(null)
-    val podcasts: StateFlow<PodcastResponse<Podcast>?> = _podcasts
+    private val _podcasts = MutableStateFlow<PodcastResponse<PodcastDTO>?>(null)
+    val podcasts: StateFlow<PodcastResponse<PodcastDTO>?> = _podcasts
 
     fun getPodcasts(term: String){
         try {

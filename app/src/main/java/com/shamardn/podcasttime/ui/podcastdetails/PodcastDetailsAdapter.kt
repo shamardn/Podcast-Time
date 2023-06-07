@@ -8,12 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.shamardn.podcasttime.R
 import com.shamardn.podcasttime.databinding.ItemEpisodeBinding
-import com.shamardn.podcasttime.domain.entity.Episode
+import com.shamardn.podcasttime.domain.entity.EpisodeDTO
 import com.shamardn.podcasttime.util.changeDateFormat
 import com.shamardn.podcasttime.util.milliSecondsToMinutes
 
 class PodcastDetailsAdapter(
-    private val items: List<Episode>,
+    private val items: List<EpisodeDTO>,
     private val listener: PodcastDetailsInteractionListener,
 ) : RecyclerView.Adapter<PodcastDetailsAdapter.PodcastDetailsViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PodcastDetailsViewHolder {
@@ -34,7 +34,10 @@ class PodcastDetailsAdapter(
             textItemEpisodeDesc.text = currentEpisode.description
             textItemEpisodePlayTime.text = currentEpisode.trackTimeMillis.milliSecondsToMinutes()
             Glide.with(root.context).load(currentEpisode.artworkUrl60).into(imgItemEpisode)
-            Log.i("PodcastDetailsAdapter", "description: -> ${currentEpisode.description}")
+            Log.i("PodcastDetailsAdapter","$currentEpisode")
+            textItemEpisodeDownload.setOnClickListener {
+                listener.onClickDownload(currentEpisode)
+            }
             root.setOnClickListener {
                 listener.onClickEpisode(currentEpisode.episodeUrl, currentEpisode.artworkUrl160, currentEpisode.collectionName, currentEpisode.trackName)
             }
