@@ -38,14 +38,22 @@
         android:label="UserProfileFragment" />
     <fragment
         android:id="@+id/downloadsFragment"
-        android:name="com.shamardn.podcasttime.ui.DownloadsFragment"
+        android:name="com.shamardn.podcasttime.ui.download.DownloadsFragment"
         android:label="fragment_downloads"
-        tools:layout="@layout/fragment_downloads" />
+        tools:layout="@layout/fragment_downloads" >
+        <action
+            android:id="@+id/action_downloadsFragment_to_episodeDetailsBottomSheet"
+            app:destination="@id/episodeDetailsBottomSheet" />
+    </fragment>
     <fragment
         android:id="@+id/libraryFragment"
-        android:name="com.shamardn.podcasttime.ui.LibraryFragment"
+        android:name="com.shamardn.podcasttime.ui.library.LibraryFragment"
         android:label="fragment_library"
-        tools:layout="@layout/fragment_library" />
+        tools:layout="@layout/fragment_library" >
+        <action
+            android:id="@+id/action_libraryFragment_to_downloadsFragment"
+            app:destination="@id/downloadsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.shamardn.podcasttime.ui.SettingsFragment"
@@ -82,7 +90,7 @@
     </fragment>
     <dialog
         android:id="@+id/episodeDetailsBottomSheet"
-        android:name="com.shamardn.podcasttime.ui.podcastdetails.EpisodeDetailsBottomSheet"
+        android:name="com.shamardn.podcasttime.ui.episodeplayer.EpisodeDetailsBottomSheet"
         android:label="EpisodeDetailsBottomSheet"
         tools:layout="@layout/episode_bottom_sheet_layout">
         <argument

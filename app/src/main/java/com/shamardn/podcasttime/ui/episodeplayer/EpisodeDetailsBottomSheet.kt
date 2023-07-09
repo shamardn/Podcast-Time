@@ -1,4 +1,4 @@
-package com.shamardn.podcasttime.ui.podcastdetails
+package com.shamardn.podcasttime.ui.episodeplayer
 
 import android.os.Bundle
 import android.view.LayoutInflater

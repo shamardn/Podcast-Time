@@ -120,12 +120,11 @@
             app:layout_constraintTop_toBottomOf="@+id/text_item_episode_desc" />
 
         <ImageView
-            android:id="@+id/text_item_episode_download"
+            android:id="@+id/img_item_episode_download"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/space16x"
             android:src="@drawable/ic_downloads"
-            app:drawableStartCompat="@drawable/ic_downloads"
             app:layout_constraintStart_toEndOf="@+id/text_item_episode_play_time"
             app:layout_constraintTop_toTopOf="@+id/text_item_episode_play_time"
             app:tint="@color/primary" />

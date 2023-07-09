@@ -10,13 +10,13 @@ import com.shamardn.podcasttime.data.local.database.entity.EpisodeEntity
 @Dao
 interface EpisodeDao {
     @Query("SELECT * FROM EPISODE_TABLE")
-    fun getEpisodes(): List<EpisodeEntity>
+    suspend fun getEpisodes(): List<EpisodeEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertEpisode(episodeEntity: EpisodeEntity)
+    suspend fun insertEpisode(episodeEntity: EpisodeEntity)
 
     @Delete
-    fun deleteEpisode(episodeEntity: EpisodeEntity)
+    suspend fun deleteEpisode(episodeEntity: EpisodeEntity)
 
     @Query("DELETE FROM EPISODE_TABLE")
     suspend fun deleteAllEpisodes()

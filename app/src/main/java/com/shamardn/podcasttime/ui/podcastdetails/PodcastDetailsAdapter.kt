@@ -35,7 +35,8 @@ class PodcastDetailsAdapter(
             textItemEpisodePlayTime.text = currentEpisode.trackTimeMillis.milliSecondsToMinutes()
             Glide.with(root.context).load(currentEpisode.artworkUrl60).into(imgItemEpisode)
             Log.i("PodcastDetailsAdapter","$currentEpisode")
-            textItemEpisodeDownload.setOnClickListener {
+
+            imgItemEpisodeDownload.setOnClickListener {
                 listener.onClickDownload(currentEpisode)
             }
             root.setOnClickListener {

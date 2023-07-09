@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.LibraryFragment">
+    tools:context=".ui.library.LibraryFragment">
 
     <LinearLayout
         android:id="@+id/top_app_bar"

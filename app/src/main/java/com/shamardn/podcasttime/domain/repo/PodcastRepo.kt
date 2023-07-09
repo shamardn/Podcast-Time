@@ -9,4 +9,5 @@ interface PodcastRepo {
     suspend fun getPodcasts(term: String): PodcastResponse<PodcastDTO>
     suspend fun getPodcastById(trackId: Int): PodcastResponse<EpisodeDTO>
     suspend fun insertEpisode(episodeEntity: EpisodeEntity)
+    suspend fun getDownloadedEpisodes(): List<EpisodeEntity>
 }

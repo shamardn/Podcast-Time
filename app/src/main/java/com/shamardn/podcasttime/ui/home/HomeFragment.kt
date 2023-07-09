@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.shamardn.podcasttime.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -34,7 +34,7 @@ class HomeFragment() : Fragment(), HomeInteractionListener {
 
         binding.textHomeSearch.setOnClickListener {
             val action = HomeFragmentDirections.actionHomeFragmentToSearchFragment()
-            Navigation.findNavController(view).navigate(action)
+            this.findNavController().navigate(action)
         }
     }
 
@@ -51,6 +51,6 @@ class HomeFragment() : Fragment(), HomeInteractionListener {
 
     override fun onClickPodcast(trackId: Int) {
         val action = HomeFragmentDirections.actionHomeFragmentToPodcastDetailsFragment(trackId)
-        Navigation.findNavController(binding.root).navigate(action)
+        this.findNavController().navigate(action)
     }
 }

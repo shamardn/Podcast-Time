@@ -7,9 +7,6 @@ import com.shamardn.podcasttime.domain.entity.EpisodeDTO
 import com.shamardn.podcasttime.domain.entity.PodcastDTO
 import com.shamardn.podcasttime.domain.entity.PodcastResponse
 import com.shamardn.podcasttime.domain.repo.PodcastRepo
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class PodcastRepoImpl @Inject constructor(
@@ -25,8 +22,10 @@ class PodcastRepoImpl @Inject constructor(
     }
 
     override suspend fun insertEpisode(episodeEntity: EpisodeEntity) {
-        CoroutineScope(IO).launch {
             episodeDao.insertEpisode(episodeEntity)
-        }
+    }
+
+    override suspend fun getDownloadedEpisodes(): List<EpisodeEntity> {
+        return episodeDao.getEpisodes()
     }
 }

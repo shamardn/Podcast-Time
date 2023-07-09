@@ -3,12 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/space8x"
+    android:layout_marginTop="@dimen/space4x"
+    android:layout_marginBottom="@dimen/space4x"
     android:layout_marginStart="@dimen/space8x"
     android:layout_marginEnd="@dimen/space8x"
     android:backgroundTint="@color/white"
     app:cardCornerRadius="@dimen/space6x"
-    app:cardElevation="0dp">
+    app:cardElevation="1dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -27,7 +28,7 @@
         <TextView
             android:id="@+id/text_item_download_episode_title"
             android:layout_width="0dp"
-            android:layout_height="12dp"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/space4x"
             android:layout_marginTop="@dimen/space1x"
             android:ellipsize="end"
@@ -53,40 +54,33 @@
             android:text="@string/_episode_date" />
 
         <TextView
-            android:id="@+id/text_item_episode_play_time"
+            android:id="@+id/text_item_download_play_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/space8x"
-            android:layout_marginBottom="@dimen/space8x"
+            android:layout_marginStart="@dimen/space24x"
             android:background="@drawable/outline_rounded_shape"
             android:drawablePadding="@dimen/space4x"
             android:gravity="center_vertical"
             android:paddingStart="@dimen/space4x"
             android:paddingEnd="@dimen/space4x"
+            android:text="@string/_episode_time"
             android:textSize="12sp"
             app:drawableStartCompat="@drawable/ic_play"
             app:drawableTint="@color/primary"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/img_item_download"
-            app:layout_constraintTop_toBottomOf="@+id/img_item_download"
-            android:text="@string/_episode_time" />
+            app:layout_constraintBottom_toBottomOf="@+id/img_item_download_downloaded"
+            app:layout_constraintStart_toEndOf="@+id/img_item_download_downloaded"
+            app:layout_constraintTop_toTopOf="@+id/img_item_download_downloaded" />
 
-        <TextView
-            android:id="@+id/text_item_episode_download"
+        <ImageView
+            android:id="@+id/img_item_download_downloaded"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/space8x"
-            android:background="@drawable/outline_rounded_shape"
-            android:drawablePadding="@dimen/space4x"
-            android:gravity="center_vertical"
-            android:paddingStart="@dimen/space4x"
-            android:paddingEnd="@dimen/space4x"
-            android:text="@string/download"
-            android:textSize="12sp"
-            app:drawableStartCompat="@drawable/ic_downloads"
-            app:drawableTint="@color/primary"
-            app:layout_constraintStart_toEndOf="@+id/text_item_episode_play_time"
-            app:layout_constraintTop_toTopOf="@+id/text_item_episode_play_time" />
+            android:src="@drawable/ic_downloads"
+            android:layout_margin="@dimen/space8x"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/img_item_download"
+            app:tint="@color/primary" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
