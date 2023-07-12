@@ -15,6 +15,9 @@
         <action
             android:id="@+id/action_homeFragment_to_podcastDetailsFragment"
             app:destination="@id/podcastDetailsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_downloadsFragment"
+            app:destination="@id/downloadsFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"

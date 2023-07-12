@@ -25,6 +25,14 @@ class HomeFragment() : Fragment(), HomeInteractionListener {
     ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         viewModel.getPodcasts("podcast")
+
+        viewModel.isOnline.observe(viewLifecycleOwner) { isOnline ->
+            if(!isOnline) {
+                val action = HomeFragmentDirections.actionHomeFragmentToDownloadsFragment()
+                this.findNavController().navigate(action)
+            }
+        }
+
         return binding.root
     }
 
