@@ -93,6 +93,7 @@
         android:name="com.shamardn.podcasttime.ui.episodeplayer.EpisodeDetailsBottomSheet"
         android:label="EpisodeDetailsBottomSheet"
         tools:layout="@layout/episode_bottom_sheet_layout">
+
         <argument
             android:name="episodeUrl"
             app:argType="string" />
@@ -105,6 +106,16 @@
         <argument
             android:name="episode"
             app:argType="string" />
+        <argument
+            android:name="guid"
+            app:argType="string" />
+        <argument
+            android:name="isOnline"
+            app:argType="boolean"
+            android:defaultValue="true" />
+        <argument
+            android:name="episodeFileExtension"
+            app:argType="string"/>
     </dialog>
 
 </navigation>

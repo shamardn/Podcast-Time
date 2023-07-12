@@ -8,12 +8,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.shamardn.podcasttime.databinding.FragmentPodcastDetailsBinding
 import com.shamardn.podcasttime.domain.entity.EpisodeDTO
+import com.shamardn.podcasttime.util.FileUtils
+import com.shamardn.podcasttime.util.FileUtils.downloadMp3UsingUrl
 import com.shamardn.podcasttime.util.changeDateFormat
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -32,6 +34,7 @@ class PodcastDetailsFragment : Fragment(), PodcastDetailsInteractionListener {
     ): View {
         binding = FragmentPodcastDetailsBinding.inflate(inflater, container, false)
         viewModel.getPodcastById(navArgs.trackId)
+
         return binding.root
     }
 
@@ -72,15 +75,19 @@ class PodcastDetailsFragment : Fragment(), PodcastDetailsInteractionListener {
         artworkUrl: String,
         podcastTitle: String,
         episode: String,
+        guid: String,
+        episodeFileExtension: String,
     ) {
         val action =
             PodcastDetailsFragmentDirections.actionPodcastDetailsFragmentToEpisodeDetailsBottomSheet(
                 episodeUrl,
                 artworkUrl,
                 podcastTitle,
-                episode
+                episode,
+                guid,
+                episodeFileExtension,
             )
-        Navigation.findNavController(binding.root).navigate(action)
+        this.findNavController().navigate(action)
     }
 
     override fun onClickEpisode(
@@ -88,13 +95,24 @@ class PodcastDetailsFragment : Fragment(), PodcastDetailsInteractionListener {
         artworkUrl: String,
         podcastTitle: String,
         episode: String,
+        guid: String,
+        episodeFileExtension: String,
     ) {
-        showEpisodeDetailsBottomSheet(episodeUrl, artworkUrl, podcastTitle, episode)
+        showEpisodeDetailsBottomSheet(episodeUrl, artworkUrl, podcastTitle, episode, guid, episodeFileExtension)
     }
 
     override fun onClickDownload(episodeDTO: EpisodeDTO) {
         lifecycleScope.launch(Dispatchers.IO) {
             viewModel.saveEpisodeToDownload(episodeDTO)
+
+            downloadMp3UsingUrl(
+                requireContext(),
+                episodeDTO.episodeUrl,
+                FileUtils.getRootDirPath(requireContext()),
+                "${episodeDTO.episodeGuid}.${episodeDTO.episodeFileExtension}"
+            )
         }
     }
+
+
 }

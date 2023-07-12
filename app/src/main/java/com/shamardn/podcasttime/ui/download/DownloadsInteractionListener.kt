@@ -4,6 +4,9 @@ interface DownloadsInteractionListener {
     fun onEpisodeClick(episodeUrl: String,
                        artworkUrl: String,
                        podcastTitle: String,
-                       episode: String)
+                       episode: String,
+                       guid: String,
+                       episodeFileExtension: String,
+    )
     fun onDownloadedEpisodeIcon()
 }

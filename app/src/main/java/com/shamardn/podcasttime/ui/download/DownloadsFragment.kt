@@ -16,7 +16,6 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class DownloadsFragment : Fragment(), DownloadsInteractionListener {
-
     lateinit var binding: FragmentDownloadsBinding
     private val viewModel: DownloadsViewModel by viewModels()
     lateinit var downloadAdapter: DownloadsAdapter
@@ -39,16 +38,16 @@ class DownloadsFragment : Fragment(), DownloadsInteractionListener {
         }
     }
 
-    fun getDownloadedEpisodes() {
+    private fun getDownloadedEpisodes() {
         lifecycleScope.launch {
             try {
-                viewModel.episodes.collect{ episodes ->
-                    if (episodes != null){
-                        downloadAdapter = DownloadsAdapter(episodes,this@DownloadsFragment)
+                viewModel.episodes.collect { episodes ->
+                    if (episodes != null) {
+                        downloadAdapter = DownloadsAdapter(episodes, this@DownloadsFragment)
                         binding.recyclerDownloads.adapter = downloadAdapter
                     }
                 }
-            }catch (e: Exception){
+            } catch (e: Exception) {
                 Log.e("DownloadsFragment", e.message.toString())
             }
         }
@@ -59,17 +58,36 @@ class DownloadsFragment : Fragment(), DownloadsInteractionListener {
         artworkUrl: String,
         podcastTitle: String,
         episode: String,
+        guid: String,
+        episodeFileExtension: String,
     ) {
-        showEpisodeDetailsBottomSheet(episodeUrl, artworkUrl, podcastTitle, episode)
+        showEpisodeDetailsBottomSheet(
+            episodeUrl,
+            artworkUrl,
+            podcastTitle,
+            episode,
+            guid,
+            episodeFileExtension
+        )
     }
 
-    private fun showEpisodeDetailsBottomSheet(episodeUrl: String, artworkUrl: String, podcastTitle: String, episode: String) {
+    private fun showEpisodeDetailsBottomSheet(
+        episodeUrl: String,
+        artworkUrl: String,
+        podcastTitle: String,
+        episode: String,
+        guid: String,
+        episodeFileExtension: String,
+    ) {
         val action = DownloadsFragmentDirections.actionDownloadsFragmentToEpisodeDetailsBottomSheet(
-                episodeUrl,
-                artworkUrl,
-                podcastTitle,
-                episode
-            )
+            episodeUrl,
+            artworkUrl,
+            podcastTitle,
+            episode,
+            guid,
+            episodeFileExtension,
+            false,
+        )
         this.findNavController().navigate(action)
     }
 

@@ -14,4 +14,6 @@ data class EpisodeEntity(
     val trackTimeMillis: Int,
     val artworkUrl160: String,
     val episodeUrl: String,
+    val guid: String,
+    val episodeFileExtension: String,
 )

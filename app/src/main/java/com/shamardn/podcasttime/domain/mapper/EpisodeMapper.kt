@@ -17,6 +17,8 @@ class EpisodeMapper @Inject constructor(
             trackTimeMillis = input.trackTimeMillis,
             artworkUrl160 = input.artworkUrl160,
             episodeUrl = input.episodeUrl,
+            guid = input.episodeGuid,
+            episodeFileExtension = input.episodeFileExtension,
         )
     }
 }

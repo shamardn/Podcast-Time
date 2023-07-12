@@ -21,8 +21,12 @@ class PodcastRepoImpl @Inject constructor(
         return apiService.getPodcastById(trackId)
     }
 
+    override suspend fun getEpisodeByGuid(guid: String): EpisodeEntity {
+        return episodeDao.getEpisodeByGuid(guid)
+    }
+
     override suspend fun insertEpisode(episodeEntity: EpisodeEntity) {
-            episodeDao.insertEpisode(episodeEntity)
+        episodeDao.insertEpisode(episodeEntity)
     }
 
     override suspend fun getDownloadedEpisodes(): List<EpisodeEntity> {

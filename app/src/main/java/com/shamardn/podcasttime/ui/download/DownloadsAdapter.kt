@@ -40,6 +40,8 @@ class DownloadsAdapter(
                     artworkUrl = currentEpisode.artworkUrl160,
                     podcastTitle = currentEpisode.collectionName,
                     episode = currentEpisode.trackName,
+                    guid = currentEpisode.guid,
+                    episodeFileExtension = currentEpisode.episodeFileExtension,
                 )
             }
         }
