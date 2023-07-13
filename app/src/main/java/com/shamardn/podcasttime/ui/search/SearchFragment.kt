@@ -11,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import com.shamardn.podcasttime.databinding.FragmentSearchBinding
+import com.shamardn.podcasttime.ui.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -21,6 +22,13 @@ class SearchFragment : Fragment(), SearchInteractionListener {
     private lateinit var binding: FragmentSearchBinding
     private lateinit var searchAdapter: SearchAdapter
     private val viewModel: SearchViewModel by viewModels()
+    private var bottomNavigationViewVisibility = View.GONE
+
+    private fun setBottomNavigationVisibility() {
+        if (activity is MainActivity) {
+            (activity as MainActivity).setBottomNavigationVisibility(bottomNavigationViewVisibility)
+        }
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -34,6 +42,7 @@ class SearchFragment : Fragment(), SearchInteractionListener {
             fetchPodcasts()
         }
 
+        setBottomNavigationVisibility()
         return binding.root
     }
 

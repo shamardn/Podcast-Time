@@ -14,6 +14,7 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.shamardn.podcasttime.databinding.FragmentPodcastDetailsBinding
 import com.shamardn.podcasttime.domain.entity.EpisodeDTO
+import com.shamardn.podcasttime.ui.main.MainActivity
 import com.shamardn.podcasttime.util.FileUtils
 import com.shamardn.podcasttime.util.FileUtils.downloadMp3UsingUrl
 import com.shamardn.podcasttime.util.changeDateFormat
@@ -27,6 +28,13 @@ class PodcastDetailsFragment : Fragment(), PodcastDetailsInteractionListener {
     private lateinit var podcastDetailsAdapter: PodcastDetailsAdapter
     private val navArgs: PodcastDetailsFragmentArgs by navArgs()
     private val viewModel: PodcastDetailsViewModel by viewModels()
+    private var bottomNavigationViewVisibility = View.GONE
+
+    private fun setBottomNavigationVisibility() {
+        if (activity is MainActivity) {
+            (activity as MainActivity).setBottomNavigationVisibility(bottomNavigationViewVisibility)
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,6 +43,7 @@ class PodcastDetailsFragment : Fragment(), PodcastDetailsInteractionListener {
         binding = FragmentPodcastDetailsBinding.inflate(inflater, container, false)
         viewModel.getPodcastById(navArgs.trackId)
 
+        setBottomNavigationVisibility()
         return binding.root
     }
 

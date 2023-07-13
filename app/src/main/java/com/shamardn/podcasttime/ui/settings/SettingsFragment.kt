@@ -1,15 +1,16 @@
-package com.shamardn.podcasttime.ui
+package com.shamardn.podcasttime.ui.settings
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.shamardn.podcasttime.R
+import androidx.fragment.app.Fragment
+import com.shamardn.podcasttime.databinding.FragmentSettingsBinding
 import com.shamardn.podcasttime.ui.main.MainActivity
 
-class SubscriptionsFragment : Fragment() {
-    private var bottomNavigationViewVisibility = View.GONE
+class SettingsFragment : Fragment() {
+    private lateinit var binding: FragmentSettingsBinding
+    private var bottomNavigationViewVisibility = View.VISIBLE
 
     private fun setBottomNavigationVisibility() {
         if (activity is MainActivity) {
@@ -19,8 +20,9 @@ class SubscriptionsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
+        binding = FragmentSettingsBinding.inflate(inflater,container, false)
         setBottomNavigationVisibility()
-        return inflater.inflate(R.layout.fragment_subscriptions, container, false)
+        return binding.root
     }
 }

@@ -9,15 +9,22 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.shamardn.podcasttime.databinding.FragmentHomeBinding
+import com.shamardn.podcasttime.ui.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-
 
 @AndroidEntryPoint
 class HomeFragment() : Fragment(), HomeInteractionListener {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var homeAdapter: HomeAdapter
     private val viewModel: HomeViewModel by viewModels()
+    private var bottomNavigationViewVisibility = View.VISIBLE
+
+    private fun setBottomNavigationVisibility() {
+        if (activity is MainActivity) {
+            (activity as MainActivity).setBottomNavigationVisibility(bottomNavigationViewVisibility)
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,6 +40,7 @@ class HomeFragment() : Fragment(), HomeInteractionListener {
             }
         }
 
+        setBottomNavigationVisibility()
         return binding.root
     }
 

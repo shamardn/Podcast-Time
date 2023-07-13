@@ -11,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.shamardn.podcasttime.databinding.FragmentDownloadsBinding
+import com.shamardn.podcasttime.ui.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -19,6 +20,13 @@ class DownloadsFragment : Fragment(), DownloadsInteractionListener {
     lateinit var binding: FragmentDownloadsBinding
     private val viewModel: DownloadsViewModel by viewModels()
     lateinit var downloadAdapter: DownloadsAdapter
+    private var bottomNavigationViewVisibility = View.GONE
+
+    private fun setBottomNavigationVisibility() {
+        if (activity is MainActivity) {
+            (activity as MainActivity).setBottomNavigationVisibility(bottomNavigationViewVisibility)
+        }
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -27,6 +35,7 @@ class DownloadsFragment : Fragment(), DownloadsInteractionListener {
 
         viewModel.getDownloadedEpisodes()
 
+        setBottomNavigationVisibility()
         return binding.root
     }
 
