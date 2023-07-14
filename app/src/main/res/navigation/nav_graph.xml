@@ -5,8 +5,8 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/homeFragment">
 
-    <action android:id="@+id/action_global_episode_player_fragment"
-        app:destination="@+id/episodeDetailsBottomSheet"
+    <action android:id="@+id/action_global_episode_details_fragment"
+        app:destination="@+id/episodeDetailsFragment"
         app:launchSingleTop="true"/>
 
     <fragment
@@ -73,7 +73,7 @@
         tools:layout="@layout/fragment_subscriptions" />
     <fragment
         android:id="@+id/episodeDetailsFragment"
-        android:name="com.shamardn.podcasttime.ui.EpisodeDetailsFragment"
+        android:name="com.shamardn.podcasttime.episodedetails.EpisodeDetailsFragment"
         android:label="fragment_episode_details"
         tools:layout="@layout/fragment_episode_details" >
         <argument
