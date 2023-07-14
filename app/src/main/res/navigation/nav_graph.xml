@@ -5,6 +5,10 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/homeFragment">
 
+    <action android:id="@+id/action_global_episode_player_fragment"
+        app:destination="@+id/episodeDetailsBottomSheet"
+        app:launchSingleTop="true"/>
+
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.shamardn.podcasttime.ui.home.HomeFragment"
