@@ -4,6 +4,7 @@ plugins {
     id 'androidx.navigation.safeargs.kotlin'
     id 'kotlin-kapt'
     id 'com.google.dagger.hilt.android'
+    id 'kotlin-parcelize'
 }
 
 android {
@@ -59,11 +60,12 @@ dependencies {
     implementation 'com.airbnb.android:lottie:5.2.0'
 
     // exo player
-    implementation 'com.google.android.exoplayer:exoplayer-core:2.18.7'
-    implementation 'com.google.android.exoplayer:exoplayer-ui:2.18.7'
-    implementation 'com.google.android.exoplayer:exoplayer-smoothstreaming:2.18.7'
+    implementation 'com.google.android.exoplayer:exoplayer-core:2.19.0'
+    implementation 'com.google.android.exoplayer:exoplayer-ui:2.19.0'
+    implementation 'com.google.android.exoplayer:exoplayer-smoothstreaming:2.19.0'
+    implementation 'com.google.android.exoplayer:extension-mediasession:2.19.0'
 
-    implementation 'com.google.android.exoplayer:exoplayer:2.18.7'
+    implementation 'com.google.android.exoplayer:exoplayer:2.19.0'
 
     //splash
     implementation 'androidx.core:core-splashscreen:1.0.1'

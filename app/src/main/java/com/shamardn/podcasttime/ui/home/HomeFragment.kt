@@ -10,9 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.shamardn.podcasttime.databinding.FragmentHomeBinding
-import com.shamardn.podcasttime.services.PodcastService
 import com.shamardn.podcasttime.ui.main.MainActivity
-import com.shamardn.podcasttime.util.Constants.ACTION_START_OR_RESUME_SERVICE
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -51,9 +49,6 @@ class HomeFragment() : Fragment(), HomeInteractionListener {
         super.onViewCreated(view, savedInstanceState)
         fetchPodcasts()
 
-        //TODO make the service start on clicking some button like play button
-        sendCommandToService(ACTION_START_OR_RESUME_SERVICE)
-
         binding.textHomeSearch.setOnClickListener {
             val action = HomeFragmentDirections.actionHomeFragmentToSearchFragment()
             this.findNavController().navigate(action)
@@ -75,10 +70,4 @@ class HomeFragment() : Fragment(), HomeInteractionListener {
         val action = HomeFragmentDirections.actionHomeFragmentToPodcastDetailsFragment(trackId)
         this.findNavController().navigate(action)
     }
-
-    private fun sendCommandToService(action: String) =
-        Intent(requireContext(), PodcastService::class.java).also {
-            it.action = action
-            requireContext().startService(it)
-        }
 }

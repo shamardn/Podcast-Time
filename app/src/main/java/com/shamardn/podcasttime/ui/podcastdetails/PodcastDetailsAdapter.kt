@@ -40,14 +40,7 @@ class PodcastDetailsAdapter(
                 listener.onClickDownload(currentEpisode)
             }
             root.setOnClickListener {
-                listener.onClickEpisode(
-                    currentEpisode.episodeUrl,
-                    currentEpisode.artworkUrl160,
-                    currentEpisode.collectionName,
-                    currentEpisode.trackName,
-                    currentEpisode.episodeGuid,
-                    currentEpisode.episodeFileExtension,
-                )
+                listener.onClickEpisode(currentEpisode)
             }
         }
     }

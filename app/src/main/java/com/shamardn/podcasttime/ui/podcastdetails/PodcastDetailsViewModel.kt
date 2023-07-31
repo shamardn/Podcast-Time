@@ -11,6 +11,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -24,7 +25,9 @@ class PodcastDetailsViewModel @Inject constructor(
     fun getPodcastById(trackId: Int){
         try {
             viewModelScope.launch {
-                _episodes.value = getPodcastByIdUseCase(trackId)
+                withContext(viewModelScope.coroutineContext) {
+                    _episodes.value = getPodcastByIdUseCase(trackId)
+                }
             }
         }catch (e: Exception){
             Log.e("PodcastDetailsViewModel", e.message.toString())

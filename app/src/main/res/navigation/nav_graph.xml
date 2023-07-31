@@ -73,7 +73,7 @@
         tools:layout="@layout/fragment_subscriptions" />
     <fragment
         android:id="@+id/episodeDetailsFragment"
-        android:name="com.shamardn.podcasttime.episodedetails.EpisodeDetailsFragment"
+        android:name="com.shamardn.podcasttime.ui.episodedetails.EpisodeDetailsFragment"
         android:label="fragment_episode_details"
         tools:layout="@layout/fragment_episode_details" >
         <argument
@@ -94,6 +94,9 @@
         <action
             android:id="@+id/action_podcastDetailsFragment_to_episodeDetailsBottomSheet"
             app:destination="@id/episodeDetailsBottomSheet" />
+        <action
+            android:id="@+id/action_podcastDetailsFragment_to_bottomPlayerFragment"
+            app:destination="@id/bottomPlayerFragment" />
     </fragment>
     <dialog
         android:id="@+id/episodeDetailsBottomSheet"
@@ -124,5 +127,10 @@
             android:name="episodeFileExtension"
             app:argType="string"/>
     </dialog>
+    <fragment
+        android:id="@+id/bottomPlayerFragment"
+        android:name="com.shamardn.podcasttime.ui.BottomPlayerFragment"
+        android:label="BottomPlayerFragment"
+        tools:layout="@layout/fragment_bottom_player"/>
 
 </navigation>

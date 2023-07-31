@@ -4,12 +4,20 @@ object Constants {
 
     const val BASE_URL = "https://itunes.apple.com"
 
-    const val ACTION_START_OR_RESUME_SERVICE = "ACTION_START_OR_RESUME_SERVICE"
-    const val ACTION_PAUSE_SERVICE = "ACTION_PAUSE_SERVICE"
-    const val ACTION_STOP_SERVICE = "ACTION_STOP_SERVICE"
-    const val ACTION_SHOW_EPISODE_DETAILS_FRAGMENT = "show_episode_player_fragment"
+    const val PLAYBACK_NOTIFICATION_CHANNEL_ID = "PLAYBACK_NOTIFICATION_CHANNEL_ID"
+    const val PLAYBACK_NOTIFICATION_ID = 123
+    const val MEDIA_ROOT_ID = "MEDIA_ROOT_ID"
+    const val START_MEDIA_PLAY_ACTION = "START_MEDIA_PLAY_ACTION"
+    const val REFRESH_MEDIA_PLAY_ACTION = "REFRESH_MEDIA_PLAY_ACTION "
+    const val PLAYBACK_UPDATE_INTERVAL = 1000L
 
-    const val NOTIFICATION_CHANNEL_ID = "podcast_time_channel"
-    const val NOTIFICATION_CHANNEL_NAME = "podcast_time"
-    const val NOTIFICATION_ID = 1
+    const val DURATION = "Duration"
+    const val NETWORK_ERROR = "NETWORK_ERROR"
+
+    object ConstantBundle {
+        const val BUNDLE_COMMAND = "COMMAND"
+        const val BUNDLE_DURATION = "DURATION"
+    }
+
+
 }
