@@ -14,6 +14,6 @@ interface ApiService {
 
     @GET("/lookup?entity=podcastEpisode")
     suspend fun getPodcastById(
-        @Query("id") trackId: Int,
+        @Query("id") trackId: Long,
     ): PodcastResponse<EpisodeDTO>
 }
