@@ -87,7 +87,7 @@
         tools:layout="@layout/fragment_podcast_details" >
         <argument
             android:name="trackId"
-            app:argType="integer" />
+            app:argType="long" />
         <action
             android:id="@+id/action_podcastDetailsFragment_to_episodeDetailsFragment"
             app:destination="@id/episodeDetailsFragment" />

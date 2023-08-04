@@ -1,5 +1,6 @@
 package com.shamardn.podcasttime.services
 
+
 import android.app.Notification
 import android.app.PendingIntent
 import android.content.Intent
@@ -11,6 +12,7 @@ import android.support.v4.media.MediaDescriptionCompat
 import android.support.v4.media.MediaMetadataCompat
 import android.support.v4.media.session.MediaSessionCompat
 import android.support.v4.media.session.PlaybackStateCompat
+import android.util.Log
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.media.MediaBrowserServiceCompat
@@ -37,6 +39,7 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class MediaPlaybackService : MediaBrowserServiceCompat() {
+
     @Inject
     lateinit var dataSourceFactory: CacheDataSource.Factory
 
@@ -95,6 +98,7 @@ class MediaPlaybackService : MediaBrowserServiceCompat() {
         )
 
         serviceScope.launch {
+            Log.i("podcastTime mService", " inside serviceScope")
             mediaSource.load()
         }
 
@@ -112,56 +116,52 @@ class MediaPlaybackService : MediaBrowserServiceCompat() {
     override fun onGetRoot(
         clientPackageName: String,
         clientUid: Int,
-        rootHints: Bundle?
+        rootHints: Bundle?,
     ): BrowserRoot {
         return BrowserRoot(MEDIA_ROOT_ID, null)
     }
 
     override fun onLoadChildren(
         parentId: String,
-        result: Result<MutableList<MediaBrowserCompat.MediaItem>>
+        result: Result<MutableList<MediaBrowserCompat.MediaItem>>,
     ) {
+
+        Log.i("podcastTime mService", " inside onLoadChildren")
 
         when (parentId) {
             MEDIA_ROOT_ID -> {
-
                 val resultsSent = mediaSource.whenReady { isInitialized ->
-
                     if (isInitialized) {
                         result.sendResult(mediaSource.asMediaItem())
                     } else {
                         result.sendResult(null)
                     }
-
                 }
-
                 if (!resultsSent) {
                     result.detach()
                 }
-
-
             }
 
             else -> Unit
-
-
         }
-
-
     }
 
 
     override fun onCustomAction(
         action: String,
         extras: Bundle?,
-        result: Result<Bundle>
+        result: Result<Bundle>,
     ) {
+
+        Log.i("podcastTime mService", " inside onCustomAction")
+
         super.onCustomAction(action, extras, result)
         when (action) {
 
             START_MEDIA_PLAY_ACTION -> {
                 mediaPlayerNotificationManager.showNotification(exoPlayer)
             }
+
             REFRESH_MEDIA_PLAY_ACTION -> {
                 mediaSource.refresh()
                 notifyChildrenChanged(MEDIA_ROOT_ID)
@@ -177,12 +177,16 @@ class MediaPlaybackService : MediaBrowserServiceCompat() {
 
     override fun onTaskRemoved(rootIntent: Intent?) {
         super.onTaskRemoved(rootIntent)
+        Log.i("podcastTime mService", " inside onTaskRemoved")
+
         exoPlayer.stop()
         exoPlayer.clearMediaItems()
     }
 
     override fun onDestroy() {
         super.onDestroy()
+        Log.i("podcastTime mService", " inside onDestroy")
+
         serviceScope.cancel()
         exoPlayer.release()
     }
@@ -192,8 +196,10 @@ class MediaPlaybackService : MediaBrowserServiceCompat() {
         PlayerNotificationManager.NotificationListener {
         override fun onNotificationCancelled(
             notificationId: Int,
-            dismissedByUser: Boolean
+            dismissedByUser: Boolean,
         ) {
+            Log.i("podcastTime mService", " inside onNotificationCancelled")
+
             stopForeground(true)
             isForegroundService = false
             stopSelf()
@@ -202,8 +208,10 @@ class MediaPlaybackService : MediaBrowserServiceCompat() {
         override fun onNotificationPosted(
             notificationId: Int,
             notification: Notification,
-            ongoing: Boolean
+            ongoing: Boolean,
         ) {
+            Log.i("podcastTime mService", " inside onNotificationPosted")
+
             if (ongoing && !isForegroundService) {
                 ContextCompat.startForegroundService(
                     applicationContext,
@@ -224,7 +232,7 @@ class MediaPlaybackService : MediaBrowserServiceCompat() {
             player: Player,
             command: String,
             extras: Bundle?,
-            cb:  ResultReceiver?
+            cb: ResultReceiver?,
         ): Boolean {
             return false
         }
@@ -238,7 +246,7 @@ class MediaPlaybackService : MediaBrowserServiceCompat() {
         override fun onPrepareFromMediaId(
             mediaId: String,
             playWhenReady: Boolean,
-            extras: Bundle?
+            extras: Bundle?,
         ) {
             mediaSource.whenReady {
 
@@ -253,49 +261,41 @@ class MediaPlaybackService : MediaBrowserServiceCompat() {
                     itemToPlay = itemToPlay,
                     playWhenReady = playWhenReady
                 )
-
-
             }
-
-
         }
 
         override fun onPrepareFromSearch(
             query: String,
             playWhenReady: Boolean,
-            extras: Bundle?
+            extras: Bundle?,
         ) = Unit
 
         override fun onPrepareFromUri(
             uri: Uri,
             playWhenReady: Boolean,
-            extras: Bundle?
+            extras: Bundle?,
         ) = Unit
     }
 
     inner class MediaQueueNavigator(
-        mediaSessionCompat: MediaSessionCompat
+        mediaSessionCompat: MediaSessionCompat,
     ) : TimelineQueueNavigator(mediaSessionCompat) {
         override fun getMediaDescription(
             player: Player,
-            windowIndex: Int
+            windowIndex: Int,
         ): MediaDescriptionCompat {
 
             if (windowIndex < mediaSource.audioMediaMetaData.size) {
                 return mediaSource.audioMediaMetaData[windowIndex].description
             }
-
             return MediaDescriptionCompat.Builder().build()
-
-
         }
     }
-
 
     private fun preparePlayer(
         mediaMetadata: List<MediaMetadataCompat>,
         itemToPlay: MediaMetadataCompat?,
-        playWhenReady: Boolean
+        playWhenReady: Boolean,
     ) {
         val indexToPlay = if (currentPlayingMedia == null) 0
         else mediaMetadata.indexOf(itemToPlay)
@@ -308,38 +308,38 @@ class MediaPlaybackService : MediaBrowserServiceCompat() {
         exoPlayer.prepare()
         exoPlayer.seekTo(indexToPlay, 0)
         exoPlayer.playWhenReady = playWhenReady
-
-
     }
-
 
     private inner class PlayerEventListener : Player.Listener {
 
         override fun onPlaybackStateChanged(playbackState: Int) {
 
+            Log.i("podcastTime mService", " inside onPlaybackStateChanged")
+
             when (playbackState) {
                 Player.STATE_BUFFERING,
-                Player.STATE_READY -> {
+                Player.STATE_READY,
+                -> {
                     mediaPlayerNotificationManager
                         .showNotification(exoPlayer)
                 }
+
                 else -> {
                     mediaPlayerNotificationManager
                         .hideNotification()
                 }
-
-
             }
-
-
         }
 
         override fun onEvents(player: Player, events: Player.Events) {
             super.onEvents(player, events)
             currentDuration = player.duration
+            Log.i("podcastTime mService", " inside onEvent")
+
         }
 
         override fun onPlayerError(error: PlaybackException) {
+            Log.i("podcastTime mService", " inside onPlayerError")
 
             var message = R.string.generic_error
 
@@ -360,4 +360,6 @@ class MediaPlaybackService : MediaBrowserServiceCompat() {
 
 
     }
+
+
 }

@@ -1,5 +1,6 @@
 package com.shamardn.podcasttime.ui.main
 
+import android.media.AudioManager
 import android.os.Bundle
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
@@ -32,6 +33,7 @@ class MainActivity : AppCompatActivity() {
 
         installSplashScreen()
 
+        volumeControlStream = AudioManager.STREAM_MUSIC
     }
 
     override fun onResume() {

@@ -1,6 +1,5 @@
 package com.shamardn.podcasttime.ui.home
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -59,14 +58,15 @@ class HomeFragment() : Fragment(), HomeInteractionListener {
         lifecycleScope.launch {
             viewModel.podcasts.collect{
                 if (it != null) {
-                    homeAdapter = HomeAdapter(it.results, this@HomeFragment)
+                    val podcastsDTO = it.results
+                    homeAdapter = HomeAdapter(podcastsDTO, this@HomeFragment)
                     binding.homeRecyclerView.adapter = homeAdapter
                 }
             }
         }
     }
 
-    override fun onClickPodcast(trackId: Int) {
+    override fun onClickPodcast(trackId: Long) {
         val action = HomeFragmentDirections.actionHomeFragmentToPodcastDetailsFragment(trackId)
         this.findNavController().navigate(action)
     }

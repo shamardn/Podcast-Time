@@ -1,14 +1,14 @@
 package com.shamardn.podcasttime.domain.mapper
 
-import com.shamardn.podcasttime.data.local.database.entity.EpisodeEntity
+import com.shamardn.podcasttime.data.local.database.entity.EpisodeAudio
 import com.shamardn.podcasttime.domain.entity.EpisodeDTO
 import javax.inject.Inject
 
-class EpisodeMapper @Inject constructor(
+class EpisodeAudioMapper @Inject constructor(
 
-) : Mapper<EpisodeDTO,EpisodeEntity>(){
-    override fun map(input: EpisodeDTO): EpisodeEntity {
-        return EpisodeEntity(
+) : Mapper<EpisodeDTO,EpisodeAudio>(){
+    override fun map(input: EpisodeDTO): EpisodeAudio {
+        return EpisodeAudio(
             id = input.trackId,
             collectionName = input.collectionName,
             trackName = input.trackName,

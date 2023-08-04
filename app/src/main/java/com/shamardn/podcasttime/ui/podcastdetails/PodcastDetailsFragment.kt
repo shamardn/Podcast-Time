@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -15,29 +14,23 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.shamardn.podcasttime.databinding.FragmentPodcastDetailsBinding
 import com.shamardn.podcasttime.domain.entity.EpisodeDTO
-import com.shamardn.podcasttime.domain.mapper.EpisodeMapper
 import com.shamardn.podcasttime.media.exoplayer.MediaViewModel
-import com.shamardn.podcasttime.ui.SharedDataViewModel
 import com.shamardn.podcasttime.ui.main.MainActivity
 import com.shamardn.podcasttime.util.FileUtils
 import com.shamardn.podcasttime.util.FileUtils.downloadMp3UsingUrl
 import com.shamardn.podcasttime.util.changeDateFormat
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class PodcastDetailsFragment : Fragment(), PodcastDetailsInteractionListener {
+class PodcastDetailsFragment: Fragment(), PodcastDetailsInteractionListener {
     private lateinit var binding: FragmentPodcastDetailsBinding
     private lateinit var podcastDetailsAdapter: PodcastDetailsAdapter
     private val navArgs: PodcastDetailsFragmentArgs by navArgs()
-    private val viewModel: PodcastDetailsViewModel by viewModels()
     private val mediaViewModel: MediaViewModel by activityViewModels()
-    private val sharedDataViewModel: SharedDataViewModel by activityViewModels()
     private var bottomNavigationViewVisibility = View.GONE
 
-    private val episodeMapper: EpisodeMapper = EpisodeMapper()
 
     private fun setBottomNavigationVisibility() {
         if (activity is MainActivity) {
@@ -49,25 +42,30 @@ class PodcastDetailsFragment : Fragment(), PodcastDetailsInteractionListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        binding = FragmentPodcastDetailsBinding.inflate(inflater, container, false)
-        viewModel.getPodcastById(navArgs.trackId)
 
+        binding = FragmentPodcastDetailsBinding.inflate(inflater, container, false)
+
+        mediaViewModel.getPodcastById(navArgs.trackId)
         setBottomNavigationVisibility()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        fetchPodcastEpisodesById()
+        fetchPodcastEpisodesByIdForMedia()
+
         binding.imgPodcastDetailsBackArrow.setOnClickListener {
             it.findNavController().popBackStack()
         }
     }
 
-    private fun fetchPodcastEpisodesById() {
+    private fun fetchPodcastEpisodesByIdForMedia() {
         lifecycleScope.launch {
-            viewModel.episodes.collectLatest {
+            mediaViewModel.episodes.collect {
                 if (it != null) {
+
+                    mediaViewModel.saveAllEpisodes(it.results)
+
                     podcastDetailsAdapter =
                         PodcastDetailsAdapter(it.results, this@PodcastDetailsFragment)
                     binding.recyclerViewPodcastDetails.adapter = podcastDetailsAdapter
@@ -82,7 +80,9 @@ class PodcastDetailsFragment : Fragment(), PodcastDetailsInteractionListener {
                         "${it.results[0].trackCount} Episodes"
                     Glide.with(binding.imgPodcastDetails).load(it.results[0].artworkUrl100)
                         .into(binding.imgPodcastDetails)
-                    Log.i("PodcastDetailsFragment", "${it.results[0]}")
+                    Log.i("PodcastDetailsFragment", "${navArgs.trackId}")
+
+                    mediaViewModel.setList(it.results)
                 }
             }
         }
@@ -108,16 +108,15 @@ class PodcastDetailsFragment : Fragment(), PodcastDetailsInteractionListener {
         this.findNavController().navigate(action)
     }
 
-    override fun onClickEpisode(episodeDTO: EpisodeDTO) {
-//        sharedDataViewModel.setCurrentEpisode(episodeMapper.map(episodeDTO))
+    override fun onClickEpisode(currentEpisode: EpisodeDTO, episodes: List<EpisodeDTO>) {
+        Log.i("PodcastDetailsFragment", episodes.toString())
 
-        mediaViewModel.onPlayFromMediaId(episodeDTO.episodeGuid, null)
-
+        mediaViewModel.playAudio(currentEpisode, episodes)
     }
 
     override fun onClickDownload(episodeDTO: EpisodeDTO) {
         lifecycleScope.launch(Dispatchers.IO) {
-            viewModel.saveEpisodeToDownload(episodeDTO)
+            mediaViewModel.saveEpisodeToDownload(episodeDTO)
 
             downloadMp3UsingUrl(
                 requireContext(),
@@ -127,4 +126,5 @@ class PodcastDetailsFragment : Fragment(), PodcastDetailsInteractionListener {
             )
         }
     }
+
 }

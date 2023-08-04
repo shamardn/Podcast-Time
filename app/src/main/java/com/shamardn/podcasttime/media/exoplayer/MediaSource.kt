@@ -5,27 +5,17 @@ import android.support.v4.media.MediaBrowserCompat
 import android.support.v4.media.MediaBrowserCompat.MediaItem.FLAG_PLAYABLE
 import android.support.v4.media.MediaDescriptionCompat
 import android.support.v4.media.MediaMetadataCompat
+import android.util.Log
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.source.ConcatenatingMediaSource
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
 import com.google.android.exoplayer2.upstream.cache.CacheDataSource
-import com.shamardn.podcasttime.data.local.database.entity.EpisodeEntity
-import com.shamardn.podcasttime.domain.usecase.GetDownloadedEpisodesUseCase
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import com.shamardn.podcasttime.domain.usecase.GetMediaPodcastsUseCase
 import javax.inject.Inject
 
-class MediaSource
-@Inject constructor(
-    private val getDownloadedEpisodesUseCase: GetDownloadedEpisodesUseCase,
+class MediaSource @Inject constructor(
+    private val getMediaPodcastsUseCase: GetMediaPodcastsUseCase,
 ) {
-
-    private val _episodes = MutableStateFlow<List<EpisodeEntity>?>(null)
-    val episodes: StateFlow<List<EpisodeEntity>?> = _episodes
-
     private val onReadyListeners: MutableList<OnReadyListener> = mutableListOf()
 
     var audioMediaMetaData: List<MediaMetadataCompat> = emptyList()
@@ -50,13 +40,12 @@ class MediaSource
         }
 
     suspend fun load() {
+        Log.i("podcastTime MediaSource", " inside load()")
+
         state = AudioSourceState.STATE_INITIALIZING
+        val data = getMediaPodcastsUseCase()
 
-        CoroutineScope(Dispatchers.IO).async {
-            _episodes.value = getDownloadedEpisodesUseCase()
-        }.await()
-
-        audioMediaMetaData = _episodes.value!!.map { audio ->
+        audioMediaMetaData = data.map { audio ->
             MediaMetadataCompat.Builder()
                 .putString(
                     MediaMetadataCompat.METADATA_KEY_MEDIA_ID,
@@ -143,8 +132,6 @@ class MediaSource
 
     private val isReady: Boolean
         get() = state == AudioSourceState.STATE_INITIALIZED
-
-
 }
 
 enum class AudioSourceState {

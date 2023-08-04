@@ -22,7 +22,7 @@ class PodcastDetailsViewModel @Inject constructor(
     private val _episodes = MutableStateFlow<PodcastResponse<EpisodeDTO>?>(null)
     val episodes: StateFlow<PodcastResponse<EpisodeDTO>?> = _episodes
 
-    fun getPodcastById(trackId: Int){
+    fun getPodcastById(trackId: Long){
         try {
             viewModelScope.launch {
                 withContext(viewModelScope.coroutineContext) {

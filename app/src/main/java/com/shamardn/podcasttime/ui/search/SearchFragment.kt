@@ -67,7 +67,7 @@ class SearchFragment : Fragment(), SearchInteractionListener {
         }
     }
 
-    override fun onClickPodcast(trackId: Int) {
+    override fun onClickPodcast(trackId: Long) {
         val action = SearchFragmentDirections.actionSearchFragmentToPodcastDetailsFragment(trackId)
         Navigation.findNavController(binding.root).navigate(action)
     }

@@ -12,6 +12,9 @@ interface EpisodeDao {
     @Query("SELECT * FROM EPISODE_TABLE")
     suspend fun getEpisodes(): List<EpisodeEntity>
 
+    @Query("SELECT * FROM EPISODE_TABLE")
+    suspend fun getMediaPodcasts(): List<EpisodeEntity>
+
     @Query("SELECT * FROM EPISODE_TABLE WHERE guid = :guid")
     suspend fun getEpisodeByGuid(guid: String): EpisodeEntity
 

@@ -1,6 +1,6 @@
 package com.shamardn.podcasttime.media.exoplayer
 
-
+import com.shamardn.podcasttime.R
 import android.app.PendingIntent
 import android.content.Context
 import android.graphics.Bitmap
@@ -8,7 +8,6 @@ import android.support.v4.media.session.MediaControllerCompat
 import android.support.v4.media.session.MediaSessionCompat
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.ui.PlayerNotificationManager
-import com.shamardn.podcasttime.R
 import com.shamardn.podcasttime.util.Constants.PLAYBACK_NOTIFICATION_CHANNEL_ID
 import com.shamardn.podcasttime.util.Constants.PLAYBACK_NOTIFICATION_ID
 
@@ -29,14 +28,12 @@ internal class MediaPlayerNotificationManager(
             PLAYBACK_NOTIFICATION_CHANNEL_ID
         )
 
-
         with(builder) {
             setMediaDescriptionAdapter(DescriptionAdapter(mediaController))
             setNotificationListener(notificationListener)
             setChannelNameResourceId(R.string.notification_channel)
             setChannelDescriptionResourceId(R.string.notification_channel_description)
         }
-
         notificationManager = builder.build()
 
         with(notificationManager) {
@@ -45,10 +42,7 @@ internal class MediaPlayerNotificationManager(
             setUseRewindAction(false)
             setUseFastForwardAction(false)
         }
-
-
     }
-
 
     fun hideNotification(){
         notificationManager.setPlayer(null)
@@ -78,6 +72,4 @@ internal class MediaPlayerNotificationManager(
             return null
         }
     }
-
-
 }

@@ -40,5 +40,4 @@ class HomeViewModel @Inject constructor(
             Log.e("HomeViewModel", e.message.toString())
         }
     }
-
 }

@@ -27,7 +27,7 @@ data class PodcastDTO(
     val trackCensoredName: String,
     val trackCount: Int,
     val trackExplicitness: String,
-    val trackId: Int,
+    val trackId: Long,
     val trackName: String,
     val trackPrice: Double,
     val trackTimeMillis: Int,
