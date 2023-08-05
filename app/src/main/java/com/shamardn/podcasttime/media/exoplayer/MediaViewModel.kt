@@ -39,11 +39,11 @@ class MediaViewModel @Inject constructor(
     val episodes: StateFlow<PodcastResponse<EpisodeDTO>?> = _episodes
 
     val currentPlayingAudio = serviceConnection.currentPlayingAudio
-    private val isConnected = serviceConnection.isConnected
+    val isConnected = serviceConnection.isConnected
     lateinit var rootMediaId: String
     var currentPlayBackPosition = MutableLiveData<Long>()
     private var updatePosition = true
-    private val playbackState = serviceConnection.plaBackState
+    val playbackState = serviceConnection.playBackState
     val isAudioPlaying: Boolean
         get() = playbackState.value?.isPlaying == true
     private val subscriptionCallback = object
@@ -76,7 +76,7 @@ class MediaViewModel @Inject constructor(
                 if (it) {
                     rootMediaId = serviceConnection.rootMediaId
 
-                    serviceConnection.plaBackState.value?.apply {
+                    serviceConnection.playBackState.value?.apply {
                         currentPlayBackPosition.postValue(position)
                     }
                     serviceConnection.subscribe(rootMediaId, subscriptionCallback)
@@ -205,5 +205,13 @@ class MediaViewModel @Inject constructor(
         Log.i("podcastTime MediaVM", " inside setList()  ")
 
         serviceConnection.setList(audioMapper.mapList(results))
+    }
+
+    fun onBottomPlayerClickPlayPause() {
+        if(isAudioPlaying) {
+            serviceConnection.transportControl.pause()
+        } else {
+            serviceConnection.transportControl.play()
+        }
     }
 }

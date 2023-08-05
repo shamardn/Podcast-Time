@@ -129,7 +129,7 @@
     </dialog>
     <fragment
         android:id="@+id/bottomPlayerFragment"
-        android:name="com.shamardn.podcasttime.ui.BottomPlayerFragment"
+        android:name="com.shamardn.podcasttime.ui.bottomplayer.BottomPlayerFragment"
         android:label="BottomPlayerFragment"
         tools:layout="@layout/fragment_bottom_player"/>
 

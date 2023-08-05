@@ -11,7 +11,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.shamardn.podcasttime.PodcastTimeApplication
 import com.shamardn.podcasttime.R
 import com.shamardn.podcasttime.databinding.ActivityMainBinding
-import com.shamardn.podcasttime.ui.BottomPlayerFragment
+import com.shamardn.podcasttime.ui.bottomplayer.BottomPlayerFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

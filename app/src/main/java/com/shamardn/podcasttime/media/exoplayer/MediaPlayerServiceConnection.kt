@@ -22,7 +22,7 @@ class MediaPlayerServiceConnection @Inject constructor(
 
     private val _playBackState: MutableStateFlow<PlaybackStateCompat?> =
         MutableStateFlow(null)
-    val plaBackState: StateFlow<PlaybackStateCompat?>
+    val playBackState: StateFlow<PlaybackStateCompat?>
         get() = _playBackState
 
     private val _isConnected: MutableStateFlow<Boolean> =
@@ -63,13 +63,13 @@ class MediaPlayerServiceConnection @Inject constructor(
     }
 
     fun fastForward(seconds:Int = 10){
-        plaBackState.value?.currentPosition?.let {
+        playBackState.value?.currentPosition?.let {
             transportControl.seekTo(it + seconds * 1000)
         }
     }
 
     fun rewind(seconds:Int = 10){
-        plaBackState.value?.currentPosition?.let {
+        playBackState.value?.currentPosition?.let {
             transportControl.seekTo(it - seconds * 1000)
         }
     }

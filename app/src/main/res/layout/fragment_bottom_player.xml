@@ -8,28 +8,10 @@
     android:layout_gravity="bottom"
     android:background="@color/secondary">
 
-    <androidx.appcompat.widget.AppCompatSeekBar
-        android:id="@+id/main_seek_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/img_main_player"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_margin="@dimen/space4x"
-        android:src="@drawable/ic_person"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:shapeAppearanceOverlay="@style/RoundedImageView" />
-
-    <com.google.android.material.progressindicator.CircularProgressIndicator
-        android:id="@+id/main_progress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_margin="@dimen/space4x"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -43,7 +25,6 @@
         android:layout_marginEnd="@dimen/space8x"
         android:ellipsize="end"
         android:maxLines="1"
-        android:text="@string/episode_title"
         android:textColor="@color/on_secondary"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/img_main_player"
@@ -56,7 +37,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/space8x"
-        android:src="@drawable/ic_play"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
