@@ -35,6 +35,9 @@ class MediaViewModel @Inject constructor(
     private var _trackId = MutableLiveData<Long>()
     val trackId: LiveData<Long> = _trackId
 
+    private var _isBottomSheetOpened = MutableLiveData(false)
+    val isBottomSheetOpened: LiveData<Boolean> = _isBottomSheetOpened
+
     private val _episodes = MutableStateFlow<PodcastResponse<EpisodeDTO>?>(null)
     val episodes: StateFlow<PodcastResponse<EpisodeDTO>?> = _episodes
 
@@ -162,6 +165,10 @@ class MediaViewModel @Inject constructor(
         serviceConnection.skipToNext()
     }
 
+    fun skipToPrevious() {
+        serviceConnection.skipToPrevious()
+    }
+
     fun seekTo(value: Float) {
         serviceConnection.transportControl.seekTo(
             (currentDuration * value / 100f).toLong()
@@ -213,5 +220,9 @@ class MediaViewModel @Inject constructor(
         } else {
             serviceConnection.transportControl.play()
         }
+    }
+
+    fun onBottomPlayerClick(isOpened: Boolean) {
+        _isBottomSheetOpened.postValue(isOpened)
     }
 }

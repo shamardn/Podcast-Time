@@ -1,7 +1,6 @@
 package com.shamardn.podcasttime.ui.podcastdetails
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -57,6 +56,8 @@ class PodcastDetailsFragment: Fragment(), PodcastDetailsInteractionListener {
         binding.imgPodcastDetailsBackArrow.setOnClickListener {
             it.findNavController().popBackStack()
         }
+
+        showBottomSheet()
     }
 
     private fun fetchPodcastEpisodesByIdForMedia() {
@@ -80,7 +81,6 @@ class PodcastDetailsFragment: Fragment(), PodcastDetailsInteractionListener {
                         "${it.results[0].trackCount} Episodes"
                     Glide.with(binding.imgPodcastDetails).load(it.results[0].artworkUrl100)
                         .into(binding.imgPodcastDetails)
-                    Log.i("PodcastDetailsFragment", "${navArgs.trackId}")
 
                     mediaViewModel.setList(it.results)
                 }
@@ -88,28 +88,7 @@ class PodcastDetailsFragment: Fragment(), PodcastDetailsInteractionListener {
         }
     }
 
-    private fun showEpisodeDetailsBottomSheet(
-        episodeUrl: String,
-        artworkUrl: String,
-        podcastTitle: String,
-        episode: String,
-        guid: String,
-        episodeFileExtension: String,
-    ) {
-        val action =
-            PodcastDetailsFragmentDirections.actionPodcastDetailsFragmentToEpisodeDetailsBottomSheet(
-                episodeUrl,
-                artworkUrl,
-                podcastTitle,
-                episode,
-                guid,
-                episodeFileExtension,
-            )
-        this.findNavController().navigate(action)
-    }
-
     override fun onClickEpisode(currentEpisode: EpisodeDTO, episodes: List<EpisodeDTO>) {
-        Log.i("PodcastDetailsFragment", episodes.toString())
 
         mediaViewModel.playAudio(currentEpisode, episodes)
     }
@@ -124,6 +103,16 @@ class PodcastDetailsFragment: Fragment(), PodcastDetailsInteractionListener {
                 FileUtils.getRootDirPath(requireContext()),
                 "${episodeDTO.episodeGuid}.${episodeDTO.episodeFileExtension}"
             )
+        }
+    }
+
+    private fun showBottomSheet() {
+        mediaViewModel.isBottomSheetOpened.observe(viewLifecycleOwner) {
+            if (it) {
+                val action =
+                    PodcastDetailsFragmentDirections.actionPodcastDetailsFragmentToEpisodeDetailsBottomSheet()
+                this.findNavController().navigate(action)
+            }
         }
     }
 

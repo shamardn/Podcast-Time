@@ -5,14 +5,11 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/homeFragment">
 
-    <action android:id="@+id/action_global_episode_details_fragment"
-        app:destination="@+id/episodeDetailsFragment"
-        app:launchSingleTop="true"/>
-
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.shamardn.podcasttime.ui.home.HomeFragment"
-        android:label="HomeFragment" >
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
@@ -22,15 +19,20 @@
         <action
             android:id="@+id/action_homeFragment_to_downloadsFragment"
             app:destination="@id/downloadsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_episodeDetailsBottomSheet"
+            app:destination="@id/episodeDetailsBottomSheet" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.shamardn.podcasttime.ui.LoginFragment"
-        android:label="LoginFragment" />
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login"/>
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.shamardn.podcasttime.ui.search.SearchFragment"
-        android:label="SearchFragment" >
+        android:label="SearchFragment"
+        tools:layout="@layout/fragment_search">
         <action
             android:id="@+id/action_searchFragment_to_podcastDetailsFragment"
             app:destination="@id/podcastDetailsFragment" />
@@ -38,11 +40,13 @@
     <fragment
         android:id="@+id/signupFragment"
         android:name="com.shamardn.podcasttime.ui.SignupFragment"
-        android:label="SignupFragment" />
+        android:label="SignupFragment"
+        tools:layout="@layout/fragment_signup"/>
     <fragment
         android:id="@+id/userProfileFragment"
         android:name="com.shamardn.podcasttime.ui.UserProfileFragment"
-        android:label="UserProfileFragment" />
+        android:label="UserProfileFragment"
+        tools:layout="@layout/fragment_user_profile"/>
     <fragment
         android:id="@+id/downloadsFragment"
         android:name="com.shamardn.podcasttime.ui.download.DownloadsFragment"
@@ -102,31 +106,7 @@
         android:id="@+id/episodeDetailsBottomSheet"
         android:name="com.shamardn.podcasttime.ui.episodeplayer.EpisodeDetailsBottomSheet"
         android:label="EpisodeDetailsBottomSheet"
-        tools:layout="@layout/episode_bottom_sheet_layout">
-
-        <argument
-            android:name="episodeUrl"
-            app:argType="string" />
-        <argument
-            android:name="artworkUrl"
-            app:argType="string" />
-        <argument
-            android:name="podcastTitle"
-            app:argType="string" />
-        <argument
-            android:name="episode"
-            app:argType="string" />
-        <argument
-            android:name="guid"
-            app:argType="string" />
-        <argument
-            android:name="isOnline"
-            app:argType="boolean"
-            android:defaultValue="true" />
-        <argument
-            android:name="episodeFileExtension"
-            app:argType="string"/>
-    </dialog>
+        tools:layout="@layout/episode_bottom_sheet_layout"/>
     <fragment
         android:id="@+id/bottomPlayerFragment"
         android:name="com.shamardn.podcasttime.ui.bottomplayer.BottomPlayerFragment"

@@ -77,6 +77,9 @@ class MediaPlayerServiceConnection @Inject constructor(
     fun skipToNext(){
         transportControl.skipToNext()
     }
+    fun skipToPrevious(){
+        transportControl.skipToPrevious()
+    }
 
     fun subscribe(
         parentId:String,

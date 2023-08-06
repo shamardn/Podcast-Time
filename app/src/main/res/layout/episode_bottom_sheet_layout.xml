@@ -7,10 +7,10 @@
     android:background="@drawable/bottom_sheet_bg">
 
     <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/img_episode"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_margin="@dimen/space12x"
+        android:id="@+id/img_bottom_sheet_episode_img"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_margin="@dimen/space16x"
         android:scaleType="centerCrop"
         tools:src="@drawable/ic_person"
         app:layout_constraintEnd_toEndOf="parent"
@@ -19,7 +19,7 @@
         app:shapeAppearanceOverlay="@style/RoundedImageView" />
 
     <TextView
-        android:id="@+id/text_podcast"
+        android:id="@+id/text_bottom_sheet_episode_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/space12x"
@@ -34,10 +34,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/img_episode" />
+        app:layout_constraintTop_toBottomOf="@id/img_bottom_sheet_episode_img" />
 
     <TextView
-        android:id="@+id/text_episode"
+        android:id="@+id/text_bottom_sheet_podcast_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/space24x"
@@ -52,52 +52,70 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_podcast" />
+        app:layout_constraintTop_toBottomOf="@id/text_bottom_sheet_episode_title" />
 
-        <com.google.android.exoplayer2.ui.StyledPlayerView
-            android:id="@+id/player_view"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_margin="@dimen/space8x"
-            app:use_controller="true"
-            app:show_timeout="0"
-            app:hide_on_touch="false"
-            android:background="@android:color/transparent"
-            app:surface_type="surface_view"
-            app:shutter_background_color="@android:color/white"
-            app:controller_layout_id="@layout/exo_player_control_view"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_episode"
-            android:gravity="center" />
-
-    <TextView
-        android:id="@+id/text_speed"
-        android:layout_width="wrap_content"
+    <SeekBar
+        android:id="@+id/seekBar_bottom_sheet"
+        style="@style/Widget.AppCompat.SeekBar.Discrete"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/space24x"
-        android:layout_marginTop="@dimen/space24x"
-        android:text="@string/_1_0x"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/player_view" />
-
-    <ImageView
-        android:id="@+id/img_sleep"
-        android:layout_width="16dp"
-        android:layout_height="24dp"
-        android:src="@drawable/ic_night"
-        app:layout_constraintEnd_toStartOf="@id/img_share"
-        app:layout_constraintStart_toEndOf="@+id/text_speed"
-        app:layout_constraintTop_toTopOf="@+id/text_speed" />
-
-    <ImageView
-        android:id="@+id/img_share"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/space24x"
-        android:src="@drawable/ic_share"
+        android:layout_marginTop="32dp"
+        android:max="100"
+        android:progress="0"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/img_sleep" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_bottom_sheet_podcast_title" />
+
+    <ImageView
+        android:id="@+id/img_bottom_sheet_play_pause"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/seekBar_bottom_sheet"
+        app:layout_constraintStart_toStartOf="@+id/seekBar_bottom_sheet"
+        app:layout_constraintTop_toBottomOf="@+id/seekBar_bottom_sheet"
+        tools:srcCompat="@drawable/ic_play" />
+
+    <ImageView
+        android:id="@+id/img_bottom_sheet_fast_rewind"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="32dp"
+        app:layout_constraintBottom_toBottomOf="@+id/img_bottom_sheet_skip_previous"
+        app:layout_constraintStart_toEndOf="@+id/img_bottom_sheet_skip_previous"
+        app:layout_constraintTop_toTopOf="@+id/img_bottom_sheet_skip_previous"
+        app:srcCompat="@drawable/ic_fast_rewind" />
+
+    <ImageView
+        android:id="@+id/img_bottom_sheet_skip_previous"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/img_bottom_sheet_play_pause"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/img_bottom_sheet_play_pause"
+        app:srcCompat="@drawable/ic_skip_previous" />
+
+    <ImageView
+        android:id="@+id/img_bottom_sheet_fast_forward"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintBottom_toBottomOf="@+id/img_bottom_sheet_play_pause"
+        app:layout_constraintEnd_toStartOf="@+id/img_bottom_sheet_skip_next"
+        app:layout_constraintTop_toTopOf="@+id/img_bottom_sheet_play_pause"
+        app:srcCompat="@drawable/ic_fast_forward" />
+
+    <ImageView
+        android:id="@+id/img_bottom_sheet_skip_next"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/img_bottom_sheet_play_pause"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/img_bottom_sheet_play_pause"
+        app:srcCompat="@drawable/ic_skip_next" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
