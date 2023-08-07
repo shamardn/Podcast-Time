@@ -2,6 +2,7 @@ package com.shamardn.podcasttime.ui.episodeplayer
 
 import android.os.Bundle
 import android.support.v4.media.session.PlaybackStateCompat
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,6 +41,7 @@ class EpisodeDetailsBottomSheet : BottomSheetDialogFragment() {
 
     fun setViewContent() {
         mediaViewModel.currentPlayingAudio.observe(viewLifecycleOwner) { episode ->
+            Log.i("MediaVM","episode observe: ${episode}")
             Glide.with(binding.imgBottomSheetEpisodeImg).load(episode?.artworkUrl160)
                 .into(binding.imgBottomSheetEpisodeImg)
             binding.textBottomSheetPodcastTitle.text = episode?.trackName

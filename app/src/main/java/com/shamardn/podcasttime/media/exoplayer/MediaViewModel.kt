@@ -78,7 +78,6 @@ class MediaViewModel @Inject constructor(
             isConnected.collect {
                 if (it) {
                     rootMediaId = serviceConnection.rootMediaId
-
                     serviceConnection.playBackState.value?.apply {
                         currentPlayBackPosition.postValue(position)
                     }
@@ -126,11 +125,9 @@ class MediaViewModel @Inject constructor(
         }
     }
 
-    fun playAudio(currentAudio: EpisodeDTO, episodes: List<EpisodeDTO>) {
-        Log.i("podcastTime MediaVM", " inside playAudio start ")
-
-        serviceConnection.setList(audioMapper.mapList(episodes))
-        Log.i("podcastTime MediaVM", " inside playAudio after serviceConnection.setList() ")
+    fun playAudio(currentAudio: EpisodeDTO) {
+        episodes.value?.results?.let { audioMapper.mapList(it) }
+            ?.let { serviceConnection.playAudio(it) }
 
         if (audioMapper.map(currentAudio).id == currentPlayingAudio.value?.id) {
             if (isAudioPlaying) {
@@ -163,6 +160,7 @@ class MediaViewModel @Inject constructor(
 
     fun skipToNext() {
         serviceConnection.skipToNext()
+
     }
 
     fun skipToPrevious() {
@@ -206,12 +204,6 @@ class MediaViewModel @Inject constructor(
             object : MediaBrowserCompat.SubscriptionCallback() {}
         )
         updatePosition = false
-    }
-
-    fun setList(results: List<EpisodeDTO>) {
-        Log.i("podcastTime MediaVM", " inside setList()  ")
-
-        serviceConnection.setList(audioMapper.mapList(results))
     }
 
     fun onBottomPlayerClickPlayPause() {

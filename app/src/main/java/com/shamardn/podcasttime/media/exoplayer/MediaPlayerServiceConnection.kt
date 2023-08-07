@@ -11,16 +11,17 @@ import androidx.lifecycle.MutableLiveData
 import com.shamardn.podcasttime.data.local.database.entity.EpisodeAudio
 import com.shamardn.podcasttime.services.MediaPlaybackService
 import com.shamardn.podcasttime.util.Constants.REFRESH_MEDIA_PLAY_ACTION
+import com.shamardn.podcasttime.util.Constants.START_MEDIA_PLAY_ACTION
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
 
 class MediaPlayerServiceConnection @Inject constructor(
-    @ApplicationContext context: Context
+    @ApplicationContext context: Context,
 ) {
 
-    private val _playBackState: MutableStateFlow<PlaybackStateCompat?> =
+    private var _playBackState: MutableStateFlow<PlaybackStateCompat?> =
         MutableStateFlow(null)
     val playBackState: StateFlow<PlaybackStateCompat?>
         get() = _playBackState
@@ -54,7 +55,6 @@ class MediaPlayerServiceConnection @Inject constructor(
     val transportControl: MediaControllerCompat.TransportControls
         get() = mediaControllerCompat.transportControls
 
-
     fun playAudio(audios:List<EpisodeAudio>){
         Log.i("podcastTime connection", " inside playAudio() ")
 
@@ -82,22 +82,15 @@ class MediaPlayerServiceConnection @Inject constructor(
     }
 
     fun subscribe(
-        parentId:String,
+        parentId: String,
         callBack:MediaBrowserCompat.SubscriptionCallback
     ){
-//
         Log.i("podcastTime connection", " inside subscribe() ")
-//        val bundle = Bundle()
-//        bundle.putParcelableArrayList(Constants.ConstantBundle.BUNDLE_COMMAND , audioList as ArrayList)
-//        mediaBrowser.sendCustomAction(START_MEDIA_PLAY_ACTION , bundle , null)
-//
-
-
         mediaBrowser.subscribe(parentId, callBack)
     }
 
     fun unSubscribe(
-        parentId:String,
+        parentId: String,
         callBack:MediaBrowserCompat.SubscriptionCallback
     ){
         Log.i("podcastTime connection", " inside unSubscribe() ")
@@ -109,7 +102,7 @@ class MediaPlayerServiceConnection @Inject constructor(
         Log.i("podcastTime connection", " inside refreshMediaBrowserChildren() ")
 
         mediaBrowser.sendCustomAction(
-            REFRESH_MEDIA_PLAY_ACTION,
+            START_MEDIA_PLAY_ACTION,
             null,
             null
         )
@@ -120,7 +113,7 @@ class MediaPlayerServiceConnection @Inject constructor(
     ) : MediaBrowserCompat.ConnectionCallback() {
 
         override fun onConnected() {
-            Log.i("podcastTime connection", " inside MediaBrowserConnectionCallBack")
+            Log.i("mediaconnection cb", " inside MediaBrowserConnectionCallBack")
 
             _isConnected.value = true
             mediaControllerCompat = MediaControllerCompat(
@@ -156,13 +149,15 @@ class MediaPlayerServiceConnection @Inject constructor(
 
         override fun onMetadataChanged(metadata: MediaMetadataCompat?) {
             super.onMetadataChanged(metadata)
-            Log.i("podcastTime connection", " inside onMetadataChanged")
 
-            currentPlayingAudio.value = metadata?.let { data ->
-                audioList.find {
-                    it.id.toString() == data.description.mediaId
+            currentPlayingAudio.postValue(
+                metadata?.let { data ->
+                    Log.i("mediaconnection", "mediaId${data.description.mediaId}")
+                    audioList.find {
+                        it.id.toString() == data.description.mediaId
+                    }
                 }
-            }
+            )
         }
 
         override fun onSessionDestroyed() {
@@ -170,17 +165,6 @@ class MediaPlayerServiceConnection @Inject constructor(
             Log.i("podcastTime connection", " inside onSessionDestroyed")
 
             mediaBrowserServiceCallback.onConnectionSuspended()
-        }
-
-
-    }
-
-    fun setList(mList: List<EpisodeAudio>) {
-        Log.i("podcastTime connection", " inside setList()")
-
-        audioList.apply {
-            clear()
-            addAll(mList)
         }
     }
 }

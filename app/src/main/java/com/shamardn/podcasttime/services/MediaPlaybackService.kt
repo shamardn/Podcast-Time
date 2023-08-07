@@ -33,6 +33,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.async
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -125,7 +126,6 @@ class MediaPlaybackService : MediaBrowserServiceCompat() {
         parentId: String,
         result: Result<MutableList<MediaBrowserCompat.MediaItem>>,
     ) {
-
         Log.i("podcastTime mService", " inside onLoadChildren")
 
         when (parentId) {
@@ -153,26 +153,24 @@ class MediaPlaybackService : MediaBrowserServiceCompat() {
         result: Result<Bundle>,
     ) {
 
-        Log.i("podcastTime mService", " inside onCustomAction")
+        Log.i("podcastTime mService", " inside onCustomAction extras: $extras")
 
         super.onCustomAction(action, extras, result)
         when (action) {
-
             START_MEDIA_PLAY_ACTION -> {
                 mediaPlayerNotificationManager.showNotification(exoPlayer)
-            }
+                }
 
             REFRESH_MEDIA_PLAY_ACTION -> {
-                mediaSource.refresh()
-                notifyChildrenChanged(MEDIA_ROOT_ID)
+                CoroutineScope(Dispatchers.IO).launch {
+                    CoroutineScope(Dispatchers.IO).async {
+                        mediaSource.load()
+                        notifyChildrenChanged(MEDIA_ROOT_ID)
+                    }.await()
+                }
             }
-
             else -> Unit
-
-
         }
-
-
     }
 
     override fun onTaskRemoved(rootIntent: Intent?) {

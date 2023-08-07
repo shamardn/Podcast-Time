@@ -62,7 +62,8 @@ class PodcastDetailsFragment: Fragment(), PodcastDetailsInteractionListener {
 
     private fun fetchPodcastEpisodesByIdForMedia() {
         lifecycleScope.launch {
-            mediaViewModel.episodes.collect {
+            mediaViewModel.
+            episodes.collect {
                 if (it != null) {
 
                     mediaViewModel.saveAllEpisodes(it.results)
@@ -82,15 +83,13 @@ class PodcastDetailsFragment: Fragment(), PodcastDetailsInteractionListener {
                     Glide.with(binding.imgPodcastDetails).load(it.results[0].artworkUrl100)
                         .into(binding.imgPodcastDetails)
 
-                    mediaViewModel.setList(it.results)
                 }
             }
         }
     }
 
-    override fun onClickEpisode(currentEpisode: EpisodeDTO, episodes: List<EpisodeDTO>) {
-
-        mediaViewModel.playAudio(currentEpisode, episodes)
+    override fun onClickEpisode(currentEpisode: EpisodeDTO) {
+        mediaViewModel.playAudio(currentEpisode)
     }
 
     override fun onClickDownload(episodeDTO: EpisodeDTO) {

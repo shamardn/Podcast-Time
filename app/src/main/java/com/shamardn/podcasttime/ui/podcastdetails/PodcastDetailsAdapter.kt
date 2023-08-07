@@ -38,7 +38,7 @@ class PodcastDetailsAdapter(
                 listener.onClickDownload(currentEpisode)
             }
             root.setOnClickListener {
-                listener.onClickEpisode(currentEpisode, items)
+                listener.onClickEpisode(currentEpisode)
 
             }
 
