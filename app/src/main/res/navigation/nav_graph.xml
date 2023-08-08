@@ -36,6 +36,9 @@
         <action
             android:id="@+id/action_searchFragment_to_podcastDetailsFragment"
             app:destination="@id/podcastDetailsFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_episodeDetailsBottomSheet"
+            app:destination="@id/episodeDetailsBottomSheet" />
     </fragment>
     <fragment
         android:id="@+id/signupFragment"
