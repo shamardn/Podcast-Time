@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.shamardn.podcasttime.databinding.FragmentLibraryBinding
+import com.shamardn.podcasttime.media.exoplayer.MediaViewModel
 import com.shamardn.podcasttime.ui.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -14,6 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class LibraryFragment : Fragment() {
 
     lateinit var binding: FragmentLibraryBinding
+    private val mediaViewModel: MediaViewModel by activityViewModels()
     private var bottomNavigationViewVisibility = View.VISIBLE
 
     private fun setBottomNavigationVisibility() {
@@ -33,6 +36,11 @@ class LibraryFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        showBottomSheet()
+    }
+
     private fun handleEvents() {
        binding.cardLibraryDownloads.setOnClickListener {
            navigateToDownloads()
@@ -42,5 +50,14 @@ class LibraryFragment : Fragment() {
     private fun navigateToDownloads() {
         val action = LibraryFragmentDirections.actionLibraryFragmentToDownloadsFragment()
         this.findNavController().navigate(action)
+    }
+
+    private fun showBottomSheet() {
+        mediaViewModel.isBottomSheetOpened.observe(viewLifecycleOwner) {
+            if (it) {
+                val action = LibraryFragmentDirections.actionLibraryFragmentToEpisodeDetailsBottomSheet()
+                this.findNavController().navigate(action)
+            }
+        }
     }
 }

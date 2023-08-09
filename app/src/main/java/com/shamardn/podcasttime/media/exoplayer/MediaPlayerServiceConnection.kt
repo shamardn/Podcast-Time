@@ -62,6 +62,13 @@ class MediaPlayerServiceConnection @Inject constructor(
         mediaBrowser.sendCustomAction(REFRESH_MEDIA_PLAY_ACTION,null,null)
     }
 
+    fun playDownloadedAudio(audios:List<EpisodeAudio>){
+        Log.i("podcastTime connection", " inside playDownloadedAudio() ")
+
+        audioList = audios as MutableList<EpisodeAudio>
+        mediaBrowser.sendCustomAction(REFRESH_MEDIA_PLAY_ACTION,null,null)
+    }
+
     fun fastForward(seconds:Int = 10){
         playBackState.value?.currentPosition?.let {
             transportControl.seekTo(it + seconds * 1000)

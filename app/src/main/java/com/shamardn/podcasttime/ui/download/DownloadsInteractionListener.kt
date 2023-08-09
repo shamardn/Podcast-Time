@@ -1,12 +1,8 @@
 package com.shamardn.podcasttime.ui.download
 
+import com.shamardn.podcasttime.data.local.database.entity.EpisodeEntity
+
 interface DownloadsInteractionListener {
-    fun onEpisodeClick(episodeUrl: String,
-                       artworkUrl: String,
-                       podcastTitle: String,
-                       episode: String,
-                       guid: String,
-                       episodeFileExtension: String,
-    )
+    fun onEpisodeClick(currentEpisode: EpisodeEntity)
     fun onDownloadedEpisodeIcon()
 }

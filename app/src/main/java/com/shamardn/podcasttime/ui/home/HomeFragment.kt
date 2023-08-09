@@ -51,7 +51,7 @@ class HomeFragment() : Fragment(), HomeInteractionListener {
         super.onViewCreated(view, savedInstanceState)
         fetchPodcasts()
 
-        showSheet()
+        showBottomSheet()
         binding.textHomeSearch.setOnClickListener {
             val action = HomeFragmentDirections.actionHomeFragmentToSearchFragment()
             this.findNavController().navigate(action)
@@ -75,7 +75,7 @@ class HomeFragment() : Fragment(), HomeInteractionListener {
         this.findNavController().navigate(action)
     }
 
-    private fun showSheet() {
+    private fun showBottomSheet() {
         mediaViewModel.isBottomSheetOpened.observe(viewLifecycleOwner) {
             if (it) {
                 val action = HomeFragmentDirections.actionHomeFragmentToEpisodeDetailsBottomSheet()

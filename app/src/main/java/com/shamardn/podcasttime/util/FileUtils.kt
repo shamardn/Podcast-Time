@@ -2,10 +2,7 @@ package com.shamardn.podcasttime.util
 
 import android.content.Context
 import android.os.Environment
-import android.widget.Toast
 import androidx.core.content.ContextCompat
-import com.downloader.OnDownloadListener
-import com.downloader.PRDownloader
 import java.io.File
 
 object FileUtils {
@@ -21,31 +18,31 @@ object FileUtils {
         }
     }
 
-    fun downloadMp3UsingUrl(context: Context, url: String, dirPath: String, fileName: String) {
-        PRDownloader.initialize(context.applicationContext)
-        PRDownloader.download(
-            url,
-            dirPath,
-            fileName
-        ).build()
-            .setOnProgressListener { progress ->
-                // Handle download progress if needed
-            }
-            .start(object : OnDownloadListener {
-                override fun onDownloadComplete() {
-                    Toast.makeText(context.applicationContext, "$fileName download Complete", Toast.LENGTH_LONG).show()
-                }
-
-
-                override fun onError(error: com.downloader.Error?) {
-                    Toast.makeText(
-                        context.applicationContext,
-                        "Error in downloading file : $error",
-                        Toast.LENGTH_LONG
-                    )
-                        .show()
-                }
-            })
-    }
+//    fun downloadMp3UsingUrl(context: Context, url: String, dirPath: String, fileName: String) {
+//        PRDownloader.initialize(context.applicationContext)
+//        PRDownloader.download(
+//            url,
+//            dirPath,
+//            fileName
+//        ).build()
+//            .setOnProgressListener { progress ->
+//                // Handle download progress if needed
+//            }
+//            .start(object : OnDownloadListener {
+//                override fun onDownloadComplete() {
+//                    Toast.makeText(context.applicationContext, "$fileName download Complete", Toast.LENGTH_LONG).show()
+//                }
+//
+//
+//                override fun onError(error: com.downloader.Error?) {
+//                    Toast.makeText(
+//                        context.applicationContext,
+//                        "Error in downloading file : $error",
+//                        Toast.LENGTH_LONG
+//                    )
+//                        .show()
+//                }
+//            })
+//    }
 
 }

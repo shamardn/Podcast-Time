@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
@@ -15,8 +16,6 @@ import com.shamardn.podcasttime.databinding.FragmentPodcastDetailsBinding
 import com.shamardn.podcasttime.domain.entity.EpisodeDTO
 import com.shamardn.podcasttime.media.exoplayer.MediaViewModel
 import com.shamardn.podcasttime.ui.main.MainActivity
-import com.shamardn.podcasttime.util.FileUtils
-import com.shamardn.podcasttime.util.FileUtils.downloadMp3UsingUrl
 import com.shamardn.podcasttime.util.changeDateFormat
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -93,15 +92,9 @@ class PodcastDetailsFragment: Fragment(), PodcastDetailsInteractionListener {
     }
 
     override fun onClickDownload(episodeDTO: EpisodeDTO) {
-        lifecycleScope.launch(Dispatchers.IO) {
+        lifecycleScope.launch(Dispatchers.Main) {
             mediaViewModel.saveEpisodeToDownload(episodeDTO)
-
-            downloadMp3UsingUrl(
-                requireContext(),
-                episodeDTO.episodeUrl,
-                FileUtils.getRootDirPath(requireContext()),
-                "${episodeDTO.episodeGuid}.${episodeDTO.episodeFileExtension}"
-            )
+            Toast.makeText(requireContext(),"Audio ${episodeDTO.trackName} is Downloaded", Toast.LENGTH_SHORT).show()
         }
     }
 

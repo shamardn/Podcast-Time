@@ -4,7 +4,7 @@ import com.shamardn.podcasttime.data.local.database.entity.EpisodeEntity
 import com.shamardn.podcasttime.domain.entity.EpisodeDTO
 import javax.inject.Inject
 
-class EpisodeMapper @Inject constructor(
+class EpisodeDTOMapper @Inject constructor(
 
 ) : Mapper<EpisodeDTO,EpisodeEntity>(){
     override fun map(input: EpisodeDTO): EpisodeEntity {
@@ -13,12 +13,12 @@ class EpisodeMapper @Inject constructor(
             collectionName = input.collectionName,
             trackName = input.trackName,
             releaseDate = input.releaseDate,
-            description = input.description ?: "",
+            description = input.description,
             trackTimeMillis = input.trackTimeMillis,
-            artworkUrl160 = input.artworkUrl160 ?: input.artworkUrl100,
-            episodeUrl = input.episodeUrl ?: input.collectionViewUrl,
-            guid = input.episodeGuid ?: "",
-            episodeFileExtension = input.episodeFileExtension ?: "",
+            artworkUrl160 = input.artworkUrl160,
+            episodeUrl = input.episodeUrl,
+            guid = input.episodeGuid,
+            episodeFileExtension = input.episodeFileExtension,
         )
     }
 }

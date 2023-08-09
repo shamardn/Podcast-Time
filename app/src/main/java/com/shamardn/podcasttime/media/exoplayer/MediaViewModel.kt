@@ -6,9 +6,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.shamardn.podcasttime.data.local.database.entity.EpisodeEntity
 import com.shamardn.podcasttime.domain.entity.EpisodeDTO
 import com.shamardn.podcasttime.domain.entity.PodcastResponse
 import com.shamardn.podcasttime.domain.mapper.EpisodeAudioMapper
+import com.shamardn.podcasttime.domain.mapper.EpisodeEntityMapper
+import com.shamardn.podcasttime.domain.usecase.GetDownloadedEpisodesUseCase
 import com.shamardn.podcasttime.domain.usecase.GetPodcastByIdUseCase
 import com.shamardn.podcasttime.domain.usecase.SaveAllEpisodesUseCase
 import com.shamardn.podcasttime.domain.usecase.SaveEpisodeToDownloadUseCase
@@ -26,9 +29,11 @@ import javax.inject.Inject
 @HiltViewModel
 class MediaViewModel @Inject constructor(
     private val audioMapper: EpisodeAudioMapper,
+    private val entityMapper: EpisodeEntityMapper,
     private val getPodcastByIdUseCase: GetPodcastByIdUseCase,
     private val saveEpisodeToDownloadUseCase: SaveEpisodeToDownloadUseCase,
     private val saveAllEpisodesUseCase: SaveAllEpisodesUseCase,
+    private val getDownloadedEpisodesUseCase: GetDownloadedEpisodesUseCase,
     serviceConnection: MediaPlayerServiceConnection,
 ) : ViewModel() {
 
@@ -40,6 +45,9 @@ class MediaViewModel @Inject constructor(
 
     private val _episodes = MutableStateFlow<PodcastResponse<EpisodeDTO>?>(null)
     val episodes: StateFlow<PodcastResponse<EpisodeDTO>?> = _episodes
+
+    private val _downloadedEpisodes = MutableStateFlow<List<EpisodeEntity>?>(null)
+    val downloadedEpisodes: StateFlow<List<EpisodeEntity>?> = _downloadedEpisodes
 
     val currentPlayingAudio = serviceConnection.currentPlayingAudio
     val isConnected = serviceConnection.isConnected
@@ -102,6 +110,18 @@ class MediaViewModel @Inject constructor(
         }
     }
 
+    fun getDownloadedEpisodes() {
+        try {
+            viewModelScope.launch {
+                withContext(viewModelScope.coroutineContext) {
+                    _downloadedEpisodes.value = getDownloadedEpisodesUseCase()
+                }
+            }
+        } catch (e: Exception) {
+            Log.e("MediaViewModel", e.message.toString())
+        }
+    }
+
 
     suspend fun saveEpisodeToDownload(episodeDTO: EpisodeDTO) {
         try {
@@ -146,8 +166,25 @@ class MediaViewModel @Inject constructor(
 
     }
 
-    fun stopPlayBack() {
-        serviceConnection.transportControl.stop()
+    fun playDownloadedEpisode(currentAudio: EpisodeEntity) {
+        downloadedEpisodes.value
+            ?.let { serviceConnection.playDownloadedAudio(entityMapper.mapList(it)) }
+
+        if (entityMapper.map(currentAudio).id == currentPlayingAudio.value?.id) {
+            if (isAudioPlaying) {
+                serviceConnection.transportControl.pause()
+            } else {
+                serviceConnection.transportControl.play()
+            }
+        } else {
+            serviceConnection.transportControl
+                .playFromMediaId(
+                    currentAudio.id.toString(),
+                    null
+                )
+        }
+        Log.i("podcastTime MediaVM", " inside playAudio end ")
+
     }
 
     fun fastForward() {
@@ -156,15 +193,6 @@ class MediaViewModel @Inject constructor(
 
     fun rewind() {
         serviceConnection.rewind()
-    }
-
-    fun skipToNext() {
-        serviceConnection.skipToNext()
-
-    }
-
-    fun skipToPrevious() {
-        serviceConnection.skipToPrevious()
     }
 
     fun seekTo(value: Float) {

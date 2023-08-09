@@ -46,7 +46,6 @@ class EpisodeDetailsBottomSheet : BottomSheetDialogFragment() {
                 .into(binding.imgBottomSheetEpisodeImg)
             binding.textBottomSheetPodcastTitle.text = episode?.trackName
             binding.textBottomSheetEpisodeTitle.text = episode?.collectionName
-            binding.seekBarBottomSheet.max = (episode?.trackTimeMillis?.div(60000)!!)
         }
 
         mediaViewModel.apply {

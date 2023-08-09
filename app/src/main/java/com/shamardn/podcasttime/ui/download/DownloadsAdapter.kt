@@ -30,19 +30,12 @@ class DownloadsAdapter(
             textItemDownloadEpisodeDate.text = currentEpisode.releaseDate.changeDateFormat()
             textItemDownloadEpisodeTitle.text = currentEpisode.trackName
             textItemDownloadPlayTime.text = currentEpisode.trackTimeMillis.milliSecondsToMinutes()
-            imgItemDownloadDownloaded.setOnClickListener {
+            imgItemDownloadRemove.setOnClickListener {
 
             }
 
             root.setOnClickListener {
-                listener.onEpisodeClick(
-                    episodeUrl = currentEpisode.episodeUrl,
-                    artworkUrl = currentEpisode.artworkUrl160,
-                    podcastTitle = currentEpisode.collectionName,
-                    episode = currentEpisode.trackName,
-                    guid = currentEpisode.guid,
-                    episodeFileExtension = currentEpisode.episodeFileExtension,
-                )
+                listener.onEpisodeClick(currentEpisode)
             }
         }
     }
