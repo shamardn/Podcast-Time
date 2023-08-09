@@ -15,6 +15,7 @@ import com.shamardn.podcasttime.util.Constants.START_MEDIA_PLAY_ACTION
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
 class MediaPlayerServiceConnection @Inject constructor(
@@ -23,8 +24,7 @@ class MediaPlayerServiceConnection @Inject constructor(
 
     private var _playBackState: MutableStateFlow<PlaybackStateCompat?> =
         MutableStateFlow(null)
-    val playBackState: StateFlow<PlaybackStateCompat?>
-        get() = _playBackState
+    val playBackState = _playBackState.asStateFlow()
 
     private val _isConnected: MutableStateFlow<Boolean> =
         MutableStateFlow(false)

@@ -34,18 +34,19 @@ class EpisodeDetailsBottomSheet : BottomSheetDialogFragment() {
         mediaViewModel.onBottomPlayerClick(false)
 
         setViewContent()
+        setUpSeekBar()
         controllerMediaPlayer()
-//        setUpSeekBar()
         return binding.root
     }
 
     fun setViewContent() {
         mediaViewModel.currentPlayingAudio.observe(viewLifecycleOwner) { episode ->
-            Log.i("MediaVM","episode observe: ${episode}")
+            Log.i("MediaVM", "episode observe: ${episode}")
             Glide.with(binding.imgBottomSheetEpisodeImg).load(episode?.artworkUrl160)
                 .into(binding.imgBottomSheetEpisodeImg)
             binding.textBottomSheetPodcastTitle.text = episode?.trackName
             binding.textBottomSheetEpisodeTitle.text = episode?.collectionName
+            binding.seekBarBottomSheet.max = (episode?.trackTimeMillis?.div(60000)!!)
         }
 
         mediaViewModel.apply {
@@ -54,9 +55,6 @@ class EpisodeDetailsBottomSheet : BottomSheetDialogFragment() {
                     if (state?.state == PlaybackStateCompat.STATE_PLAYING)
                         binding.imgBottomSheetPlayPause.setBackgroundResource(R.drawable.ic_pause)
                     else binding.imgBottomSheetPlayPause.setBackgroundResource(R.drawable.ic_play)
-                    state?.position?.toInt()?.let { statePos ->
-                        binding.seekBarBottomSheet.progress = statePos
-                    }
                 }
             }
         }
@@ -65,7 +63,16 @@ class EpisodeDetailsBottomSheet : BottomSheetDialogFragment() {
     private fun setUpSeekBar() {
         binding.seekBarBottomSheet.apply {
             if (isUpdateSeeBar) {
-                max = mediaViewModel.currentDuration.toInt()
+                max = (mediaViewModel.currentDuration / 60000).toInt()
+            }
+
+            lifecycleScope.launch {
+               mediaViewModel.playbackState.collect { state ->
+                    state?.position?.let { pos ->
+                        binding.seekBarBottomSheet.progress = (pos / 60000).toInt()
+                        Log.i("seekbarBottom", "state: ${state}")
+                    }
+                }
             }
 
             setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
@@ -77,6 +84,9 @@ class EpisodeDetailsBottomSheet : BottomSheetDialogFragment() {
                     /**
                      * Y can set text time of song
                      */
+                    Log.i("seekbarBottom", "progress: ${progress}")
+
+
                 }
 
                 override fun onStartTrackingTouch(seekBar: SeekBar?) {
@@ -95,14 +105,6 @@ class EpisodeDetailsBottomSheet : BottomSheetDialogFragment() {
 
     private fun controllerMediaPlayer() =
         mediaViewModel.apply {
-            binding.imgBottomSheetSkipPrevious.setOnClickListener {
-                it.setAlphaAnimation()
-                skipToPrevious()
-            }
-            binding.imgBottomSheetSkipNext.setOnClickListener {
-                it.setAlphaAnimation()
-                skipToNext()
-            }
             binding.imgBottomSheetFastForward.setOnClickListener {
                 it.setAlphaAnimation()
                 fastForward()
