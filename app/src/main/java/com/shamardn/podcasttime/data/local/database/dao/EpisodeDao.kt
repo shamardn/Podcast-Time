@@ -9,14 +9,8 @@ import com.shamardn.podcasttime.data.local.database.entity.EpisodeEntity
 
 @Dao
 interface EpisodeDao {
-    @Query("SELECT * FROM EPISODE_TABLE")
+    @Query("SELECT * FROM EPISODE_TABLE ORDER BY trackName")
     suspend fun getEpisodes(): List<EpisodeEntity>
-
-    @Query("SELECT * FROM EPISODE_TABLE")
-    suspend fun getMediaPodcasts(): List<EpisodeEntity>
-
-    @Query("SELECT * FROM EPISODE_TABLE WHERE guid = :guid")
-    suspend fun getEpisodeByGuid(guid: String): EpisodeEntity
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertEpisode(episodeEntity: EpisodeEntity)

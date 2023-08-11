@@ -8,7 +8,7 @@ import com.shamardn.podcasttime.data.local.database.entity.PodcastEntity
 
 @Dao
 interface SubscriptionsDao {
-    @Query("SELECT * FROM SUBSCRIPTIONS_TABLE")
+    @Query("SELECT * FROM SUBSCRIPTIONS_TABLE ORDER BY trackName")
     suspend fun getSubscriptions(): List<PodcastEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

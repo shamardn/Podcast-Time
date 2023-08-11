@@ -10,7 +10,6 @@ import com.shamardn.podcasttime.domain.entity.PodcastResponse
 interface PodcastRepo {
     suspend fun getPodcasts(term: String): PodcastResponse<PodcastDTO>
     suspend fun getPodcastById(trackId: Long): PodcastResponse<EpisodeDTO>
-    suspend fun getEpisodeByGuid(guid: String): EpisodeEntity
     suspend fun insertEpisode(episodeEntity: EpisodeEntity)
     suspend fun getDownloadedEpisodes(): List<EpisodeEntity>
     suspend fun getMediaPodcasts(): List<EpisodeAudio>
