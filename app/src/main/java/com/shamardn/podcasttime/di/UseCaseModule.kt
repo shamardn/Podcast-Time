@@ -4,6 +4,7 @@ import com.shamardn.podcasttime.domain.repo.PodcastRepo
 import com.shamardn.podcasttime.domain.usecase.GetMediaPodcastsUseCase
 import com.shamardn.podcasttime.domain.usecase.GetPodcastByIdUseCase
 import com.shamardn.podcasttime.domain.usecase.GetPodcastsUseCase
+import com.shamardn.podcasttime.domain.usecase.GetSubscriptionsUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,5 +27,10 @@ object UseCaseModule {
     @Provides
     fun provideMediaPodcastsUseCase(repo: PodcastRepo): GetMediaPodcastsUseCase{
         return GetMediaPodcastsUseCase(repo)
+    }
+
+    @Provides
+    fun provideSubscribedPodcastsUseCase(repo: PodcastRepo): GetSubscriptionsUseCase{
+        return GetSubscriptionsUseCase(repo)
     }
 }

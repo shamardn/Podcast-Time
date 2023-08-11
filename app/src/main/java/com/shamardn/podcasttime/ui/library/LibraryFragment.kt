@@ -29,7 +29,7 @@ class LibraryFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        binding = FragmentLibraryBinding.inflate(inflater,container,false)
+        binding = FragmentLibraryBinding.inflate(inflater, container, false)
 
         handleEvents()
         setBottomNavigationVisibility()
@@ -42,9 +42,12 @@ class LibraryFragment : Fragment() {
     }
 
     private fun handleEvents() {
-       binding.cardLibraryDownloads.setOnClickListener {
-           navigateToDownloads()
-       }
+        binding.cardLibraryDownloads.setOnClickListener {
+            navigateToDownloads()
+        }
+        binding.cardLibrarySubscriptions.setOnClickListener {
+            navigateToSubscriptions()
+        }
     }
 
     private fun navigateToDownloads() {
@@ -52,10 +55,16 @@ class LibraryFragment : Fragment() {
         this.findNavController().navigate(action)
     }
 
+    private fun navigateToSubscriptions() {
+        val action = LibraryFragmentDirections.actionLibraryFragmentToSubscriptionsFragment()
+        this.findNavController().navigate(action)
+    }
+
     private fun showBottomSheet() {
         mediaViewModel.isBottomSheetOpened.observe(viewLifecycleOwner) {
             if (it) {
-                val action = LibraryFragmentDirections.actionLibraryFragmentToEpisodeDetailsBottomSheet()
+                val action =
+                    LibraryFragmentDirections.actionLibraryFragmentToEpisodeDetailsBottomSheet()
                 this.findNavController().navigate(action)
             }
         }

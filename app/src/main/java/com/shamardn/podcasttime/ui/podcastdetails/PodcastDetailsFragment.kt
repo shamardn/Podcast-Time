@@ -7,13 +7,17 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.shamardn.podcasttime.R
+import com.shamardn.podcasttime.data.local.database.entity.PodcastEntity
 import com.shamardn.podcasttime.databinding.FragmentPodcastDetailsBinding
 import com.shamardn.podcasttime.domain.entity.EpisodeDTO
+import com.shamardn.podcasttime.domain.entity.PodcastResponse
 import com.shamardn.podcasttime.media.exoplayer.MediaViewModel
 import com.shamardn.podcasttime.ui.main.MainActivity
 import com.shamardn.podcasttime.util.changeDateFormat
@@ -28,6 +32,8 @@ class PodcastDetailsFragment: Fragment(), PodcastDetailsInteractionListener {
     private val navArgs: PodcastDetailsFragmentArgs by navArgs()
     private val mediaViewModel: MediaViewModel by activityViewModels()
     private var bottomNavigationViewVisibility = View.GONE
+    private val viewModel: PodcastDetailsViewModel by viewModels()
+    private var podcastEntity: PodcastEntity? = null
 
 
     private fun setBottomNavigationVisibility() {
@@ -52,11 +58,21 @@ class PodcastDetailsFragment: Fragment(), PodcastDetailsInteractionListener {
         super.onViewCreated(view, savedInstanceState)
         fetchPodcastEpisodesByIdForMedia()
 
+        handelEvents()
+
+        showBottomSheet()
+    }
+
+    private fun handelEvents() {
         binding.imgPodcastDetailsBackArrow.setOnClickListener {
             it.findNavController().popBackStack()
         }
-
-        showBottomSheet()
+        binding.imgPodcastDetailsSubscription.setOnClickListener {
+            lifecycleScope.launch {
+                podcastEntity?.let { podcast -> viewModel.onSubscribe(podcast) }
+            }
+            Toast.makeText(requireContext(),getString(R.string.subscription_completed),Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun fetchPodcastEpisodesByIdForMedia() {
@@ -64,6 +80,8 @@ class PodcastDetailsFragment: Fragment(), PodcastDetailsInteractionListener {
             mediaViewModel.
             episodes.collect {
                 if (it != null) {
+
+                    podcastEntity = getPodcastEntity(it)
 
                     mediaViewModel.saveAllEpisodes(it.results)
 
@@ -81,10 +99,22 @@ class PodcastDetailsFragment: Fragment(), PodcastDetailsInteractionListener {
                         "${it.results[0].trackCount} Episodes"
                     Glide.with(binding.imgPodcastDetails).load(it.results[0].artworkUrl100)
                         .into(binding.imgPodcastDetails)
-
                 }
             }
         }
+    }
+
+    private fun getPodcastEntity(podcast: PodcastResponse<EpisodeDTO>): PodcastEntity {
+        return PodcastEntity(
+            navArgs.trackId,
+            podcast.results[0].artistName,
+            podcast.results[0].collectionName,
+            podcast.results[0].artworkUrl100,
+            podcast.results[0].primaryGenreName,
+            podcast.results[0].releaseDate,
+            podcast.resultCount,
+            podcast.results[0].trackName,
+        )
     }
 
     override fun onClickEpisode(currentEpisode: EpisodeDTO) {

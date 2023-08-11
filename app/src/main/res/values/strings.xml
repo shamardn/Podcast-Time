@@ -56,5 +56,6 @@
 
     <!-- Error messages -->
     <string name="error_media_not_found">Could not locate requested media.</string>
-    <string name="generic_error">The application has encountered an unexpected error. try again later!</string>
+    <string name="generic_error">Click again to Refresh!</string>
+    <string name="subscription_completed">Subscription Completed</string>
 </resources>

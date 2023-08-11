@@ -70,6 +70,9 @@
         <action
             android:id="@+id/action_libraryFragment_to_episodeDetailsBottomSheet"
             app:destination="@id/episodeDetailsBottomSheet" />
+        <action
+            android:id="@+id/action_libraryFragment_to_subscriptionsFragment"
+            app:destination="@id/subscriptionsFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -78,9 +81,16 @@
         tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/subscriptionsFragment"
-        android:name="com.shamardn.podcasttime.ui.SubscriptionsFragment"
+        android:name="com.shamardn.podcasttime.ui.subscriptions.SubscriptionsFragment"
         android:label="fragment_subscriptions"
-        tools:layout="@layout/fragment_subscriptions" />
+        tools:layout="@layout/fragment_subscriptions" >
+        <action
+            android:id="@+id/action_subscriptionsFragment_to_podcastDetailsFragment"
+            app:destination="@id/podcastDetailsFragment" />
+        <action
+            android:id="@+id/action_subscriptionsFragment_to_episodeDetailsBottomSheet"
+            app:destination="@id/episodeDetailsBottomSheet" />
+    </fragment>
 
     <fragment
         android:id="@+id/podcastDetailsFragment"

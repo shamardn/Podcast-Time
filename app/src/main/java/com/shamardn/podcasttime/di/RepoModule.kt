@@ -2,6 +2,7 @@ package com.shamardn.podcasttime.di
 
 import com.shamardn.podcasttime.data.local.database.dao.EpisodeDao
 import com.shamardn.podcasttime.data.local.database.dao.PodcastDao
+import com.shamardn.podcasttime.data.local.database.dao.SubscriptionsDao
 import com.shamardn.podcasttime.data.remote.ApiService
 import com.shamardn.podcasttime.data.repo.PodcastRepoImpl
 import com.shamardn.podcasttime.domain.repo.PodcastRepo
@@ -15,7 +16,7 @@ import dagger.hilt.components.SingletonComponent
 object RepoModule {
 
     @Provides
-    fun provideRepo(apiService: ApiService, episodeDao: EpisodeDao, podcastDao: PodcastDao): PodcastRepo{
-        return PodcastRepoImpl(apiService, episodeDao, podcastDao)
+    fun provideRepo(apiService: ApiService, episodeDao: EpisodeDao, podcastDao: PodcastDao, subscriptionsDao: SubscriptionsDao): PodcastRepo{
+        return PodcastRepoImpl(apiService, episodeDao, podcastDao, subscriptionsDao)
     }
 }

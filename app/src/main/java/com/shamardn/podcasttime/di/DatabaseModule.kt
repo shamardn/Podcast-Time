@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.shamardn.podcasttime.data.local.database.PodcastDatabase
 import com.shamardn.podcasttime.data.local.database.dao.EpisodeDao
 import com.shamardn.podcasttime.data.local.database.dao.PodcastDao
+import com.shamardn.podcasttime.data.local.database.dao.SubscriptionsDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -33,5 +34,10 @@ object DatabaseModule {
     @Provides
     fun providePodcastDao(podcastDatabase: PodcastDatabase): PodcastDao {
         return podcastDatabase.podcastDao()
+    }
+    @Singleton
+    @Provides
+    fun provideSubscriptionsDao(podcastDatabase: PodcastDatabase): SubscriptionsDao {
+        return podcastDatabase.subscriptionDao()
     }
 }
