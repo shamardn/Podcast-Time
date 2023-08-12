@@ -16,4 +16,5 @@ interface PodcastRepo {
     suspend fun saveAllPodcasts(episodes: List<EpisodeAudio>)
     suspend fun getSubscriptions(): List<PodcastEntity>
     suspend fun subscribe(podcastEntity: PodcastEntity)
+    suspend fun deleteEpisode(episodeEntity: EpisodeEntity)
 }

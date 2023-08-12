@@ -30,8 +30,9 @@ class DownloadsAdapter(
             textItemDownloadEpisodeDate.text = currentEpisode.releaseDate.changeDateFormat()
             textItemDownloadEpisodeTitle.text = currentEpisode.trackName
             textItemDownloadPlayTime.text = currentEpisode.trackTimeMillis.milliSecondsToMinutes()
-            imgItemDownloadRemove.setOnClickListener {
 
+            imgItemDownloadRemove.setOnClickListener {
+                listener.onDeleteEpisodeClick(currentEpisode)
             }
 
             root.setOnClickListener {

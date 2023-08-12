@@ -4,5 +4,5 @@ import com.shamardn.podcasttime.data.local.database.entity.EpisodeEntity
 
 interface DownloadsInteractionListener {
     fun onEpisodeClick(currentEpisode: EpisodeEntity)
-    fun onDownloadedEpisodeIcon()
+    fun onDeleteEpisodeClick(currentEpisode: EpisodeEntity)
 }

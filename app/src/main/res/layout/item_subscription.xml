@@ -31,6 +31,7 @@
             android:gravity="center"
             android:maxLines="2"
             android:minLines="2"
+            android:padding="@dimen/space4x"
             android:text="@string/_track_name"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"

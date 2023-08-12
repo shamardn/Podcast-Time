@@ -23,8 +23,6 @@ class BottomPlayerFragment : Fragment() {
 
     private val mediaViewModel: MediaViewModel by activityViewModels()
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,

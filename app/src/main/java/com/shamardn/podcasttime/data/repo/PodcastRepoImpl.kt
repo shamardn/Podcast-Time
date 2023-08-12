@@ -49,4 +49,8 @@ class PodcastRepoImpl @Inject constructor(
     override suspend fun subscribe(podcastEntity: PodcastEntity) {
         return subscriptionsDao.subscribe(podcastEntity)
     }
+
+    override suspend fun deleteEpisode(episodeEntity: EpisodeEntity) {
+        return episodeDao.deleteEpisode(episodeEntity)
+    }
 }

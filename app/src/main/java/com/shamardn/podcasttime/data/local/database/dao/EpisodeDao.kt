@@ -9,7 +9,7 @@ import com.shamardn.podcasttime.data.local.database.entity.EpisodeEntity
 
 @Dao
 interface EpisodeDao {
-    @Query("SELECT * FROM EPISODE_TABLE ORDER BY trackName")
+    @Query("SELECT * FROM EPISODE_TABLE ORDER BY collectionName")
     suspend fun getEpisodes(): List<EpisodeEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
