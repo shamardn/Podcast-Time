@@ -30,6 +30,10 @@ class SubscriptionsAdapter(
             root.setOnClickListener {
                 listener.onClickPodcast(currentPodcast.trackId)
             }
+            root.setOnLongClickListener {
+                listener.onLongClickPodcast(currentPodcast)
+                true
+            }
         }
     }
 

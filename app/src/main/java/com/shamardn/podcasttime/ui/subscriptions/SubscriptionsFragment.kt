@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import com.shamardn.podcasttime.data.local.database.entity.PodcastEntity
 import com.shamardn.podcasttime.databinding.FragmentSubscriptionsBinding
 import com.shamardn.podcasttime.media.exoplayer.MediaViewModel
 import com.shamardn.podcasttime.ui.main.MainActivity
@@ -65,6 +66,12 @@ class SubscriptionsFragment : Fragment(), SubscriptionsInteractionListener {
     override fun onClickPodcast(trackId: Long) {
         val action = SubscriptionsFragmentDirections.actionSubscriptionsFragmentToPodcastDetailsFragment(trackId)
         this.findNavController().navigate(action)
+    }
+
+    override fun onLongClickPodcast(podcast: PodcastEntity) {
+        viewModel.unsubscribe(podcast)
+        viewModel.getSubscribedPodcasts()
+        fetchSubscribedPodcasts()
     }
 
     private fun showBottomSheet() {

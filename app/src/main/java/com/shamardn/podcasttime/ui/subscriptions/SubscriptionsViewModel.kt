@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.shamardn.podcasttime.data.local.database.entity.PodcastEntity
 import com.shamardn.podcasttime.domain.usecase.GetSubscriptionsUseCase
+import com.shamardn.podcasttime.domain.usecase.UnsubscribeUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -15,6 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SubscriptionsViewModel @Inject constructor(
     private val getSubscriptionsUseCase: GetSubscriptionsUseCase,
+    private val unsubscribeUseCase: UnsubscribeUseCase,
     ): ViewModel() {
 
     private val _podcasts = MutableStateFlow<List<PodcastEntity>?>(null)
@@ -26,6 +28,16 @@ class SubscriptionsViewModel @Inject constructor(
                 withContext(viewModelScope.coroutineContext) {
                     _podcasts.value = getSubscriptionsUseCase()
                 }
+            }
+        } catch (e: Exception) {
+            Log.e("SubscriptionsViewModel", e.message.toString())
+        }
+    }
+
+    fun unsubscribe(podcast: PodcastEntity) {
+        try {
+            viewModelScope.launch {
+                unsubscribeUseCase(podcast)
             }
         } catch (e: Exception) {
             Log.e("SubscriptionsViewModel", e.message.toString())
