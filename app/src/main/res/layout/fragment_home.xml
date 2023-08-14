@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:id="@+id/top_app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/space8x"
+        android:paddingVertical="@dimen/space4x"
+        app:elevation="@dimen/space2x"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/space8x"
+            android:text="@string/app_name"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@color/primary" />
+
+        <TextView
+            android:id="@+id/text_home_search"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/search_shape"
+            android:paddingHorizontal="@dimen/space8x"
+            android:paddingVertical="@dimen/space4x"
+            android:text="@string/search"
+            android:textAlignment="textStart"
+            app:tint="@color/secondary"
+            app:drawableTint="@color/primary"
+            app:drawableEndCompat="@drawable/ic_search" />
+
+        <ImageView
+            android:id="@+id/img_home_filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/space4x"
+            android:src="@drawable/ic_filter"
+            app:tint="@color/primary"
+            android:contentDescription="TODO" />
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/home_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/space_zero"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:listitem="@layout/item_podcast"
+        app:layout_constraintTop_toBottomOf="@+id/top_app_bar" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

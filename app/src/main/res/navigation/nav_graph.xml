@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.shamardn.podcasttime.ui.home.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_podcastDetailsFragment"
+            app:destination="@id/podcastDetailsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_downloadsFragment"
+            app:destination="@id/downloadsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_episodeDetailsBottomSheet"
+            app:destination="@id/episodeDetailsBottomSheet" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.shamardn.podcasttime.ui.LoginFragment"
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login"/>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.shamardn.podcasttime.ui.search.SearchFragment"
+        android:label="SearchFragment"
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/action_searchFragment_to_podcastDetailsFragment"
+            app:destination="@id/podcastDetailsFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_episodeDetailsBottomSheet"
+            app:destination="@id/episodeDetailsBottomSheet" />
+    </fragment>
+    <fragment
+        android:id="@+id/signupFragment"
+        android:name="com.shamardn.podcasttime.ui.SignupFragment"
+        android:label="SignupFragment"
+        tools:layout="@layout/fragment_signup"/>
+    <fragment
+        android:id="@+id/userProfileFragment"
+        android:name="com.shamardn.podcasttime.ui.UserProfileFragment"
+        android:label="UserProfileFragment"
+        tools:layout="@layout/fragment_user_profile"/>
+    <fragment
+        android:id="@+id/downloadsFragment"
+        android:name="com.shamardn.podcasttime.ui.download.DownloadsFragment"
+        android:label="fragment_downloads"
+        tools:layout="@layout/fragment_downloads" >
+        <action
+            android:id="@+id/action_downloadsFragment_to_episodeDetailsBottomSheet"
+            app:destination="@id/episodeDetailsBottomSheet" />
+    </fragment>
+    <fragment
+        android:id="@+id/libraryFragment"
+        android:name="com.shamardn.podcasttime.ui.library.LibraryFragment"
+        android:label="fragment_library"
+        tools:layout="@layout/fragment_library" >
+        <action
+            android:id="@+id/action_libraryFragment_to_downloadsFragment"
+            app:destination="@id/downloadsFragment" />
+        <action
+            android:id="@+id/action_libraryFragment_to_episodeDetailsBottomSheet"
+            app:destination="@id/episodeDetailsBottomSheet" />
+        <action
+            android:id="@+id/action_libraryFragment_to_subscriptionsFragment"
+            app:destination="@id/subscriptionsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.shamardn.podcasttime.ui.settings.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settingsFragment_to_episodeDetailsBottomSheet"
+            app:destination="@id/episodeDetailsBottomSheet" />
+        <action
+            android:id="@+id/action_settingsFragment_to_aboutFragment"
+            app:destination="@id/aboutFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_themeBottomSheetFragment"
+            app:destination="@id/themeBottomSheetFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_languageBottomSheetFragment"
+            app:destination="@id/languageBottomSheetFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/subscriptionsFragment"
+        android:name="com.shamardn.podcasttime.ui.subscriptions.SubscriptionsFragment"
+        android:label="fragment_subscriptions"
+        tools:layout="@layout/fragment_subscriptions" >
+        <action
+            android:id="@+id/action_subscriptionsFragment_to_podcastDetailsFragment"
+            app:destination="@id/podcastDetailsFragment" />
+        <action
+            android:id="@+id/action_subscriptionsFragment_to_episodeDetailsBottomSheet"
+            app:destination="@id/episodeDetailsBottomSheet" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/podcastDetailsFragment"
+        android:name="com.shamardn.podcasttime.ui.podcastdetails.PodcastDetailsFragment"
+        android:label="fragment_podcast_details"
+        tools:layout="@layout/fragment_podcast_details" >
+        <argument
+            android:name="trackId"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_podcastDetailsFragment_to_episodeDetailsBottomSheet"
+            app:destination="@id/episodeDetailsBottomSheet" />
+        <action
+            android:id="@+id/action_podcastDetailsFragment_to_bottomPlayerFragment"
+            app:destination="@id/bottomPlayerFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/episodeDetailsBottomSheet"
+        android:name="com.shamardn.podcasttime.ui.episodeplayer.EpisodeDetailsBottomSheet"
+        android:label="EpisodeDetailsBottomSheet"
+        tools:layout="@layout/episode_bottom_sheet_layout"/>
+    <fragment
+        android:id="@+id/bottomPlayerFragment"
+        android:name="com.shamardn.podcasttime.ui.bottomplayer.BottomPlayerFragment"
+        android:label="BottomPlayerFragment"
+        tools:layout="@layout/fragment_bottom_player"/>
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.shamardn.podcasttime.ui.about.AboutFragment"
+        android:label="fragment_about"
+        tools:layout="@layout/fragment_about" />
+    <dialog
+        android:id="@+id/themeBottomSheetFragment"
+        android:name="com.shamardn.podcasttime.ui.theme.ThemeBottomSheetFragment"
+        android:label="ThemeBottomSheetFragment" />
+    <dialog
+        android:id="@+id/languageBottomSheetFragment"
+        android:name="com.shamardn.podcasttime.ui.locale.LanguageBottomSheetFragment"
+        android:label="LanguageBottomSheetFragment" />
+
+</navigation>

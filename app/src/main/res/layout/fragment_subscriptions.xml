@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.subscriptions.SubscriptionsFragment">
+
+    <LinearLayout
+        android:id="@+id/top_app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:gravity="center"
+        android:elevation="@dimen/space2x"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/space8x"
+        android:paddingVertical="@dimen/space4x"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/img_sub_back_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/circular_shape"
+            android:contentDescription="@string/back_arrow_icon_desc"
+            android:padding="@dimen/space4x"
+            android:src="@drawable/ic_back_arrow"
+            app:tint="@color/primary" />
+
+        <TextView
+            android:id="@+id/text_sub_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/space8x"
+            android:layout_marginStart="@dimen/space8x"
+            android:text="@string/subscriptions"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_weight="1"
+            android:textColor="@color/primary" />
+
+        <ImageView
+            android:id="@+id/img_sub_profile"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="@dimen/space4x"
+            android:src="@drawable/ic_person"
+            app:tint="@color/primary"
+            android:contentDescription="TODO" />
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_sub"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top_app_bar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:spanCount="2"
+        tools:listitem="@layout/item_subscription" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
