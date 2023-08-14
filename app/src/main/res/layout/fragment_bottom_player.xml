@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="56dp"
     android:layout_alignWithParentIfMissing="true"
-    android:layout_gravity="bottom"
-    android:background="@color/secondary">
+    android:layout_gravity="bottom">
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/img_main_player"
@@ -25,7 +24,6 @@
         android:layout_marginEnd="@dimen/space8x"
         android:ellipsize="end"
         android:maxLines="1"
-        android:textColor="@color/on_secondary"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/img_main_player"
         app:layout_constraintEnd_toStartOf="@+id/img_main_player_play"
@@ -39,6 +37,7 @@
         android:layout_margin="@dimen/space8x"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="TODO" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

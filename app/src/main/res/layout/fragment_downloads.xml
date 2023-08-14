@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginBottom="56dp"
-    android:background="@color/background"
+    android:elevation="@dimen/space2x"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.download.DownloadsFragment">
 
@@ -12,7 +11,6 @@
         android:id="@+id/top_app_bar"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:background="@color/surface"
         android:gravity="center"
         android:elevation="@dimen/space2x"
         android:orientation="horizontal"
@@ -50,7 +48,8 @@
             android:layout_height="40dp"
             android:layout_margin="@dimen/space4x"
             android:src="@drawable/ic_person"
-            app:tint="@color/primary" />
+            app:tint="@color/primary"
+            android:contentDescription="TODO" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView

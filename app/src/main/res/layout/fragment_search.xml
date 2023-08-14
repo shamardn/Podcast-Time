@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/background">
+    android:layout_height="match_parent">
 
     <ImageView
         android:id="@+id/img_search_back_arrow"
@@ -23,14 +22,14 @@
     <EditText
         android:id="@+id/search_input"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="@dimen/space24x"
         android:layout_marginStart="@dimen/space4x"
         android:focusable="true"
         android:focusableInTouchMode="true"
         android:layout_marginEnd="16dp"
         android:paddingTop="@dimen/space2x"
         android:paddingBottom="@dimen/space2x"
-        android:background="@drawable/search_background"
+        android:background="@drawable/search_shape"
         android:drawableStart="@drawable/ic_search"
         android:drawablePadding="@dimen/space4x"
         android:hint="@string/search"
@@ -52,6 +51,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"
+        android:layout_marginTop="@dimen/space8x"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

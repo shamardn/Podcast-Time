@@ -78,7 +78,20 @@
         android:id="@+id/settingsFragment"
         android:name="com.shamardn.podcasttime.ui.settings.SettingsFragment"
         android:label="fragment_settings"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settingsFragment_to_episodeDetailsBottomSheet"
+            app:destination="@id/episodeDetailsBottomSheet" />
+        <action
+            android:id="@+id/action_settingsFragment_to_aboutFragment"
+            app:destination="@id/aboutFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_themeBottomSheetFragment"
+            app:destination="@id/themeBottomSheetFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_languageBottomSheetFragment"
+            app:destination="@id/languageBottomSheetFragment" />
+    </fragment>
     <fragment
         android:id="@+id/subscriptionsFragment"
         android:name="com.shamardn.podcasttime.ui.subscriptions.SubscriptionsFragment"
@@ -117,5 +130,18 @@
         android:name="com.shamardn.podcasttime.ui.bottomplayer.BottomPlayerFragment"
         android:label="BottomPlayerFragment"
         tools:layout="@layout/fragment_bottom_player"/>
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.shamardn.podcasttime.ui.about.AboutFragment"
+        android:label="fragment_about"
+        tools:layout="@layout/fragment_about" />
+    <dialog
+        android:id="@+id/themeBottomSheetFragment"
+        android:name="com.shamardn.podcasttime.ui.theme.ThemeBottomSheetFragment"
+        android:label="ThemeBottomSheetFragment" />
+    <dialog
+        android:id="@+id/languageBottomSheetFragment"
+        android:name="com.shamardn.podcasttime.ui.locale.LanguageBottomSheetFragment"
+        android:label="LanguageBottomSheetFragment" />
 
 </navigation>

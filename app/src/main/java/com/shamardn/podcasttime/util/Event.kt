@@ -1,7 +1,6 @@
 package com.shamardn.podcasttime.util
 
 open class Event<out T>(private val data: T) {
-
     var hasBeenHandled = false
         private set
 

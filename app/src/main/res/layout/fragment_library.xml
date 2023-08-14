@@ -10,7 +10,6 @@
         android:id="@+id/top_app_bar"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:background="@color/surface"
         android:gravity="center"
         android:elevation="@dimen/space2x"
         android:orientation="horizontal"
@@ -58,7 +57,6 @@
             android:drawablePadding="@dimen/space8x"
             android:gravity="center_vertical"
             android:paddingStart="@dimen/space8x"
-
             android:paddingEnd="@dimen/space8x"
             android:text="@string/subscriptions"
             android:textSize="16sp"

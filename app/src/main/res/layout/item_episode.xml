@@ -8,7 +8,6 @@
     android:layout_marginTop="@dimen/space4x"
     android:layout_marginBottom="@dimen/space4x"
     android:layout_marginEnd="@dimen/space8x"
-    android:backgroundTint="@color/white"
     app:cardCornerRadius="@dimen/space6x"
     app:cardElevation="@dimen/space1x">
 
@@ -36,7 +35,6 @@
             android:maxLines="1"
             android:textAlignment="viewStart"
             android:text="@string/_collection_name"
-            android:textColor="@color/on_surface_variant"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -48,7 +46,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/_episode_date"
-            android:textColor="@color/on_surface_variant"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -77,7 +74,6 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/space4x"
             android:layout_marginTop="@dimen/space4x"
-            android:textColor="@color/on_surface_variant"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/img_item_episode"
@@ -94,7 +90,6 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:text="@string/multi_line_text"
-            android:textColor="@color/on_surface_variant"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -127,7 +122,8 @@
             android:src="@drawable/ic_downloads"
             app:layout_constraintStart_toEndOf="@+id/text_item_episode_play_time"
             app:layout_constraintTop_toTopOf="@+id/text_item_episode_play_time"
-            app:tint="@color/primary" />
+            app:tint="@color/primary"
+            android:contentDescription="TODO" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

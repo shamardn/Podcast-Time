@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Podcast Time</string>
+    <string name="settings">الاعدادات</string>
+    <string name="search">بحث</string>
+    <string name="download">تحميل</string>
+    <string name="subscription">تسجيل</string>
+    <string name="episode_title">حلقة</string>
+    <string name="episode_author">الكاتب</string>
+    <string name="episode_topic">الموضوع</string>
+    <string name="Library">المكتبة</string>
+    <string name="sign_out">تسجيل الخروج</string>
+    <string name="welcome">اهلا ومرحبا</string>
+    <string name="language">اللغة</string>
+    <string name="theme">السمة</string>
+    <string name="light">مضيئ</string>
+    <string name="about">عن التطبيق</string>
+    <string name="profile">الحساب التعريفي</string>
+    <string name="english">اللغة الانجليزية</string>
+    <string name="arabic">اللغة العربية</string>
+    <string name="dark">داكن</string>
+    <string name="email">بريد الكتروني</string>
+    <string name="password">كلمة السر</string>
+    <string name="login">تسجيل الدخول</string>
+    <string name="register">تسجيل</string>
+    <string name="username">اسم المستخدم</string>
+    <string name="subscribe">اشترك</string>
+    <string name="_user_name">اسم المستخدم</string>
+    <string name="_genre_name">التصنيف</string>
+    <string name="_episodes_count">عدد الحلقات</string>
+    <string name="podcast_title">بودكاست</string>
+    <string name="subscriptions">قائمة الاشتراكات</string>
+    <string name="downloads">قائمة التحميلات</string>
+    <string name="notification_play">تشغيل</string>
+    <string name="notification_pause">ايقاف مؤقت</string>
+    <string name="error_media_not_found">"خطأ. لا يوجد ملف "</string>
+    <string name="generic_error">"انقر مرة اخرى لاعادة التحميل "</string>
+    <string name="subscription_completed">تم الاشتراك</string>
+</resources>

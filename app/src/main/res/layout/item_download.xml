@@ -7,7 +7,6 @@
     android:layout_marginBottom="@dimen/space4x"
     android:layout_marginStart="@dimen/space8x"
     android:layout_marginEnd="@dimen/space8x"
-    android:backgroundTint="@color/white"
     app:cardCornerRadius="@dimen/space8x"
     app:cardElevation="1dp">
 
@@ -33,7 +32,6 @@
             android:layout_marginTop="@dimen/space1x"
             android:ellipsize="end"
             android:maxLines="1"
-            android:textColor="@color/on_surface_variant"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/text_item_download_episode_date"
@@ -47,7 +45,6 @@
             android:layout_marginTop="@dimen/space4x"
             android:layout_marginStart="@dimen/space4x"
             android:text="@string/_episode_date"
-            android:textColor="@color/on_surface_variant"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"

@@ -33,7 +33,6 @@
         style="@style/Widget.Material3.BottomNavigationView.ActiveIndicator"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/surface"
         app:itemIconTint="@color/primary"
         app:itemTextColor="@color/primary"
         app:labelVisibilityMode="selected"

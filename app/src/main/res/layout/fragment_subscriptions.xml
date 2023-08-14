@@ -3,8 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginBottom="56dp"
-    android:background="@color/background"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.subscriptions.SubscriptionsFragment">
 
@@ -12,7 +10,6 @@
         android:id="@+id/top_app_bar"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:background="@color/surface"
         android:gravity="center"
         android:elevation="@dimen/space2x"
         android:orientation="horizontal"

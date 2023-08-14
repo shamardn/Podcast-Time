@@ -8,6 +8,9 @@ import android.view.View
 import android.view.animation.AlphaAnimation
 import androidx.annotation.RequiresApi
 import androidx.core.net.toUri
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.shamardn.podcasttime.data.local.database.entity.EpisodeEntity
 import java.text.SimpleDateFormat
 import java.time.Instant
@@ -113,3 +116,14 @@ fun MutableList<EpisodeEntity>.asMediaMetadataCompat() = this.map { episode ->
         .putString(MediaMetadataCompat.METADATA_KEY_DISPLAY_DESCRIPTION, episode.description)
         .build()
 }.toMutableList()
+
+fun <T> MutableLiveData<Event<T>>.postEvent(content: T) {
+    postValue(Event(content))
+}
+
+inline fun <T> LiveData<Event<T>>.observeEvent(
+    owner: LifecycleOwner,
+    crossinline onEventUnhandledContent: (T) -> Unit
+) {
+    observe(owner) { it?.getContentIfNotHandled()?.let(onEventUnhandledContent) }
+}

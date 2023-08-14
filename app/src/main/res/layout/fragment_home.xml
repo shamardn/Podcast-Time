@@ -3,19 +3,17 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_marginBottom="56dp"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
         android:id="@+id/top_app_bar"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:background="@color/surface"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingHorizontal="@dimen/space8x"
         android:paddingVertical="@dimen/space4x"
-        android:elevation="@dimen/space2x"
+        app:elevation="@dimen/space2x"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -39,7 +37,6 @@
             android:paddingVertical="@dimen/space4x"
             android:text="@string/search"
             android:textAlignment="textStart"
-            android:textColor="#5CC5245B"
             app:tint="@color/secondary"
             app:drawableTint="@color/primary"
             app:drawableEndCompat="@drawable/ic_search" />
@@ -50,7 +47,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/space4x"
             android:src="@drawable/ic_filter"
-            app:tint="@color/primary" />
+            app:tint="@color/primary"
+            android:contentDescription="TODO" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView

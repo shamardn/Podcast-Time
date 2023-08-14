@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape android:shape="oval">
-            <solid android:color="@color/white"/>
+            <solid android:color="@color/search_bg"/>
         </shape>
     </item>
 </ripple>

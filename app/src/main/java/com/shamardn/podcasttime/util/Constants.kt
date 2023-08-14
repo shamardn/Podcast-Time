@@ -2,6 +2,8 @@ package com.shamardn.podcasttime.util
 
 object Constants {
 
+    const val FIRST_INDEX = 0
+
     const val BASE_URL = "https://itunes.apple.com"
 
     const val PLAYBACK_NOTIFICATION_CHANNEL_ID = "PLAYBACK_NOTIFICATION_CHANNEL_ID"

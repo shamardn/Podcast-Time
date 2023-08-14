@@ -4,39 +4,23 @@ package com.shamardn.podcasttime.data.local.datastore
 import javax.inject.Inject
 
 interface AppConfiguration {
-
-    fun getSessionId(): String?
-
-    suspend fun saveSessionId(value: String)
-
-    suspend fun saveRequestDate(key: String,value: Long)
-
-    suspend fun getRequestDate(key: String): Long?
+    suspend fun getCurrentLanguage(): String?
+    suspend fun saveCurrentLanguage(value: String)
 
 }
 
 class AppConfigurator @Inject constructor(private val dataStorePreferences: DataStorePreferences) :
     AppConfiguration {
 
-    override fun getSessionId(): String? {
-        return dataStorePreferences.readString(SESSION_ID_KEY)
+    override suspend fun getCurrentLanguage(): String? {
+        return dataStorePreferences.readString(LANGUAGE_KEY)
     }
 
-    override suspend fun saveSessionId(value: String) {
-        dataStorePreferences.writeString(SESSION_ID_KEY, value)
+    override suspend fun saveCurrentLanguage(value: String) {
+        dataStorePreferences.writeString(LANGUAGE_KEY, value)
     }
-
-    override suspend fun saveRequestDate(key: String, value: Long) {
-        dataStorePreferences.writeLong(key, value)
-    }
-
-    override suspend fun getRequestDate(key: String): Long? {
-        return dataStorePreferences.readLong(key)
-    }
-
-
 
     companion object DataStorePreferencesKeys {
-        const val SESSION_ID_KEY = "session_id"
+        const val LANGUAGE_KEY = "LANGUAGE_KEY"
     }
 }
