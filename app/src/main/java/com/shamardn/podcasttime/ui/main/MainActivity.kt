@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.add(R.id.main_fragment_container_view, BottomPlayerFragment(),"BottomPlayerFragment").commit()
+        transaction.add(R.id.bottom_player_container, BottomPlayerFragment(),"BottomPlayerFragment").commit()
 
         navHostFragment.navController.setGraph(graph, intent.extras)
     }
