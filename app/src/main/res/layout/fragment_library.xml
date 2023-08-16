@@ -37,8 +37,19 @@
             android:layout_height="40dp"
             android:layout_margin="@dimen/space4x"
             android:src="@drawable/ic_person"
-            app:tint="@color/primary" />
+            app:tint="@color/primary"
+            android:contentDescription="TODO" />
     </LinearLayout>
+
+    <View
+        android:id="@+id/view_custom_shadow"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/space2x"
+        android:background="@drawable/gradiant_shadow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top_app_bar" />
+
     <androidx.cardview.widget.CardView
         android:id="@+id/card_library_subscriptions"
         android:layout_width="match_parent"
@@ -48,7 +59,7 @@
         app:layout_constraintStart_toStartOf="parent"
         android:layout_margin="@dimen/space8x"
         app:cardCornerRadius="@dimen/space8x"
-        app:layout_constraintTop_toBottomOf="@id/top_app_bar">
+        app:layout_constraintTop_toBottomOf="@id/view_custom_shadow">
 
         <TextView
             android:id="@+id/text_library_subscriptions"

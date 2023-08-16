@@ -34,24 +34,24 @@
             android:layout_weight="1"
             android:background="@drawable/search_shape"
             android:textColor="@color/out_line"
-
             android:paddingHorizontal="@dimen/space8x"
             android:paddingVertical="@dimen/space4x"
             android:text="@string/search"
             android:textAlignment="textStart"
             app:tint="@color/secondary"
-            app:drawableTint="@color/primary"
+            app:drawableTint="@color/out_line"
             app:drawableEndCompat="@drawable/ic_search" />
 
-        <ImageView
-            android:id="@+id/img_home_filter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/space4x"
-            android:src="@drawable/ic_filter"
-            app:tint="@color/primary"
-            android:contentDescription="TODO" />
     </LinearLayout>
+
+    <View
+        android:id="@+id/view_custom_shadow"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/space2x"
+        android:background="@drawable/gradiant_shadow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top_app_bar" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/home_recycler_view"
@@ -62,7 +62,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:listitem="@layout/item_podcast"
-        app:layout_constraintTop_toBottomOf="@+id/top_app_bar" />
+        app:layout_constraintTop_toBottomOf="@+id/view_custom_shadow"
+        tools:listitem="@layout/item_podcast" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
