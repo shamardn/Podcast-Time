@@ -33,6 +33,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/search_shape"
+            android:textColor="@color/out_line"
+
             android:paddingHorizontal="@dimen/space8x"
             android:paddingVertical="@dimen/space4x"
             android:text="@string/search"
