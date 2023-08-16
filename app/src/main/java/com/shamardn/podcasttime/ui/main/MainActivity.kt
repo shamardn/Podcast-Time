@@ -4,6 +4,7 @@ import android.media.AudioManager
 import android.os.Bundle
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -27,9 +28,12 @@ class MainActivity : AppCompatActivity() {
 
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 
+        window.statusBarColor = ContextCompat.getColor(this, R.color.primary)
+
         setContentView(binding.root)
 
         setStartDestination()
+
 
         installSplashScreen()
 
@@ -66,6 +70,4 @@ class MainActivity : AppCompatActivity() {
 
         navHostFragment.navController.setGraph(graph, intent.extras)
     }
-
-
 }
