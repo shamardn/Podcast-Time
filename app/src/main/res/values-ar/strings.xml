@@ -37,4 +37,7 @@
     <string name="generic_error">"انقر مرة اخرى لاعادة التحميل "</string>
     <string name="subscription_completed">تم الاشتراك</string>
     <string name="about_welcome_text">مرحبا بك في تطبيق  Podcast Time! يتميز هذا التطبيق بواجهة برمجية لبودكاست تتيح لك استكشاف واكتشاف بودكاستك المفضلة .</string>
+    <string name="retry">حاول</string>
+    <string name="oops">واوو</string>
+    <string name="trackCount">%1$s حلقة</string>
 </resources>

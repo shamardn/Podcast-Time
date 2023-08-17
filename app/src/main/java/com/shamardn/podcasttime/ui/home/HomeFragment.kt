@@ -60,12 +60,10 @@ class HomeFragment() : Fragment(), HomeInteractionListener {
 
     private fun fetchPodcasts() {
         lifecycleScope.launch {
-            viewModel.podcasts.collect{
-                if (it != null) {
-                    val podcastsDTO = it.results
-                    homeAdapter = HomeAdapter(podcastsDTO, this@HomeFragment)
-                    binding.homeRecyclerView.adapter = homeAdapter
-                }
+            viewModel.homeUiState.collect{
+                val podcasts =it.podcastUiState
+                homeAdapter = HomeAdapter(podcasts, this@HomeFragment)
+                binding.homeRecyclerView.adapter = homeAdapter
             }
         }
     }

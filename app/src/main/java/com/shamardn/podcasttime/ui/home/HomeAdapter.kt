@@ -7,11 +7,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.shamardn.podcasttime.R
 import com.shamardn.podcasttime.databinding.ItemPodcastBinding
-import com.shamardn.podcasttime.domain.entity.PodcastDTO
+import com.shamardn.podcasttime.ui.home.uistate.PodcastUiState
 import com.shamardn.podcasttime.util.changeDateFormat
 
 class HomeAdapter(
-    private val items: List<PodcastDTO>,
+    private val items: List<PodcastUiState>,
     private val listener: HomeInteractionListener,
 ) : RecyclerView.Adapter<HomeAdapter.PodcastViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PodcastViewHolder {
@@ -29,7 +29,7 @@ class HomeAdapter(
             textItemPodcastTrackName.text = currentPodcast.trackName.trim()
             textItemPodcastGenreName.text = currentPodcast.primaryGenreName.trim()
             textItemPodcastReleaseDate.text = currentPodcast.releaseDate.changeDateFormat()
-            textItemPodcastTrackCount.text = "${currentPodcast.trackCount} Episodes"
+            textItemPodcastTrackCount.text = this.root.resources.getString(R.string.trackCount, currentPodcast.trackCount.toString())
             Glide.with(root.context).load(currentPodcast.artworkUrl100).into(imgItemPodcast)
 
             root.setOnClickListener {
