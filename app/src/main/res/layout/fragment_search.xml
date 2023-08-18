@@ -5,57 +5,145 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/img_search_back_arrow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/space8x"
-        android:layout_marginTop="@dimen/space8x"
-        android:background="@drawable/circular_shape"
-        android:padding="@dimen/space4x"
-        android:src="@drawable/ic_back_arrow"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/primary"
-        android:contentDescription="@string/back_arrow_icon_desc" />
-
-    <EditText
-        android:id="@+id/search_input"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/space24x"
-        android:layout_marginStart="@dimen/space4x"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:layout_marginEnd="16dp"
-        android:paddingTop="@dimen/space2x"
-        android:paddingBottom="@dimen/space2x"
-        android:background="@drawable/search_shape"
-        android:drawableStart="@drawable/ic_search"
-        android:drawablePadding="@dimen/space4x"
-        android:hint="@string/search"
-        android:imeOptions="actionSearch"
-        android:padding="@dimen/space4x"
-        android:singleLine="true"
-        android:textColor="@color/primary"
-        android:textColorHint="@color/out_line"
-        app:drawableTint="@color/primary"
-        android:inputType="text"
-        app:layout_constraintBottom_toBottomOf="@+id/img_search_back_arrow"
+    <LinearLayout
+        android:id="@+id/top_app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:elevation="@dimen/space2x"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/space8x"
+        android:paddingVertical="@dimen/space4x"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/img_search_back_arrow"
-        app:layout_constraintTop_toTopOf="@+id/img_search_back_arrow"
-        android:autofillHints="podcast" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/img_search_back_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/circular_shape"
+            android:contentDescription="@string/back_arrow_icon_desc"
+            android:padding="@dimen/space4x"
+            android:src="@drawable/ic_back_arrow"
+            app:tint="@color/primary" />
+
+        <EditText
+            android:id="@+id/search_input"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/space18x"
+            android:layout_marginStart="@dimen/space4x"
+            android:layout_marginEnd="@dimen/space8x"
+            android:autofillHints="podcast"
+            android:background="@drawable/search_shape"
+            android:drawableStart="@drawable/ic_search"
+            android:drawablePadding="@dimen/space4x"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:hint="@string/search"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:padding="@dimen/space4x"
+            android:paddingTop="@dimen/space2x"
+            android:paddingBottom="@dimen/space2x"
+            android:singleLine="true"
+            android:textColor="@color/primary"
+            android:textColorHint="@color/out_line"
+            app:drawableTint="@color/out_line" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view_custom_shadow"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/space2x"
+        android:background="@drawable/gradiant_shadow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top_app_bar" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/search_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"
-        android:layout_marginTop="@dimen/space8x"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_input"
+        app:layout_constraintTop_toBottomOf="@+id/view_custom_shadow"
         tools:listitem="@layout/item_podcast" />
+
+    <ProgressBar
+        android:id="@+id/progress_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:indeterminateTint="@color/primary" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottie_search"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_margin="@dimen/space4x"
+        android:scaleType="centerCrop"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/lottie_search"/>
+    <LinearLayout
+        android:id="@+id/home_error"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/background"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top_app_bar"
+        tools:ignore="UseCompoundDrawables">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottie_no_mobile_internet"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_margin="@dimen/space4x"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="false"
+            app:lottie_rawRes="@raw/no_internet"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:text="@string/oops"
+            android:textAlignment="center"
+            android:textColor="@color/font_primary_color"
+            android:textSize="22sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:textAlignment="center"
+            android:textColor="@color/error" />
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space8x"
+            android:text="@string/retry"
+            android:textAllCaps="true" />
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

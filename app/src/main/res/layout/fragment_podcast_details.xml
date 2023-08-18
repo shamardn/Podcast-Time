@@ -45,13 +45,22 @@
 
     </LinearLayout>
 
+    <View
+        android:id="@+id/view_custom_shadow"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/space2x"
+        android:background="@drawable/gradiant_shadow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top_app_bar" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/top_app_bar">
+        app:layout_constraintTop_toBottomOf="@+id/view_custom_shadow">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -159,7 +168,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space4x"
+                android:padding="@dimen/space4x"
                 android:textSize="16sp"
+                android:background="@drawable/search_shape"
                 app:layout_constraintStart_toStartOf="@+id/text_podcast_details_desc"
                 app:layout_constraintTop_toBottomOf="@+id/text_podcast_details_desc"
                 tools:text="@string/_episodes_count" />

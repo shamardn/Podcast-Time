@@ -63,11 +63,20 @@ class SearchFragment : Fragment(), SearchInteractionListener {
     private fun fetchPodcasts() {
         lifecycleScope.launch {
             withContext(Dispatchers.Main) {
-                viewModel.podcasts.collect {
-                    if (it != null) {
-                        searchAdapter = SearchAdapter(it.results, this@SearchFragment)
+                viewModel.searchUiState.collect {
+                    if(it.podcastUiState.isEmpty()) {
+                        binding.lottieSearch.visibility = View.VISIBLE
+                        binding.searchRecyclerView.visibility = View.GONE
+
+                    } else {
+                        binding.lottieNoMobileInternet.visibility = View.GONE
+                        binding.progressSearch.visibility = View.GONE
+                        binding.searchRecyclerView.visibility = View.VISIBLE
+                        binding.lottieSearch.visibility = View.GONE
+                        searchAdapter = SearchAdapter(it.podcastUiState, this@SearchFragment)
                         binding.searchRecyclerView.adapter = searchAdapter
                     }
+
                 }
             }
         }

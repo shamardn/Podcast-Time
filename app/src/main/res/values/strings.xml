@@ -56,5 +56,14 @@
     <!-- Error messages -->
     <string name="error_media_not_found">Could not locate requested media.</string>
     <string name="generic_error">Click again to Refresh!</string>
+
     <string name="subscription_completed">Subscription Completed</string>
+    <string name="about_welcome_text">Welcome to the Podcast Time App! This app is powered by a podcast API that lets you explore and discover your favorite podcasts.</string>
+    <string name="version_no" translatable="false">1.0.0</string>
+    <string name="developer" translatable="false">Wael Shamardn</string>
+    <string name="dev_email" translatable="false">wael_shamardn@outlook.com</string>
+    <string name="dev_phone" translatable="false">01003527268</string>
+    <string name="retry">Retry</string>
+    <string name="oops">oops</string>
+    <string name="trackCount">%1$s Episodes</string>
 </resources>

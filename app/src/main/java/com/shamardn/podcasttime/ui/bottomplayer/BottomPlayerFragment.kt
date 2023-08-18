@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide
 import com.shamardn.podcasttime.R
 import com.shamardn.podcasttime.databinding.FragmentBottomPlayerBinding
 import com.shamardn.podcasttime.media.exoplayer.MediaViewModel
+import com.shamardn.podcasttime.ui.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -44,12 +45,19 @@ class BottomPlayerFragment : Fragment() {
         return binding.root
     }
 
+    private fun setBottomPlayerVisibility(visibility: Int) {
+        if (activity is MainActivity) {
+            (activity as MainActivity).setBottomPlayerVisibility(visibility)
+        }
+    }
+
     private fun setViewContent() {
-        binding.root.visibility = View.GONE
+        setBottomPlayerVisibility(View.GONE)
+
         mediaViewModel.apply {
             currentPlayingAudio.observe(viewLifecycleOwner) { episode ->
                 if (episode != null) {
-                    binding.root.visibility = View.VISIBLE
+                    setBottomPlayerVisibility(View.VISIBLE)
                 }
                 Log.i("BottomPlayerFragment", episode.toString())
                 binding.textMainPlayerEpisodeTitle.text = episode?.trackName
