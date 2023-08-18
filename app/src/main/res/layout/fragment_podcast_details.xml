@@ -168,7 +168,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space4x"
+                android:padding="@dimen/space4x"
                 android:textSize="16sp"
+                android:background="@drawable/search_shape"
                 app:layout_constraintStart_toStartOf="@+id/text_podcast_details_desc"
                 app:layout_constraintTop_toBottomOf="@+id/text_podcast_details_desc"
                 tools:text="@string/_episodes_count" />

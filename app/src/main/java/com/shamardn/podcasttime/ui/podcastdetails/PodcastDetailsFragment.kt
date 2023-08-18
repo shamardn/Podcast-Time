@@ -95,8 +95,7 @@ class PodcastDetailsFragment: Fragment(), PodcastDetailsInteractionListener {
                     binding.textPodcastDetailsDate.text =
                         it.results[0].releaseDate.changeDateFormat()
                     binding.textPodcastDetailsDesc.text = it.results[1].description
-                    binding.textPodcastDetailsEpisodesCount.text =
-                        "${it.results[0].trackCount} Episodes"
+                    binding.textPodcastDetailsEpisodesCount.text = binding.root.resources.getString(R.string.trackCount, it.results[0].trackCount.toString())
                     Glide.with(binding.imgPodcastDetails).load(it.results[0].artworkUrl100)
                         .into(binding.imgPodcastDetails)
                 }
