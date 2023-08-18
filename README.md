@@ -1,5 +1,4 @@
-
-<h1 align="center"Podcast Time</h1></br>
+<h1 align="center">Podcast Time</h1></br>
 <p align="center">  
 A demo Podcast app using <a href="https://developer.android.com/reference/android/service/media/MediaBrowserService" target="_blank"> MediaBrowserService </a> based on MVVM architecture.<br>
 Media browser services enable applications to browse media content provided by an application and ask the application to start playing it. They may also be used to control content that is already playing by way of a MediaSession.
