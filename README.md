@@ -31,6 +31,8 @@ Go to the [Releases](https://github.com/skydoves/DisneyMotions/releases) to down
   - Lifecycle - dispose observing data when lifecycle state changes.
   - ViewModel - UI related data holder, lifecycle aware.
   - Room Persistence - construct database.
+  - Navigation component.
+  - DataStore - Preferences.
 - Architecture
   - MVVM Architecture (ViewBinding - ViewModel - Model)
   - Repository pattern
@@ -39,3 +41,4 @@ Go to the [Releases](https://github.com/skydoves/DisneyMotions/releases) to down
 - [Retrofit2 & Gson](https://github.com/square/retrofit) - constructing the REST API
 - [OkHttp3](https://github.com/square/okhttp) - implementing interceptor, logging and mocking web server
 - [Glide](https://github.com/bumptech/glide) - loading images
+- [Exo player](https://github.com/google/ExoPlayer) - an application level media player for Android.
