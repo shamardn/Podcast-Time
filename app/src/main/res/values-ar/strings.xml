@@ -44,4 +44,7 @@
     <string name="remember_me">تذكرني</string>
     <string name="forget_password">نسيت كلمة السر؟</string>
     <string name="don_t_have_an_account">ليس لديك حساب</string>
+    <string name="create_new_account">انشاء حساب جديد</string>
+    <string name="have_a_problem">لديك مشكلة؟</string>
+    <string name="already_have_an_account">لديك حساب بالفعل؟</string>
 </resources>

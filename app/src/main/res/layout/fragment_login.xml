@@ -48,7 +48,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/card_login_app_logo" />
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/email_input_layout"
+        android:id="@+id/username_input_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/space8x"
@@ -58,7 +58,7 @@
         app:layout_constraintTop_toBottomOf="@id/text_login_title">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/email_input"
+            android:id="@+id/username_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/username"
@@ -74,7 +74,7 @@
         app:hintEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/email_input_layout">
+        app:layout_constraintTop_toBottomOf="@id/username_input_layout">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/password_input"
@@ -85,10 +85,11 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.checkbox.MaterialCheckBox
-        android:id="@+id/checkbox_remember_me"
+        android:id="@+id/checkbox_login_remember_me"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/space4x"
+        android:layout_marginStart="@dimen/space8x"
+        android:layout_marginTop="@dimen/space4x"
         android:text="@string/remember_me"
         android:textStyle="bold"
         android:textSize="14sp"
@@ -103,9 +104,9 @@
         android:text="@string/forget_password"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/checkbox_remember_me"
+        app:layout_constraintBottom_toBottomOf="@+id/checkbox_login_remember_me"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/checkbox_remember_me" />
+        app:layout_constraintTop_toTopOf="@+id/checkbox_login_remember_me" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_login"
@@ -117,7 +118,7 @@
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/checkbox_remember_me" />
+        app:layout_constraintTop_toBottomOf="@id/checkbox_login_remember_me" />
 
     <TextView
         android:id="@+id/text_dont_have_acount"
