@@ -47,4 +47,5 @@
     <string name="create_new_account">انشاء حساب جديد</string>
     <string name="have_a_problem">لديك مشكلة؟</string>
     <string name="already_have_an_account">لديك حساب بالفعل؟</string>
+    <string name="logout">خروج</string>
 </resources>

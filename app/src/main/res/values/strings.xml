@@ -73,4 +73,5 @@
     <string name="create_new_account">Create new account</string>
     <string name="have_a_problem">Have a problem?</string>
     <string name="already_have_an_account">Already have an account?</string>
+    <string name="logout">Log out</string>
 </resources>
