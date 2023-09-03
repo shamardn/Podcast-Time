@@ -29,7 +29,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_margin="@dimen/space8x"
-        app:tint="@color/primary" />
+        app:tint="@color/white" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card_profile_img"
