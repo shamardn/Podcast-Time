@@ -39,8 +39,8 @@ internal class MediaPlayerNotificationManager(
         with(notificationManager) {
             setMediaSessionToken(sessionToken)
             setSmallIcon(R.drawable.ic_mic)
-            setUseRewindAction(false)
-            setUseFastForwardAction(false)
+            setUseRewindAction(true)
+            setUseFastForwardAction(true)
         }
     }
 
