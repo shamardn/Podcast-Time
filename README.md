@@ -6,7 +6,7 @@ Media browser services enable applications to browse media content provided by a
 </br>
 
 ## Download
-Go to the [Releases](https://github.com/skydoves/DisneyMotions/releases) to download the latest APK.
+Go to the [Releases](https://github.com/shamardn/Podcast-Time/releases) to download the latest APK.
 
 ## Screenshots
 <p align="center">
