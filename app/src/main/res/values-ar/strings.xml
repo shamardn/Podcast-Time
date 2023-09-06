@@ -22,7 +22,7 @@
     <string name="email">بريد الكتروني</string>
     <string name="password">كلمة السر</string>
     <string name="login">تسجيل الدخول</string>
-    <string name="register">تسجيل</string>
+    <string name="register">اشترلك</string>
     <string name="username">اسم المستخدم</string>
     <string name="subscribe">اشترك</string>
     <string name="_user_name">اسم المستخدم</string>
@@ -40,4 +40,12 @@
     <string name="retry">حاول</string>
     <string name="oops">واوو</string>
     <string name="trackCount">%1$s حلقة</string>
+    <string name="log_in_to_your_account">"تسجيل الدخول "</string>
+    <string name="remember_me">تذكرني</string>
+    <string name="forget_password">نسيت كلمة السر؟</string>
+    <string name="don_t_have_an_account">ليس لديك حساب</string>
+    <string name="create_new_account">انشاء حساب جديد</string>
+    <string name="have_a_problem">لديك مشكلة؟</string>
+    <string name="already_have_an_account">لديك حساب بالفعل؟</string>
+    <string name="logout">خروج</string>
 </resources>

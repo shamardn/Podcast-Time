@@ -16,6 +16,13 @@
         <item name="cornerSize">16dp</item>
     </style>
 
+    <style name="RoundedImageViewBottom">
+        <item name="cornerFamilyBottomLeft">rounded</item>
+        <item name="cornerFamilyBottomRight">rounded</item>
+        <item name="cornerSizeBottomLeft">16dp</item>
+        <item name="cornerSizeBottomRight">16dp</item>
+    </style>
+
     <style name="PodcastTimeTheme.SplashScreen" parent="Theme.SplashScreen">
         <item name="postSplashScreenTheme">@style/PodcastTimeTheme</item>
         <item name="windowSplashScreenBackground">@color/primary</item>

@@ -48,6 +48,17 @@ class LibraryFragment : Fragment() {
         binding.cardLibrarySubscriptions.setOnClickListener {
             navigateToSubscriptions()
         }
+        binding.imgLibraryProfile.setOnClickListener {
+            navigateToProfile()
+        }
+        binding.cardLibraryHistory.setOnClickListener {
+            // TODO
+        }
+    }
+
+    private fun navigateToProfile() {
+        val action = LibraryFragmentDirections.actionLibraryFragmentToUserProfileFragment()
+        this.findNavController().navigate(action)
     }
 
     private fun navigateToDownloads() {

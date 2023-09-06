@@ -58,7 +58,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_margin="@dimen/space8x"
-        app:cardCornerRadius="@dimen/space8x"
+        app:cardCornerRadius="@dimen/space4x"
         app:layout_constraintTop_toBottomOf="@id/view_custom_shadow">
 
         <TextView
@@ -74,6 +74,7 @@
             app:drawableEndCompat="@drawable/ic_forward"
             app:drawableStartCompat="@drawable/ic_subscriptions" />
     </androidx.cardview.widget.CardView>
+
     <androidx.cardview.widget.CardView
         android:id="@+id/card_library_downloads"
         android:layout_width="match_parent"
@@ -82,7 +83,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_margin="@dimen/space8x"
-        app:cardCornerRadius="@dimen/space8x"
+        app:cardCornerRadius="@dimen/space4x"
         app:layout_constraintTop_toBottomOf="@id/card_library_subscriptions">
 
         <TextView
@@ -94,6 +95,31 @@
             android:paddingStart="@dimen/space8x"
             android:paddingEnd="@dimen/space8x"
             android:text="@string/downloads"
+            android:textSize="16sp"
+            app:drawableEndCompat="@drawable/ic_forward"
+            app:drawableStartCompat="@drawable/ic_downloads" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_library_history"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/space24x"
+        android:layout_marginTop="@dimen/space8x"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="@dimen/space8x"
+        app:cardCornerRadius="@dimen/space4x"
+        app:layout_constraintTop_toBottomOf="@id/card_library_downloads">
+
+        <TextView
+            android:id="@+id/text_profile_history"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:drawablePadding="@dimen/space8x"
+            android:gravity="center_vertical"
+            android:paddingStart="@dimen/space8x"
+            android:paddingEnd="@dimen/space8x"
+            android:text="@string/history"
             android:textSize="16sp"
             app:drawableEndCompat="@drawable/ic_forward"
             app:drawableStartCompat="@drawable/ic_downloads" />

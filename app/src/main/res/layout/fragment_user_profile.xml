@@ -6,196 +6,146 @@
     android:background="@color/background"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/RoundedImageViewBottom" />
+
     <ImageView
         android:id="@+id/img_profile_back_arrow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/space8x"
-        android:layout_marginTop="@dimen/space8x"
         android:background="@drawable/circular_shape"
+        android:backgroundTint="@color/black"
+        android:contentDescription="@string/back_arrow_icon_desc"
         android:padding="@dimen/space4x"
         android:src="@drawable/ic_back_arrow"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/primary"
-        android:contentDescription="@string/back_arrow_icon_desc" />
+        android:layout_margin="@dimen/space8x"
+        app:tint="@color/white" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_profile_img"
+        android:layout_width="116dp"
+        android:layout_height="116dp"
+        app:cardCornerRadius="@dimen/space8x"
+        app:cardElevation="@dimen/space2x"
+        android:backgroundTint="@color/primary"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/imageView">
+
+        <ImageView
+            android:id="@+id/img_profile_img"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_person"
+            android:contentDescription="TODO" />
+
+        <ImageView
+            android:id="@+id/img_profile_change_user_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space2x"
+            android:contentDescription="@string/icon_for_change_user_image"
+            android:layout_marginStart="@dimen/space2x"
+            android:src="@android:drawable/ic_menu_camera"/>
+    </com.google.android.material.card.MaterialCardView>
 
     <TextView
-        android:id="@+id/text_library_title"
+        android:id="@+id/text_profile_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/space8x"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        tools:text="Wael Shamardn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/card_profile_img" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/username_input_layout"
         android:layout_width="0dp"
-        android:layout_height="?actionBarSize"
-        android:layout_marginStart="@dimen/space8x"
-        android:layout_marginEnd="@dimen/space8x"
-        android:gravity="center_vertical|center_horizontal"
-        android:text="@string/profile"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/img_profile_back_arrow"
-        app:layout_constraintEnd_toStartOf="@+id/img_profile_settings"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/img_profile_back_arrow"
-        app:layout_constraintTop_toTopOf="@+id/img_profile_back_arrow" />
-
-    <ImageView
-        android:id="@+id/img_profile_settings"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="@dimen/space8x"
-        android:layout_marginTop="@dimen/space8x"
-        android:src="@drawable/ic_settings"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/space8x"
+        app:hintEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/primary" />
-
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/img_profile_user_image"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="@dimen/space8x"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_library_title"
-        app:shapeAppearanceOverlay="@style/RoundedImageView"
-        android:src="@drawable/ic_person" />
+        app:layout_constraintTop_toBottomOf="@id/text_profile_title">
 
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/username_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/username"
+            android:inputType="textEmailAddress" />
 
-    <ImageView
-        android:id="@+id/img_profile_change_user_image"
-        android:layout_width="wrap_content"
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/email_input_layout"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/space2x"
-        android:contentDescription="@string/icon_for_change_user_image"
-        android:layout_marginBottom="@dimen/space2x"
-        android:src="@android:drawable/ic_menu_camera"
-        app:layout_constraintBottom_toBottomOf="@+id/img_profile_user_image"
-        app:layout_constraintEnd_toEndOf="@+id/img_profile_user_image" />
-
-    <TextView
-        android:id="@+id/text_profile_email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        tools:text="user@example.com"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@id/img_profile_user_image"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@id/img_profile_user_image"
-        app:layout_constraintTop_toBottomOf="@id/img_profile_user_image"/>
-
-    <TextView
-        android:id="@+id/text_profile_welcome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="@string/welcome"
-        android:textColor="@color/black"
-        android:textSize="16sp"
+        android:layout_margin="@dimen/space8x"
+        app:hintEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_profile_email"/>
+        app:layout_constraintTop_toBottomOf="@id/username_input_layout">
 
-    <TextView
-        android:id="@+id/text_profile_user_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/space4x"
-        android:text="@string/_user_name"
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_profile_welcome"/>
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/email_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/card_profile_subscriptions"
+        android:id="@+id/card_profile_library"
         android:layout_width="match_parent"
         android:layout_height="@dimen/space24x"
-        android:layout_marginTop="@dimen/space8x"
+        android:layout_margin="@dimen/space8x"
+        app:cardCornerRadius="@dimen/space4x"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_margin="@dimen/space8x"
-        app:cardCornerRadius="@dimen/space8x"
-        app:layout_constraintTop_toBottomOf="@id/text_profile_user_name">
+        app:layout_constraintTop_toBottomOf="@+id/email_input_layout">
 
         <TextView
-            android:id="@+id/text_profile_subscriptions"
+            android:id="@+id/text_profile_library"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:drawablePadding="@dimen/space8x"
             android:gravity="center_vertical"
             android:paddingStart="@dimen/space8x"
             android:paddingEnd="@dimen/space8x"
-            android:text="@string/subscriptions"
+            android:text="@string/Library"
             android:textSize="16sp"
             app:drawableEndCompat="@drawable/ic_forward"
-            app:drawableStartCompat="@drawable/ic_subscriptions" />
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card_profile_downloads"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/space24x"
-        android:layout_marginTop="@dimen/space8x"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_margin="@dimen/space8x"
-        app:cardCornerRadius="@dimen/space8x"
-        app:layout_constraintTop_toBottomOf="@id/card_profile_subscriptions">
-
-        <TextView
-            android:id="@+id/text_profile_downloads"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:drawablePadding="@dimen/space8x"
-            android:gravity="center_vertical"
-            android:paddingStart="@dimen/space8x"
-            android:paddingEnd="@dimen/space8x"
-            android:text="@string/downloads"
-            android:textSize="16sp"
-            app:drawableEndCompat="@drawable/ic_forward"
-            app:drawableStartCompat="@drawable/ic_downloads" />
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card_profile_history"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/space24x"
-        android:layout_marginTop="@dimen/space8x"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_margin="@dimen/space8x"
-        app:cardCornerRadius="@dimen/space8x"
-        app:layout_constraintTop_toBottomOf="@id/card_profile_downloads">
-
-        <TextView
-            android:id="@+id/text_profile_history"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:drawablePadding="@dimen/space8x"
-            android:gravity="center_vertical"
-            android:paddingStart="@dimen/space8x"
-            android:paddingEnd="@dimen/space8x"
-            android:text="@string/history"
-            android:textSize="16sp"
-            app:drawableEndCompat="@drawable/ic_forward"
-            app:drawableStartCompat="@drawable/ic_downloads" />
+            app:drawableStartCompat="@drawable/ic_library" />
     </androidx.cardview.widget.CardView>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_profile_sign_out"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/space24x"
-        android:text="@string/sign_out"
-        android:textColor="@color/white"
+        android:layout_marginTop="@dimen/space8x"
         android:background="@drawable/btn_background"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/card_profile_history"
-        app:layout_constraintStart_toStartOf="@+id/card_profile_history"
-        app:layout_constraintTop_toBottomOf="@+id/card_profile_history" />
+        android:text="@string/logout"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/card_profile_library"
+        app:layout_constraintStart_toStartOf="@+id/card_profile_library"
+        app:layout_constraintTop_toBottomOf="@+id/card_profile_library" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
