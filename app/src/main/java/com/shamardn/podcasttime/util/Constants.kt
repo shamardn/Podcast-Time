@@ -16,6 +16,10 @@ object Constants {
     const val DURATION = "Duration"
     const val NETWORK_ERROR = "NETWORK_ERROR"
 
+    // notifications
+    const val CHANNEL_ID = "CHANNEL_ID"
+    const val CHANNEL_NAME = "com.shamardn.podcasttime.util"
+
     object ConstantBundle {
         const val BUNDLE_COMMAND = "COMMAND"
         const val BUNDLE_DURATION = "DURATION"

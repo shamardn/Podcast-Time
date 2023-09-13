@@ -48,4 +48,8 @@
     <string name="have_a_problem">لديك مشكلة؟</string>
     <string name="already_have_an_account">لديك حساب بالفعل؟</string>
     <string name="logout">خروج</string>
+    <string name="notifications_permission_granted">تم منح إذن الإخطارات</string>
+    <string name="fcm_can_t_post_notifications_without_post_notifications_permission">لا تستطيع استلام الإشعارات بدون إذن</string>
+    <string name="title">العنوان</string>
+    <string name="message">رسالة</string>
 </resources>

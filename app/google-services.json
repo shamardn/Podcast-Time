@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "180543863696",
+    "project_id": "podcasttime-81e1e",
+    "storage_bucket": "podcasttime-81e1e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:180543863696:android:faf1457b1e8ffb5b921115",
+        "android_client_info": {
+          "package_name": "com.shamardn.podcasttime"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAHXh3ogcMy_z8yh1pBGZ49oteUOuE88CE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

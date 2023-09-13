@@ -74,4 +74,12 @@
     <string name="have_a_problem">Have a problem?</string>
     <string name="already_have_an_account">Already have an account?</string>
     <string name="logout">Log out</string>
+
+// notifications
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <string name="notifications_permission_granted">Notifications permission granted</string>
+    <string name="fcm_can_t_post_notifications_without_post_notifications_permission">FCM can\'t post notifications without POST_NOTIFICATIONS permission</string>
+    <string name="title">Title</string>
+    <string name="message">notification message</string>
+
 </resources>
