@@ -72,7 +72,8 @@
             android:text="@string/subscriptions"
             android:textSize="16sp"
             app:drawableEndCompat="@drawable/ic_forward"
-            app:drawableStartCompat="@drawable/ic_subscriptions" />
+            app:drawableStartCompat="@drawable/ic_subscriptions"
+            app:drawableTint="@color/primary" />
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
@@ -97,7 +98,8 @@
             android:text="@string/downloads"
             android:textSize="16sp"
             app:drawableEndCompat="@drawable/ic_forward"
-            app:drawableStartCompat="@drawable/ic_downloads" />
+            app:drawableStartCompat="@drawable/ic_downloads"
+            app:drawableTint="@color/primary" />
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
@@ -122,7 +124,8 @@
             android:text="@string/history"
             android:textSize="16sp"
             app:drawableEndCompat="@drawable/ic_forward"
-            app:drawableStartCompat="@drawable/ic_downloads" />
+            app:drawableStartCompat="@drawable/ic_history"
+            app:drawableTint="@color/primary" />
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
 

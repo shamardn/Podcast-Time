@@ -14,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.shamardn.podcasttime.R
+import com.shamardn.podcasttime.data.local.database.entity.HistoryEntity
 import com.shamardn.podcasttime.data.local.database.entity.PodcastEntity
 import com.shamardn.podcasttime.databinding.FragmentPodcastDetailsBinding
 import com.shamardn.podcasttime.domain.entity.EpisodeDTO
@@ -34,6 +35,7 @@ class PodcastDetailsFragment: Fragment(), PodcastDetailsInteractionListener {
     private var bottomNavigationViewVisibility = View.GONE
     private val viewModel: PodcastDetailsViewModel by viewModels()
     private var podcastEntity: PodcastEntity? = null
+    private var historyEntity: HistoryEntity? = null
 
 
     private fun setBottomNavigationVisibility() {
@@ -75,6 +77,11 @@ class PodcastDetailsFragment: Fragment(), PodcastDetailsInteractionListener {
         }
     }
 
+    private fun saveToHistory() {
+        lifecycleScope.launch {
+            historyEntity?.let { podcast -> viewModel.saveToHistory(podcast) }
+        }
+    }
     private fun fetchPodcastEpisodesByIdForMedia() {
         lifecycleScope.launch {
             mediaViewModel.
@@ -82,6 +89,10 @@ class PodcastDetailsFragment: Fragment(), PodcastDetailsInteractionListener {
                 if (it != null) {
 
                     podcastEntity = getPodcastEntity(it)
+
+                    historyEntity = getHistoryEntity(podcastEntity!!)
+
+                    saveToHistory()
 
                     mediaViewModel.saveAllEpisodes(it.results)
 
@@ -113,6 +124,21 @@ class PodcastDetailsFragment: Fragment(), PodcastDetailsInteractionListener {
             podcast.results[0].releaseDate,
             podcast.resultCount,
             podcast.results[0].trackName,
+        )
+    }
+
+    private fun getHistoryEntity(podcastEntity: PodcastEntity): HistoryEntity {
+        val savedTime = System.currentTimeMillis()
+        return HistoryEntity(
+            navArgs.trackId,
+            podcastEntity.artistName,
+            podcastEntity.collectionName,
+            podcastEntity.artworkUrl100,
+            podcastEntity.primaryGenreName,
+            podcastEntity.releaseDate,
+            podcastEntity.trackCount,
+            podcastEntity.trackName,
+            savedTime,
         )
     }
 

@@ -2,6 +2,7 @@ package com.shamardn.podcasttime.domain.repo
 
 import com.shamardn.podcasttime.data.local.database.entity.EpisodeEntity
 import com.shamardn.podcasttime.data.local.database.entity.EpisodeAudio
+import com.shamardn.podcasttime.data.local.database.entity.HistoryEntity
 import com.shamardn.podcasttime.data.local.database.entity.PodcastEntity
 import com.shamardn.podcasttime.domain.entity.EpisodeDTO
 import com.shamardn.podcasttime.domain.entity.PodcastDTO
@@ -18,4 +19,8 @@ interface PodcastRepo {
     suspend fun subscribe(podcastEntity: PodcastEntity)
     suspend fun deleteEpisode(episodeEntity: EpisodeEntity)
     suspend fun unsubscribe(podcast: PodcastEntity)
+    suspend fun getHistoryList(): List<HistoryEntity>
+    suspend fun saveToHistory(historyEntity: HistoryEntity)
+    suspend fun deletePodcastFromHistory(podcast: HistoryEntity)
+    suspend fun deleteHistoryList()
 }

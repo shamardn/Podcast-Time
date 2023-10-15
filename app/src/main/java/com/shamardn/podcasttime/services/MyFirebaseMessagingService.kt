@@ -51,7 +51,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             notificationManager.createNotificationChannel(notificationChannel)
         }
 
-        notificationManager.notify(0, builder.build())
+        notificationManager.notify(1, builder.build())
     }
 
     private fun getRemoteView(title: String, message: String): RemoteViews {

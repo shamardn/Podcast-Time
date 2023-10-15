@@ -1,6 +1,7 @@
 package com.shamardn.podcasttime.di
 
 import com.shamardn.podcasttime.domain.repo.PodcastRepo
+import com.shamardn.podcasttime.domain.usecase.GetHistoryListUseCase
 import com.shamardn.podcasttime.domain.usecase.GetMediaPodcastsUseCase
 import com.shamardn.podcasttime.domain.usecase.GetPodcastByIdUseCase
 import com.shamardn.podcasttime.domain.usecase.GetPodcastsUseCase
@@ -32,5 +33,10 @@ object UseCaseModule {
     @Provides
     fun provideSubscribedPodcastsUseCase(repo: PodcastRepo): GetSubscriptionsUseCase{
         return GetSubscriptionsUseCase(repo)
+    }
+
+    @Provides
+    fun provideHistoryListUseCase(repo: PodcastRepo): GetHistoryListUseCase {
+        return GetHistoryListUseCase(repo)
     }
 }

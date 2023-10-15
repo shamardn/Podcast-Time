@@ -81,5 +81,9 @@
     <string name="fcm_can_t_post_notifications_without_post_notifications_permission">FCM can\'t post notifications without POST_NOTIFICATIONS permission</string>
     <string name="title">Title</string>
     <string name="message">notification message</string>
+    <string name="delete">Delete</string>
+    <string name="delete_confirmation_txt">Delete History records?</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete_podcast_confirmation_txt">"You gonna delete this podcast! Are you sure? "</string>
 
 </resources>

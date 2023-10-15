@@ -52,8 +52,13 @@ class LibraryFragment : Fragment() {
             navigateToProfile()
         }
         binding.cardLibraryHistory.setOnClickListener {
-            // TODO
+            navigateToHistory()
         }
+    }
+
+    private fun navigateToHistory() {
+        val action = LibraryFragmentDirections.actionLibraryFragmentToHistoryFragment()
+        this.findNavController().navigate(action)
     }
 
     private fun navigateToProfile() {

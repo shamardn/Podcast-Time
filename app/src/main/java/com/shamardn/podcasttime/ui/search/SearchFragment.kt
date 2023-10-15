@@ -43,6 +43,7 @@ class SearchFragment : Fragment(), SearchInteractionListener {
 
         binding.searchInput.doOnTextChanged { text, start, before, count ->
             viewModel.getPodcasts(text.toString())
+            binding.progressSearch.visibility = View.VISIBLE
             fetchPodcasts()
         }
 
@@ -67,6 +68,7 @@ class SearchFragment : Fragment(), SearchInteractionListener {
                     if(it.podcastUiState.isEmpty()) {
                         binding.lottieSearch.visibility = View.VISIBLE
                         binding.searchRecyclerView.visibility = View.GONE
+                        binding.progressSearch.visibility = View.GONE
 
                     } else {
                         binding.lottieNoMobileInternet.visibility = View.GONE

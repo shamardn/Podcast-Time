@@ -33,7 +33,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.async
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -159,14 +158,13 @@ class MediaPlaybackService : MediaBrowserServiceCompat() {
         when (action) {
             START_MEDIA_PLAY_ACTION -> {
                 mediaPlayerNotificationManager.showNotification(exoPlayer)
+
                 }
 
             REFRESH_MEDIA_PLAY_ACTION -> {
                 CoroutineScope(Dispatchers.IO).launch {
-                    CoroutineScope(Dispatchers.IO).async {
-                        mediaSource.load()
-                        notifyChildrenChanged(MEDIA_ROOT_ID)
-                    }.await()
+                    mediaSource.load()
+                    notifyChildrenChanged(MEDIA_ROOT_ID)
                 }
             }
             else -> Unit

@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.shamardn.podcasttime.data.local.database.PodcastDatabase
 import com.shamardn.podcasttime.data.local.database.dao.EpisodeDao
+import com.shamardn.podcasttime.data.local.database.dao.HistoryDao
 import com.shamardn.podcasttime.data.local.database.dao.PodcastDao
 import com.shamardn.podcasttime.data.local.database.dao.SubscriptionsDao
 import dagger.Module
@@ -39,5 +40,11 @@ object DatabaseModule {
     @Provides
     fun provideSubscriptionsDao(podcastDatabase: PodcastDatabase): SubscriptionsDao {
         return podcastDatabase.subscriptionDao()
+    }
+
+    @Singleton
+    @Provides
+    fun provideHistoryDao(podcastDatabase: PodcastDatabase): HistoryDao {
+        return podcastDatabase.historyDao()
     }
 }
