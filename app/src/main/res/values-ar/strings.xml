@@ -52,4 +52,8 @@
     <string name="fcm_can_t_post_notifications_without_post_notifications_permission">لا تستطيع استلام الإشعارات بدون إذن</string>
     <string name="title">العنوان</string>
     <string name="message">رسالة</string>
+    <string name="delete">حذف</string>
+    <string name="delete_confirmation_txt">حذف جميع السجلات؟</string>
+    <string name="cancel">إلغاء</string>
+    <string name="delete_podcast_confirmation_txt">هل انت متأكد من مسح هذا السجل؟</string>
 </resources>
