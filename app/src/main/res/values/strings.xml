@@ -82,7 +82,7 @@
     <string name="title">Title</string>
     <string name="message">notification message</string>
     <string name="delete">Delete</string>
-    <string name="delete_confirmation_txt">Delete History records?</string>
+    <string name="delete_confirmation_txt">Delete all records?</string>
     <string name="cancel">Cancel</string>
     <string name="delete_podcast_confirmation_txt">"You gonna delete this podcast! Are you sure? "</string>
 

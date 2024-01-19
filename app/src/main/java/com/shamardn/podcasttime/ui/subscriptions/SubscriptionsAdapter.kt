@@ -6,11 +6,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.shamardn.podcasttime.R
-import com.shamardn.podcasttime.data.local.database.entity.PodcastEntity
 import com.shamardn.podcasttime.databinding.ItemSubscriptionBinding
+import com.shamardn.podcasttime.ui.subscriptions.uistate.PodcastUiState
 
 class SubscriptionsAdapter(
-    private val items: List<PodcastEntity>,
+    private val items: List<PodcastUiState>,
     private val listener: SubscriptionsInteractionListener,
 ) : RecyclerView.Adapter<SubscriptionsAdapter.SubscriptionsViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubscriptionsViewHolder {

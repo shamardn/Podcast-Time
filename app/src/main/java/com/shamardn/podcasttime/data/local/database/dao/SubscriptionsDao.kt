@@ -17,4 +17,7 @@ interface SubscriptionsDao {
 
     @Delete
     suspend fun unsubscribe(podcast: PodcastEntity)
+
+    @Query("DELETE FROM SUBSCRIPTIONS_TABLE")
+    suspend fun deleteSubscriptionList()
 }

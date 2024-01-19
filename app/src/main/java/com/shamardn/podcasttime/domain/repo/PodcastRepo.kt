@@ -19,6 +19,7 @@ interface PodcastRepo {
     suspend fun subscribe(podcastEntity: PodcastEntity)
     suspend fun deleteEpisode(episodeEntity: EpisodeEntity)
     suspend fun unsubscribe(podcast: PodcastEntity)
+    suspend fun deleteSubscriptionList()
     suspend fun getHistoryList(): List<HistoryEntity>
     suspend fun saveToHistory(historyEntity: HistoryEntity)
     suspend fun deletePodcastFromHistory(podcast: HistoryEntity)

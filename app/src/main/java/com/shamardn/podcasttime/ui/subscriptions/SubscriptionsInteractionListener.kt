@@ -1,8 +1,8 @@
 package com.shamardn.podcasttime.ui.subscriptions
 
-import com.shamardn.podcasttime.data.local.database.entity.PodcastEntity
+import com.shamardn.podcasttime.ui.subscriptions.uistate.PodcastUiState
 
 interface SubscriptionsInteractionListener {
     fun onClickPodcast(trackId: Long)
-    fun onLongClickPodcast(podcast: PodcastEntity)
+    fun onLongClickPodcast(podcast: PodcastUiState)
 }

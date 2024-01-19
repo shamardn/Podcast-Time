@@ -42,12 +42,11 @@
             android:textColor="@color/primary" />
 
         <ImageView
-            android:id="@+id/img_sub_profile"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:id="@+id/img_sub_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_margin="@dimen/space4x"
-            android:src="@drawable/ic_person"
-            app:tint="@color/primary"
+            android:src="@drawable/ic_delete_selector"
             android:contentDescription="TODO" />
     </LinearLayout>
 
@@ -72,4 +71,28 @@
         app:spanCount="2"
         tools:listitem="@layout/item_subscription" />
 
+    <ProgressBar
+        android:id="@+id/progress_subs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateTint="@color/primary"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottie_no_subs"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_margin="@dimen/space4x"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="false"
+        app:lottie_rawRes="@raw/no_history" />
 </androidx.constraintlayout.widget.ConstraintLayout>

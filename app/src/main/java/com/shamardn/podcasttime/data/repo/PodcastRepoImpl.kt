@@ -42,6 +42,10 @@ class PodcastRepoImpl @Inject constructor(
         return podcastDao.getMediaPodcasts()
     }
 
+    override suspend fun deleteEpisode(episodeEntity: EpisodeEntity) {
+        return episodeDao.deleteEpisode(episodeEntity)
+    }
+
     override suspend fun saveAllPodcasts(episodes: List<EpisodeAudio>) {
         return podcastDao.insertAll(episodes)    }
 
@@ -53,14 +57,15 @@ class PodcastRepoImpl @Inject constructor(
         return subscriptionsDao.subscribe(podcastEntity)
     }
 
-    override suspend fun deleteEpisode(episodeEntity: EpisodeEntity) {
-        return episodeDao.deleteEpisode(episodeEntity)
-    }
-
     override suspend fun unsubscribe(podcast: PodcastEntity) {
         return subscriptionsDao.unsubscribe(podcast)
     }
 
+    override suspend fun deleteSubscriptionList() {
+        return subscriptionsDao.deleteSubscriptionList()
+    }
+
+    //region History
     override suspend fun saveToHistory(historyEntity: HistoryEntity) {
         return historyDao.saveToHistory(historyEntity)
     }
@@ -75,4 +80,6 @@ class PodcastRepoImpl @Inject constructor(
     override suspend fun deleteHistoryList() {
         return historyDao.deleteHistoryList()
     }
+
+    //endregion
 }
