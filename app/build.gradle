@@ -113,6 +113,9 @@ dependencies {
     // Firebase crashlytics
     implementation("com.google.firebase:firebase-crashlytics")
     implementation("com.google.firebase:firebase-analytics")
+
+    // Reactive network to check connectivity
+    implementation("com.github.pwittchen:reactivenetwork-rx2:3.0.8")
 }
 kapt {
     correctErrorTypes true

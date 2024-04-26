@@ -5,10 +5,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.shamardn.podcasttime.PodcastTimeApplication
 import com.shamardn.podcasttime.domain.usecase.GetPodcastsUseCase
 import com.shamardn.podcasttime.ui.home.mapper.PodcastUiStateMapper
 import com.shamardn.podcasttime.ui.home.uistate.HomeUiState
-import com.shamardn.podcasttime.util.ConnectionTracker
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -19,7 +19,6 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val getPodcastsUseCase: GetPodcastsUseCase,
-    private val connectionTracker: ConnectionTracker,
     private val homeUiStateMapper: PodcastUiStateMapper,
 ): ViewModel() {
     private val _homeUiState = MutableStateFlow(HomeUiState())
@@ -30,7 +29,7 @@ class HomeViewModel @Inject constructor(
     fun getPodcasts(term: String){
         try {
             viewModelScope.launch {
-                if (connectionTracker.isInternetConnectionAvailable()) {
+                if (PodcastTimeApplication.isConnected) {
                     _isOnline.postValue(true)
                     val response = getPodcastsUseCase(term)
                     _homeUiState.update {
