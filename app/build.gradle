@@ -6,11 +6,12 @@ plugins {
     id 'com.google.dagger.hilt.android'
     id 'kotlin-parcelize'
     id 'com.google.gms.google-services'
+    id("com.google.firebase.crashlytics")
 }
 
 android {
     namespace 'com.shamardn.podcasttime'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.shamardn.podcasttime"
@@ -105,10 +106,13 @@ dependencies {
     implementation "androidx.datastore:datastore-preferences:1.0.0"
 
     // firebase
-    implementation(platform("com.google.firebase:firebase-bom:32.2.3"))
+    implementation(platform("com.google.firebase:firebase-bom:32.8.1"))
     // Firebase Cloud Messaging (Kotlin)
     implementation("com.google.firebase:firebase-messaging-ktx")
 
+    // Firebase crashlytics
+    implementation("com.google.firebase:firebase-crashlytics")
+    implementation("com.google.firebase:firebase-analytics")
 }
 kapt {
     correctErrorTypes true
