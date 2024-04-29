@@ -1,14 +1,18 @@
 package com.shamardn.podcasttime.ui.main
 
 import android.Manifest
+import android.animation.ObjectAnimator
 import android.content.pm.PackageManager
 import android.media.AudioManager
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import android.view.WindowManager
+import android.view.animation.AnticipateInterpolator
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.animation.doOnEnd
 import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.findNavController
@@ -29,7 +33,11 @@ class MainActivity : AppCompatActivity() {
         ActivityResultContracts.RequestPermission(),
     ) { isGranted: Boolean ->
         if (isGranted) {
-            Toast.makeText(this, getString(R.string.notifications_permission_granted), Toast.LENGTH_SHORT)
+            Toast.makeText(
+                this,
+                getString(R.string.notifications_permission_granted),
+                Toast.LENGTH_SHORT
+            )
                 .show()
         } else {
             Toast.makeText(
@@ -39,10 +47,11 @@ class MainActivity : AppCompatActivity() {
             ).show()
         }
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setTheme(R.style.PodcastTimeTheme)
+        setTheme(R.style.Base_Theme_PodcastTime)
 
         _binding = ActivityMainBinding.inflate(layoutInflater)
 
@@ -55,11 +64,38 @@ class MainActivity : AppCompatActivity() {
         setStartDestination()
 
 
-        installSplashScreen()
+        initSplashScreen()
 
         volumeControlStream = AudioManager.STREAM_MUSIC
 
         askNotificationPermission()
+    }
+
+    private fun initSplashScreen() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            installSplashScreen()
+            // Add a callback that's called when the splash screen is animating to the
+            // app content.
+            splashScreen.setOnExitAnimationListener { splashScreenView ->
+                // Create your custom animation.
+                val slideUp = ObjectAnimator.ofFloat(
+                    splashScreenView,
+                    View.TRANSLATION_Y,
+                    0f,
+                    -splashScreenView.height.toFloat()
+                )
+                slideUp.interpolator = AnticipateInterpolator()
+                slideUp.duration = 2000L
+
+                // Call SplashScreenView.remove at the end of your custom animation.
+                slideUp.doOnEnd { splashScreenView.remove() }
+
+                // Run your animation.
+                slideUp.start()
+            }
+        } else {
+            setTheme(R.style.Theme_MainActivity)
+        }
     }
 
     override fun onResume() {
@@ -83,16 +119,21 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setStartDestination() {
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.main_fragment_container_view) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.main_fragment_container_view) as NavHostFragment
         val graph = navHostFragment.navController.navInflater.inflate(R.navigation.nav_graph)
         if (PodcastTimeApplication.isFirstTimeLaunch) {
             graph.setStartDestination(R.id.loginFragment)
-        }else {
+        } else {
             graph.setStartDestination(R.id.homeFragment)
         }
 
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.add(R.id.bottom_player_container, BottomPlayerFragment(),"BottomPlayerFragment").commit()
+        transaction.add(
+            R.id.bottom_player_container,
+            BottomPlayerFragment(),
+            "BottomPlayerFragment"
+        ).commit()
 
         navHostFragment.navController.setGraph(graph, intent.extras)
     }
