@@ -22,6 +22,8 @@ import com.shamardn.podcasttime.PodcastTimeApplication
 import com.shamardn.podcasttime.R
 import com.shamardn.podcasttime.databinding.ActivityMainBinding
 import com.shamardn.podcasttime.ui.bottomplayer.BottomPlayerFragment
+import com.shamardn.podcasttime.util.CrashlyticsUtils
+import com.shamardn.podcasttime.util.NotificationException
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -85,7 +87,7 @@ class MainActivity : AppCompatActivity() {
                     -splashScreenView.height.toFloat()
                 )
                 slideUp.interpolator = AnticipateInterpolator()
-                slideUp.duration = 2000L
+                slideUp.duration = 1000L
 
                 // Call SplashScreenView.remove at the end of your custom animation.
                 slideUp.doOnEnd { splashScreenView.remove() }
@@ -145,11 +147,15 @@ class MainActivity : AppCompatActivity() {
                 PackageManager.PERMISSION_GRANTED
             ) {
                 // FCM SDK (and your app) can post notifications.
+                CrashlyticsUtils.sendCustomLogToCrashlytics<NotificationException>("Notifications PERMISSION_GRANTED", Pair(CrashlyticsUtils.NOTIFICATION_KEY,"granted"))
             } else {
                 // Directly ask for the permission
+                CrashlyticsUtils.sendCustomLogToCrashlytics<NotificationException>("Notifications PERMISSION_NOT_GRANTED", Pair(CrashlyticsUtils.NOTIFICATION_KEY,"not granted"))
                 requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
             }
         }
+        CrashlyticsUtils.sendCustomLogToCrashlytics<NotificationException>("Notifications", Pair(CrashlyticsUtils.NOTIFICATION_KEY,"build version is less than 33"))
+
     }
 
     companion object {
