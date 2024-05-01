@@ -7,7 +7,7 @@
         <item name="colorAccent">@color/primary</item>
         <!--        system ui configurations -->
         <item name="android:statusBarColor">@color/white</item>
-        <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>
+        <item name="android:windowLightStatusBar" tools:ignore="NewApi">false</item>
         <item name="android:navigationBarColor">@color/white</item>
         <item name="android:windowLightNavigationBar" tools:ignore="NewApi,oreo">true</item>
         <item name="materialAlertDialogTheme">@style/ThemeOverlay.App.MaterialAlertDialog</item>
