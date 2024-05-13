@@ -2,6 +2,8 @@ package com.shamardn.podcasttime.ui.main
 
 import android.Manifest
 import android.animation.ObjectAnimator
+import android.app.ActivityOptions
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.media.AudioManager
 import android.os.Build
@@ -11,6 +13,7 @@ import android.view.WindowManager
 import android.view.animation.AnticipateInterpolator
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.animation.doOnEnd
 import androidx.core.content.ContextCompat
@@ -20,16 +23,27 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.shamardn.podcasttime.PodcastTimeApplication
 import com.shamardn.podcasttime.R
+import com.shamardn.podcasttime.data.datasource.datastore.UserPreferenceDataSource
+import com.shamardn.podcasttime.data.repo.user.UserPreferenceRepositoryImpl
 import com.shamardn.podcasttime.databinding.ActivityMainBinding
 import com.shamardn.podcasttime.ui.bottomplayer.BottomPlayerFragment
+import com.shamardn.podcasttime.ui.common.viewmodel.UserViewModel
+import com.shamardn.podcasttime.ui.common.viewmodel.UserViewModelFactory
+import com.shamardn.podcasttime.ui.login.AuthActivity
 import com.shamardn.podcasttime.util.CrashlyticsUtils
 import com.shamardn.podcasttime.util.NotificationException
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.runBlocking
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private var _binding: ActivityMainBinding? = null
     private val binding get() = _binding!!
+
+    private val userViewModel: UserViewModel by viewModels {
+        UserViewModelFactory(UserPreferenceRepositoryImpl(UserPreferenceDataSource(this)))
+    }
 
     private val requestPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission(),
@@ -59,18 +73,32 @@ class MainActivity : AppCompatActivity() {
 
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 
-        window.statusBarColor = ContextCompat.getColor(this, R.color.primary)
+        initSplashScreen()
 
-        setContentView(binding.root)
+        val isLoggedIn = runBlocking { userViewModel.isUserLoggedIn().first() }
+        if (!isLoggedIn) {
+            goToAuthActivity()
+            return
+        }
 
         setStartDestination()
 
-
-        initSplashScreen()
+        setContentView(binding.root)
 
         volumeControlStream = AudioManager.STREAM_MUSIC
 
         askNotificationPermission()
+    }
+
+    private fun goToAuthActivity() {
+        val intent = Intent(this, AuthActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
+        val options = ActivityOptions.makeCustomAnimation(
+            this, android.R.anim.fade_in, android.R.anim.fade_out
+        )
+        startActivity(intent, options.toBundle())
+        finish()
     }
 
     private fun initSplashScreen() {
@@ -147,14 +175,23 @@ class MainActivity : AppCompatActivity() {
                 PackageManager.PERMISSION_GRANTED
             ) {
                 // FCM SDK (and your app) can post notifications.
-                CrashlyticsUtils.sendCustomLogToCrashlytics<NotificationException>("Notifications PERMISSION_GRANTED", Pair(CrashlyticsUtils.NOTIFICATION_KEY,"granted"))
+                CrashlyticsUtils.sendCustomLogToCrashlytics<NotificationException>(
+                    "Notifications PERMISSION_GRANTED",
+                    Pair(CrashlyticsUtils.NOTIFICATION_KEY, "granted")
+                )
             } else {
                 // Directly ask for the permission
-                CrashlyticsUtils.sendCustomLogToCrashlytics<NotificationException>("Notifications PERMISSION_NOT_GRANTED", Pair(CrashlyticsUtils.NOTIFICATION_KEY,"not granted"))
+                CrashlyticsUtils.sendCustomLogToCrashlytics<NotificationException>(
+                    "Notifications PERMISSION_NOT_GRANTED",
+                    Pair(CrashlyticsUtils.NOTIFICATION_KEY, "not granted")
+                )
                 requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
             }
         }
-        CrashlyticsUtils.sendCustomLogToCrashlytics<NotificationException>("Notifications", Pair(CrashlyticsUtils.NOTIFICATION_KEY,"build version is less than 33"))
+        CrashlyticsUtils.sendCustomLogToCrashlytics<NotificationException>(
+            "Notifications",
+            Pair(CrashlyticsUtils.NOTIFICATION_KEY, "build version is less than 33")
+        )
 
     }
 
