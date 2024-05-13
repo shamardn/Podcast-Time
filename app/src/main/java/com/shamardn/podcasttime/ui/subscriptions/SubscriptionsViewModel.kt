@@ -3,7 +3,7 @@ package com.shamardn.podcasttime.ui.subscriptions
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.shamardn.podcasttime.data.local.database.entity.PodcastEntity
+import com.shamardn.podcasttime.data.datasource.local.database.entity.PodcastEntity
 import com.shamardn.podcasttime.domain.usecase.DeleteSubscriptionListUseCase
 import com.shamardn.podcasttime.domain.usecase.GetSubscriptionsUseCase
 import com.shamardn.podcasttime.domain.usecase.UnsubscribeUseCase

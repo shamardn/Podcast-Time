@@ -1,4 +1,4 @@
-package com.shamardn.podcasttime.data.local.database.entity
+package com.shamardn.podcasttime.data.datasource.local.database.entity
 
 import android.os.Parcelable
 import androidx.room.Entity
@@ -6,8 +6,8 @@ import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-@Entity(tableName = "PODCAST_TABLE")
-data class EpisodeAudio(
+@Entity(tableName = "EPISODE_TABLE")
+data class EpisodeEntity(
     @PrimaryKey(autoGenerate = true)
     val id : Long,
     val collectionName: String,

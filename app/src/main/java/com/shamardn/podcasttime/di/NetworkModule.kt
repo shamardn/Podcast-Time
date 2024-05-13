@@ -1,6 +1,6 @@
 package com.shamardn.podcasttime.di
 
-import com.shamardn.podcasttime.data.remote.ApiService
+import com.shamardn.podcasttime.data.datasource.remote.ApiService
 import com.shamardn.podcasttime.util.Constants.BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -37,7 +37,7 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideApiService(retrofit: Retrofit): ApiService{
+    fun provideApiService(retrofit: Retrofit): ApiService {
         return retrofit.create(ApiService::class.java)
     }
 }

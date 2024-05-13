@@ -1,9 +1,9 @@
 package com.shamardn.podcasttime.di
 
 import android.content.Context
-import com.shamardn.podcasttime.data.local.datastore.AppConfiguration
-import com.shamardn.podcasttime.data.local.datastore.AppConfigurator
-import com.shamardn.podcasttime.data.local.datastore.DataStorePreferences
+import com.shamardn.podcasttime.data.datasource.datastore.AppConfiguration
+import com.shamardn.podcasttime.data.datasource.datastore.AppConfigurator
+import com.shamardn.podcasttime.data.datasource.datastore.DataStorePreferences
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

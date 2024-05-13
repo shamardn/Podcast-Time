@@ -1,4 +1,4 @@
-package com.shamardn.podcasttime.data.remote
+package com.shamardn.podcasttime.data.datasource.remote
 
 import com.shamardn.podcasttime.domain.entity.EpisodeDTO
 import com.shamardn.podcasttime.domain.entity.PodcastDTO

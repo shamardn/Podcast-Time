@@ -2,11 +2,11 @@ package com.shamardn.podcasttime.di
 
 import android.content.Context
 import androidx.room.Room
-import com.shamardn.podcasttime.data.local.database.PodcastDatabase
-import com.shamardn.podcasttime.data.local.database.dao.EpisodeDao
-import com.shamardn.podcasttime.data.local.database.dao.HistoryDao
-import com.shamardn.podcasttime.data.local.database.dao.PodcastDao
-import com.shamardn.podcasttime.data.local.database.dao.SubscriptionsDao
+import com.shamardn.podcasttime.data.datasource.local.database.PodcastDatabase
+import com.shamardn.podcasttime.data.datasource.local.database.dao.EpisodeDao
+import com.shamardn.podcasttime.data.datasource.local.database.dao.HistoryDao
+import com.shamardn.podcasttime.data.datasource.local.database.dao.PodcastDao
+import com.shamardn.podcasttime.data.datasource.local.database.dao.SubscriptionsDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

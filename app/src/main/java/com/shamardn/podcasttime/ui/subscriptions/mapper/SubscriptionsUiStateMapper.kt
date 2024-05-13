@@ -1,6 +1,6 @@
 package com.shamardn.podcasttime.ui.subscriptions.mapper
 
-import com.shamardn.podcasttime.data.local.database.entity.PodcastEntity
+import com.shamardn.podcasttime.data.datasource.local.database.entity.PodcastEntity
 import com.shamardn.podcasttime.domain.mapper.Mapper
 import com.shamardn.podcasttime.ui.subscriptions.uistate.PodcastUiState
 import javax.inject.Inject

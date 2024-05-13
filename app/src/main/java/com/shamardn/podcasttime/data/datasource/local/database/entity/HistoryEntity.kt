@@ -1,4 +1,4 @@
-package com.shamardn.podcasttime.data.local.database.entity
+package com.shamardn.podcasttime.data.datasource.local.database.entity
 
 import android.os.Parcelable
 import androidx.room.Entity

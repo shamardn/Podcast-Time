@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.shamardn.podcasttime.data.local.database.entity.EpisodeEntity
+import com.shamardn.podcasttime.data.datasource.local.database.entity.EpisodeEntity
 import com.shamardn.podcasttime.domain.entity.EpisodeDTO
 import com.shamardn.podcasttime.domain.entity.PodcastResponse
 import com.shamardn.podcasttime.domain.mapper.EpisodeAudioMapper

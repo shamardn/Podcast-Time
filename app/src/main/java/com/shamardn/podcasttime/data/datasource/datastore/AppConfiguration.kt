@@ -1,4 +1,4 @@
-package com.shamardn.podcasttime.data.local.datastore
+package com.shamardn.podcasttime.data.datasource.datastore
 
 
 import javax.inject.Inject
