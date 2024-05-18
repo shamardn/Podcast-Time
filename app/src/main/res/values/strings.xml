@@ -27,7 +27,7 @@
     <string name="english">English</string>
     <string name="arabic">Arabic</string>
     <string name="dark">Dark</string>
-    <string name="email">Email</string>
+    <string name="email">Your Email</string>
     <string name="password">password</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
@@ -66,7 +66,7 @@
     <string name="retry">Retry</string>
     <string name="oops">oops</string>
     <string name="trackCount">%1$s Episodes</string>
-    <string name="log_in_to_your_account">Log in to your account</string>
+    <string name="welcome_to_podcast_time">Welcome to Podcast Time</string>
     <string name="remember_me">Remember me</string>
     <string name="forget_password">forget password?</string>
     <string name="don_t_have_an_account">Don\'t have an account?</string>
@@ -85,5 +85,9 @@
     <string name="delete_confirmation_txt">Delete all records?</string>
     <string name="cancel">Cancel</string>
     <string name="delete_podcast_confirmation_txt">"You gonna delete this podcast! Are you sure? "</string>
+    <string name="sign_in_to_continue">Sign in to continue</string>
+    <string name="or">OR</string>
+    <string name="login_with_google">Login with google</string>
+    <string name="login_with_facebook">login with facebook</string>
 
 </resources>

@@ -19,10 +19,10 @@
     <string name="english">اللغة الانجليزية</string>
     <string name="arabic">اللغة العربية</string>
     <string name="dark">داكن</string>
-    <string name="email">بريد الكتروني</string>
+    <string name="email">بريدك الالكتروني</string>
     <string name="password">كلمة السر</string>
     <string name="login">تسجيل الدخول</string>
-    <string name="register">اشترلك</string>
+    <string name="register">اشترك</string>
     <string name="username">اسم المستخدم</string>
     <string name="subscribe">اشترك</string>
     <string name="_user_name">اسم المستخدم</string>
@@ -40,7 +40,7 @@
     <string name="retry">حاول</string>
     <string name="oops">واوو</string>
     <string name="trackCount">%1$s حلقة</string>
-    <string name="log_in_to_your_account">"تسجيل الدخول "</string>
+    <string name="welcome_to_podcast_time">"مرحبا بك في بودكاست تايم"</string>
     <string name="remember_me">تذكرني</string>
     <string name="forget_password">نسيت كلمة السر؟</string>
     <string name="don_t_have_an_account">ليس لديك حساب</string>
@@ -56,4 +56,8 @@
     <string name="delete_confirmation_txt">حذف جميع السجلات؟</string>
     <string name="cancel">إلغاء</string>
     <string name="delete_podcast_confirmation_txt">هل انت متأكد من مسح هذا السجل؟</string>
+    <string name="sign_in_to_continue">"سجل الدخول "</string>
+    <string name="or">أو</string>
+    <string name="login_with_google">الدخول باستخدام جوجل</string>
+    <string name="login_with_facebook">الدخول باستخدام فيسبوك</string>
 </resources>
