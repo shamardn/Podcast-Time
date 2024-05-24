@@ -1,4 +1,4 @@
-package com.shamardn.podcasttime.ui.login
+package com.shamardn.podcasttime.ui.auth
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge

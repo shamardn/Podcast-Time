@@ -29,7 +29,7 @@ import com.shamardn.podcasttime.databinding.ActivityMainBinding
 import com.shamardn.podcasttime.ui.bottomplayer.BottomPlayerFragment
 import com.shamardn.podcasttime.ui.common.viewmodel.UserViewModel
 import com.shamardn.podcasttime.ui.common.viewmodel.UserViewModelFactory
-import com.shamardn.podcasttime.ui.login.AuthActivity
+import com.shamardn.podcasttime.ui.auth.AuthActivity
 import com.shamardn.podcasttime.util.CrashlyticsUtils
 import com.shamardn.podcasttime.util.NotificationException
 import dagger.hilt.android.AndroidEntryPoint

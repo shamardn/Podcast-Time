@@ -1,4 +1,4 @@
-package com.shamardn.podcasttime.ui.login.viewmodel
+package com.shamardn.podcasttime.ui.auth.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

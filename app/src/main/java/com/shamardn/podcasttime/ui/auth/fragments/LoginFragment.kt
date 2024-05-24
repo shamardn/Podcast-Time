@@ -1,4 +1,4 @@
-package com.shamardn.podcasttime.ui.login.fragments
+package com.shamardn.podcasttime.ui.auth.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,8 +9,8 @@ import androidx.fragment.app.viewModels
 import com.shamardn.podcasttime.data.datasource.datastore.UserPreferenceDataSource
 import com.shamardn.podcasttime.data.repo.user.UserPreferenceRepositoryImpl
 import com.shamardn.podcasttime.databinding.FragmentLoginBinding
-import com.shamardn.podcasttime.ui.login.viewmodel.LoginViewModel
-import com.shamardn.podcasttime.ui.login.viewmodel.LoginViewModelFactory
+import com.shamardn.podcasttime.ui.auth.viewmodel.LoginViewModel
+import com.shamardn.podcasttime.ui.auth.viewmodel.LoginViewModelFactory
 
 class LoginFragment : Fragment() {
 

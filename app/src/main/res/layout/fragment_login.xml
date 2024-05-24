@@ -6,7 +6,7 @@
 
         <variable
             name="viewmodel"
-            type="com.shamardn.podcasttime.ui.login.viewmodel.LoginViewModel" />
+            type="com.shamardn.podcasttime.ui.auth.viewmodel.LoginViewModel" />
     </data>
 <androidx.core.widget.NestedScrollView
     android:layout_width="match_parent"
