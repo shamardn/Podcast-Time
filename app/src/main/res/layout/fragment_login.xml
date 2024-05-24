@@ -18,26 +18,18 @@
         android:layout_height="match_parent"
         android:padding="@dimen/space8x">
 
-        <View
-            android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
-
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/card_login_app_logo"
             android:layout_width="96dp"
             android:layout_height="96dp"
+            android:layout_marginTop="48dp"
             android:backgroundTint="@color/primary"
             app:cardCornerRadius="@dimen/space8x"
             app:cardElevation="@dimen/space2x"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView"
-            app:layout_constraintEnd_toEndOf="@+id/imageView"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="@+id/imageView"
-            app:layout_constraintTop_toBottomOf="@+id/imageView">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/img_login_app_logo"
@@ -87,7 +79,6 @@
                 android:layout_marginTop="@dimen/space4x"
                 android:hint="@string/email"
                 android:inputType="textEmailAddress" />
-
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -111,18 +102,6 @@
                 android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/text_forget_password"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/space8x"
-            android:text="@string/forget_password"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/text_login_facebook"
-            app:layout_constraintStart_toStartOf="@+id/text_login_facebook"
-            app:layout_constraintTop_toBottomOf="@+id/text_login_facebook" />
-
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_login"
             android:layout_width="0dp"
@@ -136,28 +115,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/password_input_layout" />
-
-        <TextView
-            android:id="@+id/text_dont_have_acount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/space8x"
-            android:text="@string/don_t_have_an_account"
-            app:layout_constraintEnd_toEndOf="@+id/text_forget_password"
-            app:layout_constraintStart_toStartOf="@+id/text_forget_password"
-            app:layout_constraintTop_toBottomOf="@+id/text_forget_password" />
-
-        <TextView
-            android:id="@+id/text_register"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/space4x"
-            android:text="@string/register"
-            android:textStyle="bold"
-            android:textColor="@color/primary"
-            app:layout_constraintBottom_toBottomOf="@+id/text_dont_have_acount"
-            app:layout_constraintStart_toEndOf="@+id/text_dont_have_acount"
-            app:layout_constraintTop_toTopOf="@+id/text_dont_have_acount" />
 
         <View
             android:id="@+id/or_line"
@@ -183,44 +140,70 @@
             app:layout_constraintStart_toStartOf="@id/or_line"
             app:layout_constraintEnd_toEndOf="@id/or_line"/>
 
-        <TextView
-            android:id="@+id/text_login_google"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_marginTop="12dp"
-            android:background="@drawable/outline_rounded_shape_gray"
-            android:gravity="center"
-            android:paddingStart="@dimen/space8x"
-            android:paddingEnd="@dimen/space8x"
-            android:text="@string/login_with_google"
-            android:textAllCaps="true"
-            android:textColor="@color/on_surface_variant"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/or"
-            app:drawableLeftCompat="@drawable/ic_google" />
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space8x"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="@+id/or"
+            app:layout_constraintStart_toStartOf="@+id/or"
+            app:layout_constraintTop_toBottomOf="@+id/or_line">
+
+            <ImageButton
+                android:id="@+id/btn_login_google"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/space8x"
+                android:background="@drawable/circle_button"
+                android:src="@drawable/ic_google" />
+
+            <ImageButton
+                android:id="@+id/btn_login_face"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/space8x"
+                android:background="@drawable/circle_button"
+                android:src="@drawable/ic_facebook" />
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/text_login_facebook"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_marginTop="@dimen/space4x"
-            android:background="@drawable/outline_rounded_shape_gray"
-            android:gravity="center"
-            android:paddingStart="@dimen/space8x"
-            android:paddingEnd="@dimen/space8x"
-            android:text="@string/login_with_facebook"
-            android:textAllCaps="true"
-            android:textColor="@color/on_surface_variant"
-            android:textSize="18sp"
+            android:id="@+id/text_forget_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space8x"
+            android:text="@string/forget_password"
+            android:textSize="14sp"
             android:textStyle="bold"
+            android:textColor="@color/primary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_login_google"
-            app:drawableLeftCompat="@drawable/ic_facebook" />
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@+id/text_forget_password"
+            app:layout_constraintStart_toStartOf="@+id/text_forget_password"
+            app:layout_constraintTop_toBottomOf="@+id/text_forget_password"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/space8x">
+            <TextView
+                android:id="@+id/text_dont_have_acount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/don_t_have_an_account"
+                />
+
+            <TextView
+                android:id="@+id/text_register"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space4x"
+                android:text="@string/register"
+                android:textStyle="bold"
+                android:textColor="@color/primary" />
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.core.widget.NestedScrollView>
