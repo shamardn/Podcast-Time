@@ -109,12 +109,21 @@ dependencies {
 
     // firebase
     implementation(platform("com.google.firebase:firebase-bom:32.8.1"))
+
     // Firebase Cloud Messaging (Kotlin)
     implementation("com.google.firebase:firebase-messaging-ktx")
 
     // Firebase crashlytics
     implementation("com.google.firebase:firebase-crashlytics")
     implementation("com.google.firebase:firebase-analytics")
+
+    //Firebase Auth
+    implementation("com.google.firebase:firebase-auth-ktx")
+    implementation("com.google.android.gms:play-services-auth:21.2.0")
+
+    //Firebase firestore
+    implementation("com.google.firebase:firebase-firestore")
+
 
     // Reactive network to check connectivity
     implementation("com.github.pwittchen:reactivenetwork-rx2:3.0.8")

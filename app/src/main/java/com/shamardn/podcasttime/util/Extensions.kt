@@ -70,24 +70,6 @@ fun List<MediaBrowserCompat.MediaItem>.asAudio() =
         )
     }
 
-fun <T> Resource<T>.execute(
-    onSuccess : (T) -> Unit = {},
-    onError : (String) -> Unit = {},
-    onLoading : () -> Unit = {}
-) {
-    when(this.status){
-        Status.SUCCESS -> {
-            this.data?.let { onSuccess(it) }
-        }
-        Status.ERROR -> {
-            this.message?.let { onError(it) }
-        }
-        Status.LOADING -> {
-            onLoading()
-        }
-    }
-}
-
 fun View.setAlphaAnimation(){
     this.startAnimation(AlphaAnimation(9f, 0.1f))
 }

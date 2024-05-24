@@ -5,7 +5,7 @@
     <data>
 
         <variable
-            name="viewmodel"
+            name="viewModel"
             type="com.shamardn.podcasttime.ui.auth.viewmodel.LoginViewModel" />
     </data>
 <androidx.core.widget.NestedScrollView
@@ -78,6 +78,7 @@
                 android:drawablePadding="@dimen/space4x"
                 android:layout_marginTop="@dimen/space4x"
                 android:hint="@string/email"
+                android:text="@={viewModel.email}"
                 android:inputType="textEmailAddress" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -99,6 +100,7 @@
                 android:drawableStart="@drawable/ic_password"
                 android:drawablePadding="@dimen/space4x"
                 android:hint="@string/password"
+                android:text="@={viewModel.password}"
                 android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
