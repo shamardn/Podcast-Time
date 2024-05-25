@@ -4,17 +4,24 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.shamardn.podcasttime.data.datasource.datastore.UserPreferenceDataSource
+import com.shamardn.podcasttime.data.models.Resource
 import com.shamardn.podcasttime.data.repo.auth.FirebaseAuthRepositoryImpl
 import com.shamardn.podcasttime.data.repo.user.UserPreferenceRepositoryImpl
 import com.shamardn.podcasttime.databinding.FragmentLoginBinding
 import com.shamardn.podcasttime.ui.auth.viewmodel.LoginViewModel
 import com.shamardn.podcasttime.ui.auth.viewmodel.LoginViewModelFactory
+import com.shamardn.podcasttime.ui.common.custom_views.ProgressDialog
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 class LoginFragment : Fragment() {
 
+    val progressDialog by lazy { ProgressDialog.createProgressDialog(requireActivity())}
     private var _binding : FragmentLoginBinding? = null
     private val binding get() = _binding!!
 
@@ -46,7 +53,25 @@ class LoginFragment : Fragment() {
     }
 
     private fun initViewModel() {
-
+        lifecycleScope.launch {
+            loginViewModel.loginState.collect{ state ->
+                state?.let { resource ->
+                    when(resource) {
+                        is Resource.Loading -> {
+                            progressDialog.show()
+                        }
+                        is Resource.Success -> {
+                            progressDialog.dismiss()
+                            Toast.makeText(requireContext(), resource.data.toString(),Toast.LENGTH_SHORT).show()
+                        }
+                        is Resource.Error -> {
+                            progressDialog.dismiss()
+                            Toast.makeText(requireContext(), resource.exception?.message,Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+            }
+        }
     }
 
     override fun onDestroy() {

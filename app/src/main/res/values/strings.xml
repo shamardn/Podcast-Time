@@ -89,5 +89,6 @@
     <string name="or">OR</string>
     <string name="login_with_google">Login with google</string>
     <string name="login_with_facebook">login with facebook</string>
+    <string name="loading">Loading</string>
 
 </resources>
