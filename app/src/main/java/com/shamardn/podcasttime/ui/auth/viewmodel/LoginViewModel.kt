@@ -35,23 +35,59 @@ class LoginViewModel(
         viewModelScope.launch {
             if (isLoginValid.first()) {
 
-                authRepository.loginWithEmailAndPassword(email.value, password.value).onEach { resource ->
+                authRepository.loginWithEmailAndPassword(email.value, password.value)
+                    .onEach { resource ->
 
-                    when (resource) {
-                        is Resource.Loading -> { loginState.emit(Resource.Loading)}
-                        is Resource.Success -> {
-                            userPrefs.saveLoginState(true)
-                            userPrefs.saveUserId(resource.data ?: "Empty User Id")
-                            loginState.emit(Resource.Success(resource.data ?: "Empty User Id"))
+                        when (resource) {
+                            is Resource.Loading -> {
+                                loginState.emit(Resource.Loading)
+                            }
+
+                            is Resource.Success -> {
+                                userPrefs.saveLoginState(true)
+                                userPrefs.saveUserId(resource.data ?: "Empty User Id")
+                                loginState.emit(Resource.Success(resource.data ?: "Empty User Id"))
+                            }
+
+                            is Resource.Error -> {
+                                loginState.emit(
+                                    Resource.Error(
+                                        resource.exception ?: Exception("Unknown Exception")
+                                    )
+                                )
+                            }
                         }
-                        is Resource.Error -> { loginState.emit(Resource.Error(resource.exception ?: Exception("Unknown Exception"))) }
-                    }
-                }.launchIn(this)
+                    }.launchIn(this)
             } else {
                 loginState.emit(Resource.Error(Exception("Invalid Email or Password")))
             }
         }
     }
+
+    fun loginWithGoogle(tokenId: String) = viewModelScope.launch {
+        authRepository.loginWithGoogle(tokenId).onEach { resource ->
+            when (resource) {
+                is Resource.Loading -> {
+                    loginState.emit(Resource.Loading)
+                }
+
+                is Resource.Success -> {
+                    userPrefs.saveLoginState(true)
+                    userPrefs.saveUserId(resource.data ?: "Empty User Id")
+                    loginState.emit(Resource.Success(resource.data ?: "Empty User Id"))
+                }
+
+                is Resource.Error -> {
+                    loginState.emit(
+                        Resource.Error(
+                            resource.exception ?: Exception("Unknown Exception")
+                        )
+                    )
+                }
+            }
+        }.launchIn(this)
+    }
+
 }
 
 class LoginViewModelFactory(

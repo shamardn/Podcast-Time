@@ -90,5 +90,8 @@
     <string name="login_with_google">Login with google</string>
     <string name="login_with_facebook">login with facebook</string>
     <string name="loading">Loading</string>
+    <string name="ok">Ok</string>
+    <string name="sign_in_failed">Sign in failed, please try again later!!</string>
+    <string name="generic_err_msg">Error: Please Try Again Later!!</string>
 
 </resources>

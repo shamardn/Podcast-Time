@@ -30,7 +30,7 @@ android {
         }
         forEach{
             it.buildConfigField(
-                    "String" , "clientServerId" , "\"180543863696-lqmbhriktnik062mgt26pbd0r45te9ts.apps.googleusercontent.com\""
+                    "String" , "clientServerId" , "\"180543863696-3fps3lb9t69hcj6mnunan8jd9va1k5mo.apps.googleusercontent.com\""
             )
         }
     }
