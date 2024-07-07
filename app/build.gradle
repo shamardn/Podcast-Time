@@ -28,6 +28,11 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        forEach{
+            it.buildConfigField(
+                    "String" , "clientServerId" , "\"180543863696-lqmbhriktnik062mgt26pbd0r45te9ts.apps.googleusercontent.com\""
+            )
+        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
@@ -37,6 +42,8 @@ android {
         jvmTarget = '17'
     }
     buildFeatures {
+        buildConfig = true
+
         viewBinding true
         dataBinding true
     }
