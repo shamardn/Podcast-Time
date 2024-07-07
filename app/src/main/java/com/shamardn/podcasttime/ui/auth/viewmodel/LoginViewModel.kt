@@ -32,22 +32,21 @@ class LoginViewModel(
     }
 
     fun login() {
-        viewModelScope.launch{
-            val email = email.value
-            val password = password.value
-            if (isLoginValid.first()){
-                authRepository.loginWithEmailAndPassword(email, password).onEach { resource ->
-                    when(resource) {
-                        is Resource.Loading -> { loginState.emit(Resource.Loading) }
+        viewModelScope.launch {
+            if (isLoginValid.first()) {
+
+                authRepository.loginWithEmailAndPassword(email.value, password.value).onEach { resource ->
+
+                    when (resource) {
+                        is Resource.Loading -> { loginState.emit(Resource.Loading)}
                         is Resource.Success -> {
-//                            userPrefs.saveUserEmail(email)
-                            loginState.emit(Resource.Success(resource.data ?: "Empty user id"))
+                            userPrefs.saveLoginState(true)
+                            userPrefs.saveUserId(resource.data ?: "Empty User Id")
+                            loginState.emit(Resource.Success(resource.data ?: "Empty User Id"))
                         }
-                        is Resource.Error -> { loginState.emit(Resource.Error(
-                            resource.exception ?: Exception("Unknown Error")
-                        ) )}
+                        is Resource.Error -> { loginState.emit(Resource.Error(resource.exception ?: Exception("Unknown Exception"))) }
                     }
-                }.launchIn(viewModelScope)
+                }.launchIn(this)
             } else {
                 loginState.emit(Resource.Error(Exception("Invalid Email or Password")))
             }
@@ -58,9 +57,9 @@ class LoginViewModel(
 class LoginViewModelFactory(
     private val userPrefs: UserPreferenceRepository,
     private val authRepository: FirebaseAuthRepository,
-): ViewModelProvider.Factory{
+) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>, extras: CreationExtras): T {
-        if(modelClass.isAssignableFrom(LoginViewModel::class.java)){
+        if (modelClass.isAssignableFrom(LoginViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
             return LoginViewModel(userPrefs, authRepository) as T
         }
