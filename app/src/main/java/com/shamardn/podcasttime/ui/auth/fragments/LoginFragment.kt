@@ -52,15 +52,19 @@ class LoginFragment : Fragment() {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = loginViewModel
+
+        loginViewModel.isGoogleBtnClicked.observe(viewLifecycleOwner) {
+            if (it) {
+                loginWithGoogleRequest()
+            }
+        }
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViewModel()
-        binding.btnLoginGoogle.setOnClickListener {
-            loginWithGoogleRequest()
-        }
     }
 
     private fun initViewModel() {
@@ -78,8 +82,8 @@ class LoginFragment : Fragment() {
 
                     is Resource.Error -> {
                         progressDialog.dismiss()
-                        view?.showSnakeBarError(resource.exception?.message ?: getString(R.string.generic_err_msg))
                         val msg = resource.exception?.message ?: getString(R.string.generic_err_msg)
+                        view?.showSnakeBarError(msg)
                         logAuthIssuesToCrashlytics(msg, "Login Error")
                     }
                 }
@@ -112,6 +116,7 @@ class LoginFragment : Fragment() {
             .build()
 
         val googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
+
         googleSignInClient.signOut()
 
         val signInIntent = googleSignInClient.signInIntent

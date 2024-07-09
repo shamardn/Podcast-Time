@@ -15,7 +15,7 @@ android {
 
     defaultConfig {
         applicationId "com.shamardn.podcasttime"
-        minSdk 22
+        minSdk 23
         targetSdk 33
         versionCode 1
         versionName "1.0"
@@ -115,7 +115,7 @@ dependencies {
     implementation "androidx.datastore:datastore-preferences:1.0.0"
 
     // firebase
-    implementation(platform("com.google.firebase:firebase-bom:32.8.1"))
+    implementation(platform("com.google.firebase:firebase-bom:33.1.1"))
 
     // Firebase Cloud Messaging (Kotlin)
     implementation("com.google.firebase:firebase-messaging-ktx")

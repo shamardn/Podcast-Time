@@ -1,5 +1,6 @@
 package com.shamardn.podcasttime.ui.auth.viewmodel
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
@@ -27,8 +28,14 @@ class LoginViewModel(
     val email = MutableStateFlow("")
     val password = MutableStateFlow("")
 
+    val isGoogleBtnClicked = MutableLiveData(false)
+
     private val isLoginValid: Flow<Boolean> = combine(email, password) { email, password ->
         email.isEmailValid() && password.length >= 6
+    }
+
+    fun onClickGoogleBtn() {
+        isGoogleBtnClicked.postValue(true)
     }
 
     fun login() {
@@ -65,6 +72,8 @@ class LoginViewModel(
     }
 
     fun loginWithGoogle(tokenId: String) = viewModelScope.launch {
+        isGoogleBtnClicked.postValue(false)
+
         authRepository.loginWithGoogle(tokenId).onEach { resource ->
             when (resource) {
                 is Resource.Loading -> {
