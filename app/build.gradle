@@ -15,7 +15,7 @@ android {
 
     defaultConfig {
         applicationId "com.shamardn.podcasttime"
-        minSdk 22
+        minSdk 23
         targetSdk 33
         versionCode 1
         versionName "1.0"
@@ -28,6 +28,11 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        forEach{
+            it.buildConfigField(
+                    "String" , "clientServerId" , "\"180543863696-3fps3lb9t69hcj6mnunan8jd9va1k5mo.apps.googleusercontent.com\""
+            )
+        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
@@ -37,6 +42,8 @@ android {
         jvmTarget = '17'
     }
     buildFeatures {
+        buildConfig = true
+
         viewBinding true
         dataBinding true
     }
@@ -108,13 +115,22 @@ dependencies {
     implementation "androidx.datastore:datastore-preferences:1.0.0"
 
     // firebase
-    implementation(platform("com.google.firebase:firebase-bom:32.8.1"))
+    implementation(platform("com.google.firebase:firebase-bom:33.1.1"))
+
     // Firebase Cloud Messaging (Kotlin)
     implementation("com.google.firebase:firebase-messaging-ktx")
 
     // Firebase crashlytics
     implementation("com.google.firebase:firebase-crashlytics")
     implementation("com.google.firebase:firebase-analytics")
+
+    //Firebase Auth
+    implementation("com.google.firebase:firebase-auth-ktx")
+    implementation("com.google.android.gms:play-services-auth:21.2.0")
+
+    //Firebase firestore
+    implementation("com.google.firebase:firebase-firestore")
+
 
     // Reactive network to check connectivity
     implementation("com.github.pwittchen:reactivenetwork-rx2:3.0.8")
