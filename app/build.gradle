@@ -32,6 +32,21 @@ android {
             it.buildConfigField(
                     "String" , "clientServerId" , "\"180543863696-3fps3lb9t69hcj6mnunan8jd9va1k5mo.apps.googleusercontent.com\""
             )
+            it.resValue(
+                    "string",
+                    "facebook_app_id",
+                    "\"492893389878853\""
+            )
+            it.resValue(
+                    "string",
+                    "fb_login_protocol_scheme",
+                    "\"fb492893389878853\""
+            )
+            it.resValue(
+                    "string",
+                    "facebook_client_token",
+                    "\"3a07d42f59628bc28e35fa5560fb15f4\""
+            )
         }
     }
     compileOptions {
@@ -134,6 +149,9 @@ dependencies {
 
     // Reactive network to check connectivity
     implementation("com.github.pwittchen:reactivenetwork-rx2:3.0.8")
+
+    // login with facebook
+    implementation ("com.facebook.android:facebook-login:17.0.0")
 }
 kapt {
     correctErrorTypes true

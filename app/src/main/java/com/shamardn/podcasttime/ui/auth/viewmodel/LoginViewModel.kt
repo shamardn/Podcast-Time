@@ -29,6 +29,7 @@ class LoginViewModel(
     val password = MutableStateFlow("")
 
     val isGoogleBtnClicked = MutableLiveData(false)
+    val isFacebookBtnClicked = MutableLiveData(false)
 
     private val isLoginValid: Flow<Boolean> = combine(email, password) { email, password ->
         email.isEmailValid() && password.length >= 6
@@ -36,6 +37,9 @@ class LoginViewModel(
 
     fun onClickGoogleBtn() {
         isGoogleBtnClicked.postValue(true)
+    }
+    fun onClickFacebookBtn() {
+        isFacebookBtnClicked.postValue(true)
     }
 
     fun login() {
@@ -97,6 +101,31 @@ class LoginViewModel(
         }.launchIn(this)
     }
 
+    fun loginWithFacebook(token: String) = viewModelScope.launch {
+        isFacebookBtnClicked.postValue(false)
+
+        authRepository.loginWithFacebook(token).onEach { resource ->
+            when (resource) {
+                is Resource.Loading -> {
+                    loginState.emit(Resource.Loading)
+                }
+
+                is Resource.Success -> {
+                    userPrefs.saveLoginState(true)
+                    userPrefs.saveUserId(resource.data ?: "Empty User Id")
+                    loginState.emit(Resource.Success(resource.data ?: "Empty User Id"))
+                }
+
+                is Resource.Error -> {
+                    loginState.emit(
+                        Resource.Error(
+                            resource.exception ?: Exception("Unknown Exception")
+                        )
+                    )
+                }
+            }
+        }.launchIn(viewModelScope)
+    }
 }
 
 class LoginViewModelFactory(

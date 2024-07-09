@@ -1,5 +1,6 @@
 package com.shamardn.podcasttime.ui.auth.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,6 +12,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.facebook.AccessToken
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.login.LoginManager
+import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -33,6 +40,8 @@ import com.shamardn.podcasttime.util.LoginException
 import kotlinx.coroutines.launch
 
 class LoginFragment : Fragment() {
+    private val callbackManager: CallbackManager by lazy { CallbackManager.Factory.create() }
+    private val loginManager: LoginManager by lazy { LoginManager.getInstance() }
 
     val progressDialog by lazy { ProgressDialog.createProgressDialog(requireActivity()) }
     private var _binding: FragmentLoginBinding? = null
@@ -53,18 +62,31 @@ class LoginFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = loginViewModel
 
-        loginViewModel.isGoogleBtnClicked.observe(viewLifecycleOwner) {
-            if (it) {
-                loginWithGoogleRequest()
-            }
-        }
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViewModel()
+        handleObservers()
+    }
+
+    private fun handleObservers() {
+        loginViewModel.isGoogleBtnClicked.observe(viewLifecycleOwner) {
+            if (it) {
+                loginWithGoogleRequest()
+            }
+        }
+
+        loginViewModel.isFacebookBtnClicked.observe(viewLifecycleOwner) {
+            if (it) {
+                if (isLoggedIn()) {
+                    signOut()
+                } else {
+                    loginWithFacebook()
+                }
+            }
+        }
     }
 
     private fun initViewModel() {
@@ -94,6 +116,47 @@ class LoginFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    private fun signOut() {
+        loginManager.logOut()
+    }
+
+    private fun isLoggedIn(): Boolean {
+        val accessToken = AccessToken.getCurrentAccessToken()
+        return accessToken != null && !accessToken.isExpired
+    }
+
+    private fun loginWithFacebook() {
+        loginManager.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
+            override fun onSuccess(result: LoginResult) {
+                val token = result.accessToken.token
+                firebaseAuthWithFacebook(token)
+            }
+
+            override fun onCancel() {
+                // Handle login cancel
+            }
+
+            override fun onError(error: FacebookException) {
+                val msg = error.message ?: getString(R.string.generic_err_msg)
+                view?.showSnakeBarError(msg)
+                logAuthIssuesToCrashlytics(msg, "Facebook")
+            }
+        })
+
+        loginManager.logInWithReadPermissions(
+            this, callbackManager, listOf("email", "public_profile")
+        )
+    }
+
+    private fun firebaseAuthWithFacebook(token: String) {
+        loginViewModel.loginWithFacebook(token)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        callbackManager.onActivityResult(requestCode, resultCode, data)
     }
 
     private val launcher =
@@ -129,7 +192,6 @@ class LoginFragment : Fragment() {
             firebaseAuthWithGoogle(account.idToken!!)
         } catch (e: ApiException) {
             val msg = e.message ?: getString(R.string.generic_err_msg)
-            Log.w(TAG, "Google sign in failed", e)
             logAuthIssuesToCrashlytics(msg, "Google")
             view?.showSnakeBarError(e.message ?: getString(R.string.generic_err_msg))
         }
