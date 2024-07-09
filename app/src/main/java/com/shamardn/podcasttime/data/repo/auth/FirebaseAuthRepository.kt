@@ -11,4 +11,8 @@ interface FirebaseAuthRepository {
     suspend fun loginWithGoogle(
         idToken: String
     ): Flow<Resource<String>>
+
+    suspend fun loginWithFacebook(
+        token: String
+    ): Flow<Resource<String>>
 }
