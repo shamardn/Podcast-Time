@@ -1,8 +1,6 @@
 package com.shamardn.podcasttime.ui.auth.fragments
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,16 +18,12 @@ import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
-import com.shamardn.podcasttime.BuildConfig
 import com.shamardn.podcasttime.R
-import com.shamardn.podcasttime.data.datasource.datastore.UserPreferenceDataSource
 import com.shamardn.podcasttime.data.models.Resource
-import com.shamardn.podcasttime.data.repo.auth.FirebaseAuthRepositoryImpl
-import com.shamardn.podcasttime.data.repo.user.UserPreferenceRepositoryImpl
 import com.shamardn.podcasttime.databinding.FragmentLoginBinding
+import com.shamardn.podcasttime.ui.auth.getGoogleRequestIntent
 import com.shamardn.podcasttime.ui.auth.viewmodel.LoginViewModel
 import com.shamardn.podcasttime.ui.auth.viewmodel.LoginViewModelFactory
 import com.shamardn.podcasttime.ui.common.custom_views.ProgressDialog
@@ -44,15 +38,13 @@ class LoginFragment : Fragment() {
     private val loginManager: LoginManager by lazy { LoginManager.getInstance() }
 
     val progressDialog by lazy { ProgressDialog.createProgressDialog(requireActivity()) }
-    private var _binding: FragmentLoginBinding? = null
-    private val binding get() = _binding!!
 
     private val loginViewModel: LoginViewModel by viewModels {
-        LoginViewModelFactory(
-            userPrefs = UserPreferenceRepositoryImpl(UserPreferenceDataSource(requireActivity())),
-            authRepository = FirebaseAuthRepositoryImpl()
-        )
+        LoginViewModelFactory(contextValue = requireContext())
     }
+
+    private var _binding: FragmentLoginBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -78,8 +70,8 @@ class LoginFragment : Fragment() {
             }
         }
 
-        loginViewModel.isFacebookBtnClicked.observe(viewLifecycleOwner) {
-            if (it) {
+        loginViewModel.isFacebookBtnClicked.observe(viewLifecycleOwner) { isClicked ->
+            if (isClicked) {
                 if (isLoggedIn()) {
                     signOut()
                 } else {
@@ -154,11 +146,6 @@ class LoginFragment : Fragment() {
         loginViewModel.loginWithFacebook(token)
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        callbackManager.onActivityResult(requestCode, resultCode, data)
-    }
-
     private val launcher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == AppCompatActivity.RESULT_OK) {
@@ -172,17 +159,7 @@ class LoginFragment : Fragment() {
         }
 
     private fun loginWithGoogleRequest() {
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(BuildConfig.clientServerId)
-            .requestEmail()
-            .requestProfile()
-            .build()
-
-        val googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
-
-        googleSignInClient.signOut()
-
-        val signInIntent = googleSignInClient.signInIntent
+        val signInIntent = getGoogleRequestIntent(requireActivity())
         launcher.launch(signInIntent)
     }
 
