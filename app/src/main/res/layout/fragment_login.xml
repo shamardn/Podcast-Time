@@ -114,7 +114,7 @@
             android:textColor="@color/white"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:onClick="@{() -> viewModel.login()}"
+            android:onClick="@{() -> viewModel.loginWithEmailAndPassword()}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/password_input_layout" />

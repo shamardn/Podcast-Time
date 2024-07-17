@@ -3,7 +3,6 @@ package com.shamardn.podcasttime.di
 import android.content.Context
 import com.shamardn.podcasttime.data.datasource.datastore.AppConfiguration
 import com.shamardn.podcasttime.data.datasource.datastore.AppConfigurator
-import com.shamardn.podcasttime.data.datasource.datastore.DataStorePreferences
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,13 +16,7 @@ object DataStoreModule {
 
     @Singleton
     @Provides
-    fun provideDataStorePreferences(@ApplicationContext context: Context) =
-        DataStorePreferences(context)
-
-
-    @Singleton
-    @Provides
-    fun provideAppConfiguration(dataStorePreferences: DataStorePreferences): AppConfiguration =
-        AppConfigurator(dataStorePreferences)
+    fun provideAppConfiguration(@ApplicationContext context: Context): AppConfiguration =
+        AppConfigurator(context)
 
 }

@@ -8,6 +8,7 @@ import android.content.pm.PackageManager
 import android.media.AudioManager
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.view.animation.AnticipateInterpolator
@@ -18,22 +19,22 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.animation.doOnEnd
 import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.shamardn.podcasttime.PodcastTimeApplication
 import com.shamardn.podcasttime.R
-import com.shamardn.podcasttime.data.datasource.datastore.UserPreferenceDataSource
-import com.shamardn.podcasttime.data.repo.user.UserPreferenceRepositoryImpl
 import com.shamardn.podcasttime.databinding.ActivityMainBinding
+import com.shamardn.podcasttime.ui.auth.AuthActivity
 import com.shamardn.podcasttime.ui.bottomplayer.BottomPlayerFragment
 import com.shamardn.podcasttime.ui.common.viewmodel.UserViewModel
 import com.shamardn.podcasttime.ui.common.viewmodel.UserViewModelFactory
-import com.shamardn.podcasttime.ui.auth.AuthActivity
 import com.shamardn.podcasttime.util.CrashlyticsUtils
 import com.shamardn.podcasttime.util.NotificationException
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 @AndroidEntryPoint
@@ -42,7 +43,7 @@ class MainActivity : AppCompatActivity() {
     private val binding get() = _binding!!
 
     private val userViewModel: UserViewModel by viewModels {
-        UserViewModelFactory(UserPreferenceRepositoryImpl(UserPreferenceDataSource(this)))
+        UserViewModelFactory(context = this)
     }
 
     private val requestPermissionLauncher = registerForActivityResult(
@@ -88,6 +89,27 @@ class MainActivity : AppCompatActivity() {
         volumeControlStream = AudioManager.STREAM_MUSIC
 
         askNotificationPermission()
+
+        initViewModel()
+    }
+
+    private fun initViewModel() {
+        lifecycleScope.launch {
+            val userDetails = runBlocking { userViewModel.getUserDetails().first() }
+            Log.d(TAG, "initViewModel: user details ${userDetails.email}")
+
+            userViewModel.userDetailsState.collect {
+                Log.d(TAG, "initViewModel: user details updated ${it?.email}")
+            }
+
+        }
+    }
+
+    private fun logOut() {
+        lifecycleScope.launch {
+            userViewModel.logOut()
+            goToAuthActivity()
+        }
     }
 
     private fun goToAuthActivity() {

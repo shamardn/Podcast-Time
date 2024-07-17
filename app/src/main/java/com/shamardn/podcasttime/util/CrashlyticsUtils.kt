@@ -17,6 +17,7 @@ object CrashlyticsUtils {
     const val NOTIFICATION_KEY = "NOTIFICATION_KEY"
     const val LOGIN_KEY = "LOGIN_KEY"
     const val AUTH_PROVIDER = "AUTH_PROVIDER"
+    const val LISTEN_TO_USER_DETAILS = "LISTEN_TO_USER_DETAILS"
 
 
     fun sendLogToCrashlytics(msg: String, vararg keys: String) {
@@ -51,3 +52,4 @@ class CustomCrashlyticsLogException(message: String) : Exception(message)
 class SearchException(message: String) : Exception(message)
 class NotificationException(message: String) : Exception(message)
 class LoginException(message: String) : Exception(message)
+class UserDetailsException(message: String) : Exception(message)
