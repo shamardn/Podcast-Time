@@ -6,15 +6,16 @@ plugins {
     id 'com.google.dagger.hilt.android'
     id 'kotlin-parcelize'
     id 'com.google.gms.google-services'
+    id("com.google.firebase.crashlytics")
 }
 
 android {
     namespace 'com.shamardn.podcasttime'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.shamardn.podcasttime"
-        minSdk 22
+        minSdk 23
         targetSdk 33
         versionCode 1
         versionName "1.0"
@@ -27,6 +28,26 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        forEach{
+            it.buildConfigField(
+                    "String" , "clientServerId" , "\"180543863696-3fps3lb9t69hcj6mnunan8jd9va1k5mo.apps.googleusercontent.com\""
+            )
+            it.resValue(
+                    "string",
+                    "facebook_app_id",
+                    "\"492893389878853\""
+            )
+            it.resValue(
+                    "string",
+                    "fb_login_protocol_scheme",
+                    "\"fb492893389878853\""
+            )
+            it.resValue(
+                    "string",
+                    "facebook_client_token",
+                    "\"3a07d42f59628bc28e35fa5560fb15f4\""
+            )
+        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
@@ -36,7 +57,10 @@ android {
         jvmTarget = '17'
     }
     buildFeatures {
+        buildConfig = true
+
         viewBinding true
+        dataBinding true
     }
 }
 
@@ -45,6 +69,7 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.10.1'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.activity:activity:1.8.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
@@ -105,10 +130,28 @@ dependencies {
     implementation "androidx.datastore:datastore-preferences:1.0.0"
 
     // firebase
-    implementation(platform("com.google.firebase:firebase-bom:32.2.3"))
+    implementation(platform("com.google.firebase:firebase-bom:33.1.1"))
+
     // Firebase Cloud Messaging (Kotlin)
     implementation("com.google.firebase:firebase-messaging-ktx")
 
+    // Firebase crashlytics
+    implementation("com.google.firebase:firebase-crashlytics")
+    implementation("com.google.firebase:firebase-analytics")
+
+    //Firebase Auth
+    implementation("com.google.firebase:firebase-auth-ktx")
+    implementation("com.google.android.gms:play-services-auth:21.2.0")
+
+    //Firebase firestore
+    implementation("com.google.firebase:firebase-firestore")
+
+
+    // Reactive network to check connectivity
+    implementation("com.github.pwittchen:reactivenetwork-rx2:3.0.8")
+
+    // login with facebook
+    implementation ("com.facebook.android:facebook-login:17.0.0")
 }
 kapt {
     correctErrorTypes true

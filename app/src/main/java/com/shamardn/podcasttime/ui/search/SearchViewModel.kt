@@ -6,6 +6,8 @@ import androidx.lifecycle.viewModelScope
 import com.shamardn.podcasttime.domain.usecase.GetPodcastsUseCase
 import com.shamardn.podcasttime.ui.search.mapper.SearchUiStateMapper
 import com.shamardn.podcasttime.ui.search.uistate.SearchUiState
+import com.shamardn.podcasttime.util.CrashlyticsUtils
+import com.shamardn.podcasttime.util.SearchException
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -31,15 +33,21 @@ class SearchViewModel @Inject constructor(
                         isSuccess = true,
                         podcastUiState = response.results.map { podcast ->
                             searchUiStateMapper.map(podcast)
-
                         }
                     )
                 }
             }
         }catch (e: Exception){
-            Log.e("SearchViewModel", e.message.toString())
+            Log.e(TAG, e.message.toString())
             onError(e.message.toString())
         }
+    }
+
+    private fun logSearchIssueToCrashlytics(msg: String) {
+        CrashlyticsUtils.sendCustomLogToCrashlytics<SearchException>(
+            msg,
+            CrashlyticsUtils.SEARCH_KEY to msg,
+        )
     }
     private fun onError(message: String) {
         val errors = _searchUiState.value.error.toMutableList()
@@ -51,6 +59,11 @@ class SearchViewModel @Inject constructor(
                 isFailed = true,
             )
         }
+        logSearchIssueToCrashlytics(message)
+    }
+
+    companion object{
+        private const val TAG = "SearchViewModel"
     }
 
 }

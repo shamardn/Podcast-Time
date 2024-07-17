@@ -3,8 +3,8 @@ package com.shamardn.podcasttime.ui.podcastdetails
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.shamardn.podcasttime.data.local.database.entity.HistoryEntity
-import com.shamardn.podcasttime.data.local.database.entity.PodcastEntity
+import com.shamardn.podcasttime.data.datasource.local.database.entity.HistoryEntity
+import com.shamardn.podcasttime.data.datasource.local.database.entity.PodcastEntity
 import com.shamardn.podcasttime.domain.entity.EpisodeDTO
 import com.shamardn.podcasttime.domain.entity.PodcastResponse
 import com.shamardn.podcasttime.domain.usecase.GetHistoryListUseCase

@@ -1,10 +1,32 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="PodcastTimeTheme" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.PodcastTime" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-
+         <item name="colorPrimary">@color/primary</item> 
+        <item name="colorPrimaryDark">@color/white</item>
+        <item name="colorAccent">@color/primary</item>
+        <!--        system ui configurations -->
+        <item name="android:statusBarColor">@color/primary</item>
+        <item name="android:windowLightStatusBar" tools:ignore="NewApi">false</item>
+        <item name="android:navigationBarColor">@color/white</item>
+        <item name="android:windowLightNavigationBar" tools:ignore="NewApi,oreo">true</item>
         <item name="materialAlertDialogTheme">@style/ThemeOverlay.App.MaterialAlertDialog</item>
+    </style>
+
+    <style name="Theme.PodcastTime" parent="Base.Theme.PodcastTime"/>
+
+    <style name="Theme.MainActivity" parent="Theme.PodcastTime">
+        <item name="android:windowNoTitle">true</item>
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary</item>
+        <item name="android:windowBackground">@drawable/launch_background</item>
+
+        <!--        system ui configurations -->
+
+        <item name="android:statusBarColor">@color/primary</item>
+        <item name="android:windowLightStatusBar" tools:ignore="NewApi">false</item>
+        <item name="android:navigationBarColor">@color/white</item>
+        <item name="android:windowLightNavigationBar" tools:ignore="NewApi">true</item>
     </style>
 
     <style name="ThemeOverlay.App.MaterialAlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
@@ -36,12 +58,6 @@
         <item name="cornerFamilyBottomRight">rounded</item>
         <item name="cornerSizeBottomLeft">16dp</item>
         <item name="cornerSizeBottomRight">16dp</item>
-    </style>
-
-    <style name="PodcastTimeTheme.SplashScreen" parent="Theme.SplashScreen">
-        <item name="postSplashScreenTheme">@style/PodcastTimeTheme</item>
-        <item name="windowSplashScreenBackground">@color/primary</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/podcast_icon</item>
     </style>
 
 </resources>

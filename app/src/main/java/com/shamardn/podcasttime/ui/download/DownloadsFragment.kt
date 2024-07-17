@@ -11,7 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
-import com.shamardn.podcasttime.data.local.database.entity.EpisodeEntity
+import com.shamardn.podcasttime.data.datasource.local.database.entity.EpisodeEntity
 import com.shamardn.podcasttime.databinding.FragmentDownloadsBinding
 import com.shamardn.podcasttime.media.exoplayer.MediaViewModel
 import com.shamardn.podcasttime.ui.main.MainActivity

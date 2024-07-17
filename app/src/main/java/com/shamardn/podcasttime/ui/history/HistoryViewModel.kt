@@ -3,7 +3,7 @@ package com.shamardn.podcasttime.ui.history
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.shamardn.podcasttime.data.local.database.entity.HistoryEntity
+import com.shamardn.podcasttime.data.datasource.local.database.entity.HistoryEntity
 import com.shamardn.podcasttime.domain.usecase.DeleteHistoryListUseCase
 import com.shamardn.podcasttime.domain.usecase.DeletePodcastFromHistoryUseCase
 import com.shamardn.podcasttime.domain.usecase.GetHistoryListUseCase

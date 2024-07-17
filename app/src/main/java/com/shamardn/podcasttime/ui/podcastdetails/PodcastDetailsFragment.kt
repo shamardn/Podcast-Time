@@ -14,8 +14,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.shamardn.podcasttime.R
-import com.shamardn.podcasttime.data.local.database.entity.HistoryEntity
-import com.shamardn.podcasttime.data.local.database.entity.PodcastEntity
+import com.shamardn.podcasttime.data.datasource.local.database.entity.HistoryEntity
+import com.shamardn.podcasttime.data.datasource.local.database.entity.PodcastEntity
 import com.shamardn.podcasttime.databinding.FragmentPodcastDetailsBinding
 import com.shamardn.podcasttime.domain.entity.EpisodeDTO
 import com.shamardn.podcasttime.domain.entity.PodcastResponse

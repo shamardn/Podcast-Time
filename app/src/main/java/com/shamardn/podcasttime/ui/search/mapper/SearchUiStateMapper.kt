@@ -13,7 +13,7 @@ class SearchUiStateMapper @Inject constructor(
             trackId = input.trackId,
             trackName = input.trackName,
             artworkUrl100 = input.artworkUrl100,
-            releaseDate = input.releaseDate,
+            releaseDate = input.releaseDate ?: "2024-04-20T15:29:00Z",
             trackCount = input.trackCount,
             primaryGenreName = input.primaryGenreName,
             artistName = input.artistName,

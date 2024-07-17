@@ -1,7 +1,7 @@
 package com.shamardn.podcasttime.domain.mapper
 
-import com.shamardn.podcasttime.data.local.database.entity.EpisodeAudio
-import com.shamardn.podcasttime.data.local.database.entity.EpisodeEntity
+import com.shamardn.podcasttime.data.datasource.local.database.entity.EpisodeAudio
+import com.shamardn.podcasttime.data.datasource.local.database.entity.EpisodeEntity
 import javax.inject.Inject
 
 class EpisodeEntityMapper @Inject constructor(

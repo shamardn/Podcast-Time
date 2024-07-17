@@ -12,15 +12,33 @@
           "package_name": "com.shamardn.podcasttime"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "180543863696-lqmbhriktnik062mgt26pbd0r45te9ts.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.shamardn.podcasttime",
+            "certificate_hash": "f0a123fd365d73e28a7c34689fa5b4ceb7848685"
+          }
+        },
+        {
+          "client_id": "180543863696-3fps3lb9t69hcj6mnunan8jd9va1k5mo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyAHXh3ogcMy_z8yh1pBGZ49oteUOuE88CE"
+          "current_key": "AIzaSyBMfacYkpQmtBi1WkguNZZHFwbUBtfNvXc"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "180543863696-3fps3lb9t69hcj6mnunan8jd9va1k5mo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

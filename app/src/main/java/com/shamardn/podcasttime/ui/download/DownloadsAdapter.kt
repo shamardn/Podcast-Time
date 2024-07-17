@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.shamardn.podcasttime.R
-import com.shamardn.podcasttime.data.local.database.entity.EpisodeEntity
+import com.shamardn.podcasttime.data.datasource.local.database.entity.EpisodeEntity
 import com.shamardn.podcasttime.databinding.ItemDownloadBinding
 import com.shamardn.podcasttime.util.changeDateFormat
 import com.shamardn.podcasttime.util.milliSecondsToMinutes

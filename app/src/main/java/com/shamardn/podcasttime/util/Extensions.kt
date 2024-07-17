@@ -11,7 +11,7 @@ import androidx.core.net.toUri
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.shamardn.podcasttime.data.local.database.entity.EpisodeEntity
+import com.shamardn.podcasttime.data.datasource.local.database.entity.EpisodeEntity
 import java.text.SimpleDateFormat
 import java.time.Instant
 import java.time.format.DateTimeFormatter
@@ -69,24 +69,6 @@ fun List<MediaBrowserCompat.MediaItem>.asAudio() =
             guid = "",
         )
     }
-
-fun <T> Resource<T>.execute(
-    onSuccess : (T) -> Unit = {},
-    onError : (String) -> Unit = {},
-    onLoading : () -> Unit = {}
-) {
-    when(this.status){
-        Status.SUCCESS -> {
-            this.data?.let { onSuccess(it) }
-        }
-        Status.ERROR -> {
-            this.message?.let { onError(it) }
-        }
-        Status.LOADING -> {
-            onLoading()
-        }
-    }
-}
 
 fun View.setAlphaAnimation(){
     this.startAnimation(AlphaAnimation(9f, 0.1f))

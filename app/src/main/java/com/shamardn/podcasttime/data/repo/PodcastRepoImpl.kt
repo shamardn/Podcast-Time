@@ -1,14 +1,14 @@
 package com.shamardn.podcasttime.data.repo
 
-import com.shamardn.podcasttime.data.local.database.dao.EpisodeDao
-import com.shamardn.podcasttime.data.local.database.dao.HistoryDao
-import com.shamardn.podcasttime.data.local.database.dao.PodcastDao
-import com.shamardn.podcasttime.data.local.database.dao.SubscriptionsDao
-import com.shamardn.podcasttime.data.local.database.entity.EpisodeEntity
-import com.shamardn.podcasttime.data.local.database.entity.EpisodeAudio
-import com.shamardn.podcasttime.data.local.database.entity.HistoryEntity
-import com.shamardn.podcasttime.data.local.database.entity.PodcastEntity
-import com.shamardn.podcasttime.data.remote.ApiService
+import com.shamardn.podcasttime.data.datasource.local.database.dao.EpisodeDao
+import com.shamardn.podcasttime.data.datasource.local.database.dao.HistoryDao
+import com.shamardn.podcasttime.data.datasource.local.database.dao.PodcastDao
+import com.shamardn.podcasttime.data.datasource.local.database.dao.SubscriptionsDao
+import com.shamardn.podcasttime.data.datasource.local.database.entity.EpisodeEntity
+import com.shamardn.podcasttime.data.datasource.local.database.entity.EpisodeAudio
+import com.shamardn.podcasttime.data.datasource.local.database.entity.HistoryEntity
+import com.shamardn.podcasttime.data.datasource.local.database.entity.PodcastEntity
+import com.shamardn.podcasttime.data.datasource.remote.ApiService
 import com.shamardn.podcasttime.domain.entity.EpisodeDTO
 import com.shamardn.podcasttime.domain.entity.PodcastDTO
 import com.shamardn.podcasttime.domain.entity.PodcastResponse

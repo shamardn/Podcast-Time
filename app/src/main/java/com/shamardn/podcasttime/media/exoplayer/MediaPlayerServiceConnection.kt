@@ -8,7 +8,7 @@ import android.support.v4.media.session.MediaControllerCompat
 import android.support.v4.media.session.PlaybackStateCompat
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import com.shamardn.podcasttime.data.local.database.entity.EpisodeAudio
+import com.shamardn.podcasttime.data.datasource.local.database.entity.EpisodeAudio
 import com.shamardn.podcasttime.services.MediaPlaybackService
 import com.shamardn.podcasttime.util.Constants.REFRESH_MEDIA_PLAY_ACTION
 import com.shamardn.podcasttime.util.Constants.START_MEDIA_PLAY_ACTION

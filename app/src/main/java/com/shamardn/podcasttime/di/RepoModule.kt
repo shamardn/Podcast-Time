@@ -1,10 +1,10 @@
 package com.shamardn.podcasttime.di
 
-import com.shamardn.podcasttime.data.local.database.dao.EpisodeDao
-import com.shamardn.podcasttime.data.local.database.dao.HistoryDao
-import com.shamardn.podcasttime.data.local.database.dao.PodcastDao
-import com.shamardn.podcasttime.data.local.database.dao.SubscriptionsDao
-import com.shamardn.podcasttime.data.remote.ApiService
+import com.shamardn.podcasttime.data.datasource.local.database.dao.EpisodeDao
+import com.shamardn.podcasttime.data.datasource.local.database.dao.HistoryDao
+import com.shamardn.podcasttime.data.datasource.local.database.dao.PodcastDao
+import com.shamardn.podcasttime.data.datasource.local.database.dao.SubscriptionsDao
+import com.shamardn.podcasttime.data.datasource.remote.ApiService
 import com.shamardn.podcasttime.data.repo.PodcastRepoImpl
 import com.shamardn.podcasttime.domain.repo.PodcastRepo
 import dagger.Module

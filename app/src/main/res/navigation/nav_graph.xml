@@ -24,11 +24,6 @@
             app:destination="@id/episodeDetailsBottomSheet" />
     </fragment>
     <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.shamardn.podcasttime.ui.LoginFragment"
-        android:label="LoginFragment"
-        tools:layout="@layout/fragment_login"/>
-    <fragment
         android:id="@+id/searchFragment"
         android:name="com.shamardn.podcasttime.ui.search.SearchFragment"
         android:label="SearchFragment"
