@@ -36,11 +36,6 @@
             app:destination="@id/episodeDetailsBottomSheet" />
     </fragment>
     <fragment
-        android:id="@+id/signupFragment"
-        android:name="com.shamardn.podcasttime.ui.SignupFragment"
-        android:label="SignupFragment"
-        tools:layout="@layout/fragment_signup"/>
-    <fragment
         android:id="@+id/userProfileFragment"
         android:name="com.shamardn.podcasttime.ui.UserProfileFragment"
         android:label="UserProfileFragment"
@@ -142,6 +137,7 @@
     </fragment>
     <dialog
         android:id="@+id/themeBottomSheetFragment"
+        tools:layout="@layout/fragment_theme_bottom_sheet"
         android:name="com.shamardn.podcasttime.ui.theme.ThemeBottomSheetFragment"
         android:label="ThemeBottomSheetFragment" />
     <dialog

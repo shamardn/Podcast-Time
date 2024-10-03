@@ -173,7 +173,6 @@ class FirebaseAuthRepositoryImpl(
     override suspend fun registerWithEmailAndPassword(
         name: String, email: String, password: String
     ): Flow<Resource<UserDetailsModel>> {
-
         return flow {
             try {
                 emit(Resource.Loading)

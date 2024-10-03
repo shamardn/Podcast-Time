@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -27,6 +28,7 @@ import com.shamardn.podcasttime.ui.auth.getGoogleRequestIntent
 import com.shamardn.podcasttime.ui.auth.viewmodel.LoginViewModel
 import com.shamardn.podcasttime.ui.auth.viewmodel.LoginViewModelFactory
 import com.shamardn.podcasttime.ui.common.custom_views.ProgressDialog
+import com.shamardn.podcasttime.ui.search.SearchFragmentDirections
 import com.shamardn.podcasttime.ui.showRetrySnakeBar
 import com.shamardn.podcasttime.ui.showSnakeBarError
 import com.shamardn.podcasttime.util.CrashlyticsUtils
@@ -78,6 +80,9 @@ class LoginFragment : Fragment() {
                     loginWithFacebook()
                 }
             }
+        }
+        binding.textRegister.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
     }
 

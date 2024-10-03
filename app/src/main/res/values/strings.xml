@@ -27,7 +27,7 @@
     <string name="english">English</string>
     <string name="arabic">Arabic</string>
     <string name="dark">Dark</string>
-    <string name="email">Your Email</string>
+    <string name="email">your email</string>
     <string name="password">password</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
@@ -93,4 +93,12 @@
     <string name="ok">Ok</string>
     <string name="sign_in_failed">Sign in failed, please try again later!!</string>
     <string name="generic_err_msg">Error: Please Try Again Later!!</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="register_welcome_msg">Let\'s Get Started</string>
+    <string name="register_to_continue">Create a New Account!</string>
+    <string name="full_name">full name</string>
+    <string name="password_again">password Again</string>
+    <string name="signup">Sign Up</string>
+    <string name="have_an_account">Have an Account</string>
 </resources>
