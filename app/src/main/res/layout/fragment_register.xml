@@ -207,7 +207,6 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/space8x"
                     android:background="@drawable/circle_button"
-                    android:onClick="@{() -> viewModel.onClickGoogleBtn()}"
                     android:src="@drawable/ic_google" />
 
                 <ImageButton
@@ -216,7 +215,6 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/space8x"
                     android:background="@drawable/circle_button"
-                    android:onClick="@{() -> viewModel.onClickFacebookBtn()}"
                     android:src="@drawable/ic_facebook" />
             </LinearLayout>
 

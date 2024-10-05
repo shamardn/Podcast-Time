@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -28,7 +27,6 @@ import com.shamardn.podcasttime.ui.auth.getGoogleRequestIntent
 import com.shamardn.podcasttime.ui.auth.viewmodel.LoginViewModel
 import com.shamardn.podcasttime.ui.auth.viewmodel.LoginViewModelFactory
 import com.shamardn.podcasttime.ui.common.custom_views.ProgressDialog
-import com.shamardn.podcasttime.ui.search.SearchFragmentDirections
 import com.shamardn.podcasttime.ui.showRetrySnakeBar
 import com.shamardn.podcasttime.ui.showSnakeBarError
 import com.shamardn.podcasttime.util.CrashlyticsUtils
@@ -66,19 +64,15 @@ class LoginFragment : Fragment() {
     }
 
     private fun handleObservers() {
-        loginViewModel.isGoogleBtnClicked.observe(viewLifecycleOwner) {
-            if (it) {
-                loginWithGoogleRequest()
-            }
+        binding.btnLoginGoogle.setOnClickListener {
+            loginWithGoogleRequest()
         }
 
-        loginViewModel.isFacebookBtnClicked.observe(viewLifecycleOwner) { isClicked ->
-            if (isClicked) {
-                if (isLoggedIn()) {
-                    signOut()
-                } else {
-                    loginWithFacebook()
-                }
+        binding.btnLoginFace.setOnClickListener {
+            if (!isLoggedIn()) {
+                loginWithFacebook()
+            } else {
+                signOut()
             }
         }
         binding.textRegister.setOnClickListener {
@@ -97,6 +91,7 @@ class LoginFragment : Fragment() {
                     is Resource.Success -> {
                         progressDialog.dismiss()
                         findNavController().navigate(R.id.action_loginFragment_to_mainActivity)
+                        requireActivity().finish()
                     }
 
                     is Resource.Error -> {
@@ -182,13 +177,13 @@ class LoginFragment : Fragment() {
     private fun logAuthIssuesToCrashlytics(msg: String, provider: String) {
         CrashlyticsUtils.sendCustomLogToCrashlytics<LoginException>(
             msg,
-            CrashlyticsUtils.LOGIN_KEY to  msg,
+            CrashlyticsUtils.LOGIN_KEY to msg,
             CrashlyticsUtils.AUTH_PROVIDER to provider,
-            )
+        )
     }
 
     private fun firebaseAuthWithGoogle(idToken: String) {
-       loginViewModel.loginWithGoogle(idToken)
+        loginViewModel.loginWithGoogle(idToken)
     }
 
 

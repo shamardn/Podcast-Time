@@ -1,7 +1,6 @@
 package com.shamardn.podcasttime.ui.auth.viewmodel
 
 import android.content.Context
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
@@ -16,7 +15,6 @@ import com.shamardn.podcasttime.data.repo.user.UserPreferenceRepository
 import com.shamardn.podcasttime.data.repo.user.UserPreferenceRepositoryImpl
 import com.shamardn.podcasttime.util.isEmailValid
 import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -38,8 +36,6 @@ class RegisterViewModel(
     val email = MutableStateFlow("")
     val password = MutableStateFlow("")
     val confirmPassword = MutableStateFlow("")
-    val isFacebookBtnClicked = MutableLiveData(false)
-    val isGoogleBtnClicked = MutableLiveData(false)
 
     private val isRegisterValid = combine(
         name, email, password, confirmPassword
@@ -61,13 +57,11 @@ class RegisterViewModel(
         }
     }
 
-
-    fun onClickGoogleBtn() {
-        isGoogleBtnClicked.postValue(true)
-    }
-    fun onClickFacebookBtn() {
-        isFacebookBtnClicked.postValue(true)
-    }
+    fun registerWithGoogle(idToken: String) = viewModelScope.launch {
+            authRepository.registerWithGoogle(idToken).collect {
+                _registerState.emit(it)
+            }
+        }
 }
 
 class RegisterViewModelFactory(

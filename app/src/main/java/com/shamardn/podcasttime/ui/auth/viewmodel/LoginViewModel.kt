@@ -1,7 +1,6 @@
 package com.shamardn.podcasttime.ui.auth.viewmodel
 
 import android.content.Context
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -41,16 +40,6 @@ class LoginViewModel(
 
     private val isLoginValid: Flow<Boolean> = combine(email, password) { email, password ->
         email.isEmailValid() && password.length >= 6
-    }
-
-    val isGoogleBtnClicked = MutableLiveData(false)
-    val isFacebookBtnClicked = MutableLiveData(false)
-
-    fun onClickGoogleBtn() {
-        isGoogleBtnClicked.postValue(true)
-    }
-    fun onClickFacebookBtn() {
-        isFacebookBtnClicked.postValue(true)
     }
 
     fun loginWithEmailAndPassword() = viewModelScope.launch(IO) {
