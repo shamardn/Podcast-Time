@@ -10,6 +10,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.facebook.AccessToken
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.login.LoginManager
+import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.common.api.ApiException
@@ -29,6 +35,9 @@ import com.shamardn.podcasttime.util.RegisterException
 import kotlinx.coroutines.launch
 
 class RegisterFragment : Fragment() {
+    private val callbackManager: CallbackManager by lazy { CallbackManager.Factory.create() }
+    private val loginManager: LoginManager by lazy { LoginManager.getInstance() }
+
     private val registerViewModel: RegisterViewModel by viewModels {
         RegisterViewModelFactory(contextValue = requireContext())
     }
@@ -87,24 +96,60 @@ class RegisterFragment : Fragment() {
     }
 
     private fun handleObservers() {
-        binding.btnSignupGoogle.setOnClickListener{
+        binding.btnRegisterSignupGoogle.setOnClickListener{
             registerWithGoogleRequest()
         }
 
-        binding.btnSignupFace.setOnClickListener {
-//            if (!isLoggedIn()) {
-//                loginWithFacebook()
-//            } else {
-//                signOut()
-//            }
+        binding.btnRegisterSignupFace.setOnClickListener {
+            if (!isLoggedIn()) {
+                loginWithFacebook()
+            } else {
+                signOut()
+            }
         }
-        binding.btnSignup.setOnClickListener {
+        binding.btnRegisterSignup.setOnClickListener {
             registerViewModel.registerWithEmailAndPassword()
         }
 
-        binding.textLogin.setOnClickListener {
+        binding.textRegisterLogin.setOnClickListener {
             findNavController().popBackStack()
         }
+    }
+
+    private fun signOut() {
+        loginManager.logOut()
+    }
+
+    private fun isLoggedIn(): Boolean {
+        val accessToken = AccessToken.getCurrentAccessToken()
+        return accessToken != null && !accessToken.isExpired
+    }
+
+    private fun loginWithFacebook() {
+        loginManager.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
+            override fun onSuccess(result: LoginResult) {
+                val token = result.accessToken.token
+                firebaseAuthWithFacebook(token)
+            }
+
+            override fun onCancel() {
+                // Handle login cancel
+            }
+
+            override fun onError(error: FacebookException) {
+                val msg = error.message ?: getString(R.string.generic_err_msg)
+                view?.showSnakeBarError(msg)
+                logAuthIssuesToCrashlytics(msg, "Facebook")
+            }
+        })
+
+        loginManager.logInWithReadPermissions(
+            this, callbackManager, listOf("email", "public_profile")
+        )
+    }
+
+    private fun firebaseAuthWithFacebook(token: String) {
+        registerViewModel.registerWithFacebook(token)
     }
 
     private fun handleSignupResult(completedTask: Task<GoogleSignInAccount>) {
