@@ -75,9 +75,19 @@ class LoginFragment : Fragment() {
                 signOut()
             }
         }
+
+        binding.textLoginForgetPassword.setOnClickListener {
+            showForgetPasswordDialog()
+        }
+
         binding.textLoginRegister.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
+    }
+
+    private fun showForgetPasswordDialog() {
+        val forgetPasswordDialog = ForgetPasswordFragment()
+        forgetPasswordDialog.show(childFragmentManager, "ForgetPasswordFragment")
     }
 
     private fun initViewModel() {

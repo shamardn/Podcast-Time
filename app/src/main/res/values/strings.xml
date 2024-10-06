@@ -99,4 +99,6 @@
     <string name="password_again">password Again</string>
     <string name="signup">Sign Up</string>
     <string name="have_an_account">Have an Account</string>
+    <string name="forget_password_msg">Enter your Email to send you an email to update your Password.</string>
+    <string name="send">Send</string>
 </resources>

@@ -78,17 +78,20 @@ class RegisterFragment : Fragment() {
 
     private fun initViewModel() {
         lifecycleScope.launch {
-            registerViewModel.registerState.collect { resources ->
-                when(resources){
+            registerViewModel.registerState.collect { resource ->
+                when(resource){
                     is Resource.Loading -> {
                         progressDialog.show()
                     }
                     is Resource.Success -> {
                         progressDialog.dismiss()
-                        showLoginSuccessDialog()
+                        showRegisterSuccessDialog()
                     }
                     is Resource.Error -> {
                         progressDialog.dismiss()
+                        val msg = resource.exception?.message ?: getString(R.string.generic_err_msg)
+                        view?.showSnakeBarError(msg)
+                        logAuthIssuesToCrashlytics(msg, "Register Error")
                     }
                 }
             }
@@ -180,7 +183,7 @@ class RegisterFragment : Fragment() {
         )
     }
 
-    private fun showLoginSuccessDialog() {
+    private fun showRegisterSuccessDialog() {
         MaterialAlertDialogBuilder(requireActivity()).setTitle("Register Success")
             .setMessage("We have sent you an email verification link. Please verify your email to login.")
             .setPositiveButton(
@@ -189,5 +192,10 @@ class RegisterFragment : Fragment() {
                 dialog?.dismiss()
                 findNavController().popBackStack()
             }.create().show()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }

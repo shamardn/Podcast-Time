@@ -62,11 +62,13 @@
     <string name="loading">Loading</string>
     <string name="ok">Ok</string>
     <string name="sign_in_failed">Sign in failed, please try again later!!</string>
-    <string name="generic_err_msg">Error: Please Try Again Later!!</string>
+    <string name="generic_err_msg">خطأ: من فضلك حاول مرة أخرى لاحقا</string>
     <string name="register_welcome_msg">هيا بنا نبدأ</string>
     <string name="register_to_continue">أنشيء حساب جديد</string>
     <string name="full_name">الأسم بالكامل</string>
     <string name="password_again">كلمة المرور مرة أخري</string>
     <string name="signup">تسجيل</string>
     <string name="have_an_account">"لديك حساب "</string>
+    <string name="forget_password_msg">ادخل ايميلك لتحديث كلمة المرور</string>
+    <string name="send">ارسال</string>
 </resources>
