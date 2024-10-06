@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Podcast Time</string>
+    <string name="app_name" translatable="false">Podcast Time</string>
     <string name="home" translatable="false">Home</string>
     <string name="subscriptions">Subscriptions</string>
     <string name="downloads">Downloads</string>
@@ -90,11 +90,9 @@
     <string name="login_with_google">Login with google</string>
     <string name="login_with_facebook">login with facebook</string>
     <string name="loading">Loading</string>
-    <string name="ok">Ok</string>
+    <string name="ok">OK</string>
     <string name="sign_in_failed">Sign in failed, please try again later!!</string>
     <string name="generic_err_msg">Error: Please Try Again Later!!</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="register_welcome_msg">Let\'s Get Started</string>
     <string name="register_to_continue">Create a New Account!</string>
     <string name="full_name">full name</string>

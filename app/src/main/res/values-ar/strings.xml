@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Podcast Time</string>
     <string name="settings">الاعدادات</string>
     <string name="search">بحث</string>
     <string name="download">تحميل</string>
@@ -64,4 +63,10 @@
     <string name="ok">Ok</string>
     <string name="sign_in_failed">Sign in failed, please try again later!!</string>
     <string name="generic_err_msg">Error: Please Try Again Later!!</string>
+    <string name="register_welcome_msg">هيا بنا نبدأ</string>
+    <string name="register_to_continue">أنشيء حساب جديد</string>
+    <string name="full_name">الأسم بالكامل</string>
+    <string name="password_again">كلمة المرور مرة أخري</string>
+    <string name="signup">تسجيل</string>
+    <string name="have_an_account">"لديك حساب "</string>
 </resources>

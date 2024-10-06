@@ -75,7 +75,7 @@ class LoginFragment : Fragment() {
                 signOut()
             }
         }
-        binding.textRegister.setOnClickListener {
+        binding.textLoginRegister.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
     }

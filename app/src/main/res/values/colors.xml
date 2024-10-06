@@ -30,6 +30,7 @@
     <color name="on_surface">#1a1c1e</color>
     <color name="surface_variant">#dee3eb</color>
     <color name="on_surface_variant">#696E75</color>
+    <color name="hint_color">#AAABAE</color>
 
     <color name="font_primary_color">#1a1c1e</color>
     <color name="card_background">#26F83066</color>
