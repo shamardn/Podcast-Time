@@ -24,29 +24,35 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    def localProperties = new Properties()
+    localProperties.load(new FileInputStream(rootProject.file("local.properties")))
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+
         forEach{
             it.buildConfigField(
-                    "String" , "clientServerId" , "\"180543863696-3fps3lb9t69hcj6mnunan8jd9va1k5mo.apps.googleusercontent.com\""
+                    "String",
+                    "clientServerId",
+                    localProperties['CLIENT_SERVER_ID']
             )
             it.resValue(
                     "string",
                     "facebook_app_id",
-                    "\"492893389878853\""
+                    localProperties['FACEBOOK_APP_ID']
             )
             it.resValue(
                     "string",
                     "fb_login_protocol_scheme",
-                    "\"fb492893389878853\""
+                    localProperties['FB_LOGIN_PROTOCOL_SCHEME']
             )
             it.resValue(
                     "string",
                     "facebook_client_token",
-                    "\"3a07d42f59628bc28e35fa5560fb15f4\""
+                    localProperties['FACEBOOK_CLIENT_TOKEN']
             )
         }
     }
