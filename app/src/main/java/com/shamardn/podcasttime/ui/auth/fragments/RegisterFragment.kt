@@ -20,39 +20,52 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.shamardn.podcasttime.R
 import com.shamardn.podcasttime.data.models.Resource
-import com.shamardn.podcasttime.databinding.FragmentLoginBinding
+import com.shamardn.podcasttime.databinding.FragmentRegisterBinding
 import com.shamardn.podcasttime.ui.auth.getGoogleRequestIntent
-import com.shamardn.podcasttime.ui.auth.viewmodel.LoginViewModel
-import com.shamardn.podcasttime.ui.auth.viewmodel.LoginViewModelFactory
+import com.shamardn.podcasttime.ui.auth.viewmodel.RegisterViewModel
+import com.shamardn.podcasttime.ui.auth.viewmodel.RegisterViewModelFactory
 import com.shamardn.podcasttime.ui.common.custom_views.ProgressDialog
 import com.shamardn.podcasttime.ui.showRetrySnakeBar
 import com.shamardn.podcasttime.ui.showSnakeBarError
 import com.shamardn.podcasttime.util.CrashlyticsUtils
-import com.shamardn.podcasttime.util.LoginException
+import com.shamardn.podcasttime.util.RegisterException
 import kotlinx.coroutines.launch
 
-class LoginFragment : Fragment() {
+class RegisterFragment : Fragment() {
     private val callbackManager: CallbackManager by lazy { CallbackManager.Factory.create() }
     private val loginManager: LoginManager by lazy { LoginManager.getInstance() }
 
-    val progressDialog by lazy { ProgressDialog.createProgressDialog(requireActivity()) }
-
-    private val loginViewModel: LoginViewModel by viewModels {
-        LoginViewModelFactory(contextValue = requireContext())
+    private val registerViewModel: RegisterViewModel by viewModels {
+        RegisterViewModelFactory(contextValue = requireContext())
     }
 
-    private var _binding: FragmentLoginBinding? = null
+    val progressDialog by lazy { ProgressDialog.createProgressDialog(requireActivity()) }
+
+    private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
+
+    private val launcher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == AppCompatActivity.RESULT_OK) {
+                val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
+                handleSignupResult(task)
+            } else {
+                view?.showRetrySnakeBar(getString(R.string.sign_in_failed)) {
+                    registerWithGoogleRequest()
+                }
+            }
+        }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        _binding = FragmentLoginBinding.inflate(inflater, container, false)
+        _binding = FragmentRegisterBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
-        binding.viewModel = loginViewModel
+        binding.viewModel = registerViewModel
 
         return binding.root
     }
@@ -63,61 +76,47 @@ class LoginFragment : Fragment() {
         handleObservers()
     }
 
-    private fun handleObservers() {
-        binding.btnLoginGoogle.setOnClickListener {
-            loginWithGoogleRequest()
-        }
-
-        binding.btnLoginFace.setOnClickListener {
-            if (!isLoggedIn()) {
-                loginWithFacebook()
-            } else {
-                signOut()
-            }
-        }
-
-        binding.textLoginForgetPassword.setOnClickListener {
-            showForgetPasswordDialog()
-        }
-
-        binding.textLoginRegister.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
-        }
-    }
-
-    private fun showForgetPasswordDialog() {
-        val forgetPasswordDialog = ForgetPasswordFragment()
-        forgetPasswordDialog.show(childFragmentManager, "ForgetPasswordFragment")
-    }
-
     private fun initViewModel() {
         lifecycleScope.launch {
-            loginViewModel.loginState.collect { resource ->
-                when (resource) {
+            registerViewModel.registerState.collect { resource ->
+                when(resource){
                     is Resource.Loading -> {
                         progressDialog.show()
                     }
-
                     is Resource.Success -> {
                         progressDialog.dismiss()
-                        findNavController().navigate(R.id.action_loginFragment_to_mainActivity)
-                        requireActivity().finish()
+                        showRegisterSuccessDialog()
                     }
-
                     is Resource.Error -> {
                         progressDialog.dismiss()
                         val msg = resource.exception?.message ?: getString(R.string.generic_err_msg)
                         view?.showSnakeBarError(msg)
-                        logAuthIssuesToCrashlytics(msg, "Login Error")
+                        logAuthIssuesToCrashlytics(msg, "Register Error")
                     }
                 }
             }
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
+    private fun handleObservers() {
+        binding.btnRegisterSignupGoogle.setOnClickListener{
+            registerWithGoogleRequest()
+        }
+
+        binding.btnRegisterSignupFace.setOnClickListener {
+            if (!isLoggedIn()) {
+                loginWithFacebook()
+            } else {
+                signOut()
+            }
+        }
+        binding.btnRegisterSignup.setOnClickListener {
+            registerViewModel.registerWithEmailAndPassword()
+        }
+
+        binding.textRegisterLogin.setOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 
     private fun signOut() {
@@ -153,27 +152,10 @@ class LoginFragment : Fragment() {
     }
 
     private fun firebaseAuthWithFacebook(token: String) {
-        loginViewModel.loginWithFacebook(token)
+        registerViewModel.registerWithFacebook(token)
     }
 
-    private val launcher =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == AppCompatActivity.RESULT_OK) {
-                val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
-                handleSignInResult(task)
-            } else {
-                view?.showRetrySnakeBar(getString(R.string.sign_in_failed)) {
-                    loginWithGoogleRequest()
-                }
-            }
-        }
-
-    private fun loginWithGoogleRequest() {
-        val signInIntent = getGoogleRequestIntent(requireActivity())
-        launcher.launch(signInIntent)
-    }
-
-    private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
+    private fun handleSignupResult(completedTask: Task<GoogleSignInAccount>) {
         try {
             val account = completedTask.getResult(ApiException::class.java)
             firebaseAuthWithGoogle(account.idToken!!)
@@ -184,20 +166,36 @@ class LoginFragment : Fragment() {
         }
     }
 
+    private fun firebaseAuthWithGoogle(idToken: String) {
+        registerViewModel.registerWithGoogle(idToken)
+    }
+
+    private fun registerWithGoogleRequest() {
+        val signupIntent = getGoogleRequestIntent(requireActivity())
+        launcher.launch(signupIntent)
+    }
+
     private fun logAuthIssuesToCrashlytics(msg: String, provider: String) {
-        CrashlyticsUtils.sendCustomLogToCrashlytics<LoginException>(
+        CrashlyticsUtils.sendCustomLogToCrashlytics<RegisterException>(
             msg,
-            CrashlyticsUtils.LOGIN_KEY to msg,
+            CrashlyticsUtils.REGISTER_KEY to msg,
             CrashlyticsUtils.AUTH_PROVIDER to provider,
         )
     }
 
-    private fun firebaseAuthWithGoogle(idToken: String) {
-        loginViewModel.loginWithGoogle(idToken)
+    private fun showRegisterSuccessDialog() {
+        MaterialAlertDialogBuilder(requireActivity()).setTitle("Register Success")
+            .setMessage("We have sent you an email verification link. Please verify your email to login.")
+            .setPositiveButton(
+                "OK"
+            ) { dialog, which ->
+                dialog?.dismiss()
+                findNavController().popBackStack()
+            }.create().show()
     }
 
-
-    companion object {
-        private const val TAG = "LoginFragment"
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }
