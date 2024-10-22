@@ -57,10 +57,11 @@
             android:value="@string/facebook_client_token" />
 
         <service
-            android:name=".services.MediaPlaybackService"
-            android:exported="false">
+            android:name=".player.MediaService"
+            android:exported="true"
+            android:foregroundServiceType="mediaPlayback">
             <intent-filter>
-                <action android:name="android.media.browse.MediaBrowserService" />
+                <action android:name="androidx.media3.session.MediaSessionService" />
             </intent-filter>
         </service>
         <service
@@ -72,7 +73,7 @@
                 android:value="true" />
         </service>
         <service
-            android:name=".services.MyFirebaseMessagingService"
+            android:name=".service.MyFirebaseMessagingService"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
