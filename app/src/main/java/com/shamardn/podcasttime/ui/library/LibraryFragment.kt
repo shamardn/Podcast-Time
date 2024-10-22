@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.shamardn.podcasttime.databinding.FragmentLibraryBinding
-import com.shamardn.podcasttime.media.exoplayer.MediaViewModel
+import com.shamardn.podcasttime.ui.common.viewmodel.PlayerViewModel
 import com.shamardn.podcasttime.ui.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -16,7 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class LibraryFragment : Fragment() {
 
     lateinit var binding: FragmentLibraryBinding
-    private val mediaViewModel: MediaViewModel by activityViewModels()
+    private val playerViewModel: PlayerViewModel by activityViewModels()
     private var bottomNavigationViewVisibility = View.VISIBLE
 
     private fun setBottomNavigationVisibility() {
@@ -77,7 +77,7 @@ class LibraryFragment : Fragment() {
     }
 
     private fun showBottomSheet() {
-        mediaViewModel.isBottomSheetOpened.observe(viewLifecycleOwner) {
+        playerViewModel.isBottomSheetOpened.observe(viewLifecycleOwner) {
             if (it) {
                 val action =
                     LibraryFragmentDirections.actionLibraryFragmentToEpisodeDetailsBottomSheet()

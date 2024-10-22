@@ -1,4 +1,4 @@
-package com.shamardn.podcasttime.data.datasource.datastore
+package com.shamardn.podcasttime.data.datasource.local.datastore
 
 import android.content.Context
 import androidx.datastore.core.CorruptionException
@@ -10,8 +10,8 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.datastore.preferences.protobuf.InvalidProtocolBufferException
-import com.shamardn.podcasttime.data.datasource.datastore.DataStoreKeys.PODCAST_TIME_PREFERENCES
-import com.shamardn.podcasttime.data.datasource.datastore.DataStoreKeys.USER_DETAILS_PREFERENCES_PB
+import com.shamardn.podcasttime.data.datasource.local.datastore.DataStoreKeys.PODCAST_TIME_PREFERENCES
+import com.shamardn.podcasttime.data.datasource.local.datastore.DataStoreKeys.USER_DETAILS_PREFERENCES_PB
 import com.shamardn.podcasttime.data.models.user.UserDetailsPreferences
 import java.io.InputStream
 import java.io.OutputStream

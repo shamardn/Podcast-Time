@@ -2,7 +2,7 @@ package com.shamardn.podcasttime.ui.history.mapper
 
 import com.shamardn.podcasttime.data.datasource.local.database.entity.HistoryEntity
 import com.shamardn.podcasttime.domain.mapper.Mapper
-import com.shamardn.podcasttime.ui.history.uistate.PodcastUiState
+import com.shamardn.podcasttime.ui.common.uistate.PodcastUiState
 import javax.inject.Inject
 
 class HistoryUiStateMapper @Inject constructor(
@@ -17,6 +17,7 @@ class HistoryUiStateMapper @Inject constructor(
             trackCount = input.trackCount,
             primaryGenreName = input.primaryGenreName,
             artistName = input.artistName,
+            collectionName = input.collectionName,
         )
     }
 }

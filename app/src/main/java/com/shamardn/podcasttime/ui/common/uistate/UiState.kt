@@ -1,6 +1,6 @@
-package com.shamardn.podcasttime.ui.history.uistate
+package com.shamardn.podcasttime.ui.common.uistate
 
-data class HistoryUiState(
+data class UiState(
     val isLoading: Boolean = true,
     val error : List<String> = emptyList(),
     val isFailed : Boolean = false,

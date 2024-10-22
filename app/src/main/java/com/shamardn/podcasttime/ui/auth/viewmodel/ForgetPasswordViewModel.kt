@@ -3,8 +3,8 @@ package com.shamardn.podcasttime.ui.auth.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.shamardn.podcasttime.data.models.Resource
-import com.shamardn.podcasttime.data.repo.auth.FirebaseAuthRepository
+import com.shamardn.podcasttime.data.model.Resource
+import com.shamardn.podcasttime.domain.repo.auth.FirebaseAuthRepository
 import com.shamardn.podcasttime.data.repo.auth.FirebaseAuthRepositoryImpl
 import com.shamardn.podcasttime.util.isEmailValid
 import kotlinx.coroutines.Dispatchers.IO

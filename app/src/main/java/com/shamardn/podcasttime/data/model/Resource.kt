@@ -1,4 +1,4 @@
-package com.shamardn.podcasttime.data.models
+package com.shamardn.podcasttime.data.model
 
 sealed class Resource<out T>(
     val data: T? = null, val exception: Exception? = null

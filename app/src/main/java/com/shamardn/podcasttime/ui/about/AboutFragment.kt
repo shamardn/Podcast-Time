@@ -9,14 +9,14 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.shamardn.podcasttime.databinding.FragmentAboutBinding
-import com.shamardn.podcasttime.media.exoplayer.MediaViewModel
+import com.shamardn.podcasttime.ui.common.viewmodel.PlayerViewModel
 import com.shamardn.podcasttime.ui.main.MainActivity
 
 class AboutFragment : Fragment() {
 
     private lateinit var binding: FragmentAboutBinding
     private var bottomNavigationViewVisibility = View.GONE
-    private val mediaViewModel: MediaViewModel by activityViewModels()
+    private val playerViewModel: PlayerViewModel by activityViewModels()
 
     private fun setBottomNavigationVisibility() {
         if (activity is MainActivity) {
@@ -44,7 +44,7 @@ class AboutFragment : Fragment() {
     }
 
     private fun showBottomSheet() {
-        mediaViewModel.isBottomSheetOpened.observe(viewLifecycleOwner) {
+        playerViewModel.isBottomSheetOpened.observe(viewLifecycleOwner) {
             if (it) {
                 val action =
                     AboutFragmentDirections.actionAboutFragmentToEpisodeDetailsBottomSheet()

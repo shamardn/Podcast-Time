@@ -1,4 +1,4 @@
-package com.shamardn.podcasttime.data.models.user
+package com.shamardn.podcasttime.data.model.user
 
 enum class AuthProvider {
     GOOGLE,

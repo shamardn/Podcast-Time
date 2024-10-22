@@ -1,4 +1,4 @@
-package com.shamardn.podcasttime.data.datasource.datastore
+package com.shamardn.podcasttime.data.datasource.local.datastore
 
 
 import android.content.Context

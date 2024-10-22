@@ -1,4 +1,4 @@
-package com.shamardn.podcasttime.data.repo.common
+package com.shamardn.podcasttime.domain.repo.common
 
 import kotlinx.coroutines.flow.Flow
 

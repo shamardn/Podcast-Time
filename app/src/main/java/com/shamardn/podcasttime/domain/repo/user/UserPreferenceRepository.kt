@@ -1,4 +1,4 @@
-package com.shamardn.podcasttime.data.repo.user
+package com.shamardn.podcasttime.domain.repo.user
 
 import com.shamardn.podcasttime.data.models.user.UserDetailsPreferences
 import kotlinx.coroutines.flow.Flow

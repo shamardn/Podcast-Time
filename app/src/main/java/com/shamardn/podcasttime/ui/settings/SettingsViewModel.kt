@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.shamardn.podcasttime.data.datasource.datastore.AppConfiguration
+import com.shamardn.podcasttime.data.datasource.local.datastore.AppConfiguration
 import com.shamardn.podcasttime.util.Event
 import com.shamardn.podcasttime.util.SettingsUtils
 import com.shamardn.podcasttime.util.postEvent

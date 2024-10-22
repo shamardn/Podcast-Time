@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.shamardn.podcasttime.R
 import com.shamardn.podcasttime.databinding.ItemPodcastBinding
-import com.shamardn.podcasttime.ui.search.uistate.PodcastUiState
+import com.shamardn.podcasttime.ui.common.uistate.PodcastUiState
 import com.shamardn.podcasttime.util.changeDateFormat
 
 class SearchAdapter(

@@ -1,4 +1,4 @@
-package com.shamardn.podcasttime.data.models.user
+package com.shamardn.podcasttime.data.model.user
 
 import android.os.Parcelable
 import androidx.annotation.Keep

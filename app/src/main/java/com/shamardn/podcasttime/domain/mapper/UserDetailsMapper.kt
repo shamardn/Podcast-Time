@@ -1,6 +1,6 @@
 package com.shamardn.podcasttime.domain.mapper
 
-import com.shamardn.podcasttime.data.models.user.UserDetailsModel
+import com.shamardn.podcasttime.data.model.user.UserDetailsModel
 import com.shamardn.podcasttime.data.models.user.UserDetailsPreferences
 
 fun UserDetailsPreferences.toUserDetailsModel(): UserDetailsModel {

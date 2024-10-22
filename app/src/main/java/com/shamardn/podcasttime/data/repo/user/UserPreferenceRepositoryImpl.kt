@@ -1,8 +1,9 @@
 package com.shamardn.podcasttime.data.repo.user
 
 import android.content.Context
-import com.shamardn.podcasttime.data.datasource.datastore.userDetailsDataStore
+import com.shamardn.podcasttime.data.datasource.local.datastore.userDetailsDataStore
 import com.shamardn.podcasttime.data.models.user.UserDetailsPreferences
+import com.shamardn.podcasttime.domain.repo.user.UserPreferenceRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 

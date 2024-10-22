@@ -1,7 +1,7 @@
-package com.shamardn.podcasttime.data.repo.auth
+package com.shamardn.podcasttime.domain.repo.auth
 
-import com.shamardn.podcasttime.data.models.Resource
-import com.shamardn.podcasttime.data.models.user.UserDetailsModel
+import com.shamardn.podcasttime.data.model.Resource
+import com.shamardn.podcasttime.data.model.user.UserDetailsModel
 import kotlinx.coroutines.flow.Flow
 
 interface FirebaseAuthRepository {
