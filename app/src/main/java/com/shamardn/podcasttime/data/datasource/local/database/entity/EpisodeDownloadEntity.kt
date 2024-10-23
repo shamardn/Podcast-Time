@@ -6,17 +6,19 @@ import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-@Entity(tableName = "PODCAST_TABLE")
-data class EpisodeAudio(
-    @PrimaryKey(autoGenerate = true)
+@Entity(tableName = "EPISODE_DOWNLOAD_TABLE")
+data class EpisodeDownloadEntity(
+    @PrimaryKey()
+    val guid: String,
     val id : Long,
+    val collectionId: Int,
     val collectionName: String,
+    val artistName: String,
     val trackName: String,
     val releaseDate: String,
     val description: String,
-    val trackTimeMillis: Int,
-    val artworkUrl160: String,
+    val trackTimeMillis: Long,
+    val artworkUrl100: String,
     val episodeUrl: String,
-    val guid: String,
     val episodeFileExtension: String,
 ): Parcelable
