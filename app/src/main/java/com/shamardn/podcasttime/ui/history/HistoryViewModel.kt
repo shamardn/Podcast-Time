@@ -7,11 +7,12 @@ import com.shamardn.podcasttime.data.datasource.local.database.entity.HistoryEnt
 import com.shamardn.podcasttime.domain.usecase.DeleteHistoryListUseCase
 import com.shamardn.podcasttime.domain.usecase.DeletePodcastFromHistoryUseCase
 import com.shamardn.podcasttime.domain.usecase.GetHistoryListUseCase
+import com.shamardn.podcasttime.ui.common.uistate.PodcastUiState
+import com.shamardn.podcasttime.ui.common.uistate.UiState
 import com.shamardn.podcasttime.ui.history.mapper.HistoryEntityMapper
 import com.shamardn.podcasttime.ui.history.mapper.HistoryUiStateMapper
-import com.shamardn.podcasttime.ui.history.uistate.HistoryUiState
-import com.shamardn.podcasttime.ui.history.uistate.PodcastUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
@@ -26,31 +27,27 @@ class HistoryViewModel @Inject constructor(
     private val deletePodcastFromHistoryUseCase: DeletePodcastFromHistoryUseCase,
     private val historyUiStateMapper: HistoryUiStateMapper,
     private val historyEntityMapper: HistoryEntityMapper,
-    ): ViewModel() {
+) : ViewModel() {
 
     private val _podcasts = MutableStateFlow<List<HistoryEntity>?>(null)
     val podcasts: StateFlow<List<HistoryEntity>?> = _podcasts
 
-    private val _historyUiState = MutableStateFlow(HistoryUiState(HistoryUiState().isEmpty))
-    val historyUiState: StateFlow<HistoryUiState> = _historyUiState
+    private val _historyUiState = MutableStateFlow(UiState(UiState().isEmpty))
+    val historyUiState: StateFlow<UiState> = _historyUiState
 
-    fun getHistoryPodcasts() {
+    fun getHistoryPodcasts() = viewModelScope.launch(IO) {
         try {
-            viewModelScope.launch {
-                withContext(viewModelScope.coroutineContext) {
-                    val response = getHistoryListUseCase()
-                    _historyUiState.update {
-                        it.copy(
-                            isLoading = false,
-                            isSuccess = true,
-                            podcastUiState = response.map { podcast ->
-                                historyUiStateMapper.map(podcast)
-                            }
-                        )
+            val response = getHistoryListUseCase()
+            _historyUiState.update {
+                it.copy(
+                    isLoading = false,
+                    isSuccess = true,
+                    podcastUiState = response.map { podcast ->
+                        historyUiStateMapper.map(podcast)
                     }
-                }
+                )
             }
-        } catch (e: Exception){
+        } catch (e: Exception) {
             Log.e("HistoryViewModel", e.message.toString())
             onError(e.message.toString())
         }
@@ -68,24 +65,22 @@ class HistoryViewModel @Inject constructor(
         }
     }
 
-    fun deleteHistoryList() {
+    fun deleteHistoryList() = viewModelScope.launch {
         try {
-            viewModelScope.launch {
-                withContext(viewModelScope.coroutineContext) {
-                    _podcasts.value = null
-                    deleteHistoryListUseCase()
-                }
+            withContext(viewModelScope.coroutineContext) {
+                _podcasts.value = null
+                deleteHistoryListUseCase()
             }
+
         } catch (e: Exception) {
             Log.e("HistoryViewModel", e.message.toString())
         }
     }
 
-    fun deletePodcastFromHistory(podcast: PodcastUiState) {
+    fun deletePodcastFromHistory(podcast: PodcastUiState) = viewModelScope.launch {
         try {
-            viewModelScope.launch {
-                deletePodcastFromHistoryUseCase(historyEntityMapper.map(podcast))
-            }
+            deletePodcastFromHistoryUseCase(historyEntityMapper.map(podcast))
+
         } catch (e: Exception) {
             Log.e("HistoryViewModel", e.message.toString())
         }
