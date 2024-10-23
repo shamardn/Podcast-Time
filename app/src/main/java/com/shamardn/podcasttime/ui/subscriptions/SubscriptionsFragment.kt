@@ -12,28 +12,26 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.shamardn.podcasttime.R
+import com.shamardn.podcasttime.data.model.Resource
 import com.shamardn.podcasttime.databinding.FragmentSubscriptionsBinding
-import com.shamardn.podcasttime.media.exoplayer.MediaViewModel
-import com.shamardn.podcasttime.ui.main.MainActivity
-import com.shamardn.podcasttime.ui.subscriptions.uistate.PodcastUiState
+import com.shamardn.podcasttime.ui.common.custom_views.ProgressDialog
+import com.shamardn.podcasttime.ui.common.uistate.PodcastUiState
+import com.shamardn.podcasttime.ui.common.viewmodel.PlayerViewModel
+import com.shamardn.podcasttime.ui.showSnakeBarError
+import com.shamardn.podcasttime.util.CrashlyticsUtils
+import com.shamardn.podcasttime.util.SubscriptionException
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
 class SubscriptionsFragment : Fragment(), SubscriptionsInteractionListener {
     lateinit var binding: FragmentSubscriptionsBinding
     private val viewModel: SubscriptionsViewModel by viewModels()
-    private val mediaViewModel: MediaViewModel by activityViewModels()
+    private val playerViewModel: PlayerViewModel by activityViewModels()
     lateinit var adapter: SubscriptionsAdapter
-    private var bottomNavigationViewVisibility = View.GONE
-
-    private fun setBottomNavigationVisibility() {
-        if (activity is MainActivity) {
-            (activity as MainActivity).setBottomNavigationVisibility(bottomNavigationViewVisibility)
-        }
-    }
+    private val progressDialog by lazy { ProgressDialog.createProgressDialog(requireActivity()) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,14 +39,14 @@ class SubscriptionsFragment : Fragment(), SubscriptionsInteractionListener {
     ): View {
         binding = FragmentSubscriptionsBinding.inflate(inflater, container, false)
 
+        adapter = SubscriptionsAdapter(listOf(), this)
         viewModel.getSubscribedPodcasts()
-        setBottomNavigationVisibility()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        fetchSubscribedPodcasts()
+        initViewModel()
 
         showBottomSheet()
 
@@ -58,6 +56,35 @@ class SubscriptionsFragment : Fragment(), SubscriptionsInteractionListener {
         binding.imgSubBackArrow.setOnClickListener {
             it.findNavController().popBackStack()
         }
+    }
+
+    private fun initViewModel() = lifecycleScope.launch(Main) {
+        viewModel.subscriptionsUiState.collect { resource ->
+            when( resource) {
+                is Resource.Loading -> {
+                    progressDialog.show()
+                    delay(500)
+                }
+                is Resource.Success -> {
+                    progressDialog.dismiss()
+                    showSubscribedPodcasts()
+                }
+                is Resource.Error -> {
+                    progressDialog.dismiss()
+                    val msg = resource.exception?.message ?: getString(R.string.generic_err_msg)
+                    view?.showSnakeBarError(msg)
+                    logSubscriptionIssuesToCrashlytics(msg)
+                }
+            }
+        }
+
+    }
+
+    private fun logSubscriptionIssuesToCrashlytics(msg: String) {
+        CrashlyticsUtils.sendCustomLogToCrashlytics<SubscriptionException>(
+            msg,
+            CrashlyticsUtils.SUBSCRIPTIONS_KEY to msg,
+        )
     }
 
     private fun showDeleteSubscriptionListDialog() {
@@ -75,32 +102,25 @@ class SubscriptionsFragment : Fragment(), SubscriptionsInteractionListener {
 
     private fun deleteSubscriptionList() {
         viewModel.deleteSubscriptionList()
-        binding.progressSubs.visibility = View.VISIBLE
+        progressDialog.dismiss()
         viewModel.getSubscribedPodcasts()
-        fetchSubscribedPodcasts()
+        showSubscribedPodcasts()
     }
 
-    private fun fetchSubscribedPodcasts() {
-        lifecycleScope.launch {
-            withContext(Dispatchers.Main) {
-                viewModel.subscriptionsUiState.collect { podcasts ->
-                    if (podcasts.podcastUiState.isEmpty()) {
-                        binding.lottieNoSubs.visibility = View.VISIBLE
-                        binding.recyclerSub.visibility = View.GONE
-                        binding.progressSubs.visibility = View.GONE
-                        binding.imgSubDelete.isActivated = false
-                    } else {
-                        binding.progressSubs.visibility = View.GONE
-                        binding.recyclerSub.visibility = View.VISIBLE
-                        binding.lottieNoSubs.visibility = View.GONE
-                        adapter = SubscriptionsAdapter(
-                            podcasts.podcastUiState,
-                            this@SubscriptionsFragment
-                        )
-                        binding.recyclerSub.adapter = adapter
-                        binding.imgSubDelete.isActivated = true
-                    }
-                }
+    private fun showSubscribedPodcasts() = lifecycleScope.launch(Main) {
+        viewModel.subscriptionsUiState.collect { resource ->
+            if (resource.data.isNullOrEmpty()) {
+                binding.lottieNoSubs.visibility = View.VISIBLE
+                binding.recyclerSub.visibility = View.GONE
+                binding.imgSubDelete.isActivated = false
+                progressDialog.dismiss()
+            } else {
+                progressDialog.dismiss()
+                binding.recyclerSub.visibility = View.VISIBLE
+                binding.lottieNoSubs.visibility = View.GONE
+                adapter.setData((resource.data))
+                binding.recyclerSub.adapter = adapter
+                binding.imgSubDelete.isActivated = true
             }
         }
     }
@@ -114,13 +134,22 @@ class SubscriptionsFragment : Fragment(), SubscriptionsInteractionListener {
     }
 
     override fun onLongClickPodcast(podcast: PodcastUiState) {
-        viewModel.unsubscribe(podcast)
-        viewModel.getSubscribedPodcasts()
-        fetchSubscribedPodcasts()
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(resources.getString(R.string.delete))
+            .setMessage(resources.getString(R.string.delete_podcast_confirmation_txt))
+            .setNegativeButton(resources.getString(R.string.cancel)) { dialog, which ->
+                // Respond to negative button press
+            }
+            .setPositiveButton(resources.getString(R.string.delete)) { dialog, which ->
+                viewModel.unsubscribe(podcast)
+                viewModel.getSubscribedPodcasts()
+                showSubscribedPodcasts()
+            }
+            .show()
     }
 
     private fun showBottomSheet() {
-        mediaViewModel.isBottomSheetOpened.observe(viewLifecycleOwner) {
+        playerViewModel.isBottomSheetOpened.observe(viewLifecycleOwner) {
             if (it) {
                 val action =
                     SubscriptionsFragmentDirections.actionSubscriptionsFragmentToEpisodeDetailsBottomSheet()
