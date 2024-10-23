@@ -13,7 +13,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.shamardn.podcasttime.databinding.FragmentSearchBinding
-import com.shamardn.podcasttime.media.exoplayer.MediaViewModel
+import com.shamardn.podcasttime.ui.common.viewmodel.PlayerViewModel
 import com.shamardn.podcasttime.ui.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -25,7 +25,7 @@ class SearchFragment : Fragment(), SearchInteractionListener {
     private lateinit var binding: FragmentSearchBinding
     private lateinit var searchAdapter: SearchAdapter
     private val viewModel: SearchViewModel by viewModels()
-    private val mediaViewModel: MediaViewModel by activityViewModels()
+    private val playerViewModel: PlayerViewModel by activityViewModels()
     private var bottomNavigationViewVisibility = View.GONE
 
     private fun setBottomNavigationVisibility() {
@@ -90,7 +90,7 @@ class SearchFragment : Fragment(), SearchInteractionListener {
     }
 
     private fun showBottomSheet() {
-        mediaViewModel.isBottomSheetOpened.observe(viewLifecycleOwner) {
+        playerViewModel.isBottomSheetOpened.observe(viewLifecycleOwner) {
             if (it) {
                 val action = SearchFragmentDirections.actionSearchFragmentToEpisodeDetailsBottomSheet()
                 this.findNavController().navigate(action)

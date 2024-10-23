@@ -54,7 +54,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/top_app_bar" />
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -133,6 +133,8 @@
                 android:layout_marginTop="@dimen/space8x"
                 android:layout_marginEnd="@dimen/space8x"
                 android:textSize="16sp"
+                android:maxLines="4"
+                android:ellipsize="end"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/img_podcast_details_subscription"
                 app:layout_constraintTop_toBottomOf="@+id/img_podcast_details_subscription"
@@ -150,29 +152,18 @@
                 app:layout_constraintTop_toBottomOf="@+id/text_podcast_details_date"
                 app:tint="@color/primary" />
 
-            <ImageView
-                android:id="@+id/img_podcast_details_download"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/space16x"
-                android:contentDescription="@string/back_arrow_icon_desc"
-                android:padding="@dimen/space4x"
-                android:src="@drawable/ic_downloads"
-                app:layout_constraintBottom_toBottomOf="@+id/img_podcast_details_subscription"
-                app:layout_constraintStart_toEndOf="@+id/img_podcast_details_subscription"
-                app:layout_constraintTop_toTopOf="@+id/img_podcast_details_subscription"
-                app:tint="@color/primary" />
 
             <TextView
                 android:id="@+id/text_podcast_details_episodes_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/space4x"
+                android:background="@drawable/search_shape"
                 android:padding="@dimen/space4x"
                 android:textSize="16sp"
-                android:background="@drawable/search_shape"
-                app:layout_constraintStart_toStartOf="@+id/text_podcast_details_desc"
-                app:layout_constraintTop_toBottomOf="@+id/text_podcast_details_desc"
+                android:layout_marginStart="@dimen/space8x"
+                app:layout_constraintBottom_toBottomOf="@+id/img_podcast_details_subscription"
+                app:layout_constraintStart_toEndOf="@+id/img_podcast_details_subscription"
+                app:layout_constraintTop_toTopOf="@+id/img_podcast_details_subscription"
                 tools:text="@string/_episodes_count" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -185,9 +176,9 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_podcast_details_episodes_count"
+                app:layout_constraintTop_toBottomOf="@+id/text_podcast_details_desc"
                 app:layout_constraintVertical_bias="0.0"
                 tools:listitem="@layout/item_episode" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

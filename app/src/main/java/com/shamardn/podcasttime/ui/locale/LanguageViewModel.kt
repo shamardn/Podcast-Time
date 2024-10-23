@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.shamardn.podcasttime.data.datasource.datastore.AppConfiguration
+import com.shamardn.podcasttime.data.datasource.local.datastore.AppConfiguration
 import com.shamardn.podcasttime.util.Language
 import com.shamardn.podcasttime.util.SettingsUtils
 import dagger.hilt.android.lifecycle.HiltViewModel

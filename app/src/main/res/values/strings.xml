@@ -15,7 +15,7 @@
     <string name="_1_0x" translatable="false">1.0x</string>
     <string name="multi_line_text" translatable="false">Description of episode Learn English 1 Description of episode Learn English 1 Description of episode Learn English 1 Description of episode Learn English 1 Description of episode Learn English 1 Description of episode Learn English 1 Description of episode Learn English 1 Description of episode Learn English 1</string>
     <string name="Library">Library</string>
-    <string name="history" translatable="false">History</string>
+    <string name="history">History</string>
     <string name="sign_out">Sign out</string>
     <string name="welcome">Welcome</string>
     <string name="icon_for_change_user_image" translatable="false">icon for change user image</string>
@@ -101,4 +101,6 @@
     <string name="have_an_account">Have an Account</string>
     <string name="forget_password_msg">Enter your Email to send you an email to update your Password.</string>
     <string name="send">Send</string>
+    <string name="playlists">Playlists</string>
+    <string name="_new">New</string>
 </resources>

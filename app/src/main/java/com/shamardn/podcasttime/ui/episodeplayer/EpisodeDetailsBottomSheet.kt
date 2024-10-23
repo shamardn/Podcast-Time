@@ -1,120 +1,86 @@
 package com.shamardn.podcasttime.ui.episodeplayer
 
 import android.os.Bundle
-import android.support.v4.media.session.PlaybackStateCompat
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
-import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.shamardn.podcasttime.R
 import com.shamardn.podcasttime.databinding.EpisodeBottomSheetLayoutBinding
-import com.shamardn.podcasttime.media.exoplayer.MediaViewModel
-import com.shamardn.podcasttime.util.setAlphaAnimation
+import com.shamardn.podcasttime.ui.common.custom_views.ProgressDialog
+import com.shamardn.podcasttime.ui.common.uistate.EpisodeUiState
+import com.shamardn.podcasttime.ui.common.viewmodel.PlayerViewModel
+import com.shamardn.podcasttime.util.PlayerEvents
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
+
 
 @AndroidEntryPoint
-class EpisodeDetailsBottomSheet : BottomSheetDialogFragment() {
-    lateinit var binding: EpisodeBottomSheetLayoutBinding
-    private val mediaViewModel: MediaViewModel by activityViewModels()
+class EpisodeDetailsBottomSheet(
+    var currentEpisode: EpisodeUiState,
+) : BottomSheetDialogFragment() {
 
-    private var isUpdateSeeBar = true
+    val playerViewModel: PlayerViewModel by activityViewModels()
+
+    private var _binding: EpisodeBottomSheetLayoutBinding? = null
+    private val binding get() = _binding!!
+
+    private var isFavouriteEpisode: Boolean = false
+
+    private val progressDialog by lazy { ProgressDialog.createProgressDialog(requireActivity()) }
+
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?,
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?,
     ): View {
-        binding = EpisodeBottomSheetLayoutBinding.inflate(inflater, container, false)
-
-        mediaViewModel.onBottomPlayerClick(false)
-
-        setViewContent()
-        setUpSeekBar()
-        controllerMediaPlayer()
+        _binding = EpisodeBottomSheetLayoutBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.playerViewModel = playerViewModel
         return binding.root
     }
 
-    fun setViewContent() {
-        mediaViewModel.currentPlayingAudio.observe(viewLifecycleOwner) { episode ->
-            Log.i("MediaVM", "episode observe: ${episode}")
-            Glide.with(binding.imgBottomSheetEpisodeImg).load(episode?.artworkUrl160)
-                .into(binding.imgBottomSheetEpisodeImg)
-            binding.textBottomSheetPodcastTitle.text = episode?.trackName
-            binding.textBottomSheetEpisodeTitle.text = episode?.collectionName
-        }
-
-        mediaViewModel.apply {
-            lifecycleScope.launch {
-                playbackState.collect { state ->
-                    if (state?.state == PlaybackStateCompat.STATE_PLAYING)
-                        binding.imgBottomSheetPlayPause.setBackgroundResource(R.drawable.ic_pause)
-                    else binding.imgBottomSheetPlayPause.setBackgroundResource(R.drawable.ic_play)
-                }
-            }
-        }
-    }
-
-    private fun setUpSeekBar() {
-        binding.seekBarBottomSheet.apply {
-            if (isUpdateSeeBar) {
-                max = (mediaViewModel.currentDuration / 60000).toInt()
-            }
-
-            lifecycleScope.launch {
-               mediaViewModel.playbackState.collect { state ->
-                    state?.position?.let { pos ->
-                        binding.seekBarBottomSheet.progress = (pos / 60000).toInt()
-                        Log.i("seekbarBottom", "state: ${state}")
-                    }
-                }
-            }
-
-            setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+    private fun handelEvents() {
+        binding.apply {
+            dragHandle.setOnClickListener { dismiss() }
+            btnBottomSheetPlayPause.setOnClickListener { playerViewModel?.onPlayerEvents(PlayerEvents.PausePlay) }
+            btnBottomSheetNext.setOnClickListener { playerViewModel?.onPlayerEvents(PlayerEvents.Next) }
+            btnBottomSheetPrev.setOnClickListener { playerViewModel?.onPlayerEvents(PlayerEvents.Previous) }
+            btnBottomSheetForward.setOnClickListener { playerViewModel?.onPlayerEvents(PlayerEvents.SeekForward) }
+            btnBottomSheetRewind.setOnClickListener { playerViewModel?.onPlayerEvents(PlayerEvents.SeekBack) }
+            seekBarBottomSheet.setOnSeekBarChangeListener(object :
+                SeekBar.OnSeekBarChangeListener {
                 override fun onProgressChanged(
-                    seekBar: SeekBar?,
-                    progress: Int,
-                    fromUser: Boolean,
+                    seekBar: SeekBar?, progress: Int, fromUser: Boolean,
                 ) {
-                    /**
-                     * Y can set text time of song
-                     */
-                    Log.i("seekbarBottom", "progress: ${progress}")
-
-
+                    if (fromUser) playerViewModel?.onPlayerEvents(
+                        PlayerEvents.MoveToSpecificPosition(
+                            progress.toLong()
+                        )
+                    )
                 }
 
                 override fun onStartTrackingTouch(seekBar: SeekBar?) {
-                    isUpdateSeeBar = false
+                    // Do something when the user starts touching the SeekBar
                 }
 
                 override fun onStopTrackingTouch(seekBar: SeekBar?) {
-                    seekBar?.let {
-                        mediaViewModel.seekTo(it.progress.toFloat())
-                        isUpdateSeeBar = true
-                    }
+                    // Do something when the user stops touching the SeekBar
                 }
             })
         }
     }
 
-    private fun controllerMediaPlayer() =
-        mediaViewModel.apply {
-            binding.imgBottomSheetFastForward.setOnClickListener {
-                it.setAlphaAnimation()
-                fastForward()
-            }
-            binding.imgBottomSheetFastRewind.setOnClickListener {
-                it.setAlphaAnimation()
-                rewind()
-            }
-            binding.imgBottomSheetPlayPause.setOnClickListener {
-                it.setAlphaAnimation()
-                onBottomPlayerClickPlayPause()
-            }
-        }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        handelEvents()
+    }
+
+    companion object {
+        private const val TAG = "EpisodeDetailsBottomSheet"
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
 }

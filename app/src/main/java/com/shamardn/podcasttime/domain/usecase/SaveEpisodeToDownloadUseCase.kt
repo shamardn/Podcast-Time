@@ -1,15 +1,16 @@
 package com.shamardn.podcasttime.domain.usecase
 
-import com.shamardn.podcasttime.domain.entity.EpisodeDTO
-import com.shamardn.podcasttime.domain.mapper.EpisodeDTOMapper
-import com.shamardn.podcasttime.domain.repo.PodcastRepo
+import com.shamardn.podcasttime.domain.repo.common.PodcastRepo
+import com.shamardn.podcasttime.ui.common.mapper.EpisodeUiStateToDownloadEntityMapper
+import com.shamardn.podcasttime.ui.common.uistate.EpisodeUiState
 import javax.inject.Inject
 
 class SaveEpisodeToDownloadUseCase @Inject constructor(
     private val podcastRepo: PodcastRepo,
-    private val episodeDTOMapper: EpisodeDTOMapper,
+    private val mapper: EpisodeUiStateToDownloadEntityMapper,
 ) {
-    suspend operator fun invoke(episodeDTO: EpisodeDTO) {
-        podcastRepo.insertEpisode(episodeDTOMapper.map(episodeDTO))
+
+    suspend operator fun invoke(episodeUiState: EpisodeUiState) {
+        podcastRepo.saveEpisodeToDownload(mapper.map(episodeUiState))
     }
 }

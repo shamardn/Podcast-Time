@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="PlaylistEntity"
+            type="com.shamardn.podcasttime.data.datasource.local.database.entity.PlaylistEntity" />
+
+
+        <variable
+            name="listener"
+            type="com.shamardn.podcasttime.ui.playlist.PlaylistsListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{()-> listener.onPlaylistClick(PlaylistEntity)}"
+        android:paddingVertical="@dimen/space8x">
+
+        <ImageView
+            android:id="@+id/img_playlist"
+            android:layout_width="@dimen/space24x"
+            android:layout_height="@dimen/space24x"
+            android:background="@drawable/outline_rounded_shape"
+            android:src="@drawable/ic_playlist"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/playlistName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/space8x"
+            android:ellipsize="end"
+            android:lines="1"
+            android:text="@{PlaylistEntity.playlistName}"
+            app:layout_constraintEnd_toStartOf="@+id/playlistMoreImage"
+            app:layout_constraintStart_toEndOf="@+id/img_playlist"
+            app:layout_constraintTop_toTopOf="@+id/img_playlist"
+            tools:text="playlist Name" />
+
+        <TextView
+            android:id="@+id/playlistSongsCount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:alpha="0.5"
+            android:text="@{String.format(`%d Episodes`, PlaylistEntity.playlistEpisodes.size())}"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@+id/playlistName"
+            app:layout_constraintStart_toStartOf="@+id/playlistName"
+            app:layout_constraintTop_toBottomOf="@id/playlistName" />
+
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/playlistMoreImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:alpha="0.5"
+            android:src="@drawable/ic_play"
+            app:tint="@color/primary"
+            app:layout_constraintBottom_toBottomOf="@+id/playlistSongsCount"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/playlistName" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

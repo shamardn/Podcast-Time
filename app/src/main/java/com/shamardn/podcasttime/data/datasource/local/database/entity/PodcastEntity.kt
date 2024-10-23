@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-@Entity(tableName = "SUBSCRIPTIONS_TABLE")
+@Entity(tableName = "PODCAST_TABLE")
 data class PodcastEntity(
     @PrimaryKey(autoGenerate = true)
     val trackId: Long,

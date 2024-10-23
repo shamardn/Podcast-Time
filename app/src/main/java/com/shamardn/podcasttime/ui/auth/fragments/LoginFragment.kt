@@ -21,7 +21,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.shamardn.podcasttime.R
-import com.shamardn.podcasttime.data.models.Resource
+import com.shamardn.podcasttime.data.model.Resource
 import com.shamardn.podcasttime.databinding.FragmentLoginBinding
 import com.shamardn.podcasttime.ui.auth.getGoogleRequestIntent
 import com.shamardn.podcasttime.ui.auth.viewmodel.LoginViewModel

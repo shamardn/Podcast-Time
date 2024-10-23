@@ -9,7 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.shamardn.podcasttime.R
-import com.shamardn.podcasttime.data.models.Resource
+import com.shamardn.podcasttime.data.model.Resource
 import com.shamardn.podcasttime.databinding.FragmentForgetPasswordBinding
 import com.shamardn.podcasttime.ui.auth.viewmodel.ForgetPasswordViewModel
 import com.shamardn.podcasttime.ui.auth.viewmodel.ForgetPasswordViewModelFactory

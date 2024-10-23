@@ -1,8 +1,8 @@
 package com.shamardn.podcasttime.ui.download
 
-import com.shamardn.podcasttime.data.datasource.local.database.entity.EpisodeEntity
+import com.shamardn.podcasttime.ui.common.uistate.EpisodeUiState
 
 interface DownloadsInteractionListener {
-    fun onEpisodeClick(currentEpisode: EpisodeEntity)
-    fun onDeleteEpisodeClick(currentEpisode: EpisodeEntity)
+    fun onEpisodeClick(currentEpisode: EpisodeUiState, position: Int)
+    fun onDeleteEpisodeClick(currentEpisode: EpisodeUiState)
 }
