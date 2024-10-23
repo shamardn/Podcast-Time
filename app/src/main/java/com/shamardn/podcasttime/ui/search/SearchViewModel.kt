@@ -3,9 +3,9 @@ package com.shamardn.podcasttime.ui.search
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.shamardn.podcasttime.domain.usecase.GetPodcastsUseCase
-import com.shamardn.podcasttime.ui.search.mapper.SearchUiStateMapper
-import com.shamardn.podcasttime.ui.search.uistate.SearchUiState
+import com.shamardn.podcasttime.domain.usecase.SearchLocalPodcastsUseCase
+import com.shamardn.podcasttime.ui.common.mapper.PodcastUiStateMapper
+import com.shamardn.podcasttime.ui.common.uistate.UiState
 import com.shamardn.podcasttime.util.CrashlyticsUtils
 import com.shamardn.podcasttime.util.SearchException
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,26 +17,25 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
-    private val getPodcastsUseCase: GetPodcastsUseCase,
-    private val searchUiStateMapper: SearchUiStateMapper,
+    private val searchLocalPodcastsUseCase: SearchLocalPodcastsUseCase,
+    private val podcastUiStateMapper: PodcastUiStateMapper,
     ): ViewModel() {
-    private val _searchUiState = MutableStateFlow(SearchUiState(SearchUiState().isEmpty))
-    val searchUiState: StateFlow<SearchUiState> = _searchUiState
+    private val _searchUiState = MutableStateFlow(UiState(UiState().isEmpty))
+    val searchUiState: StateFlow<UiState> = _searchUiState
 
-    fun getPodcasts(term: String){
+    fun getPodcasts(term: String) = viewModelScope.launch {
         try {
-            viewModelScope.launch {
-                val response = getPodcastsUseCase(term)
+                val response = searchLocalPodcastsUseCase(term)
                 _searchUiState.update {
                     it.copy(
                         isLoading = false,
                         isSuccess = true,
-                        podcastUiState = response.results.map { podcast ->
-                            searchUiStateMapper.map(podcast)
+                        podcastUiState = response.map { podcast ->
+                            podcastUiStateMapper.map(podcast)
                         }
                     )
                 }
-            }
+
         }catch (e: Exception){
             Log.e(TAG, e.message.toString())
             onError(e.message.toString())
