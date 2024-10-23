@@ -1,4 +1,4 @@
-package com.shamardn.podcasttime.services
+package com.shamardn.podcasttime.service
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
