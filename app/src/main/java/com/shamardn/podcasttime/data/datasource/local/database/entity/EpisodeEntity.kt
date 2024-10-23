@@ -8,15 +8,17 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 @Entity(tableName = "EPISODE_TABLE")
 data class EpisodeEntity(
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey()
+    val guid: String,
     val id : Long,
+    val collectionId: Int,
     val collectionName: String,
+    val artistName: String,
     val trackName: String,
     val releaseDate: String,
     val description: String,
-    val trackTimeMillis: Int,
-    val artworkUrl160: String,
+    val trackTimeMillis: Long,
+    val artworkUrl100: String,
     val episodeUrl: String,
-    val guid: String,
     val episodeFileExtension: String,
 ): Parcelable

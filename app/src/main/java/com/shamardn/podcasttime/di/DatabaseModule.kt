@@ -3,8 +3,11 @@ package com.shamardn.podcasttime.di
 import android.content.Context
 import androidx.room.Room
 import com.shamardn.podcasttime.data.datasource.local.database.PodcastDatabase
+import com.shamardn.podcasttime.data.datasource.local.database.dao.ArtistDao
+import com.shamardn.podcasttime.data.datasource.local.database.dao.DownloadDao
 import com.shamardn.podcasttime.data.datasource.local.database.dao.EpisodeDao
 import com.shamardn.podcasttime.data.datasource.local.database.dao.HistoryDao
+import com.shamardn.podcasttime.data.datasource.local.database.dao.PlaylistDao
 import com.shamardn.podcasttime.data.datasource.local.database.dao.PodcastDao
 import com.shamardn.podcasttime.data.datasource.local.database.dao.SubscriptionsDao
 import dagger.Module
@@ -38,13 +41,32 @@ object DatabaseModule {
     }
     @Singleton
     @Provides
+    fun provideHistoryDao(podcastDatabase: PodcastDatabase): HistoryDao {
+        return podcastDatabase.historyDao()
+    }
+
+    @Singleton
+    @Provides
     fun provideSubscriptionsDao(podcastDatabase: PodcastDatabase): SubscriptionsDao {
         return podcastDatabase.subscriptionDao()
     }
 
     @Singleton
     @Provides
-    fun provideHistoryDao(podcastDatabase: PodcastDatabase): HistoryDao {
-        return podcastDatabase.historyDao()
+    fun provideDownloadDao(podcastDatabase: PodcastDatabase): DownloadDao {
+        return podcastDatabase.downloadDao()
     }
+
+    @Singleton
+    @Provides
+    fun provideArtistDao(podcastDatabase: PodcastDatabase): ArtistDao {
+        return podcastDatabase.artistDao()
+    }
+
+    @Singleton
+    @Provides
+    fun providePlaylistDao(podcastDatabase: PodcastDatabase): PlaylistDao {
+        return podcastDatabase.playlistDao()
+    }
+
 }
