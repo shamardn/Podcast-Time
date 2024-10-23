@@ -3,14 +3,16 @@ package com.shamardn.podcasttime.ui.subscriptions
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.shamardn.podcasttime.R
 import com.shamardn.podcasttime.databinding.ItemSubscriptionBinding
-import com.shamardn.podcasttime.ui.subscriptions.uistate.PodcastUiState
+import com.shamardn.podcasttime.ui.BaseDiffUtil
+import com.shamardn.podcasttime.ui.common.uistate.PodcastUiState
 
 class SubscriptionsAdapter(
-    private val items: List<PodcastUiState>,
+    private var items: List<PodcastUiState>,
     private val listener: SubscriptionsInteractionListener,
 ) : RecyclerView.Adapter<SubscriptionsAdapter.SubscriptionsViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubscriptionsViewHolder {
@@ -20,6 +22,21 @@ class SubscriptionsAdapter(
     }
 
     override fun getItemCount() = items.size
+
+    fun setData(newList: List<PodcastUiState>) {
+        val diffResult =
+            DiffUtil.calculateDiff(BaseDiffUtil(items, newList, ::areItemsSame, ::areContentSame))
+        items = newList
+        diffResult.dispatchUpdatesTo(this)
+        notifyDataSetChanged()
+    }
+
+    private fun areItemsSame(oldItem: PodcastUiState, newItem: PodcastUiState) =
+        oldItem.trackId == newItem.trackId
+
+    private fun areContentSame(oldItem: PodcastUiState, newItem: PodcastUiState) =
+        oldItem.trackName == newItem.trackName
+
 
     override fun onBindViewHolder(holder: SubscriptionsViewHolder, position: Int) {
         val currentPodcast = items[position]
