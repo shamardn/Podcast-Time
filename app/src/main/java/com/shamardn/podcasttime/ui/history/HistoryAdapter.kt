@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.shamardn.podcasttime.R
 import com.shamardn.podcasttime.databinding.ItemHistoryBinding
-import com.shamardn.podcasttime.ui.history.uistate.PodcastUiState
+import com.shamardn.podcasttime.ui.common.uistate.PodcastUiState
 
 class HistoryAdapter(
     private val items: List<PodcastUiState>,

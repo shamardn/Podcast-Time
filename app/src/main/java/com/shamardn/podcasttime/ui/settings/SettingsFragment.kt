@@ -11,7 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.shamardn.podcasttime.R
 import com.shamardn.podcasttime.databinding.FragmentSettingsBinding
-import com.shamardn.podcasttime.media.exoplayer.MediaViewModel
+import com.shamardn.podcasttime.ui.common.viewmodel.PlayerViewModel
 import com.shamardn.podcasttime.ui.main.MainActivity
 import com.shamardn.podcasttime.util.observeEvent
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,7 +20,7 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class SettingsFragment : Fragment() {
     private lateinit var binding: FragmentSettingsBinding
-    private val mediaViewModel: MediaViewModel by activityViewModels()
+    private val playerViewModel: PlayerViewModel by activityViewModels()
     private val viewModel: SettingsViewModel by viewModels()
     private var bottomNavigationViewVisibility = View.VISIBLE
 
@@ -112,7 +112,7 @@ class SettingsFragment : Fragment() {
     }
 
     private fun showMediaBottomSheet() {
-        mediaViewModel.isBottomSheetOpened.observe(viewLifecycleOwner) {
+        playerViewModel.isBottomSheetOpened.observe(viewLifecycleOwner) {
             if (it) {
                 val action =
                     SettingsFragmentDirections.actionSettingsFragmentToEpisodeDetailsBottomSheet()

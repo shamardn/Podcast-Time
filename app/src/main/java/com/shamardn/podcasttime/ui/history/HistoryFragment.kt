@@ -13,8 +13,8 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.shamardn.podcasttime.R
 import com.shamardn.podcasttime.databinding.FragmentHistoryBinding
-import com.shamardn.podcasttime.media.exoplayer.MediaViewModel
-import com.shamardn.podcasttime.ui.history.uistate.PodcastUiState
+import com.shamardn.podcasttime.ui.common.uistate.PodcastUiState
+import com.shamardn.podcasttime.ui.common.viewmodel.PlayerViewModel
 import com.shamardn.podcasttime.ui.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -25,7 +25,7 @@ import kotlinx.coroutines.withContext
 class HistoryFragment : Fragment(), HistoryInteractionListener {
     lateinit var binding: FragmentHistoryBinding
     private val viewModel: HistoryViewModel by viewModels()
-    private val mediaViewModel: MediaViewModel by activityViewModels()
+    private val playerViewModel: PlayerViewModel by activityViewModels()
     lateinit var adapter: HistoryAdapter
     private var bottomNavigationViewVisibility = View.GONE
 
@@ -133,7 +133,7 @@ class HistoryFragment : Fragment(), HistoryInteractionListener {
     }
 
     private fun showBottomSheet() {
-        mediaViewModel.isBottomSheetOpened.observe(viewLifecycleOwner) {
+        playerViewModel.isBottomSheetOpened.observe(viewLifecycleOwner) {
             if (it) {
                 val action = HistoryFragmentDirections.actionHistoryFragmentToEpisodeDetailsBottomSheet()
                 this.findNavController().navigate(action)

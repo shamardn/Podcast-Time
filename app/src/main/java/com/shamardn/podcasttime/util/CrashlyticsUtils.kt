@@ -16,9 +16,13 @@ object CrashlyticsUtils {
     const val SEARCH_KEY = "SEARCH_KEY"
     const val NOTIFICATION_KEY = "NOTIFICATION_KEY"
     const val LOGIN_KEY = "LOGIN_KEY"
+    const val DETAILS_KEY = "DETAILS_KEY"
+    const val DOWNLOADS_KEY = "DOWNLOADS_KEY"
+    const val SUBSCRIPTIONS_KEY = "SUBSCRIPTIONS_KEY"
     const val REGISTER_KEY = "REGISTER_KEY"
     const val FORGET_PASSWORD_KEY = "FORGET_PASSWORD_KEY"
     const val AUTH_PROVIDER = "AUTH_PROVIDER"
+    const val PLAYLIST_KEY = "PLAYLIST_KEY"
     const val LISTEN_TO_USER_DETAILS = "LISTEN_TO_USER_DETAILS"
 
 
@@ -57,3 +61,7 @@ class LoginException(message: String) : Exception(message)
 class RegisterException(message: String) : Exception(message)
 class ForgetPasswordException(message: String) : Exception(message)
 class UserDetailsException(message: String) : Exception(message)
+class DetailsException(message: String) : Exception(message)
+class DownloadsException(message: String) : Exception(message)
+class SubscriptionException(message: String) : Exception(message)
+class PlaylistException(message: String) : Exception(message)

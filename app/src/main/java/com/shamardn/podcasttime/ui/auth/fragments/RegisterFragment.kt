@@ -22,7 +22,7 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.shamardn.podcasttime.R
-import com.shamardn.podcasttime.data.models.Resource
+import com.shamardn.podcasttime.data.model.Resource
 import com.shamardn.podcasttime.databinding.FragmentRegisterBinding
 import com.shamardn.podcasttime.ui.auth.getGoogleRequestIntent
 import com.shamardn.podcasttime.ui.auth.viewmodel.RegisterViewModel

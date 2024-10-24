@@ -1,9 +1,9 @@
 package com.training.ecommerce.data.repository.user
 
 import com.google.firebase.firestore.FirebaseFirestore
-import com.shamardn.podcasttime.data.models.Resource
-import com.shamardn.podcasttime.data.models.user.UserDetailsModel
-import com.shamardn.podcasttime.data.repo.user.UserFireStoreRepository
+import com.shamardn.podcasttime.data.model.Resource
+import com.shamardn.podcasttime.data.model.user.UserDetailsModel
+import com.shamardn.podcasttime.domain.repo.user.UserFireStoreRepository
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow

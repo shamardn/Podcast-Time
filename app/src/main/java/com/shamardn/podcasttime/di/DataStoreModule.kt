@@ -1,8 +1,8 @@
 package com.shamardn.podcasttime.di
 
 import android.content.Context
-import com.shamardn.podcasttime.data.datasource.datastore.AppConfiguration
-import com.shamardn.podcasttime.data.datasource.datastore.AppConfigurator
+import com.shamardn.podcasttime.data.datasource.local.datastore.AppConfiguration
+import com.shamardn.podcasttime.data.datasource.local.datastore.AppConfigurator
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

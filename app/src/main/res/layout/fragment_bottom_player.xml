@@ -7,6 +7,17 @@
     android:layout_alignWithParentIfMissing="true"
     android:layout_gravity="bottom">
 
+    <View
+        android:id="@+id/separator"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:alpha="0.3"
+        android:background="@color/primary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1" />
+
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/img_main_player"
         android:layout_width="40dp"

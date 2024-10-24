@@ -5,9 +5,10 @@ import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.firestore.FirebaseFirestore
-import com.shamardn.podcasttime.data.models.Resource
-import com.shamardn.podcasttime.data.models.user.AuthProvider
-import com.shamardn.podcasttime.data.models.user.UserDetailsModel
+import com.shamardn.podcasttime.data.model.Resource
+import com.shamardn.podcasttime.data.model.user.AuthProvider
+import com.shamardn.podcasttime.data.model.user.UserDetailsModel
+import com.shamardn.podcasttime.domain.repo.auth.FirebaseAuthRepository
 import com.shamardn.podcasttime.util.CrashlyticsUtils
 import com.shamardn.podcasttime.util.LoginException
 import kotlinx.coroutines.flow.Flow

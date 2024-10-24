@@ -1,18 +1,17 @@
 package com.shamardn.podcasttime.ui.auth.viewmodel
 
 import android.content.Context
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.shamardn.podcasttime.data.datasource.datastore.AppPreferencesDataSource
-import com.shamardn.podcasttime.data.models.Resource
-import com.shamardn.podcasttime.data.models.user.UserDetailsModel
-import com.shamardn.podcasttime.data.repo.auth.FirebaseAuthRepository
+import com.shamardn.podcasttime.data.datasource.local.datastore.AppPreferencesDataSource
+import com.shamardn.podcasttime.data.model.Resource
+import com.shamardn.podcasttime.data.model.user.UserDetailsModel
+import com.shamardn.podcasttime.domain.repo.auth.FirebaseAuthRepository
 import com.shamardn.podcasttime.data.repo.auth.FirebaseAuthRepositoryImpl
 import com.shamardn.podcasttime.data.repo.common.AppDataStoreRepositoryImpl
-import com.shamardn.podcasttime.data.repo.common.AppPreferenceRepository
-import com.shamardn.podcasttime.data.repo.user.UserPreferenceRepository
+import com.shamardn.podcasttime.domain.repo.common.AppPreferenceRepository
+import com.shamardn.podcasttime.domain.repo.user.UserPreferenceRepository
 import com.shamardn.podcasttime.data.repo.user.UserPreferenceRepositoryImpl
 import com.shamardn.podcasttime.domain.mapper.toUserDetailsPreferences
 import com.shamardn.podcasttime.util.isEmailValid
