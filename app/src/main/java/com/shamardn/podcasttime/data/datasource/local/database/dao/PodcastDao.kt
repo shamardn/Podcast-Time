@@ -29,5 +29,4 @@ interface PodcastDao {
 
     @Query("DELETE FROM PODCAST_TABLE")
     suspend fun deleteAllPodcasts()
-
 }

@@ -1,7 +1,6 @@
 package com.shamardn.podcasttime.ui.main
 
 import android.Manifest
-import android.animation.ObjectAnimator
 import android.app.ActivityOptions
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -9,16 +8,12 @@ import android.media.AudioManager
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.view.WindowManager
-import android.view.animation.AnticipateInterpolator
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.animation.doOnEnd
 import androidx.core.content.ContextCompat
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -74,8 +69,6 @@ class MainActivity : AppCompatActivity() {
 
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 
-        initSplashScreen()
-
         val isLoggedIn = runBlocking { userViewModel.isUserLoggedIn().first() }
         if (!isLoggedIn) {
             goToAuthActivity()
@@ -121,33 +114,6 @@ class MainActivity : AppCompatActivity() {
         )
         startActivity(intent, options.toBundle())
         finish()
-    }
-
-    private fun initSplashScreen() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            installSplashScreen()
-            // Add a callback that's called when the splash screen is animating to the
-            // app content.
-            splashScreen.setOnExitAnimationListener { splashScreenView ->
-                // Create your custom animation.
-                val slideUp = ObjectAnimator.ofFloat(
-                    splashScreenView,
-                    View.TRANSLATION_Y,
-                    0f,
-                    -splashScreenView.height.toFloat()
-                )
-                slideUp.interpolator = AnticipateInterpolator()
-                slideUp.duration = 1000L
-
-                // Call SplashScreenView.remove at the end of your custom animation.
-                slideUp.doOnEnd { splashScreenView.remove() }
-
-                // Run your animation.
-                slideUp.start()
-            }
-        } else {
-            setTheme(R.style.Theme_MainActivity)
-        }
     }
 
     override fun onResume() {

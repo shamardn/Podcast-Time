@@ -19,14 +19,14 @@
         <item name="android:windowNoTitle">true</item>
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/primary</item>
-        <item name="android:windowBackground">@drawable/launch_background</item>
+<!--        <item name="android:windowBackground">@drawable/launch_background</item>-->
 
         <!--        system ui configurations -->
 
         <item name="android:statusBarColor">@color/primary</item>
         <item name="android:windowLightStatusBar" tools:ignore="NewApi">false</item>
         <item name="android:navigationBarColor">@color/white</item>
-        <item name="android:windowLightNavigationBar" tools:ignore="NewApi">true</item>
+        <item name="android:windowLightNavigationBar" tools:ignore="NewApi">false</item>
     </style>
 
     <style name="ThemeOverlay.App.MaterialAlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
