@@ -20,7 +20,8 @@ import com.shamardn.podcasttime.data.datasource.local.database.entity.Subscripti
 
 @Database(
     entities = [PodcastEntity::class, EpisodeEntity::class, SubscriptionsEntity::class, HistoryEntity::class, ArtistEntity::class, EpisodeDownloadEntity::class, PlaylistEntity::class],
-    version = 1
+    version = 1,
+    exportSchema = true,
 )
 @TypeConverters(value = [RoomTypeConverters::class])
 abstract class PodcastDatabase: RoomDatabase() {
