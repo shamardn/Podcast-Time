@@ -6,9 +6,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.shamardn.podcasttime.R
-import com.shamardn.podcasttime.databinding.ItemPodcastBinding
+import com.shamardn.podcasttime.databinding.CarouselItemContainerBinding
 import com.shamardn.podcasttime.ui.common.uistate.PodcastUiState
-import com.shamardn.podcasttime.util.changeDateFormat
 
 class SearchAdapter(
     private val items: List<PodcastUiState>,
@@ -16,7 +15,8 @@ class SearchAdapter(
 ) : RecyclerView.Adapter<SearchAdapter.PodcastViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PodcastViewHolder {
         return PodcastViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_podcast, parent, false)
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.carousel_item_container, parent, false)
         )
     }
 
@@ -25,13 +25,9 @@ class SearchAdapter(
     override fun onBindViewHolder(holder: PodcastViewHolder, position: Int) {
         val currentPodcast = items[position]
         holder.binding.apply {
-            textItemPodcastArtistName.text = currentPodcast.artistName.trim()
-            textItemPodcastTrackName.text = currentPodcast.trackName.trim()
-            textItemPodcastGenreName.text = currentPodcast.primaryGenreName.trim()
-            textItemPodcastReleaseDate.text = currentPodcast.releaseDate.changeDateFormat()
-            textItemPodcastTrackCount.text = this.root.resources.getString(R.string.trackCount, currentPodcast.trackCount.toString())
-            Glide.with(root.context).load(currentPodcast.artworkUrl100).into(imgItemPodcast)
+            Glide.with(root.context).load(currentPodcast.artworkUrl100).into(carouselImageView)
 
+            textItemCarouselTitle.text = currentPodcast.trackName
             root.setOnClickListener {
                 listener.onClickPodcast(currentPodcast.trackId)
             }
@@ -39,6 +35,6 @@ class SearchAdapter(
     }
 
     class PodcastViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val binding = ItemPodcastBinding.bind(itemView)
+        val binding = CarouselItemContainerBinding.bind(itemView)
     }
 }
