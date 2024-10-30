@@ -7,6 +7,7 @@ import androidx.datastore.core.Serializer
 import androidx.datastore.dataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
+import androidx.datastore.preferences.core.longPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.datastore.preferences.protobuf.InvalidProtocolBufferException
@@ -21,6 +22,7 @@ object DataStoreKeys{
     const val USER_DETAILS_PREFERENCES_PB = "user_details.pb"
     val IS_USER_LOGGED_IN = booleanPreferencesKey("is_user_logged_in")
     val LANGUAGE_KEY = stringPreferencesKey("LANGUAGE_KEY")
+    val FETCH_TIME_KEY = longPreferencesKey("FETCH_TIME_KEY")
 }
 
 val Context.appDataStore: DataStore<Preferences> by preferencesDataStore(name = PODCAST_TIME_PREFERENCES)

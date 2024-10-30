@@ -1,21 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.carousel.MaskableFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="136dp"
+    android:layout_height="156dp"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/carousel_item_container"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginStart="4dp"
-    android:layout_marginEnd="4dp"
-    android:foreground="?attr/selectableItemBackground"
-    app:shapeAppearance="?attr/shapeAppearanceCornerExtraLarge">
+    app:cardCornerRadius="@dimen/space8x"
+    android:layout_margin="@dimen/space4x"
+    app:cardElevation="@dimen/space1x"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/carousel_image_view"
+            android:id="@+id/img_item_favourite"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:scaleType="centerCrop"
@@ -27,23 +25,23 @@
             app:shapeAppearanceOverlay="@style/RoundedImageView" />
 
         <TextView
-            android:id="@+id/text_item_carousel_title"
+            android:id="@+id/text_item_favourite_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/out_line"
+            android:background="@color/card_background"
             android:ellipsize="end"
             android:gravity="center"
             android:includeFontPadding="true"
-            android:textColor="@color/white"
+            android:textColor="@color/hint_color"
             android:maxLines="2"
             android:minLines="2"
             android:textStyle="bold"
             android:padding="@dimen/space4x"
             tools:text="@string/_track_name"
-            android:textSize="16sp"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-</com.google.android.material.carousel.MaskableFrameLayout>
+</androidx.cardview.widget.CardView>

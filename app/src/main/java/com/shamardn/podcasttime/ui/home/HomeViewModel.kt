@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.shamardn.podcasttime.PodcastTimeApplication
+import com.shamardn.podcasttime.domain.usecase.GetLocalPodcastsUseCase
 import com.shamardn.podcasttime.domain.usecase.GetPodcastsUseCase
 import com.shamardn.podcasttime.domain.usecase.SavePodcastUseCase
 import com.shamardn.podcasttime.ui.common.mapper.PodcastUiStateMapper
@@ -22,6 +23,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val getPodcastsUseCase: GetPodcastsUseCase,
+    private val getLocalPodcastsUseCase: GetLocalPodcastsUseCase,
     private val homeUiStateMapper: PodcastUiStateMapper,
     private val savePodcastUseCase: SavePodcastUseCase,
 ) : ViewModel() {
@@ -30,7 +32,26 @@ class HomeViewModel @Inject constructor(
 
     private val _isOnline = MutableLiveData<Boolean>()
     val isOnline = _isOnline as LiveData<Boolean>
-    fun getPodcasts() = viewModelScope.launch(IO) {
+    fun getLocalPodcasts() = viewModelScope.launch {
+        _uiState.emit(UiState(isLoading = true))
+        try {
+            val response = getLocalPodcastsUseCase()
+            _uiState.update {
+                it.copy(
+                    isLoading = false,
+                    isSuccess = true,
+                    podcastUiState = response.map { podcast ->
+                        homeUiStateMapper.map(podcast)
+                    }
+                )
+            }
+
+        }catch (e: Exception){
+            onError(e.message.toString())
+        }
+    }
+
+    fun getRemotePodcasts() = viewModelScope.launch(IO) {
         _uiState.emit(UiState(isLoading = true))
         try {
             if (PodcastTimeApplication.isConnected) {

@@ -3,6 +3,7 @@ package com.shamardn.podcasttime.ui.search
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.shamardn.podcasttime.domain.usecase.GetLocalPodcastsUseCase
 import com.shamardn.podcasttime.domain.usecase.SearchLocalPodcastsUseCase
 import com.shamardn.podcasttime.ui.common.mapper.PodcastUiStateMapper
 import com.shamardn.podcasttime.ui.common.uistate.UiState
@@ -18,14 +19,34 @@ import javax.inject.Inject
 @HiltViewModel
 class SearchViewModel @Inject constructor(
     private val searchLocalPodcastsUseCase: SearchLocalPodcastsUseCase,
+    private val getLocalPodcastsUseCase: GetLocalPodcastsUseCase,
     private val podcastUiStateMapper: PodcastUiStateMapper,
     ): ViewModel() {
     private val _searchUiState = MutableStateFlow(UiState(UiState().isEmpty))
     val searchUiState: StateFlow<UiState> = _searchUiState
 
-    fun getPodcasts(term: String) = viewModelScope.launch {
+    fun searchPodcastsLocally(term: String) = viewModelScope.launch {
         try {
                 val response = searchLocalPodcastsUseCase(term)
+                _searchUiState.update {
+                    it.copy(
+                        isLoading = false,
+                        isSuccess = true,
+                        podcastUiState = response.map { podcast ->
+                            podcastUiStateMapper.map(podcast)
+                        }
+                    )
+                }
+
+        }catch (e: Exception){
+            Log.e(TAG, e.message.toString())
+            onError(e.message.toString())
+        }
+    }
+
+    fun fetchPodcastsLocally() = viewModelScope.launch {
+        try {
+                val response = getLocalPodcastsUseCase()
                 _searchUiState.update {
                     it.copy(
                         isLoading = false,

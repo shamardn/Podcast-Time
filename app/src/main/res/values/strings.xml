@@ -103,4 +103,6 @@
     <string name="send">Send</string>
     <string name="playlists">Playlists</string>
     <string name="_new">New</string>
+    <string name="explore_recent_podcast">Recent Podcast</string>
+    <string name="explore_favourite_episodes">Favourite Episodes</string>
 </resources>
