@@ -7,9 +7,11 @@ import com.shamardn.podcasttime.domain.repo.common.PodcastRepo
 import com.shamardn.podcasttime.domain.usecase.GetEpisodesByIdUseCase
 import com.shamardn.podcasttime.domain.usecase.GetFavouritePlaylistUseCase
 import com.shamardn.podcasttime.domain.usecase.GetHistoryListUseCase
+import com.shamardn.podcasttime.domain.usecase.GetLocalPodcastsUseCase
 import com.shamardn.podcasttime.domain.usecase.GetPodcastByIdUseCase
 import com.shamardn.podcasttime.domain.usecase.GetPodcastsUseCase
 import com.shamardn.podcasttime.domain.usecase.GetSubscriptionsUseCase
+import com.shamardn.podcasttime.domain.usecase.SaveAllPodcastsLocallyUseCase
 import com.shamardn.podcasttime.domain.usecase.SavePodcastUseCase
 import com.shamardn.podcasttime.domain.usecase.SearchLocalPodcastsUseCase
 import com.shamardn.podcasttime.domain.usecase.UnsubscribeUseCase
@@ -35,6 +37,16 @@ object UseCaseModule {
     @Provides
     fun provideSavePodcastUseCase (repo: PodcastRepo): SavePodcastUseCase {
         return SavePodcastUseCase(repo)
+    }
+
+    @Provides
+    fun provideSaveAllPodcastsLocallyUseCase (repo: PodcastRepo): SaveAllPodcastsLocallyUseCase {
+        return SaveAllPodcastsLocallyUseCase(repo)
+    }
+
+    @Provides
+    fun provideGetLocalPodcastsUseCase (repo: PodcastRepo, mapper: PodcastDTOMapper): GetLocalPodcastsUseCase {
+        return GetLocalPodcastsUseCase(repo, mapper)
     }
 
     @Provides
