@@ -23,6 +23,7 @@ object CrashlyticsUtils {
     const val FORGET_PASSWORD_KEY = "FORGET_PASSWORD_KEY"
     const val AUTH_PROVIDER = "AUTH_PROVIDER"
     const val PLAYLIST_KEY = "PLAYLIST_KEY"
+    const val HOME_KEY = "HOME_KEY"
     const val LISTEN_TO_USER_DETAILS = "LISTEN_TO_USER_DETAILS"
 
 
@@ -65,3 +66,4 @@ class DetailsException(message: String) : Exception(message)
 class DownloadsException(message: String) : Exception(message)
 class SubscriptionException(message: String) : Exception(message)
 class PlaylistException(message: String) : Exception(message)
+class HomeException(message: String) : Exception(message)

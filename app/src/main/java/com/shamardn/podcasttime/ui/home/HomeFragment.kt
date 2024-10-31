@@ -10,13 +10,19 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.shamardn.podcasttime.R
 import com.shamardn.podcasttime.data.datasource.local.datastore.DataStoreKeys
 import com.shamardn.podcasttime.data.datasource.local.datastore.appDataStore
+import com.shamardn.podcasttime.data.model.Resource
 import com.shamardn.podcasttime.databinding.FragmentHomeBinding
+import com.shamardn.podcasttime.ui.common.custom_views.ProgressDialog
 import com.shamardn.podcasttime.ui.common.uistate.PodcastUiState
 import com.shamardn.podcasttime.ui.common.viewmodel.PlayerViewModel
-import com.shamardn.podcasttime.ui.main.MainActivity
+import com.shamardn.podcasttime.ui.showSnakeBarError
+import com.shamardn.podcasttime.util.CrashlyticsUtils
+import com.shamardn.podcasttime.util.HomeException
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.last
 import kotlinx.coroutines.flow.map
@@ -24,40 +30,27 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HomeFragment() : Fragment(), HomeInteractionListener {
-    private lateinit var binding: FragmentHomeBinding
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
+
     private lateinit var homeAdapter: HomeAdapter
     private val viewModel: HomeViewModel by viewModels()
     private val playerViewModel: PlayerViewModel by activityViewModels()
-    private var bottomNavigationViewVisibility = View.VISIBLE
-
-    private fun setBottomNavigationVisibility() {
-        if (activity is MainActivity) {
-            (activity as MainActivity).setBottomNavigationVisibility(bottomNavigationViewVisibility)
-        }
-    }
+    private val progressDialog by lazy { ProgressDialog.createProgressDialog(requireActivity()) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        binding = FragmentHomeBinding.inflate(inflater, container, false)
-
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
         refreshDataOnceDaily()
-
-        viewModel.isOnline.observe(viewLifecycleOwner) { isOnline ->
-            if (!isOnline) {
-                val action = HomeFragmentDirections.actionHomeFragmentToDownloadsFragment()
-                this.findNavController().navigate(action)
-            }
-        }
-
-        setBottomNavigationVisibility()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        showPodcasts()
+        initViewModel()
+        handelEvents()
 
         showBottomSheet()
         binding.textHomeSearch.setOnClickListener {
@@ -66,29 +59,58 @@ class HomeFragment() : Fragment(), HomeInteractionListener {
         }
     }
 
-    private fun refreshDataOnceDaily() {
-        viewModel.getLocalPodcasts()
-        lifecycleScope.launch {
-            val lastFetchTime: Flow<Long> = requireContext().appDataStore.data.map { preferences ->
-                preferences[DataStoreKeys.FETCH_TIME_KEY] ?: 0
+    private fun handelEvents() {
+        viewModel.isOnline.observe(viewLifecycleOwner) { isOnline ->
+            if (!isOnline) {
+                val action = HomeFragmentDirections.actionHomeFragmentToDownloadsFragment()
+                this.findNavController().navigate(action)
             }
+        }
+    }
 
-            val currentTime = System.currentTimeMillis()
-            if (currentTime - lastFetchTime.last() > 24 * 60 * 60 * 1000) {
-                // 24 hours in milliseconds
-                viewModel.getRemotePodcasts()
-                requireContext().appDataStore.edit { preferences ->
-                    preferences[DataStoreKeys.FETCH_TIME_KEY] = currentTime
+    private fun initViewModel() = lifecycleScope.launch(Main){
+        viewModel.homeUiState.collect { resource ->
+            when(resource){
+                is Resource.Loading -> {
+                    progressDialog.show()
+                }
+                is Resource.Success -> {
+                    progressDialog.dismiss()
+                    showPodcasts()
+                }
+                is Resource.Error -> {
+                    progressDialog.dismiss()
+                    val msg = resource.exception?.message ?: getString(R.string.generic_err_msg)
+                    view?.showSnakeBarError(msg)
+                    logHomeIssuesToCrashlytics(msg)
                 }
             }
         }
     }
 
-    private fun showPodcasts() {
-        lifecycleScope.launch {
-            viewModel.uiState.collect{
-                val podcasts =it.podcastUiState
-                homeAdapter = HomeAdapter(podcasts, this@HomeFragment)
+    private fun refreshDataOnceDaily() {
+        viewModel.getLocalPodcasts()
+        lifecycleScope.launch(Main) {
+            val lastFetchTime: Flow<Long> = requireContext().appDataStore.data.map { preferences ->
+                preferences[DataStoreKeys.FETCH_TIME_KEY] ?: 0
+            }
+
+            val currentTime = System.currentTimeMillis()
+            requireContext().appDataStore.edit { preferences ->
+                preferences[DataStoreKeys.FETCH_TIME_KEY] = currentTime
+            }
+            // Check if it's been more than 24 hours since the last fetch
+            if (currentTime - lastFetchTime.last() > 24 * 60 * 60 * 1000) {
+                // 24 hours in milliseconds
+                viewModel.getRemotePodcasts()
+            }
+        }
+    }
+
+    private fun showPodcasts() = lifecycleScope.launch(Main) {
+            viewModel.homeUiState.collect { resource ->
+                if (resource.data?.isNotEmpty() == true) {
+                homeAdapter = HomeAdapter(resource.data , this@HomeFragment)
                 binding.homeRecyclerView.adapter = homeAdapter
             }
         }
@@ -106,6 +128,18 @@ class HomeFragment() : Fragment(), HomeInteractionListener {
                 this.findNavController().navigate(action)
             }
         }
+    }
+
+    private fun logHomeIssuesToCrashlytics(msg: String) {
+        CrashlyticsUtils.sendCustomLogToCrashlytics<HomeException>(
+            msg,
+            CrashlyticsUtils.HOME_KEY to msg,
+        )
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
     companion object {

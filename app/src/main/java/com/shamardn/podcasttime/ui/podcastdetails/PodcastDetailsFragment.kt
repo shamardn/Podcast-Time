@@ -28,7 +28,6 @@ import com.shamardn.podcasttime.util.PlayerEvents
 import com.shamardn.podcasttime.util.changeDateFormat
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers.Main
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
@@ -86,13 +85,11 @@ class PodcastDetailsFragment : Fragment(), PodcastDetailsInteractionListener {
                     }
 
                     is Resource.Success -> {
-                        delay(300)
                         progressDialog.dismiss()
                         onSuccess1()
                     }
 
                     is Resource.Error -> {
-                        delay(300)
                         progressDialog.dismiss()
                         val msg = podcast.exception?.message ?: getString(R.string.generic_err_msg)
                         view?.showSnakeBarError(msg)
@@ -107,13 +104,11 @@ class PodcastDetailsFragment : Fragment(), PodcastDetailsInteractionListener {
                     }
 
                     is Resource.Success -> {
-                        delay(300)
                         progressDialog.dismiss()
                         onSuccess2()
                     }
 
                     is Resource.Error -> {
-                        delay(300)
                         progressDialog.dismiss()
                         val msg = episodes.exception?.message ?: getString(R.string.generic_err_msg)
                         view?.showSnakeBarError(msg)
@@ -217,12 +212,12 @@ class PodcastDetailsFragment : Fragment(), PodcastDetailsInteractionListener {
         )
     }
 
-    override fun onClickEpisode(currentEpisode: EpisodeUiState) {
-        if (playerViewModel.currentEpisode.value.data?.guid != currentEpisode.guid) {
-            playerViewModel.onPlayerEvents(PlayerEvents.PlayNewEpisode(currentEpisode))
+    override fun onClickEpisode(episode: EpisodeUiState) {
+        if (playerViewModel.currentEpisode.value.data?.guid != episode.guid) {
+            playerViewModel.onPlayerEvents(PlayerEvents.PlayNewEpisode(episode))
         }
 
-        val episodeDetailsBottomSheet = EpisodeDetailsBottomSheet(currentEpisode)
+        val episodeDetailsBottomSheet = EpisodeDetailsBottomSheet(episode)
         childFragmentManager.let {
             episodeDetailsBottomSheet.show(it, episodeDetailsBottomSheet.tag)
         }
