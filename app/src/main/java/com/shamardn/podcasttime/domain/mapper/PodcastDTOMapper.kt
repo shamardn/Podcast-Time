@@ -12,7 +12,7 @@ class PodcastDTOMapper @Inject constructor(
             trackId = input.collectionId.toLong(),
             artistName = input.artistName,
             collectionName = input.collectionName,
-            artworkUrl100 = input.artworkUrl100,
+            artworkUrl100 = input.artworkUrl600,
             trackCount = input.trackCount,
             trackName = input.trackName,
             releaseDate = input.releaseDate,

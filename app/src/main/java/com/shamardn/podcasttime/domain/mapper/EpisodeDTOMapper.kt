@@ -15,7 +15,7 @@ class EpisodeDTOMapper @Inject constructor(
             releaseDate = input.releaseDate ?: "1970-10-12T12:46:00Z",
             description = input.shortDescription ?: "description is null",
             trackTimeMillis = input.trackTimeMillis ?: 0,
-            artworkUrl100 = input.artworkUrl100 ?: input.artworkUrl160 ?: "artworkUrl is null",
+            artworkUrl100 = input.artworkUrl600 ?: input.artworkUrl160 ?: "artworkUrl is null",
             episodeUrl = input.episodeUrl ?: "episodeUrl is null",
             guid = input.episodeGuid ?: "guid is null",
             episodeFileExtension = input.episodeFileExtension ?: "mp3",
