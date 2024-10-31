@@ -3,15 +3,17 @@ package com.shamardn.podcasttime.ui.home
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.shamardn.podcasttime.R
 import com.shamardn.podcasttime.databinding.ItemPodcastBinding
+import com.shamardn.podcasttime.ui.BaseDiffUtil
 import com.shamardn.podcasttime.ui.common.uistate.PodcastUiState
 import com.shamardn.podcasttime.util.changeDateFormat
 
 class HomeAdapter(
-    private val items: List<PodcastUiState>,
+    private var items: List<PodcastUiState>,
     private val listener: HomeInteractionListener,
 ) : RecyclerView.Adapter<HomeAdapter.PodcastViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PodcastViewHolder {
@@ -21,6 +23,21 @@ class HomeAdapter(
     }
 
     override fun getItemCount() = items.size
+
+    fun setData(newList: List<PodcastUiState>) {
+        val diffResult =
+            DiffUtil.calculateDiff(BaseDiffUtil(items, newList, ::areItemsSame, ::areContentSame))
+        items = newList
+        diffResult.dispatchUpdatesTo(this)
+        notifyDataSetChanged()
+    }
+
+    private fun areItemsSame(oldItem: PodcastUiState, newItem: PodcastUiState) =
+        oldItem.trackId == newItem.trackId
+
+    private fun areContentSame(oldItem: PodcastUiState, newItem: PodcastUiState) =
+        oldItem.collectionName == newItem.collectionName
+
 
     override fun onBindViewHolder(holder: PodcastViewHolder, position: Int) {
         val currentPodcast = items[position]

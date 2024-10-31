@@ -43,6 +43,7 @@ class HomeFragment() : Fragment(), HomeInteractionListener {
         savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        homeAdapter = HomeAdapter(listOf(), this@HomeFragment)
         refreshDataOnceDaily()
         return binding.root
     }
@@ -110,7 +111,7 @@ class HomeFragment() : Fragment(), HomeInteractionListener {
     private fun showPodcasts() = lifecycleScope.launch(Main) {
             viewModel.homeUiState.collect { resource ->
                 if (resource.data?.isNotEmpty() == true) {
-                homeAdapter = HomeAdapter(resource.data , this@HomeFragment)
+                homeAdapter.setData(resource.data)
                 binding.homeRecyclerView.adapter = homeAdapter
             }
         }
