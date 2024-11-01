@@ -1,4 +1,4 @@
-package com.shamardn.podcasttime.ui.home
+package com.shamardn.podcasttime.ui.home.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +10,7 @@ import com.shamardn.podcasttime.R
 import com.shamardn.podcasttime.databinding.ItemPodcastBinding
 import com.shamardn.podcasttime.ui.BaseDiffUtil
 import com.shamardn.podcasttime.ui.common.uistate.PodcastUiState
+import com.shamardn.podcasttime.ui.home.HomeInteractionListener
 import com.shamardn.podcasttime.util.changeDateFormat
 
 class HomeAdapter(
@@ -47,7 +48,7 @@ class HomeAdapter(
             textItemPodcastGenreName.text = currentPodcast.primaryGenreName.trim()
             textItemPodcastReleaseDate.text = currentPodcast.releaseDate.changeDateFormat()
             textItemPodcastTrackCount.text = this.root.resources.getString(R.string.trackCount, currentPodcast.trackCount.toString())
-            Glide.with(root.context).load(currentPodcast.artworkUrl100).into(imgItemPodcast)
+            Glide.with(root.context).load(currentPodcast.artworkUrl600).into(imgItemPodcast)
 
             root.setOnClickListener {
                 listener.onClickPodcast(currentPodcast)

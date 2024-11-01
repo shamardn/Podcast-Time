@@ -12,7 +12,7 @@ data class PodcastEntity(
     val trackId: Long,
     val artistName: String,
     val collectionName: String,
-    val artworkUrl100: String,
+    val artworkUrl600: String,
     val primaryGenreName: String,
     val releaseDate: String,
     val trackCount: Int,

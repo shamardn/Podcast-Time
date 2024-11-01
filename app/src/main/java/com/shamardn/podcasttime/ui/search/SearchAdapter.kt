@@ -25,11 +25,11 @@ class SearchAdapter(
     override fun onBindViewHolder(holder: PodcastViewHolder, position: Int) {
         val currentPodcast = items[position]
         holder.binding.apply {
-            Glide.with(root.context).load(currentPodcast.artworkUrl100).into(carouselImageView)
+            Glide.with(root.context).load(currentPodcast.artworkUrl600).into(carouselImageView)
 
             textItemCarouselTitle.text = currentPodcast.trackName
             root.setOnClickListener {
-                listener.onClickPodcast(currentPodcast.trackId)
+                listener.onClickPodcast(currentPodcast)
             }
         }
     }

@@ -13,7 +13,7 @@ fun toEpisodeEntity(mediaItem: MediaItem): EpisodeUiState {
         guid = mediaItem.mediaId,
         trackName = mediaItem.mediaMetadata.title.toString(),
         collectionName = mediaItem.mediaMetadata.albumTitle.toString(),
-        artworkUrl100 = mediaItem.mediaMetadata.artworkUri.toString(),
+        artworkUrl600 = mediaItem.mediaMetadata.artworkUri.toString(),
         description = mediaItem.mediaMetadata.description.toString(),
         releaseDate = mediaItem.mediaMetadata.releaseYear.toString(),
         trackTimeMillis = mediaItem.mediaMetadata.durationMs ?: 0 ,

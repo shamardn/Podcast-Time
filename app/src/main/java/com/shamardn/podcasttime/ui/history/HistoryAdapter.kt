@@ -25,7 +25,7 @@ class HistoryAdapter(
         val currentPodcast = items[position]
         holder.binding.apply {
             textItemHistory.text = currentPodcast.trackName.trim()
-            Glide.with(imgItemHistory).load(currentPodcast.artworkUrl100).into(imgItemHistory)
+            Glide.with(imgItemHistory).load(currentPodcast.artworkUrl600).into(imgItemHistory)
 
             root.setOnClickListener {
                 listener.onClickPodcast(currentPodcast.trackId)

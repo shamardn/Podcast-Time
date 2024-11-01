@@ -18,7 +18,7 @@ data class EpisodeDownloadEntity(
     val releaseDate: String,
     val description: String,
     val trackTimeMillis: Long,
-    val artworkUrl100: String,
+    val artworkUrl600: String,
     val episodeUrl: String,
     val episodeFileExtension: String,
 ): Parcelable

@@ -237,7 +237,7 @@ class PlayerController(
             .setDisplayTitle(item.trackName)
             .setArtist(item.collectionName)
             .setAlbumArtist(item.collectionName)
-            .setArtworkUri(Uri.parse(item.artworkUrl100))
+            .setArtworkUri(Uri.parse(item.artworkUrl600))
             .setExtras(extras) // Add extras bundle to metadata
             .build()
     }

@@ -55,7 +55,7 @@ class PodcastDetailsAdapter(
 
     override fun onBindViewHolder(holder: PodcastDetailsViewHolder, position: Int) {
         val currentEpisode = items[position + 1]
-        val img = items[0].artworkUrl100
+        val img = items[0].artworkUrl600
         val artistName = items[0].artistName
         holder.binding.apply {
             textItemEpisodePodcastName.text = currentEpisode.collectionName

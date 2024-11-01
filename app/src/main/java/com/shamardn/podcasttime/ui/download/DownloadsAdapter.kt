@@ -55,7 +55,7 @@ class DownloadsAdapter(
     override fun onBindViewHolder(holder: DownloadsViewHolder, position: Int) {
         val currentEpisode = items[position]
         holder.binding.apply {
-            Glide.with(root.context).load(currentEpisode.artworkUrl100).into(imgItemDownload)
+            Glide.with(root.context).load(currentEpisode.artworkUrl600).into(imgItemDownload)
             textItemDownloadEpisodeDate.text = currentEpisode.releaseDate.changeDateFormat()
             textItemDownloadEpisodeTitle.text = currentEpisode.trackName
             textItemDownloadPlayTime.text = currentEpisode.trackTimeMillis.milliSecondsToMinutes()

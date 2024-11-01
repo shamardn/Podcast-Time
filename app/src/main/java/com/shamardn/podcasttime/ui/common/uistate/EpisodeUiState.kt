@@ -9,7 +9,7 @@ data class EpisodeUiState(
     val releaseDate: String,
     val description: String,
     val trackTimeMillis: Long,
-    val artworkUrl100: String,
+    val artworkUrl600: String,
     val episodeUrl: String,
     val guid: String,
     val episodeFileExtension: String,

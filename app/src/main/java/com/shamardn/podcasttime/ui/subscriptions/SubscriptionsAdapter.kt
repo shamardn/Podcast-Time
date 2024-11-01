@@ -42,7 +42,7 @@ class SubscriptionsAdapter(
         val currentPodcast = items[position]
         holder.binding.apply {
             textItemSub.text = currentPodcast.trackName.trim()
-            Glide.with(imgItemSub).load(currentPodcast.artworkUrl100).into(imgItemSub)
+            Glide.with(imgItemSub).load(currentPodcast.artworkUrl600).into(imgItemSub)
 
             root.setOnClickListener {
                 listener.onClickPodcast(currentPodcast.trackId)

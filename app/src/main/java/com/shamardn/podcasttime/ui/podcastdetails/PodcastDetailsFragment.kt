@@ -13,8 +13,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.shamardn.podcasttime.R
-import com.shamardn.podcasttime.data.datasource.local.database.entity.HistoryEntity
 import com.shamardn.podcasttime.data.datasource.local.database.entity.PodcastEntity
+import com.shamardn.podcasttime.data.datasource.local.database.entity.RecentEntity
 import com.shamardn.podcasttime.data.model.Resource
 import com.shamardn.podcasttime.databinding.FragmentPodcastDetailsBinding
 import com.shamardn.podcasttime.ui.common.custom_views.ProgressDialog
@@ -74,46 +74,44 @@ class PodcastDetailsFragment : Fragment(), PodcastDetailsInteractionListener {
         stateFlow2: StateFlow<Resource<Any>>,
         onSuccess1: () -> Unit,
         onSuccess2: () -> Unit,
-    ) {
-        lifecycleScope.launch {
-            stateFlow1.combine(stateFlow2) { podcast, episodes ->
-                Pair(podcast, episodes)
-            }.collect { (podcast, episodes) ->
-                when (podcast) {
-                    is Resource.Loading -> {
-                        progressDialog.show()
-                    }
-
-                    is Resource.Success -> {
-                        progressDialog.dismiss()
-                        onSuccess1()
-                    }
-
-                    is Resource.Error -> {
-                        progressDialog.dismiss()
-                        val msg = podcast.exception?.message ?: getString(R.string.generic_err_msg)
-                        view?.showSnakeBarError(msg)
-                        logDetailsIssuesToCrashlytics(msg)
-                    }
+    ) = lifecycleScope.launch(Main) {
+        stateFlow1.combine(stateFlow2) { podcast, episodes ->
+            Pair(podcast, episodes)
+        }.collect { (podcast, episodes) ->
+            when (podcast) {
+                is Resource.Loading -> {
+                    progressDialog.show()
                 }
 
-                // Handle the second state flow
-                when (episodes) {
-                    is Resource.Loading -> {
-                        progressDialog.show()
-                    }
+                is Resource.Success -> {
+                    progressDialog.dismiss()
+                    onSuccess1()
+                }
 
-                    is Resource.Success -> {
-                        progressDialog.dismiss()
-                        onSuccess2()
-                    }
+                is Resource.Error -> {
+                    progressDialog.dismiss()
+                    val msg = podcast.exception?.message ?: getString(R.string.generic_err_msg)
+                    view?.showSnakeBarError(msg)
+                    logDetailsIssuesToCrashlytics(msg)
+                }
+            }
 
-                    is Resource.Error -> {
-                        progressDialog.dismiss()
-                        val msg = episodes.exception?.message ?: getString(R.string.generic_err_msg)
-                        view?.showSnakeBarError(msg)
-                        logDetailsIssuesToCrashlytics(msg)
-                    }
+            // Handle the second state flow
+            when (episodes) {
+                is Resource.Loading -> {
+                    progressDialog.show()
+                }
+
+                is Resource.Success -> {
+                    progressDialog.dismiss()
+                    onSuccess2()
+                }
+
+                is Resource.Error -> {
+                    progressDialog.dismiss()
+                    val msg = episodes.exception?.message ?: getString(R.string.generic_err_msg)
+                    view?.showSnakeBarError(msg)
+                    logDetailsIssuesToCrashlytics(msg)
                 }
             }
         }
@@ -172,7 +170,7 @@ class PodcastDetailsFragment : Fragment(), PodcastDetailsInteractionListener {
                         R.string.trackCount,
                         resource.data.trackCount.toString()
                     )
-                Glide.with(binding.imgPodcastDetails).load(resource.data.artworkUrl100)
+                Glide.with(binding.imgPodcastDetails).load(resource.data.artworkUrl600)
                     .into(binding.imgPodcastDetails)
             }
         }
@@ -197,13 +195,13 @@ class PodcastDetailsFragment : Fragment(), PodcastDetailsInteractionListener {
         }
     }
 
-    private fun getHistoryEntity(podcastEntity: PodcastEntity): HistoryEntity {
+    private fun getHistoryEntity(podcastEntity: PodcastEntity): RecentEntity {
         val savedTime = System.currentTimeMillis()
-        return HistoryEntity(
+        return RecentEntity(
             navArgs.trackId,
             podcastEntity.artistName,
             podcastEntity.collectionName,
-            podcastEntity.artworkUrl100,
+            podcastEntity.artworkUrl600,
             podcastEntity.primaryGenreName,
             podcastEntity.releaseDate,
             podcastEntity.trackCount,

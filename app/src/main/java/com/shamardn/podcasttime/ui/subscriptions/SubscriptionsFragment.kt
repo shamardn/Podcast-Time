@@ -22,7 +22,6 @@ import com.shamardn.podcasttime.util.CrashlyticsUtils
 import com.shamardn.podcasttime.util.SubscriptionException
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers.Main
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -63,7 +62,6 @@ class SubscriptionsFragment : Fragment(), SubscriptionsInteractionListener {
             when( resource) {
                 is Resource.Loading -> {
                     progressDialog.show()
-                    delay(500)
                 }
                 is Resource.Success -> {
                     progressDialog.dismiss()

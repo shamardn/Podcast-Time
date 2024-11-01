@@ -73,7 +73,7 @@ class BottomPlayerFragment : Fragment() {
 
                 setBottomPlayerVisibility(View.VISIBLE)
                 binding.textMainPlayerEpisodeTitle.text = episode.trackName
-                Glide.with(binding.imgMainPlayer).load(episode.artworkUrl100)
+                Glide.with(binding.imgMainPlayer).load(episode.artworkUrl600)
                     .into(binding.imgMainPlayer)
             }
         }
