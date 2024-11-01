@@ -4,12 +4,14 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.shamardn.podcasttime.domain.usecase.GetLocalPodcastsUseCase
+import com.shamardn.podcasttime.domain.usecase.SaveRecentPodcastUseCase
 import com.shamardn.podcasttime.domain.usecase.SearchLocalPodcastsUseCase
-import com.shamardn.podcasttime.ui.common.mapper.PodcastUiStateMapper
+import com.shamardn.podcasttime.ui.common.uistate.PodcastUiState
 import com.shamardn.podcasttime.ui.common.uistate.UiState
 import com.shamardn.podcasttime.util.CrashlyticsUtils
 import com.shamardn.podcasttime.util.SearchException
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
@@ -20,7 +22,7 @@ import javax.inject.Inject
 class SearchViewModel @Inject constructor(
     private val searchLocalPodcastsUseCase: SearchLocalPodcastsUseCase,
     private val getLocalPodcastsUseCase: GetLocalPodcastsUseCase,
-    private val podcastUiStateMapper: PodcastUiStateMapper,
+    private val saveRecentPodcastUseCase: SaveRecentPodcastUseCase,
     ): ViewModel() {
     private val _searchUiState = MutableStateFlow(UiState(UiState().isEmpty))
     val searchUiState: StateFlow<UiState> = _searchUiState
@@ -32,9 +34,7 @@ class SearchViewModel @Inject constructor(
                     it.copy(
                         isLoading = false,
                         isSuccess = true,
-                        podcastUiState = response.map { podcast ->
-                            podcastUiStateMapper.map(podcast)
-                        }
+                        podcastUiState = response
                     )
                 }
 
@@ -51,9 +51,7 @@ class SearchViewModel @Inject constructor(
                     it.copy(
                         isLoading = false,
                         isSuccess = true,
-                        podcastUiState = response.map { podcast ->
-                            podcastUiStateMapper.map(podcast)
-                        }
+                        podcastUiState = response
                     )
                 }
 
@@ -80,6 +78,10 @@ class SearchViewModel @Inject constructor(
             )
         }
         logSearchIssueToCrashlytics(message)
+    }
+
+    fun saveRecentPodcast(podcast: PodcastUiState) = viewModelScope.launch(IO) {
+        saveRecentPodcastUseCase(podcast)
     }
 
     companion object{
