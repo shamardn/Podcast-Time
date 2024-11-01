@@ -1,5 +1,7 @@
 package com.shamardn.podcasttime.ui.search
 
+import com.shamardn.podcasttime.ui.common.uistate.PodcastUiState
+
 interface SearchInteractionListener {
-    fun onClickPodcast(trackId: Long)
+    fun onClickPodcast(podcast: PodcastUiState)
 }

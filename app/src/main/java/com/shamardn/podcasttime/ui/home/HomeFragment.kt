@@ -10,6 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.carousel.CarouselLayoutManager
 import com.shamardn.podcasttime.R
 import com.shamardn.podcasttime.data.datasource.local.datastore.DataStoreKeys
 import com.shamardn.podcasttime.data.datasource.local.datastore.appDataStore
@@ -18,12 +19,16 @@ import com.shamardn.podcasttime.databinding.FragmentHomeBinding
 import com.shamardn.podcasttime.ui.common.custom_views.ProgressDialog
 import com.shamardn.podcasttime.ui.common.uistate.PodcastUiState
 import com.shamardn.podcasttime.ui.common.viewmodel.PlayerViewModel
+import com.shamardn.podcasttime.ui.home.adapter.HomeAdapter
+import com.shamardn.podcasttime.ui.home.adapter.RecentAdapter
 import com.shamardn.podcasttime.ui.showSnakeBarError
 import com.shamardn.podcasttime.util.CrashlyticsUtils
 import com.shamardn.podcasttime.util.HomeException
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.last
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
@@ -34,6 +39,7 @@ class HomeFragment() : Fragment(), HomeInteractionListener {
     private val binding get() = _binding!!
 
     private lateinit var homeAdapter: HomeAdapter
+    private lateinit var recentAdapter: RecentAdapter
     private val viewModel: HomeViewModel by viewModels()
     private val playerViewModel: PlayerViewModel by activityViewModels()
     private val progressDialog by lazy { ProgressDialog.createProgressDialog(requireActivity()) }
@@ -44,13 +50,20 @@ class HomeFragment() : Fragment(), HomeInteractionListener {
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         homeAdapter = HomeAdapter(listOf(), this@HomeFragment)
+        recentAdapter = RecentAdapter(listOf(), this@HomeFragment)
         refreshDataOnceDaily()
+        viewModel.getRecentPodcast()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initViewModel()
+        initViewModel(
+            viewModel.homeUiState,
+            viewModel.recentUiState,
+            { showPodcasts() },
+            { showRecent() }
+        )
         handelEvents()
 
         showBottomSheet()
@@ -67,21 +80,52 @@ class HomeFragment() : Fragment(), HomeInteractionListener {
                 this.findNavController().navigate(action)
             }
         }
+
+        binding.tvHomeRecentMore.setOnClickListener {
+            navigateToRecent()
+        }
     }
 
-    private fun initViewModel() = lifecycleScope.launch(Main){
-        viewModel.homeUiState.collect { resource ->
-            when(resource){
+    private fun initViewModel(
+        stateFlow1: StateFlow<Resource<Any>>,
+        stateFlow2: StateFlow<Resource<Any>>,
+        onSuccess1: () -> Unit,
+        onSuccess2: () -> Unit,
+    ) = lifecycleScope.launch(Main) {
+        stateFlow1.combine(stateFlow2) { homePodcasts, recentPodcast ->
+            Pair(homePodcasts, recentPodcast)
+        }.collect { (homePodcasts, recentPodcast) ->
+            when (homePodcasts) {
                 is Resource.Loading -> {
                     progressDialog.show()
                 }
+
                 is Resource.Success -> {
                     progressDialog.dismiss()
-                    showPodcasts()
+                    onSuccess1()
                 }
+
                 is Resource.Error -> {
                     progressDialog.dismiss()
-                    val msg = resource.exception?.message ?: getString(R.string.generic_err_msg)
+                    val msg = homePodcasts.exception?.message ?: getString(R.string.generic_err_msg)
+                    view?.showSnakeBarError(msg)
+                    logHomeIssuesToCrashlytics(msg)
+                }
+            }
+            when (recentPodcast) {
+                is Resource.Loading -> {
+                    progressDialog.show()
+                }
+
+                is Resource.Success -> {
+                    progressDialog.dismiss()
+                    onSuccess2()
+                }
+
+                is Resource.Error -> {
+                    progressDialog.dismiss()
+                    val msg =
+                        recentPodcast.exception?.message ?: getString(R.string.generic_err_msg)
                     view?.showSnakeBarError(msg)
                     logHomeIssuesToCrashlytics(msg)
                 }
@@ -109,14 +153,38 @@ class HomeFragment() : Fragment(), HomeInteractionListener {
     }
 
     private fun showPodcasts() = lifecycleScope.launch(Main) {
-            viewModel.homeUiState.collect { resource ->
-                if (resource.data?.isNotEmpty() == true) {
+        viewModel.homeUiState.collect { resource ->
+            if (resource.data?.isNotEmpty() == true) {
+                binding.homeRecyclerView.visibility = View.VISIBLE
                 homeAdapter.setData(resource.data)
                 binding.homeRecyclerView.adapter = homeAdapter
+            } else {
+                binding.homeRecyclerView.visibility = View.GONE
             }
         }
     }
+
+    private fun showRecent() = lifecycleScope.launch(Main) {
+        viewModel.recentUiState.collect { resource ->
+            if (resource.data?.isNotEmpty() == true) {
+                binding.rvCarouselRecent.layoutManager = CarouselLayoutManager()
+                (binding.rvCarouselRecent.layoutManager as CarouselLayoutManager).orientation =
+                    CarouselLayoutManager.HORIZONTAL
+                binding.rvCarouselRecent.visibility = View.VISIBLE
+                binding.tvHomeRecentTitle.visibility = View.VISIBLE
+                binding.tvHomeRecentMore.visibility = View.VISIBLE
+                recentAdapter.setData(resource.data)
+                binding.rvCarouselRecent.adapter = recentAdapter
+            } else {
+                binding.rvCarouselRecent.visibility = View.GONE
+                binding.tvHomeRecentTitle.visibility = View.GONE
+                binding.tvHomeRecentMore.visibility = View.GONE
+            }
+        }
+    }
+
     override fun onClickPodcast(podcast: PodcastUiState) {
+        viewModel.saveRecentPodcast(podcast)
         val action =
             HomeFragmentDirections.actionHomeFragmentToPodcastDetailsFragment(podcast.trackId)
         this.findNavController().navigate(action)
@@ -129,6 +197,11 @@ class HomeFragment() : Fragment(), HomeInteractionListener {
                 this.findNavController().navigate(action)
             }
         }
+    }
+
+    private fun navigateToRecent() {
+        val action = HomeFragmentDirections.actionHomeFragmentToHistoryFragment()
+        this.findNavController().navigate(action)
     }
 
     private fun logHomeIssuesToCrashlytics(msg: String) {

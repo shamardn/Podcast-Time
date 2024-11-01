@@ -6,7 +6,7 @@ import com.shamardn.podcasttime.data.datasource.local.database.PodcastDatabase
 import com.shamardn.podcasttime.data.datasource.local.database.dao.ArtistDao
 import com.shamardn.podcasttime.data.datasource.local.database.dao.DownloadDao
 import com.shamardn.podcasttime.data.datasource.local.database.dao.EpisodeDao
-import com.shamardn.podcasttime.data.datasource.local.database.dao.HistoryDao
+import com.shamardn.podcasttime.data.datasource.local.database.dao.RecentDao
 import com.shamardn.podcasttime.data.datasource.local.database.dao.PlaylistDao
 import com.shamardn.podcasttime.data.datasource.local.database.dao.PodcastDao
 import com.shamardn.podcasttime.data.datasource.local.database.dao.SubscriptionsDao
@@ -41,8 +41,8 @@ object DatabaseModule {
     }
     @Singleton
     @Provides
-    fun provideHistoryDao(podcastDatabase: PodcastDatabase): HistoryDao {
-        return podcastDatabase.historyDao()
+    fun provideRecentDao(podcastDatabase: PodcastDatabase): RecentDao {
+        return podcastDatabase.recentDao()
     }
 
     @Singleton

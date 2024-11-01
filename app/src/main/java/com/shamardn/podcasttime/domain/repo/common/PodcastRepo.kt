@@ -2,7 +2,7 @@ package com.shamardn.podcasttime.domain.repo.common
 
 import com.shamardn.podcasttime.data.datasource.local.database.entity.EpisodeDownloadEntity
 import com.shamardn.podcasttime.data.datasource.local.database.entity.EpisodeEntity
-import com.shamardn.podcasttime.data.datasource.local.database.entity.HistoryEntity
+import com.shamardn.podcasttime.data.datasource.local.database.entity.RecentEntity
 import com.shamardn.podcasttime.data.datasource.local.database.entity.PlaylistEntity
 import com.shamardn.podcasttime.data.datasource.local.database.entity.PodcastEntity
 import com.shamardn.podcasttime.data.datasource.local.database.entity.SubscriptionsEntity
@@ -19,16 +19,17 @@ interface PodcastRepo {
     suspend fun refreshEpisodesById(trackId: Long): PodcastResponse<EpisodeDTO>
     suspend fun getLocalPodcasts(): List<PodcastEntity>
     suspend fun getPodcastById(podcastId: Long): PodcastEntity
-    suspend fun deleteHistoryList()
-    suspend fun deletePodcastFromHistory(podcast: HistoryEntity)
+    suspend fun deleteRecentList()
+    suspend fun deletePodcastFromRecent(podcast: RecentEntity)
 
     suspend fun deleteSubscriptionList()
-    suspend fun getHistoryList(): List<HistoryEntity>
+    suspend fun getRecentList(): List<RecentEntity>
     suspend fun getLocalEpisodes(): List<EpisodeEntity>
     suspend fun getAllDownloadedEpisodes(): List<EpisodeDownloadEntity>
 
     suspend fun unsubscribe(subscriptionsEntity: SubscriptionsEntity)
-    suspend fun saveToHistory(historyEntity: HistoryEntity) //    suspend fun getRemotePodcastById(trackId: Long): PodcastResponse<EpisodeDTO>
+    suspend fun saveToRecent(recentEntity: RecentEntity)
+    //    suspend fun getRemotePodcastById(trackId: Long): PodcastResponse<EpisodeDTO>
     suspend fun saveEpisodeToDownload(episode: EpisodeDownloadEntity)
 
     suspend fun getSubscriptions(): List<SubscriptionsEntity>

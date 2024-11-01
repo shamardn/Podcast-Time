@@ -5,18 +5,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.shamardn.podcasttime.data.datasource.local.database.entity.HistoryEntity
 import com.shamardn.podcasttime.data.model.Resource
 import com.shamardn.podcasttime.domain.usecase.GetEpisodesByIdUseCase
-import com.shamardn.podcasttime.domain.usecase.GetHistoryListUseCase
 import com.shamardn.podcasttime.domain.usecase.GetPodcastByIdUseCase
+import com.shamardn.podcasttime.domain.usecase.GetRecentListUseCase
 import com.shamardn.podcasttime.domain.usecase.GetSubscriptionsUseCase
 import com.shamardn.podcasttime.domain.usecase.SaveEpisodeToDownloadUseCase
-import com.shamardn.podcasttime.domain.usecase.SaveToHistoryUseCase
+import com.shamardn.podcasttime.domain.usecase.SaveRecentPodcastUseCase
 import com.shamardn.podcasttime.domain.usecase.SubscribeUseCase
 import com.shamardn.podcasttime.domain.usecase.UnsubscribeUseCase
-import com.shamardn.podcasttime.ui.common.mapper.EpisodeUiStateMapper
-import com.shamardn.podcasttime.ui.common.mapper.PodcastUiStateMapper
+import com.shamardn.podcasttime.ui.common.ui_state_mapper.EpisodeEntityUiStateMapper
+import com.shamardn.podcasttime.ui.common.ui_state_mapper.PodcastEntityUiStateMapper
 import com.shamardn.podcasttime.ui.common.uistate.EpisodeUiState
 import com.shamardn.podcasttime.ui.common.uistate.PodcastUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -32,13 +31,13 @@ class PodcastDetailsViewModel @Inject constructor(
     private val subscribeUseCase: SubscribeUseCase,
     private val getSubscriptionsUseCase: GetSubscriptionsUseCase,
     private val unsubscribeUseCase: UnsubscribeUseCase,
-    private val getHistoryListUseCase: GetHistoryListUseCase,
-    private val saveToHistoryUseCase: SaveToHistoryUseCase,
+    private val getRecentListUseCase: GetRecentListUseCase,
+    private val saveRecentPodcastUseCase: SaveRecentPodcastUseCase,
     private val getPodcastByIdUseCase: GetPodcastByIdUseCase,
     private val getEpisodesByIdUseCase: GetEpisodesByIdUseCase,
     private val saveEpisodeToDownloadUseCase: SaveEpisodeToDownloadUseCase,
-    private val uiStateMapper: PodcastUiStateMapper,
-    private val episodeUiStateMapper: EpisodeUiStateMapper,
+    private val uiStateMapper: PodcastEntityUiStateMapper,
+    private val episodeEntityUiStateMapper: EpisodeEntityUiStateMapper,
 
     ) : ViewModel() {
     private val _podcastUiState = MutableStateFlow<Resource<PodcastUiState>>(Resource.Loading)
@@ -64,7 +63,7 @@ class PodcastDetailsViewModel @Inject constructor(
     fun getEpisodeSById(trackId: Long) = viewModelScope.launch(IO) {
         try {
             val episodesResponse = getEpisodesByIdUseCase(trackId)
-            _episodesUiState.emit(Resource.Success(episodeUiStateMapper.mapList(episodesResponse)))
+            _episodesUiState.emit(Resource.Success(episodeEntityUiStateMapper.mapList(episodesResponse)))
             _desc.postValue(episodesResponse[1].description)
         } catch (e: Exception) {
             Log.e(TAG, "Exception in getEpisodeSById = ${e.message}")
@@ -82,15 +81,15 @@ class PodcastDetailsViewModel @Inject constructor(
         }
     }
 
-    suspend fun saveToHistory(historyEntity: HistoryEntity) {
-        try {
-            viewModelScope.launch {
-                saveToHistoryUseCase(historyEntity)
-            }
-        } catch (e: Exception) {
-            Log.e(TAG, e.message.toString())
-        }
-    }
+//    suspend fun saveToHistory(recentEntity: RecentEntity) {
+//        try {
+//            viewModelScope.launch {
+//                saveRecentPodcastUseCase(recentEntity)
+//            }
+//        } catch (e: Exception) {
+//            Log.e(TAG, e.message.toString())
+//        }
+//    }
 
     suspend fun saveEpisodeToDownload(episodeUiState: EpisodeUiState) = viewModelScope.launch {
         try {

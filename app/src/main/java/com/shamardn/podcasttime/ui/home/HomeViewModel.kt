@@ -8,8 +8,8 @@ import com.shamardn.podcasttime.PodcastTimeApplication
 import com.shamardn.podcasttime.data.model.Resource
 import com.shamardn.podcasttime.domain.usecase.GetLocalPodcastsUseCase
 import com.shamardn.podcasttime.domain.usecase.GetPodcastsUseCase
-import com.shamardn.podcasttime.domain.usecase.SavePodcastUseCase
-import com.shamardn.podcasttime.ui.common.mapper.PodcastUiStateMapper
+import com.shamardn.podcasttime.domain.usecase.GetRecentPodcastsUseCase
+import com.shamardn.podcasttime.domain.usecase.SaveRecentPodcastUseCase
 import com.shamardn.podcasttime.ui.common.uistate.PodcastUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers.IO
@@ -23,11 +23,14 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val getPodcastsUseCase: GetPodcastsUseCase,
     private val getLocalPodcastsUseCase: GetLocalPodcastsUseCase,
-    private val homeUiStateMapper: PodcastUiStateMapper,
-    private val savePodcastUseCase: SavePodcastUseCase,
+    private val saveRecentPodcastUseCase: SaveRecentPodcastUseCase,
+    private val getRecentPodcastsUseCase: GetRecentPodcastsUseCase,
 ) : ViewModel() {
     private val _homeUiState = MutableStateFlow<Resource<List<PodcastUiState>>>(Resource.Loading)
     val homeUiState: StateFlow<Resource<List<PodcastUiState>>> = _homeUiState.asStateFlow()
+
+    private val _recentUiState = MutableStateFlow<Resource<List<PodcastUiState>>>(Resource.Loading)
+    val recentUiState: StateFlow<Resource<List<PodcastUiState>>> = _recentUiState.asStateFlow()
 
     private val _isOnline = MutableLiveData<Boolean>()
     val isOnline = _isOnline as LiveData<Boolean>
@@ -35,7 +38,7 @@ class HomeViewModel @Inject constructor(
     fun getLocalPodcasts() = viewModelScope.launch(IO) {
         try {
             val response = getLocalPodcastsUseCase()
-            _homeUiState.emit(Resource.Success(homeUiStateMapper.mapList(response)))
+            _homeUiState.emit(Resource.Success(response))
         }catch (e: Exception){
             val msg = e.message.toString()
             _homeUiState.emit(Resource.Error(Exception(msg)))
@@ -47,7 +50,7 @@ class HomeViewModel @Inject constructor(
             if (PodcastTimeApplication.isConnected) {
                 _isOnline.postValue(true)
                 val response = getPodcastsUseCase()
-                _homeUiState.emit(Resource.Success(homeUiStateMapper.mapList(response)))
+                _homeUiState.emit(Resource.Success(response))
             } else {
                 _isOnline.postValue(false)
                 _homeUiState.emit(Resource.Error(Exception("No Internet Connection")))
@@ -57,7 +60,19 @@ class HomeViewModel @Inject constructor(
             _homeUiState.emit(Resource.Error(Exception(msg)))
         }
     }
-    fun savePodcast(podcast: PodcastUiState) = viewModelScope.launch(IO) {
-        savePodcastUseCase(podcast)
+
+    fun getRecentPodcast() = viewModelScope.launch(IO) {
+        try {
+            val recentPodcasts = getRecentPodcastsUseCase()
+            _recentUiState.emit(Resource.Success(recentPodcasts))
+        }catch (e: Exception){
+            val msg = e.message.toString()
+            _recentUiState.emit(Resource.Error(Exception(msg)))
+        }
+
+    }
+
+    fun saveRecentPodcast(podcast: PodcastUiState) = viewModelScope.launch(IO) {
+        saveRecentPodcastUseCase(podcast)
     }
 }

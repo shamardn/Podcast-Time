@@ -14,6 +14,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.carousel.CarouselLayoutManager
 import com.shamardn.podcasttime.databinding.FragmentSearchBinding
+import com.shamardn.podcasttime.ui.common.uistate.PodcastUiState
 import com.shamardn.podcasttime.ui.common.viewmodel.PlayerViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers.Main
@@ -103,8 +104,9 @@ class SearchFragment : Fragment(), SearchInteractionListener {
         }
     }
 
-override fun onClickPodcast(trackId: Long) {
-    val action = SearchFragmentDirections.actionSearchFragmentToPodcastDetailsFragment(trackId)
+override fun onClickPodcast(podcast: PodcastUiState) {
+    viewModel.saveRecentPodcast(podcast)
+    val action = SearchFragmentDirections.actionSearchFragmentToPodcastDetailsFragment(podcast.trackId)
     Navigation.findNavController(binding.root).navigate(action)
 }
 

@@ -2,7 +2,7 @@ package com.shamardn.podcasttime.di
 
 import com.shamardn.podcasttime.data.datasource.local.database.dao.DownloadDao
 import com.shamardn.podcasttime.data.datasource.local.database.dao.EpisodeDao
-import com.shamardn.podcasttime.data.datasource.local.database.dao.HistoryDao
+import com.shamardn.podcasttime.data.datasource.local.database.dao.RecentDao
 import com.shamardn.podcasttime.data.datasource.local.database.dao.PlaylistDao
 import com.shamardn.podcasttime.data.datasource.local.database.dao.PodcastDao
 import com.shamardn.podcasttime.data.datasource.local.database.dao.SubscriptionsDao
@@ -24,10 +24,10 @@ object RepoModule {
         episodeDao: EpisodeDao,
         podcastDao: PodcastDao,
         subscriptionsDao: SubscriptionsDao,
-        historyDao: HistoryDao,
+        recentDao: RecentDao,
         downloadDao: DownloadDao,
         playlistDao: PlaylistDao,
     ): PodcastRepo {
-        return PodcastRepoImpl(apiService, episodeDao, podcastDao, subscriptionsDao, historyDao, downloadDao, playlistDao)
+        return PodcastRepoImpl(apiService, episodeDao, podcastDao, subscriptionsDao, recentDao, downloadDao, playlistDao)
     }
 }

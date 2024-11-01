@@ -2,13 +2,13 @@ package com.shamardn.podcasttime.data.repo.common
 
 import com.shamardn.podcasttime.data.datasource.local.database.dao.DownloadDao
 import com.shamardn.podcasttime.data.datasource.local.database.dao.EpisodeDao
-import com.shamardn.podcasttime.data.datasource.local.database.dao.HistoryDao
+import com.shamardn.podcasttime.data.datasource.local.database.dao.RecentDao
 import com.shamardn.podcasttime.data.datasource.local.database.dao.PlaylistDao
 import com.shamardn.podcasttime.data.datasource.local.database.dao.PodcastDao
 import com.shamardn.podcasttime.data.datasource.local.database.dao.SubscriptionsDao
 import com.shamardn.podcasttime.data.datasource.local.database.entity.EpisodeDownloadEntity
 import com.shamardn.podcasttime.data.datasource.local.database.entity.EpisodeEntity
-import com.shamardn.podcasttime.data.datasource.local.database.entity.HistoryEntity
+import com.shamardn.podcasttime.data.datasource.local.database.entity.RecentEntity
 import com.shamardn.podcasttime.data.datasource.local.database.entity.PlaylistEntity
 import com.shamardn.podcasttime.data.datasource.local.database.entity.PodcastEntity
 import com.shamardn.podcasttime.data.datasource.local.database.entity.SubscriptionsEntity
@@ -26,7 +26,7 @@ class PodcastRepoImpl @Inject constructor(
     private val episodeDao: EpisodeDao,
     private val podcastDao: PodcastDao,
     private val subscriptionsDao: SubscriptionsDao,
-    private val historyDao: HistoryDao,
+    private val recentDao: RecentDao,
     private val downloadDao: DownloadDao,
     private val playlistDao: PlaylistDao,
 ) : PodcastRepo {
@@ -78,20 +78,20 @@ class PodcastRepoImpl @Inject constructor(
         return downloadDao.deleteAllDownloadedEpisodes()
     }
 
-    override suspend fun deleteHistoryList() {
-        return historyDao.deleteHistoryList()
+    override suspend fun deleteRecentList() {
+        return recentDao.deleteRecentList()
     }
 
-    override suspend fun deletePodcastFromHistory(podcast: HistoryEntity) {
-        return historyDao.deletePodcastFromHistory(podcast)
+    override suspend fun deletePodcastFromRecent(podcast: RecentEntity) {
+        return recentDao.deletePodcastFromRecent(podcast)
     }
 
     override suspend fun deleteSubscriptionList() {
         return subscriptionsDao.deleteSubscriptionList()
     }
 
-    override suspend fun getHistoryList(): List<HistoryEntity> {
-        return historyDao.getHistoryList()
+    override suspend fun getRecentList(): List<RecentEntity> {
+        return recentDao.getRecentList()
     }
 
     override suspend fun saveEpisodeToDownload(episode: EpisodeDownloadEntity) {
@@ -119,8 +119,8 @@ class PodcastRepoImpl @Inject constructor(
     }
 
 
-    override suspend fun saveToHistory(historyEntity: HistoryEntity) {
-        return historyDao.saveToHistory(historyEntity)
+    override suspend fun saveToRecent(recentEntity: RecentEntity) {
+        return recentDao.saveToRecent(recentEntity)
     }
 
     override suspend fun getPlaylists(): List<PlaylistEntity> {

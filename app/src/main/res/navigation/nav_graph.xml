@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_homeFragment_to_episodeDetailsBottomSheet"
             app:destination="@id/episodeDetailsBottomSheet" />
+        <action
+            android:id="@+id/action_homeFragment_to_historyFragment"
+            app:destination="@id/historyFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
