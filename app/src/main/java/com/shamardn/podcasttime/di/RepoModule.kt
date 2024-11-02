@@ -7,6 +7,7 @@ import com.shamardn.podcasttime.data.datasource.local.database.dao.PlaylistDao
 import com.shamardn.podcasttime.data.datasource.local.database.dao.PodcastDao
 import com.shamardn.podcasttime.data.datasource.local.database.dao.SubscriptionsDao
 import com.shamardn.podcasttime.data.datasource.remote.ApiService
+import com.shamardn.podcasttime.data.datasource.remote.IpApiService
 import com.shamardn.podcasttime.data.repo.common.PodcastRepoImpl
 import com.shamardn.podcasttime.domain.repo.common.PodcastRepo
 import dagger.Module
@@ -21,6 +22,7 @@ object RepoModule {
     @Provides
     fun provideRepo(
         apiService: ApiService,
+        ipApiService: IpApiService,
         episodeDao: EpisodeDao,
         podcastDao: PodcastDao,
         subscriptionsDao: SubscriptionsDao,
@@ -28,6 +30,6 @@ object RepoModule {
         downloadDao: DownloadDao,
         playlistDao: PlaylistDao,
     ): PodcastRepo {
-        return PodcastRepoImpl(apiService, episodeDao, podcastDao, subscriptionsDao, recentDao, downloadDao, playlistDao)
+        return PodcastRepoImpl(apiService, ipApiService, episodeDao, podcastDao, subscriptionsDao, recentDao, downloadDao, playlistDao)
     }
 }

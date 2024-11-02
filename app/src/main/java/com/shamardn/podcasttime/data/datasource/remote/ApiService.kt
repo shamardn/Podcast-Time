@@ -7,9 +7,10 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface ApiService {
-    @GET("/search?media=podcast&country=eg&limit=50&country=eg&limit=50")
+    @GET("/search?media=podcast&limit=50")
     suspend fun getPodcasts(
         @Query("term") term: String,
+        @Query("country") country: String = "us",
     ): PodcastResponse<PodcastDTO>
 
     @GET("/lookup?entity=podcastEpisode&limit=50")

@@ -2,27 +2,30 @@ package com.shamardn.podcasttime.data.repo.common
 
 import com.shamardn.podcasttime.data.datasource.local.database.dao.DownloadDao
 import com.shamardn.podcasttime.data.datasource.local.database.dao.EpisodeDao
-import com.shamardn.podcasttime.data.datasource.local.database.dao.RecentDao
 import com.shamardn.podcasttime.data.datasource.local.database.dao.PlaylistDao
 import com.shamardn.podcasttime.data.datasource.local.database.dao.PodcastDao
+import com.shamardn.podcasttime.data.datasource.local.database.dao.RecentDao
 import com.shamardn.podcasttime.data.datasource.local.database.dao.SubscriptionsDao
 import com.shamardn.podcasttime.data.datasource.local.database.entity.EpisodeDownloadEntity
 import com.shamardn.podcasttime.data.datasource.local.database.entity.EpisodeEntity
-import com.shamardn.podcasttime.data.datasource.local.database.entity.RecentEntity
 import com.shamardn.podcasttime.data.datasource.local.database.entity.PlaylistEntity
 import com.shamardn.podcasttime.data.datasource.local.database.entity.PodcastEntity
+import com.shamardn.podcasttime.data.datasource.local.database.entity.RecentEntity
 import com.shamardn.podcasttime.data.datasource.local.database.entity.SubscriptionsEntity
 import com.shamardn.podcasttime.data.datasource.remote.ApiService
+import com.shamardn.podcasttime.data.datasource.remote.IpApiService
 import com.shamardn.podcasttime.data.datasource.remote.dtos.EpisodeDTO
 import com.shamardn.podcasttime.data.datasource.remote.dtos.PodcastDTO
 import com.shamardn.podcasttime.data.datasource.remote.dtos.PodcastResponse
 import com.shamardn.podcasttime.domain.repo.common.PodcastRepo
 import com.shamardn.podcasttime.util.Constants.FAVOURITE_PLAYLIST
 import com.shamardn.podcasttime.util.Constants.RECENTLY_PLAYED
+import kotlinx.coroutines.delay
 import javax.inject.Inject
 
 class PodcastRepoImpl @Inject constructor(
     private val apiService: ApiService,
+    private val ipApiService: IpApiService,
     private val episodeDao: EpisodeDao,
     private val podcastDao: PodcastDao,
     private val subscriptionsDao: SubscriptionsDao,
@@ -31,14 +34,21 @@ class PodcastRepoImpl @Inject constructor(
     private val playlistDao: PlaylistDao,
 ) : PodcastRepo {
     override suspend fun refreshRemotePodcasts(): PodcastResponse<PodcastDTO> {
-        val data = apiService.getPodcasts("podcast").results
-        val podcastResponse = PodcastResponse(resultCount = data[0].trackCount, results = data)
-        return podcastResponse
+        return try {
+            val data = apiService.getPodcasts("podcast", getUserCountryCode()).results
+            val podcastResponse = PodcastResponse(resultCount = data[0].trackCount, results = data)
+            podcastResponse
+        } catch (e: Exception) {
+            delay(5000)
+            throw e
+        }
     }
 
     override suspend fun searchLocalPodcastsByName(text: String): List<PodcastEntity> {
         return podcastDao.searchLocalPodcastsByName(text)
     }
+
+    override suspend fun getUserCountryCode() = ipApiService.getUserLocation().country_code
 
     override suspend fun insertAllPodcasts(podcasts: List<PodcastEntity>) {
         podcastDao.insertAllPodcasts(podcasts)
@@ -54,7 +64,8 @@ class PodcastRepoImpl @Inject constructor(
 
     override suspend fun refreshEpisodesById(trackId: Long): PodcastResponse<EpisodeDTO> {
         val data = apiService.getEpisodesById(trackId).results
-        val podcastResponse = PodcastResponse(resultCount = data[0].trackCount, results = data)
+        val podcastResponse =
+            PodcastResponse(resultCount = data[0].trackCount, results = data)
         return podcastResponse
     }
 

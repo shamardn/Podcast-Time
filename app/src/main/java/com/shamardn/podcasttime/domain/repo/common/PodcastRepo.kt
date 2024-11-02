@@ -11,6 +11,7 @@ import com.shamardn.podcasttime.data.datasource.remote.dtos.PodcastDTO
 import com.shamardn.podcasttime.data.datasource.remote.dtos.PodcastResponse
 
 interface PodcastRepo {
+    suspend fun getUserCountryCode(): String
     suspend fun insertAllPodcasts(podcasts: List<PodcastEntity>)
     suspend fun insertAllEpisodes(episodes: List<EpisodeEntity>)
     suspend fun insertPodcast(podcast: PodcastEntity)
